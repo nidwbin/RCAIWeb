@@ -18,7 +18,7 @@
                 <h1 class="title">{{ item.title }}</h1>
                 <p>{{ item.date }}</p>
                 <p>{{ item.overview }}</p>
-                <nuxt-link :to="url_view_new" @click="view(item.file)">查看</nuxt-link>
+                <nuxt-link :to="{name:'view', query:{type:'new', file:item.file}}">查看</nuxt-link>
               </div>
             </div>
           </div>
@@ -66,9 +66,6 @@
     computed:{
       is_admin(){
         return this.$store.state.authority.is_admin;
-      },
-      location(){
-        return this.$store.state.com_sync.location;
       }
     },
     methods:{
@@ -88,9 +85,6 @@
             }
           }
         }
-      },
-      view(file){
-        this.$store.commit("set_message","news-"+file);
       },
     }
   }

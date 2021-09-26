@@ -9,7 +9,7 @@
   <div>
     <Init/>
     <Nav/>
-    <Viewer/>
+    <Viewer :type="this.$route.query.type" :file="this.$route.query.file"/>
     <Footer/>
   </div>
 </template>
@@ -29,16 +29,5 @@
       Viewer,
       Footer,
     },
-    mounted() {
-
-    },
-    computed:{
-      message(){
-        return this.$store.state.com_sync.message;
-      }
-    },
-    methods:{
-
-    }
   }
 </script>

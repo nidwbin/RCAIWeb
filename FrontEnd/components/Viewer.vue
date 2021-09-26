@@ -8,12 +8,24 @@
 <template>
   <div class="container mt-4 mb-4">
     <div class="mavonEditor">
-        <mavon-editor v-model="handbook" :toolbars="toolbars"  :editable="is_admin" :toolbarsFlag="is_admin" :defaultOpen="is_admin?null:'preview'" :preview="!is_admin" :subfield="is_admin" />
+        <mavon-editor ref=md v-model="text" :toolbars="toolbars" :editable="is_admin" :toolbarsFlag="is_admin"
+                      :defaultOpen="is_admin?null:'preview'" :preview="!is_admin" :subfield="is_admin"
+                      />
     </div>
   </div>
 </template>
 <script>
 export default {
+  props:{
+    type:{
+      type: String,
+      default: '',
+    },
+    file:{
+      type: String,
+      default: '',
+    }
+  },
   data() {
     return {
       toolbars: {
@@ -51,12 +63,33 @@ export default {
               subfield: true, // 单双栏模式
               preview: true, // 预览
       },
-      handbook: "#### how to use mavonEditor in nuxt.js"
+      text: '哎呀！出错了╮(￣▽￣)╭',
     };
   },
   computed:{
     is_admin(){
       return this.$store.state.authority.is_admin;
+    }
+  },
+  created() {
+    this.get_file();
+  },
+  methods:{
+    async get_file(){
+      if(this.type!=='' && this.file!=='' && this.$cookies.get("ajax-ready")){
+        this.$axios.get(this.$cookies.get("backend-url"), {
+            "type":this.type,
+            "file":this.file
+        }).then(
+          (data)=>{
+            this.text=data['text'];
+          }
+        );
+      }
+    },
+
+    add_image(pos, $file){
+
     }
   }
 };
