@@ -1,57 +1,75 @@
+<!--
+ * @FileDescription: home page
+ * @Author: wenbin
+ * @Date: 2021-09-25
+ * @LastEditors: wenbin
+ * @LastEditTime: 2021-09-25
+ -->
 <template>
   <div>
+    <Init />
     <Nav />
-    <Slider />
-    <ServiceArea />
-    <SolutionArea />
+    <SliderTwo />
+    <NanoArea />
+    <AboutArea />
+    <EmailArea />
+    <ServicesTwoArea />
     <VideoArea />
-    <BuildingArea />
-    <BrandArea />
-    <ClientArea />
-    <FunFactArea />
-    <ProjectArea />
-    <FaqBrandArea />
-    <FaqArea />
-    <FutureArea />
-    <BlogArea />
+    <MissionArea />
+    <ProjectThreeArea />
+    <ClientThreeArea />
+    <FunfactsThreeArea />
+    <ExperienceArea />
+    <NewsList />
+    <BrandThreeArea />
     <Footer />
   </div>
+
 </template>
 
 <script>
-
+  import Init from "../components/Init";
   import Nav from "../components/Nav";
-  import Slider from "../components/Slider";
-  import ServiceArea from "../components/ServiceArea";
-  import SolutionArea from "../components/SolutionArea";
-  import VideoArea from "../components/VideoArea";
-  import BuildingArea from "../components/BuildingArea";
-  import BrandArea from "../components/BrandArea";
-  import ClientArea from "../components/ClientArea";
-  import FunFactArea from "../components/FunFactArea";
-  import ProjectArea from "../components/ProjectArea";
-  import FaqBrandArea from "../components/FaqBrandArea";
-  import FaqArea from "../components/FaqArea";
-  import FutureArea from "../components/FutureArea";
-  import BlogArea from "../components/BlogArea";
+  import NewsList from "../components/NewsList";
   import Footer from "../components/Footer";
+
+
+  import SliderTwo from "../components/Slider";
+  import NanoArea from "../components/NanoArea";
+  import AboutArea from "../components/AboutArea";
+  import EmailArea from "../components/EmailArea";
+  import ServicesTwoArea from "../components/ServicesArea";
+  import VideoArea from "../components/VideoArea";
+  import MissionArea from "../components/MissionArea";
+  import ProjectThreeArea from "../components/ProjectArea";
+  import ClientThreeArea from "../components/ClientArea";
+  import FunfactsThreeArea from "../components/FunfactsArea";
+  import ExperienceArea from "../components/ExperienceArea";
+  import BrandThreeArea from "../components/BrandArea";
   export default {
     components: {
+      Init,
+      Nav,
+      NewsList,
       Footer,
-      BlogArea,
-      FutureArea,
-      FaqArea,
-      FaqBrandArea,
-      ProjectArea,
-      FunFactArea,
-      ClientArea,
-      BrandArea,
-      BuildingArea,
+
+      BrandThreeArea,
+      ExperienceArea,
+      FunfactsThreeArea,
+      ClientThreeArea,
+      ProjectThreeArea,
+      MissionArea,
       VideoArea,
-      SolutionArea,
-      ServiceArea,
-      Slider,
-      Nav
+      ServicesTwoArea,
+      EmailArea,
+      AboutArea,
+      NanoArea,
+      SliderTwo,
+    },
+    head(){
+      return {
+        title: "听觉智能研究中心"
+      }
     }
   }
 </script>

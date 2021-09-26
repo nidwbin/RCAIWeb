@@ -17,7 +17,7 @@
               </form>
             </div>
             <div class="shape">
-              <img src="/assets/images/shape/shape-5.png" alt="shape">
+              <img src="/static/images/shape/shape-5.png" alt="shape">
             </div>
           </div>
         </div>

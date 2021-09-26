@@ -1,37 +1,37 @@
 <template>
-  <div class="brand-area pb-120">
+  <div class="brand-area brand-3-area pb-120">
     <div class="container">
-      <div class="row">
+      <div class="row brand-active">
         <swiper :options="swiperOptions">
           <swiper-slide>
-          <div class="brand-item">
-            <a href="#"><img src="/assets/images/brand-1.png" alt="brand"></a>
-          </div>
+            <div class="brand-item">
+              <a href="#"><img src="/static/images_/brand-1.png" alt="brand"></a>
+            </div>
           </swiper-slide>
           <swiper-slide>
-          <div class="brand-item">
-            <a href="#"><img src="/assets/images/brand-1.png" alt="brand"></a>
-          </div>
+            <div class="brand-item">
+              <a href="#"><img src="/static/images_/brand-1.png" alt="brand"></a>
+            </div>
           </swiper-slide>
           <swiper-slide>
-          <div class="brand-item">
-            <a href="#"><img src="/assets/images/brand-1.png" alt="brand"></a>
-          </div>
+            <div class="brand-item">
+              <a href="#"><img src="/static/images_/brand-1.png" alt="brand"></a>
+            </div>
           </swiper-slide>
           <swiper-slide>
-          <div class="brand-item">
-            <a href="#"><img src="/assets/images/brand-1.png" alt="brand"></a>
-          </div>
+            <div class="brand-item">
+              <a href="#"><img src="/static/images_/brand-1.png" alt="brand"></a>
+            </div>
             <swiper-slide>
             </swiper-slide>
-          <div class="brand-item">
-            <a href="#"><img src="/assets/images/brand-1.png" alt="brand"></a>
-          </div>
+            <div class="brand-item">
+              <a href="#"><img src="/static/images_/brand-1.png" alt="brand"></a>
+            </div>
             <swiper-slide>
             </swiper-slide>
-          <div class="brand-item">
-            <a href="#"><img src="/assets/images/brand-1.png" alt="brand"></a>
-          </div>
+            <div class="brand-item">
+              <a href="#"><img src="/static/images_/brand-1.png" alt="brand"></a>
+            </div>
           </swiper-slide>
         </swiper>
       </div>
@@ -39,12 +39,13 @@
   </div>
 </template>
 
+
 <script>
   import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper';
   import 'swiper/css/swiper.css';
 
   export default {
-    name: "BrandArea",
+    name: "BrandThreeArea",
     components: {
       Swiper,
       SwiperSlide

@@ -83,6 +83,8 @@ dist
 # Service worker
 sw.*
 
+backup/
+
 # macOS
 .DS_Store
 

@@ -46,7 +46,7 @@
                 <p>Professional and Skilled Contractors</p>
               </div>
               <div class="thumb">
-                <img src="/assets/images/mission-contractors.jpg" alt="">
+                <img src="/static/images_/mission-contractors.jpg" alt="">
               </div>
             </div>
           </div>

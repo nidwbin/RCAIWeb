@@ -13,6 +13,7 @@
   "dependencies": {
     "@nuxtjs/axios": "^5.13.6",
     "cookie-universal-nuxt": "^2.1.5",
+    "mavon-editor": "^2.9.1",
     "nuxt": "^2.0.0",
     "swiper": "^5.4.5",
     "v-owl-carousel": "^1.0.8",
@@ -23,8 +24,9 @@
   },
   "config": {
     "nuxt": {
+
       "host": "0.0.0.0",
-      "port": "80"
+      "port": "8000"
     }
   }
 }

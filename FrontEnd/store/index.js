@@ -1,15 +1,26 @@
 export const state= () => ({
-    domain:"http://localhost",
-    port:"4980",
-    location:"/",
-    is_admin: false,
+  backend:{
+      //后端域名和端口，前端域名和端口在package.json中修改
+      domain:"http://localhost",
+      port:"8000",
+  },
+  com_sync:{
+    location: "/",
+    message: "",
+  },
+  authority:{
+        is_admin: false,
+  },
 });
 
 export const mutations = {
-    change_admin(state, is_admin) {
-      state.is_admin = is_admin;
+    set_admin(state, is_admin) {
+      state.authority.is_admin = is_admin;
     },
-    change_location(state, location){
-      state.location=location;
-    }
+    set_location(state, location){
+      state.com_sync.location=location;
+    },
+    set_message(state, message){
+      state.com_sync.message = message;
+    },
 };

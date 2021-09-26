@@ -1,10 +1,3 @@
-<!--
- * @FileDescription: home page
- * @Author: liuyoude
- * @Date: 2021-09-10
- * @LastEditors: liuyoude
- * @LastEditTime: 2021-09-10
- -->
 <template>
     <div>
       <footer class="footer-area">
@@ -14,16 +7,15 @@
               <div class="col-lg-3 col-md-6">
                 <div class="footer-widget mt-30">
                   <div class="footer-title pb-30">
-                    <h4 class="title">听觉智能研究中心</h4>
-                    <p class="subtitle">Center for Intelligent Auditory</p>
+                    <h4 class="title">{{ mse_address }}</h4>
                   </div>
                   <div class="footer-about-content">
-                    <p>黑龙江省哈尔滨市<br>哈尔滨工业大学综合楼6层</p>
+                    <p>{{ address }}</p>
                     <div class="email">
-                      <a href="mailto:splab@hit.edu.cn">splab@hit.edu.cn</a>
+                      <a :href="'mailto:'+email">{{ email }}</a>
                     </div>
                     <div class="call">
-                      <a href="tel:0451-86417981">0451-86417981</a>
+                      <a :href="'tel:'+phone">{{ phone }}</a>
                     </div>
                     <div class="social">
                       <ul>
@@ -39,21 +31,14 @@
               <div class="col-lg-3 col-md-6 col-sm-6">
                 <div class="footer-widget mt-30 ml-30">
                   <div class="footer-title pb-20">
-                    <h4 class="title">Explore</h4>
+                    <h4 class="title">{{ mse_research }}</h4>
                   </div>
                   <div class="footer-about-list d-flex">
                     <ul class="mr-70">
-                      <li><a href="#"><i class="fa fa-angle-right"></i> About</a></li>
-                      <li><a href="#"><i class="fa fa-angle-right"></i> New Projects</a></li>
-                      <li><a href="#"><i class="fa fa-angle-right"></i> Our History</a></li>
-                      <li><a href="#"><i class="fa fa-angle-right"></i> Contact</a></li>
-                      <li><a href="#"><i class="fa fa-angle-right"></i> Blog Posts</a></li>
-                    </ul>
-                    <ul>
-                      <li><a href="#"><i class="fa fa-angle-right"></i> Press Release</a></li>
-                      <li><a href="#"><i class="fa fa-angle-right"></i> Help Topics</a></li>
-                      <li><a href="#"><i class="fa fa-angle-right"></i> Privacy Policy</a></li>
-                      <li><a href="#"><i class="fa fa-angle-right"></i> Terms of Use</a></li>
+                      <li><nuxt-link :to="url_direction"><i class="fa fa-angle-right"></i> {{ mse_direction }}</nuxt-link></li>
+                      <li><nuxt-link :to="url_single_post"><i class="fa fa-angle-right"></i> {{ mse_single_post }}</nuxt-link></li>
+                      <li><nuxt-link :to="url_all_projects"><i class="fa fa-angle-right"></i> {{ mse_all_projects }}</nuxt-link></li>
+                      <li><nuxt-link :to="url_single_project"><i class="fa fa-angle-right"></i> {{ mse_single_project }}</nuxt-link></li>
                     </ul>
                   </div>
                 </div>
@@ -61,15 +46,24 @@
               <div class="col-lg-3 col-md-6 col-sm-6">
                 <div class="footer-widget mt-30 ml-30">
                   <div class="footer-title pb-20">
-                    <h4 class="title">Services</h4>
+                    <h4 class="title">{{ mse_team }}</h4>
                   </div>
                   <div class="footer-about-list d-flex">
                     <ul class="mr-70">
-                      <li><a href="#"><i class="fa fa-angle-right"></i> Petroleum and Gas</a></li>
-                      <li><a href="#"><i class="fa fa-angle-right"></i> Industrial Construction</a></li>
-                      <li><a href="#"><i class="fa fa-angle-right"></i> Chemical Research</a></li>
-                      <li><a href="#"><i class="fa fa-angle-right"></i> Mechanical Engineering</a></li>
-                      <li><a href="#"><i class="fa fa-angle-right"></i> Power Energies</a></li>
+                      <li><nuxt-link :to="url_teacher"><i class="fa fa-angle-right"></i> {{ mse_teacher }}</nuxt-link></li>
+                      <li><nuxt-link :to="url_doctor"><i class="fa fa-angle-right"></i>{{ mse_doctor }}</nuxt-link></li>
+                      <li><nuxt-link :to="url_master"><i class="fa fa-angle-right"></i>{{ mse_master }}</nuxt-link></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="footer-widget mt-30 ml-30">
+                  <div class="footer-title pb-20">
+                    <h4 class="title">{{ mse_contact}}</h4>
+                  </div>
+                  <div class="footer-about-list d-flex">
+                    <ul class="mr-70">
+                      <li><nuxt-link :to="url_contact_students"><i class="fa fa-angle-right"></i> {{ mse_contact_students }}</nuxt-link></li>
+                      <li><nuxt-link :to="url_contact_teacher"><i class="fa fa-angle-right"></i> {{ mse_contact_teacher }}</nuxt-link></li>
                     </ul>
                   </div>
                 </div>
@@ -77,27 +71,25 @@
               <div class="col-lg-3 col-md-6 col-sm-7">
                 <div class="footer-widget footer-news mt-30">
                   <div class="footer-title pb-40">
-                    <h4 class="title">Latest News</h4>
+                    <nuxt-link :to="url_news"><h4 class="title"> {{ mse_news }}</h4></nuxt-link>
                   </div>
                   <div class="footer-news-content">
                     <div class="news-item d-flex align-items-center">
                       <div class="news-item-thumb">
-                        <img src="/assets/images/footer-news-1.jpg" alt="">
+                        <img src="/images_/footer-news-1.jpg" alt="">
                       </div>
                       <div class="news-item-content">
                         <span>06 April, 2020</span>
                         <a href="#">We are designing industry materials of innovation</a>
-
                       </div>
                     </div>
                     <div class="news-item d-flex align-items-center mt-20">
                       <div class="news-item-thumb">
-                        <img src="/assets/images/footer-news-2.jpg" alt="">
+                        <img src="/static/images_/footer-news-2.jpg" alt="">
                       </div>
                       <div class="news-item-content">
                         <span>06 April, 2020</span>
                         <a href="#">We are designing industry materials of innovation</a>
-
                       </div>
                     </div>
                   </div>
@@ -106,14 +98,14 @@
             </div>
           </div>
           <div class="footer-copyright text-center">
-            <p>Copyright©2021 All Rights Reserved 版权所有：哈尔滨工业大学·听觉智能研究中心</p>
+            <p>© Copyright 2020</p>
           </div>
         </div>
         <div class="footer-shape-1">
-          <img src="/assets/images/shape/shape-5.png" alt="">
+          <img src="/images/shape/shape-5.png" alt="">
         </div>
-        <div class="footer-shape-2  animated wow fadeInLeft" data-wow-duration="1500ms" data-wow-delay="0ms">
-          <img src="/assets/images/shape/shape-6.png" alt="">
+        <div class="footer-shape-2 animated wow fadeInLeft" data-wow-duration="1500ms" data-wow-delay="0ms">
+          <img src="/images/shape/shape-6.png" alt="">
         </div>
       </footer>
 
@@ -127,8 +119,6 @@
           </div>
         </div>
       </div>
-
-
     </div>
 </template>
 
@@ -137,7 +127,43 @@
       name: "Footer",
       data(){
         return {
-          scrollBtn: false
+              url_home:"/",
+              url_news:"/news",
+              url_teacher:"/team/teacher",
+              url_doctor:"/team/doctor",
+              url_master:"/team/master",
+              url_direction:"/direction",
+              url_all_projects:"/projects",
+              url_single_project:"/single-projects",
+              url_single_post:"/single-post",
+              url_contact_students:"/contact-students",
+              url_contact_teacher:"/contact-teacher",
+
+              mse_news:"最近新闻",
+
+              mse_research:"科研",
+              mse_direction:"研究方向",
+              mse_single_post:"学术成果",
+              mse_all_projects:"项目总览",
+              mse_single_project:"项目演示",
+
+              mse_team:"研究团队",
+              mse_teacher:"中心教师",
+              mse_doctor:"中心博士",
+              mse_master:"中心研究生",
+
+              mse_address:"联系我们",
+
+              mse_contact:"加入我们",
+              mse_contact_students:"结伴同行",
+              mse_contact_teacher:"求贤若渴",
+
+              email:"splab@hit.edu.cn",
+              phone:"123123123",
+              address:"哈尔滨",
+
+              mobileToggle: false,
+              scrollBtn: false,
         }
       },
       mounted() {
@@ -159,6 +185,7 @@
         scrollTop () {
           window.scrollTo(0, 0);
         }
+
 
       }
     }

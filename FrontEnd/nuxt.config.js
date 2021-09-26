@@ -12,20 +12,20 @@ export default {
       { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
     ],
     link: [
-      { rel: 'shortcut icon', sizes:'180x180', type: 'image/png', href: '/assets/images/favicon.png' },
+      { rel: 'shortcut icon', sizes:'180x180', type: 'image/png', href: '/assets/images_/favicon.png' },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" },
-      { rel: "stylesheet", href: "/assets/css/bootstrap.min.css" },
-      { rel: "stylesheet", href: "/assets/css/animate.min.css" },
-      { rel: "stylesheet", href: "/assets/css/font-awesome.min.css" },
-      { rel: "stylesheet", href: "/assets/plugins/glightbox/glightbox.min.css" },
-      { rel: "stylesheet", href: "/assets/css/flaticon.css" },
-      { rel: "stylesheet", href: "/assets/css/default.css" },
-      { rel: "stylesheet", href: "/assets/css/style.css" }
+      { rel: "stylesheet", href: "/css/bootstrap.min.css" },
+      { rel: "stylesheet", href: "/css/animate.min.css" },
+      { rel: "stylesheet", href: "/css/font-awesome.min.css" },
+      { rel: "stylesheet", href: "/plugins/glightbox/glightbox.min.css" },
+      { rel: "stylesheet", href: "/css/flaticon.css" },
+      { rel: "stylesheet", href: "/css/default.css" },
+      { rel: "stylesheet", href: "/css/style.css" }
     ],
 
     script: [
-      { src: "/assets/plugins/glightbox/glightbox.min.js", body: true },
-      { src: "/assets/plugins/accordion/accordion.min.js", body: true }
+      { src: "/plugins/glightbox/glightbox.min.js", body: true },
+      { src: "/plugins/accordion/accordion.min.js", body: true }
     ]
   },
   /*
@@ -41,7 +41,8 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    {src: 'plugins/owl.js', ssr: false},
+    {src: '@/plugins/owl.js', ssr: false},
+    { src: '@/plugins/vue-mavon-editor.js', ssr: false },
   ],
   /*
   ** Nuxt.js dev-modules

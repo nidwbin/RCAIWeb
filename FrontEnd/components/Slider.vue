@@ -2,11 +2,11 @@
   <section class="banner-slide">
 
     <VueSlickCarousel v-bind="settings">
-    <div class="banner-area slide-bg1 bg_cover d-flex align-items-center">
+    <div class="banner-area banner-2-area slide-bg2 bg_cover d-flex align-items-center">
       <div class="container">
-        <div class="row justify-content-center">
+        <div class="row">
           <div class="col-lg-10">
-            <div class="banner-content text-center">
+            <div class="banner-content text-left">
               <span data-animation="fadeInDown" data-delay="1s">Welcome to Factory & Industry Business</span>
               <h3 data-animation="fadeInDown" data-delay=".1s" class="title">We Build Everything with Passion</h3>
               <a data-animation="fadeInUp" data-delay="1s" class="main-btn" href="#">Discover more</a>
@@ -15,11 +15,11 @@
         </div>
       </div>
     </div>
-    <div class="banner-area slide-bg2 bg_cover d-flex align-items-center">
+    <div class="banner-area banner-2-area slide-bg1 bg_cover d-flex align-items-center">
       <div class="container">
-        <div class="row justify-content-center">
+        <div class="row">
           <div class="col-lg-10">
-            <div class="banner-content text-center">
+            <div class="banner-content text-left">
               <span data-animation="fadeInDown" data-delay="1s">Welcome to Factory & Industry Business</span>
               <h3 data-animation="fadeInDown" data-delay=".1s" class="title">We Build Everything with Passion</h3>
               <a data-animation="fadeInUp" data-delay="1s" class="main-btn" href="#">Discover more</a>

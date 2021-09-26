@@ -1,37 +1,33 @@
 <!--
  * @FileDescription: nav
- * @Author: liuyoude, wenbin
- * @Date: 2021-09-10
+ * @Author: wenbin
+ * @Date: 2021-09-14
  * @LastEditors: wenbin
  * @LastEditTime: 2021-09-25
+
+ 注意与Footer.vue同步修改url等变量
  -->
+
 <template>
-  <header class="header-area">
-    <div class="header-top">
+  <header class="header-area header-3-area">
+    <div class="header-top-3">
       <div class="container">
         <div class="row">
           <div class="col-lg-12">
-            <div class="header-top-items d-flex justify-content-between align-items-center">
-              <div class="logo">
-                <a href="/"><img src="/images/logo.png" alt=""></a>
-              </div>
-              <div class="header-top-info d-none d-md-block">
+            <div class="header-top-item">
+              <div class="header-info">
                 <ul>
-                  <li>
-                    <i class="flaticon-email"></i>
-                    <span>邮箱</span>
-                    <a :href="'mailto:'+email">{{ email }}</a>
-                  </li>
-                  <li>
-                    <i class="flaticon-calling"></i>
-                    <span>电话</span>
-                    <a href="tel:0451-86417981">0451-86417981</a>
-                  </li>
-                  <li>
-                    <i class="flaticon-address"></i>
-                    <span>地址</span>
-                    <a href="#">黑龙江省哈尔滨市<br>哈尔滨工业大学综合楼6层</a>
-                  </li>
+                  <li><a :href="'mailto:' + email"><i class="flaticon-email-2"></i> {{ email }}</a></li>
+                  <li><a :href="'tel:'+phone"><i class="flaticon-call"></i> {{ phone }}</a></li>
+                  <li><a href="#"><i class="flaticon-pin"></i> {{ address }}</a></li>
+                </ul>
+              </div>
+              <div class="social">
+                <ul>
+                  <li><a href="#"><i class="fa fa-facebook-f"></i></a></li>
+                  <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                  <li><a href="#"><i class="fa fa-pinterest-p"></i></a></li>
+                  <li><a href="#"><i class="fa fa-instagram"></i></a></li>
                 </ul>
               </div>
             </div>
@@ -39,24 +35,27 @@
         </div>
       </div>
     </div>
-    <div id="Nav" class="main-header">
+    <div class="main-header">
       <div class="container">
         <div class="row">
           <div class="col-lg-12">
-            <div class="main-header-item d-flex justify-content-between align-items-center">
-              <div class="main-header-menus  d-flex">
-                <div class="header-btn">
-                  <a @click="mobileToggle = !mobileToggle" href="#">{{ mse_header }}</a>
+            <div class="main-header-item">
+              <div class="main-header-menus  d-flex justify-content-between align-items-center">
+                <div class="header-logo">
+                  <a href="/"><img src="/static/images/logo.png" alt=""></a>
                 </div>
                 <div class="toggle-btn ml-30 canvas_open">
-<!--                  <i @click="mobileToggle = !mobileToggle" class="fa fa-bars"></i>-->
+                  <i @click="mobileToggle = !mobileToggle" class="fa fa-bars"></i>
                 </div>
                 <div class="header-menu d-none d-lg-block">
                   <ul>
-
                     <li><nuxt-link :to="url_home">{{ mse_home }}</nuxt-link></li>
 
                     <li><nuxt-link :to="url_news">{{ mse_news }}</nuxt-link></li>
+
+                    <li><nuxt-link :to="url_direction">{{ mse_direction }}</nuxt-link></li>
+
+                    <li><nuxt-link :to="url_single_post">{{ mse_single_post }}</nuxt-link></li>
 
                     <li>
                       <a href="#">{{ mse_team }}</a>
@@ -67,8 +66,6 @@
                       </ul>
                     </li>
 
-                    <li><nuxt-link :to="url_direction">{{ mse_direction }}</nuxt-link></li>
-
                     <li>
                       <a href="#">{{ mse_projects }}</a>
                       <ul class="sub-menu">
@@ -76,8 +73,6 @@
                         <li><nuxt-link :to="url_single_project">{{ mse_single_project }}</nuxt-link></li>
                       </ul>
                     </li>
-
-                    <li><nuxt-link :to="url_single_post">{{ mse_single_post }}</nuxt-link></li>
 
                     <li>
                       <a href="#">{{ mse_contact }}</a>
@@ -90,7 +85,6 @@
                 </div>
               </div>
             </div>
-
             <div :class="`offcanvas_menu_wrapper ${mobileToggle ? 'active' : ''}`">
               <div class="canvas_close">
                 <a @click="mobileToggle = !mobileToggle" href="javascript:void(0)"><i class="fa fa-times"></i></a>
@@ -110,6 +104,9 @@
 
                   <li class="menu-item-has-children active"><nuxt-link :to="url_news">{{ mse_news }}</nuxt-link></li>
 
+                  <li class="menu-item-has-children active"><nuxt-link :to="url_direction">{{ mse_direction }}</nuxt-link></li>
+
+                  <li class="menu-item-has-children active"><nuxt-link :to="url_single_post">{{ mse_single_post }}</nuxt-link></li>
 
                   <li class="menu-item-has-children active"><span class="menu-expand"><i class="fa fa-angle-down"></i></span>
                     <a href="#">{{ mse_team }}</a>
@@ -120,8 +117,6 @@
                       </ul>
                   </li>
 
-                  <li class="menu-item-has-children active"><nuxt-link :to="url_direction">{{ mse_direction }}</nuxt-link></li>
-
                   <li class="menu-item-has-children active"><span class="menu-expand"><i class="fa fa-angle-down"></i></span>
                     <a href="#">{{ mse_projects }}</a>
                       <ul class="sub-menu">
@@ -129,8 +124,6 @@
                         <li><nuxt-link :to="url_single_project">{{ mse_single_project }}</nuxt-link></li>
                       </ul>
                   </li>
-
-                  <li class="menu-item-has-children active"><nuxt-link :to="url_single_post">{{ mse_single_post }}</nuxt-link></li>
 
                   <li class="menu-item-has-children active"><span class="menu-expand"><i class="fa fa-angle-down"></i></span>
                     <a href="#">{{ mse_contact }}</a>
@@ -142,10 +135,9 @@
                 </ul>
               </div>
               <div class="offcanvas_footer">
-                <span><a :href="'mailto:' + email"><i class="fa fa-envelope-o"></i> {{ email }} </a></span>
+                <span><a :href="'mailto:'+email"><i class="fa fa-envelope-o"></i> {{ email }}</a></span>
               </div>
             </div>
-
           </div>
         </div>
       </div>
@@ -154,45 +146,44 @@
 </template>
 
 <script>
-    let NavVars= {
-          url_home:"/",
-          url_news:"/news",
-          url_teacher:"/teacher",
-          url_doctor:"/doctor",
-          url_master:"/master",
-          url_direction:"/direction",
-          url_all_projects:"/projects",
-          url_single_project:"/single-projects",
-          url_single_post:"/single-post",
-          url_contact_students:"/contact-students",
-          url_contact_teacher:"/contact-teacher",
-
-          mse_header:"管理",
-          mse_home:"首页",
-          mse_news:"新闻",
-          mse_team:"研究团队",
-          mse_teacher:"中心教师",
-          mse_doctor:"中心博士",
-          mse_master:"中心研究生",
-          mse_direction:"研究方向",
-          mse_projects:"科研项目",
-          mse_all_projects:"项目总览",
-          mse_single_project:"项目演示",
-          mse_single_post:"学术成果",
-          mse_contact:"加入我们",
-          mse_contact_students:"结伴同行",
-          mse_contact_teacher:"求贤若渴",
-
-          email:"splab@hit.edu.cn",
-
-          mobileToggle: false
-    };
-
     export default {
       name: "Nav",
       data(){
-        return NavVars;
-      },
+        return {
+              url_home:"/",
+              url_news:"/news",
+              url_teacher:"/team/teacher",
+              url_doctor:"/team/doctor",
+              url_master:"/team/master",
+              url_direction:"/direction",
+              url_all_projects:"/projects",
+              url_single_project:"/single-projects",
+              url_single_post:"/single-post",
+              url_contact_students:"/contact-students",
+              url_contact_teacher:"/contact-teacher",
+
+              mse_home:"首页",
+              mse_news:"新闻",
+              mse_team:"研究团队",
+              mse_teacher:"中心教师",
+              mse_doctor:"中心博士",
+              mse_master:"中心研究生",
+              mse_direction:"研究方向",
+              mse_projects:"科研项目",
+              mse_all_projects:"项目总览",
+              mse_single_project:"项目演示",
+              mse_single_post:"学术成果",
+              mse_contact:"加入我们",
+              mse_contact_students:"结伴同行",
+              mse_contact_teacher:"求贤若渴",
+
+              email:"splab@hit.edu.cn",
+              phone:"123123123",
+              address:"哈尔滨",
+
+              mobileToggle: false,
+        }
+    },
     }
 </script>
 
