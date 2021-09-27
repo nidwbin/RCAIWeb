@@ -43,13 +43,12 @@
     },
     methods:{
       login(){
-        if(this.username!==''&&this.password!==''){
+        if(this.username!==''&&this.password!==''&&this.$cookies.get("ajax-ready")){
           this.$axios.post(this.$cookies.get("backend-url")+'/login/',{
-            name:this.username,
+            username:this.username,
             password:this.password,
           }).then(
           (response)=>{
-            console.log(response);
             if(response.data['message']==='success'){
                 this.button_class="btn-success";
             }else{

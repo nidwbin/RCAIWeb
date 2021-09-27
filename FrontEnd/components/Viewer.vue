@@ -77,13 +77,13 @@ export default {
   methods:{
     get_file(){
       if(this.type!=='' && this.file!=='' && this.$cookies.get("ajax-ready")){
-        this.$axios.get(this.$cookies.get("backend-url"), {
+        this.$axios.get(this.$cookies.get("backend-url")+"/file", {params:{
             "type":this.type,
             "file":this.file
-        }).then(
+        }}).then(
           (response)=>{
-            if(response.data['text']!==undefined) {
-              this.text = response.data['text'];
+            if(response.data['data']!==undefined) {
+              this.text = response.data['data'];
             }
           }
         );
