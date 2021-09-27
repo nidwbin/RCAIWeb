@@ -12,16 +12,7 @@
 export default {
   mounted() {
     if(process.client){
-      console.log('client');
-    }
-    if(process.server){
-      console.log('server');
-    }
-    this.init();
-  },
-  computed:{
-    key(){
-      return this.$store.state.authority.key;
+      this.init();
     }
   },
   methods:{
