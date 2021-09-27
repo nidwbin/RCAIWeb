@@ -40,14 +40,17 @@
       </div>
     </div>
     <div id="Nav" class="main-header">
+       <div class="header-btn" ：hidden="!admin" @click="logout">
+           <a href="#">{{ mse_header }}</a>
+       </div>
       <div class="container">
+
         <div class="row">
+
           <div class="col-lg-12">
+
             <div class="main-header-item">
             <div class="main-header-menus d-flex justify-content-between align-items-center">
-<!--                <div class="header-btn">-->
-<!--                  <a href="#">{{ mse_header }}</a>-->
-<!--                </div>-->
                 <div class="toggle-btn ml-30 canvas_open">
                   <i @click="mobileToggle = !mobileToggle" class="fa fa-bars"></i>
                 </div>
@@ -164,7 +167,7 @@
           url_contact_students:"/contact-students",
           url_contact_teacher:"/contact-teacher",
 
-          mse_header:"RCAI",
+          mse_header:"登出",
           mse_home:"首页",
           mse_news:"新闻",
           mse_team:"研究团队",
@@ -192,7 +195,33 @@
       data(){
         return NavVars;
       },
+        computed:{
+          admin(){
+              return this.$store.admin;
+          }
+        },
+
+      methods: {
+          // set_btn_display() {
+          //     if (this.$cookies.isKey("isInLogin")){
+          //       if(this.$cookies.get("isInLogin") == true){
+          //           this.$("header-btn").css("display", "block");
+          //       }
+          //     }
+          // },
+          logout(){
+              if(this.$cookies.get('ajax-ready')){
+                  this.$axios.delete('/log').then(
+                      ()=> {
+                          this.$store.commit("set_admin", false);
+                      }
+                  );
+              }
+          }
+      }
     }
+
+
 </script>
 
 <style scoped>

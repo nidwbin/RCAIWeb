@@ -70,6 +70,8 @@
       return {
         title: "听觉智能研究中心"
       }
-    }
+    },
   }
+
+
 </script>
