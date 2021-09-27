@@ -44,7 +44,7 @@
     methods:{
       login(){
         if(this.username!==''&&this.password!==''&&this.$cookies.get("ajax-ready")){
-          this.$axios.post(this.$cookies.get("backend-url")+'/login/',{
+          this.$axios.post('/login/',{
             username:this.username,
             password:this.password,
           }).then(

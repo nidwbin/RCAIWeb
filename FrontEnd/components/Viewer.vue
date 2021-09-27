@@ -8,8 +8,8 @@
 <template>
   <div class="container mt-4 mb-4">
     <div class="mavonEditor">
-        <mavon-editor ref=md v-model="text" :toolbars="toolbars" :editable="is_admin" :toolbarsFlag="is_admin"
-                      :defaultOpen="is_admin?null:'preview'" :preview="!is_admin" :subfield="is_admin"
+        <mavon-editor ref=md v-model="text" :toolbars="toolbars" :editable="admin" :toolbarsFlag="admin"
+                      :defaultOpen="admin?null:'preview'" :preview="!admin" :subfield="admin"
                       />
     </div>
   </div>
@@ -64,11 +64,12 @@ export default {
               preview: true, // 预览
       },
       text: '哎呀！出错了╮(￣▽￣)╭',
+      images:{},
     };
   },
   computed:{
-    is_admin(){
-      return this.$store.state.authority.is_admin;
+    admin(){
+      return this.$store.state.admin;
     }
   },
   created() {
@@ -77,9 +78,9 @@ export default {
   methods:{
     get_file(){
       if(this.type!=='' && this.file!=='' && this.$cookies.get("ajax-ready")){
-        this.$axios.get(this.$cookies.get("backend-url")+"/file", {params:{
+        this.$axios.get("/file", {params:{
             "type":this.type,
-            "file":this.file
+            "filename":this.file
         }}).then(
           (response)=>{
             if(response.data['data']!==undefined) {
@@ -91,7 +92,11 @@ export default {
     },
 
     add_image(pos, $file){
-
+      if(this.$cookies.get('ajax-ready')){
+        this.$axios.post("/file", )
+      }else{
+        this.$router.go(0);
+      }
     }
   }
 };

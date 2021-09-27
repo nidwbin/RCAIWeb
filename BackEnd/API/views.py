@@ -8,26 +8,26 @@ from BackEnd.settings import SECRET_KEY
 
 # Create your views here.
 
-def set_key(request, response, admin):
-    error = "Visitor"
-    if admin == 'next':
+def check_key(request, response, set=False):
+    if set or request.headers['Key'] == 'Admin':
         response['Key'] = 'Admin'
-    elif admin == 'first':
-        response['Key'] = 'Admin'
+
+
+def set_key(request, response, next=True, set=False):
+    if set or (next and 'Key' in request.headers):
+        check_key(request,response,set)
     else:
-        response['Key'] = error
+        response['Key'] = 'Visitor'
     # response['Access-Control-Allow-Origin'] = "192.168.11.233:8000"
     # response['Access-Control-Allow-Credentials'] = True
-    # response['Access-Control-Allow-Header'] = 'Content-Type, X-Requested-With,X-CSRFToken,COOKIES'
+    response['Access-Control-Allow-Header'] = 'key, set-cookie'
     # response['Access-Control-Allow-Method'] = 'PUT,POST,PATCH,DELETE'
     return response
 
 
 @ensure_csrf_cookie
 def get_csrf(request):
-    csrf = django.middleware.csrf.get_token(request)
-    request.session['_csrftoken'] = csrf
-    return set_key(request, JsonResponse({'csrf': csrf}), 'none')
+    return set_key(request, JsonResponse({}))
 
 
 class Test(View):
@@ -52,9 +52,24 @@ class Login(View):
         name = request.POST.get('username')
         pwd = request.POST.get('password')
         if name == 'hello' and pwd == '123456':
-            return set_key(request, JsonResponse({'message': 'success'}), 'first')
+            return set_key(request, JsonResponse({'message': 'success'}), set=True)
         else:
-            return set_key(request, JsonResponse({'message': 'error'}), 'none')
+            return set_key(request, JsonResponse({'message': 'error'}), next=False)
+
+    def delete(self, request):
+        pass
+
+class File(View):
+    def get(self, request):
+        type = request.GET.get('type')
+        filename = request.GET.get('filename')
+        return JsonResponse({'data': '# ok'})
+
+    def post(self, request):
+        type = request.POST.get('type')
+        filename = request.POST.get('filename')
+        file = request.POST.get('file')
+        return JsonResponse({'message':'success', 'url':'/images/logo.png'})
 
     def delete(self, request):
         pass

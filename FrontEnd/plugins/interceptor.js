@@ -3,15 +3,15 @@ import qs from 'qs';
 export default({store, $cookies, $axios}) => {
   if(process.client) {
     $axios.defaults.withCredentials = true;
+    $axios.defaults.baseURL = 'http://192.168.11.233:8001/backend';
 
     $axios.onRequest(config => {
       config.xsrfCookieName = 'csrftoken';
       config.xsrfHeaderName = 'X-CSRFToken';
-      config.headers.common['Key'] = store.state.authority.key;
+      config.headers.common['Key'] = $cookies.get('key');
       config.data = qs.stringify(config.data, {
         allowDots:true
       });
-      console.log(config);
       return config;
     })
 
@@ -23,7 +23,7 @@ export default({store, $cookies, $axios}) => {
         key = "Visitor";
       }
       $cookies.set("ajax-ready", true)
-      store.commit("set_key", key);
+      $cookies.set("key", key)
       store.commit("set_admin", key !== "Visitor");
     })
 

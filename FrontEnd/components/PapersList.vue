@@ -18,29 +18,12 @@
                 <h1 class="title">{{ item.title }}</h1>
                 <p>{{ item.date }}</p>
                 <p>{{ item.abstract }}</p>
-                <nuxt-link :to="{name:'view', query:{type:'new', file:item.file}}">查看</nuxt-link>
+                <nuxt-link :to="{name:'view', query:{type:type, file:item.file}}">查看</nuxt-link>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="container mt-4" :hidden="pages.hidden">
-      <div class="row">
-        <div class="col"></div>
-          <ul class="pagination">
-            <li :class="pages.active === pages.page_list[0] ? 'page-item disabled' : 'page-item'">
-              <a class="page-link" href="#" @click="change_page(-1)"><i class="fa fa-chevron-left" ></i></a>
-            </li>
-            <li v-for="page in pages.page_list" :class="pages.active === page ? 'page-item active' : 'page-item'" >
-              <a class="page-link" href="#" @click="change_page(page)">{{ page }}</a>
-            </li>
-            <li :class="pages.active === pages.page_list[pages.page_list.length-1] ? 'page-item disabled' : 'page-item'">
-              <a class="page-link" href="#" @click="change_page(0)"><i class="fa fa-chevron-right"></i></a>
-            </li>
-          </ul>
-        <div class="col"></div>
-      </div>
-    </div>
     </section>
 </template>
 
@@ -49,23 +32,24 @@
     name:"PapersList",
     data(){
       return{
-        url_view_new:"/view",
+        type:'paper',
 
         items:[
-          {title:"这是一条新闻",image:"/images/logo.png",date:"2021/9/10",abstract:"something",file:"1",},
-          {title:"这是一条新闻",image:"/images/logo.png",date:"2021/9/10",abstract:"something",file:"2"},
-          {title:"这是一条新闻",image:"/images/logo.png",date:"2021/9/10",abstract:"something",file:"3"},
+          {title:"这是一篇论文",image:"/images/logo.png",date:"2021/9/10",abstract:"something",file:"1",},
+          {title:"这是一篇论文",image:"/images/logo.png",date:"2021/9/10",abstract:"something",file:"2"},
+          {title:"这是一篇论文",image:"/images/logo.png",date:"2021/9/10",abstract:"something",file:"3"},
+          {title:"这是一篇论文",image:"/images/logo.png",date:"2021/9/10",abstract:"something",file:"3"},
+          {title:"这是一篇论文",image:"/images/logo.png",date:"2021/9/10",abstract:"something",file:"3"},
+          {title:"这是一篇论文",image:"/images/logo.png",date:"2021/9/10",abstract:"something",file:"3"},
+          {title:"这是一篇论文",image:"/images/logo.png",date:"2021/9/10",abstract:"something",file:"3"},
+          {title:"这是一篇论文",image:"/images/logo.png",date:"2021/9/10",abstract:"something",file:"3"},
+          {title:"这是一篇论文",image:"/images/logo.png",date:"2021/9/10",abstract:"something",file:"3"},
         ],
         pages:{
           active:1,
           hidden:true,
           page_list:[1,2,3,4],
         },
-      }
-    },
-    computed:{
-      is_admin(){
-        return this.$store.state.authority.is_admin;
       }
     },
     methods:{

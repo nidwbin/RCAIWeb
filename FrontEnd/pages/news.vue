@@ -11,6 +11,7 @@
     <Nav/>
     <PageHeader title="新闻"/>
     <NewsList/>
+    <PagesList/>
     <Footer/>
   </div>
 </template>
@@ -20,6 +21,7 @@
   import Nav from "../components/Nav";
   import PageHeader from "../components/PageHeader";
   import NewsList from "../components/NewsList";
+  import PagesList from "../components/PagesList";
   import Footer from "../components/Footer";
 
   export default {
@@ -28,6 +30,7 @@
       Nav,
       PageHeader,
       NewsList,
+      PagesList,
       Footer,
     }
   }
