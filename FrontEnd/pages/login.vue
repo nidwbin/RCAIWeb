@@ -1,7 +1,7 @@
 <!--
- * @FileDescription: news page
+ * @FileDescription: login page
  * @Author: wenbin
- * @Date: 2021-09-25
+ * @Date: 2021-09-26
  * @LastEditors: wenbin
  * @LastEditTime: 2021-09-26
  -->
@@ -9,7 +9,8 @@
   <div>
     <Init/>
     <Nav/>
-    <Viewer :type="this.$route.query.type" :file="this.$route.query.file"/>
+    <PageHeader title="登录"/>
+    <LoginArea/>
     <Footer/>
   </div>
 </template>
@@ -18,7 +19,7 @@
   import Init from "../components/Init";
   import Nav from "../components/Nav";
   import PageHeader from "../components/PageHeader";
-  import Viewer from "../components/Viewer";
+  import LoginArea from "../components/LoginArea";
   import Footer from "../components/Footer";
 
   export default {
@@ -26,7 +27,7 @@
       Init,
       Nav,
       PageHeader,
-      Viewer,
+      LoginArea,
       Footer,
     },
   }

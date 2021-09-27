@@ -1,7 +1,7 @@
 export const state= () => ({
   backend:{
       //后端域名和端口，前端域名和端口在package.json中修改
-      domain:"localhost",
+      domain:"192.168.11.167",
       port:"8000",
   },
   authority:{

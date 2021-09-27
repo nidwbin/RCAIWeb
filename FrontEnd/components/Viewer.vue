@@ -75,14 +75,16 @@ export default {
     this.get_file();
   },
   methods:{
-    async get_file(){
+    get_file(){
       if(this.type!=='' && this.file!=='' && this.$cookies.get("ajax-ready")){
         this.$axios.get(this.$cookies.get("backend-url"), {
             "type":this.type,
             "file":this.file
         }).then(
-          (data)=>{
-            this.text=data['text'];
+          (response)=>{
+            if(response.data['text']!==undefined) {
+              this.text = response.data['text'];
+            }
           }
         );
       }
