@@ -13,7 +13,7 @@
           <div class="col-lg-12">
             <div class="header-top-items d-flex justify-content-between align-items-center">
               <div class="logo">
-                <a href="/"><img src="/assets/images/logo.png" alt=""></a>
+                <a href="/"><img src="/assets/images/logo/logo.png" alt="" height="80px"></a>
               </div>
               <div class="header-top-info d-none d-md-block">
                 <ul>
@@ -30,7 +30,7 @@
                   <li>
                     <i class="flaticon-address"></i>
                     <span>地址</span>
-                    <a href="#">黑龙江省哈尔滨市<br>哈尔滨工业大学综合楼6层</a>
+                    <a href="#">黑龙江省哈尔滨市哈尔滨工业大学综合楼6层</a>
                   </li>
                 </ul>
               </div>

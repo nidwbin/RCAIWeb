@@ -20,7 +20,7 @@
     },
     head(){
       return {
-        title: "HIT SPLab - Speech Processing Lab"
+        title: "RCAI - Research Center of Auditory Intelligence"
       }
     },
     mounted(){

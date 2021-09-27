@@ -120,10 +120,12 @@ p {
   outline: 0; }
 
 .banner-slide .slide-bg1 {
-  background-image: url("/assets/images/banner-bg-1.jpg");
+  background-image: url("/assets/images/background/teacher_team_600h.png");
+  height: 600px;
 }
 .banner-slide .slide-bg2 {
-  background-image: url("/assets/images/banner-bg-2.jpg");
+  background-image: url("/assets/images/background/teacher_team_600h.png");
+  height: 600px;
 }
 
 /*===== All Button Style =====*/
@@ -301,6 +303,7 @@ p {
         width: 20%; } }
   .header-area .header-top .header-top-items .logo {
     background: #f4f4f5;
+    /*height: 140px;*/
     padding: 41px 85px 41px 0; }
     @media only screen and (min-width: 992px) and (max-width: 1200px) {
       .header-area .header-top .header-top-items .logo {
@@ -422,11 +425,11 @@ p {
         position: relative; }
         .header-area .main-header .main-header-item .header-menu ul li > a {
           line-height: 70px;
-          font-size: 15px;
+          font-size: 16px;
           color: #e5efff;
           text-transform: uppercase;
           font-weight: 400;
-          margin: 0 18px;
+          margin: 0 32px;
           -webkit-transition: all 0.3s ease-out 0s;
           -moz-transition: all 0.3s ease-out 0s;
           -ms-transition: all 0.3s ease-out 0s;
