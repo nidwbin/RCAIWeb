@@ -286,6 +286,9 @@ p {
 ===========================*/
 .header-area .header-top {
   position: relative;
+  /*height: 20%;*/
+  /*margin-top: ;*/
+
 }
   .header-area .header-top::before {
     position: absolute;
@@ -304,7 +307,7 @@ p {
   .header-area .header-top .header-top-items .logo {
     background: #f4f4f5;
     /*height: 140px;*/
-    padding: 41px 85px 41px 0; }
+    padding: 20px 60px 20px 0; }
     @media only screen and (min-width: 992px) and (max-width: 1200px) {
       .header-area .header-top .header-top-items .logo {
         padding: 41px 31px 41px 0; } }
@@ -359,7 +362,7 @@ p {
     left: 0;
     top: 0;
     height: 100%;
-    min-width: 20%;
+    min-width: 0;
     background: #f4f4f5; }
   .header-area .main-header .main-header-item .header-btn a {
     background: #ff5316;
@@ -429,7 +432,7 @@ p {
           color: #e5efff;
           text-transform: uppercase;
           font-weight: 400;
-          margin: 0 32px;
+          margin: 0 46px;
           -webkit-transition: all 0.3s ease-out 0s;
           -moz-transition: all 0.3s ease-out 0s;
           -ms-transition: all 0.3s ease-out 0s;

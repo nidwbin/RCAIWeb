@@ -2,8 +2,8 @@
  * @FileDescription: nav
  * @Author: liuyoude, wenbin
  * @Date: 2021-09-10
- * @LastEditors: wenbin
- * @LastEditTime: 2021-09-25
+ * @LastEditors: liuyoude
+ * @LastEditTime: 2021-09-27
  -->
 <template>
   <header class="header-area">
@@ -13,7 +13,7 @@
           <div class="col-lg-12">
             <div class="header-top-items d-flex justify-content-between align-items-center">
               <div class="logo">
-                <a href="/"><img src="/assets/images/logo/logo.png" alt="" height="80px"></a>
+                <a href="/"><img src="/assets/images/logo/logo.png" alt="" height="100px"></a>
               </div>
               <div class="header-top-info d-none d-md-block">
                 <ul>
@@ -25,12 +25,12 @@
                   <li>
                     <i class="flaticon-calling"></i>
                     <span>电话</span>
-                    <a href="tel:0451-86417981">0451-86417981</a>
+                    <a href="'tel:'+phone">{{phone}}</a>
                   </li>
                   <li>
                     <i class="flaticon-address"></i>
                     <span>地址</span>
-                    <a href="#">黑龙江省哈尔滨市哈尔滨工业大学综合楼6层</a>
+                    <a href="#">{{adress}}</a>
                   </li>
                 </ul>
               </div>
@@ -45,9 +45,9 @@
           <div class="col-lg-12">
             <div class="main-header-item">
             <div class="main-header-menus d-flex justify-content-between align-items-center">
-                <div class="header-btn">
-                  <a href="#">{{ mse_header }}</a>
-                </div>
+<!--                <div class="header-btn">-->
+<!--                  <a href="#">{{ mse_header }}</a>-->
+<!--                </div>-->
                 <div class="toggle-btn ml-30 canvas_open">
                   <i @click="mobileToggle = !mobileToggle" class="fa fa-bars"></i>
                 </div>
@@ -59,7 +59,7 @@
 
                     <li><nuxt-link :to="url_direction">{{ mse_direction }}</nuxt-link></li>
 
-                    <li><nuxt-link :to="url_single_post">{{ mse_single_post }}</nuxt-link></li>
+                    <li><nuxt-link :to="url_papers">{{ mse_papers }}</nuxt-link></li>
 
                     <li>
                       <a href="#">{{ mse_team }}</a>
@@ -111,7 +111,7 @@
 
                   <li class="menu-item-has-children active"><nuxt-link :to="url_direction">{{ mse_direction }}</nuxt-link></li>
 
-                  <li class="menu-item-has-children active"><nuxt-link :to="url_single_post">{{ mse_single_post }}</nuxt-link></li>
+                  <li class="menu-item-has-children active"><nuxt-link :to="url_papers">{{ mse_papers }}</nuxt-link></li>
 
                   <li class="menu-item-has-children active"><span class="menu-expand"><i class="fa fa-angle-down"></i></span>
                     <a href="#">{{ mse_team }}</a>
@@ -160,7 +160,7 @@
           url_direction:"/direction",
           url_all_projects:"/projects",
           url_single_project:"/single-projects",
-          url_single_post:"/single-post",
+          url_papers:"/papers",
           url_contact_students:"/contact-students",
           url_contact_teacher:"/contact-teacher",
 
@@ -175,12 +175,14 @@
           mse_projects:"科研项目",
           mse_all_projects:"项目总览",
           mse_single_project:"项目演示",
-          mse_single_post:"学术成果",
+          mse_papers:"学术成果",
           mse_contact:"加入我们",
           mse_contact_students:"结伴同行",
           mse_contact_teacher:"求贤若渴",
 
           email:"splab@hit.edu.cn",
+          phone:"0451-86417981",
+          adress:"黑龙江省哈尔滨市哈尔滨工业大学综合楼6层",
 
           mobileToggle: false
     };
