@@ -11,19 +11,13 @@
 <script>
 export default {
   mounted() {
-    if(process.client){
       this.init();
-    }
   },
   methods:{
     init(){
-      let csrf="error";
-      this.$cookies.set("csrftoken",csrf);
-      this.$axios.get('/csrf').then(
-        (response)=>{
-          csrf=response.data["csrf"];
-          this.$cookies.set("csrftoken",csrf);
-        });
+      if(process.client){
+        this.$axios.get('/csrf');
+      }
     },
   }
 }

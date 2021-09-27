@@ -40,7 +40,7 @@
       </div>
     </div>
     <div id="Nav" class="main-header">
-       <div class="header-btn" ：hidden="!admin" @click="logout">
+       <div class="header-btn" :hidden="!admin" @click="logout">
            <a href="#">{{ mse_header }}</a>
        </div>
       <div class="container">
@@ -197,7 +197,7 @@
       },
         computed:{
           admin(){
-              return this.$store.admin;
+              return this.$store.state.admin;
           }
         },
 
@@ -211,11 +211,7 @@
           // },
           logout(){
               if(this.$cookies.get('ajax-ready')){
-                  this.$axios.delete('/log').then(
-                      ()=> {
-                          this.$store.commit("set_admin", false);
-                      }
-                  );
+                  this.$axios.delete('/login/');
               }
           }
       }

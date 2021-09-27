@@ -17,14 +17,14 @@ export default({store, $cookies, $axios}) => {
 
     $axios.onResponse(response => {
       let key;
-      if ('Key' in response.headers) {
-        key = response.headers['Key'];
+      if ('key' in response.headers) {
+        key = response.headers['key'];
       } else {
         key = "Visitor";
       }
       $cookies.set("ajax-ready", true)
       $cookies.set("key", key)
-      store.commit("set_admin", key !== "Visitor");
+      store.commit("set_admin", key===undefined ? false : key !== "Visitor");
     })
 
     $axios.onError(error => {

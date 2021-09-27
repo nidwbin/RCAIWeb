@@ -139,10 +139,9 @@ CORS_ALLOW_METHODS = (
 )
 
 CORS_ALLOW_HEADERS = (
-    'Content-Type',
-    'X-Requested-With',
     'X-CSRFToken',
-    'Key'
+    'Key',
+    'Set-Cookie'
 )
 
 # CSRF_USE_SESSIONS = True

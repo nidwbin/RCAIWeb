@@ -11,6 +11,8 @@ from BackEnd.settings import SECRET_KEY
 def check_key(request, response, set=False):
     if set or request.headers['Key'] == 'Admin':
         response['Key'] = 'Admin'
+    else:
+        response['Key'] = 'Visitor'
 
 
 def set_key(request, response, next=True, set=False):
@@ -18,10 +20,7 @@ def set_key(request, response, next=True, set=False):
         check_key(request,response,set)
     else:
         response['Key'] = 'Visitor'
-    # response['Access-Control-Allow-Origin'] = "192.168.11.233:8000"
-    # response['Access-Control-Allow-Credentials'] = True
-    response['Access-Control-Allow-Header'] = 'key, set-cookie'
-    # response['Access-Control-Allow-Method'] = 'PUT,POST,PATCH,DELETE'
+    response['Access-Control-Expose-Headers'] = "key,set-cookie"
     return response
 
 
@@ -57,7 +56,8 @@ class Login(View):
             return set_key(request, JsonResponse({'message': 'error'}), next=False)
 
     def delete(self, request):
-        pass
+        return set_key(request,JsonResponse({}),next=False)
+
 
 class File(View):
     def get(self, request):
