@@ -30,5 +30,12 @@
       LoginArea,
       Footer,
     },
+
+    methods: {
+      set_isInLogin() {
+         this.$cookies.set("isInInLog", true);
+      },
+    },
   }
+
 </script>
