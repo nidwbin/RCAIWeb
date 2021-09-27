@@ -12,7 +12,7 @@ export default {
       { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
     ],
     link: [
-      { rel: 'shortcut icon', sizes:'180x180', type: 'image/png', href: '/assets/images_/favicon.png' },
+      { rel: 'shortcut icon', sizes:'180x180', type: 'image/png', href: '/assets/images/logo/facvicon.png' },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" },
       { rel: "stylesheet", href: "/css/bootstrap.min.css" },
       { rel: "stylesheet", href: "/css/animate.min.css" },

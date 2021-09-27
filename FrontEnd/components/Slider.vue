@@ -6,10 +6,17 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-10">
+<<<<<<< HEAD
             <div class="banner-content text-left">
               <span data-animation="fadeInDown" data-delay="1s">Welcome to Factory & Industry Business</span>
               <h3 data-animation="fadeInDown" data-delay=".1s" class="title">We Build Everything with Passion</h3>
               <a data-animation="fadeInUp" data-delay="1s" class="main-btn" href="#">Discover more</a>
+=======
+            <div class="banner-content text-center">
+              <span data-animation="fadeInDown" data-delay="1s">Research Center of Auditory Intelligence</span>
+              <h3 data-animation="fadeInDown" data-delay=".1s" class="title">听觉智能研究中心</h3>
+<!--              <a data-animation="fadeInUp" data-delay="1s" class="main-btn" href="#">Discover more</a>-->
+>>>>>>> liuyoude
             </div>
           </div>
         </div>
@@ -19,10 +26,10 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-10">
-            <div class="banner-content text-left">
-              <span data-animation="fadeInDown" data-delay="1s">Welcome to Factory & Industry Business</span>
-              <h3 data-animation="fadeInDown" data-delay=".1s" class="title">We Build Everything with Passion</h3>
-              <a data-animation="fadeInUp" data-delay="1s" class="main-btn" href="#">Discover more</a>
+            <div class="banner-content text-center">
+              <span data-animation="fadeInDown" data-delay="1s">Research Center of Auditory Intelligence</span>
+              <h3 data-animation="fadeInDown" data-delay=".1s" class="title">听觉智能研究中心</h3>
+<!--              <a data-animation="fadeInUp" data-delay="1s" class="main-btn" href="#">Discover more</a>-->
             </div>
           </div>
         </div>
