@@ -3,7 +3,7 @@
  * @Author: wenbin
  * @Date: 2021-09-14
  * @LastEditors: wenbin
- * @LastEditTime: 2021-09-25
+ * @LastEditTime: 2021-09-26
  -->
 <template>
 
@@ -11,6 +11,12 @@
 <script>
 export default {
   mounted() {
+    if(process.client){
+      console.log('client');
+    }
+    if(process.server){
+      console.log('server');
+    }
     this.init();
   },
   computed:{
@@ -31,20 +37,20 @@ export default {
           break;
         }
         default:{
-          url="http://" + this.$store.state.backend.domain + ":" + this.$store.state.backend.port;
+          url="http://"+ this.$store.state.backend.domain + ":" + this.$store.state.backend.port;
         }
       }
       url += "/backend";
       this.$cookies.set("backend-url", url);
       return url;
     },
-    async init(){
+    init(){
       let csrf="error";
-      this.$cookies.set("csrf",csrf);
-      this.$axios.get(this.get_back_url()).then(
-        (data)=>{
-          csrf=data["status"];
-          this.$cookies.set("csrf",csrf);
+      this.$cookies.set("csrftoken",csrf);
+      this.$axios.get(this.get_back_url()+'/csrf').then(
+        (response)=>{
+          csrf=response.data["csrf"];
+          this.$cookies.set("csrftoken",csrf);
         });
     },
   }

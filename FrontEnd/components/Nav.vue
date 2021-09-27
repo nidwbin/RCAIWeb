@@ -43,20 +43,23 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-12">
-            <div class="main-header-item d-flex justify-content-between align-items-center">
-              <div class="main-header-menus  d-flex">
+            <div class="main-header-item">
+            <div class="main-header-menus d-flex justify-content-between align-items-center">
                 <div class="header-btn">
-                  <a @click="mobileToggle = !mobileToggle" href="#">{{ mse_header }}</a>
+                  <a href="#">{{ mse_header }}</a>
                 </div>
                 <div class="toggle-btn ml-30 canvas_open">
-<!--                  <i @click="mobileToggle = !mobileToggle" class="fa fa-bars"></i>-->
+                  <i @click="mobileToggle = !mobileToggle" class="fa fa-bars"></i>
                 </div>
                 <div class="header-menu d-none d-lg-block">
                   <ul>
-
                     <li><nuxt-link :to="url_home">{{ mse_home }}</nuxt-link></li>
 
                     <li><nuxt-link :to="url_news">{{ mse_news }}</nuxt-link></li>
+
+                    <li><nuxt-link :to="url_direction">{{ mse_direction }}</nuxt-link></li>
+
+                    <li><nuxt-link :to="url_single_post">{{ mse_single_post }}</nuxt-link></li>
 
                     <li>
                       <a href="#">{{ mse_team }}</a>
@@ -67,8 +70,6 @@
                       </ul>
                     </li>
 
-                    <li><nuxt-link :to="url_direction">{{ mse_direction }}</nuxt-link></li>
-
                     <li>
                       <a href="#">{{ mse_projects }}</a>
                       <ul class="sub-menu">
@@ -76,8 +77,6 @@
                         <li><nuxt-link :to="url_single_project">{{ mse_single_project }}</nuxt-link></li>
                       </ul>
                     </li>
-
-                    <li><nuxt-link :to="url_single_post">{{ mse_single_post }}</nuxt-link></li>
 
                     <li>
                       <a href="#">{{ mse_contact }}</a>
@@ -91,7 +90,7 @@
               </div>
             </div>
 
-            <div :class="`offcanvas_menu_wrapper ${mobileToggle ? 'active' : ''}`">
+           <div :class="`offcanvas_menu_wrapper ${mobileToggle ? 'active' : ''}`">
               <div class="canvas_close">
                 <a @click="mobileToggle = !mobileToggle" href="javascript:void(0)"><i class="fa fa-times"></i></a>
               </div>
@@ -110,6 +109,9 @@
 
                   <li class="menu-item-has-children active"><nuxt-link :to="url_news">{{ mse_news }}</nuxt-link></li>
 
+                  <li class="menu-item-has-children active"><nuxt-link :to="url_direction">{{ mse_direction }}</nuxt-link></li>
+
+                  <li class="menu-item-has-children active"><nuxt-link :to="url_single_post">{{ mse_single_post }}</nuxt-link></li>
 
                   <li class="menu-item-has-children active"><span class="menu-expand"><i class="fa fa-angle-down"></i></span>
                     <a href="#">{{ mse_team }}</a>
@@ -120,8 +122,6 @@
                       </ul>
                   </li>
 
-                  <li class="menu-item-has-children active"><nuxt-link :to="url_direction">{{ mse_direction }}</nuxt-link></li>
-
                   <li class="menu-item-has-children active"><span class="menu-expand"><i class="fa fa-angle-down"></i></span>
                     <a href="#">{{ mse_projects }}</a>
                       <ul class="sub-menu">
@@ -129,8 +129,6 @@
                         <li><nuxt-link :to="url_single_project">{{ mse_single_project }}</nuxt-link></li>
                       </ul>
                   </li>
-
-                  <li class="menu-item-has-children active"><nuxt-link :to="url_single_post">{{ mse_single_post }}</nuxt-link></li>
 
                   <li class="menu-item-has-children active"><span class="menu-expand"><i class="fa fa-angle-down"></i></span>
                     <a href="#">{{ mse_contact }}</a>
@@ -142,10 +140,9 @@
                 </ul>
               </div>
               <div class="offcanvas_footer">
-                <span><a :href="'mailto:' + email"><i class="fa fa-envelope-o"></i> {{ email }} </a></span>
+                <span><a :href="'mailto:'+email"><i class="fa fa-envelope-o"></i> {{ email }}</a></span>
               </div>
             </div>
-
           </div>
         </div>
       </div>
@@ -167,7 +164,7 @@
           url_contact_students:"/contact-students",
           url_contact_teacher:"/contact-teacher",
 
-          mse_header:"管理",
+          mse_header:"RCAI",
           mse_home:"首页",
           mse_news:"新闻",
           mse_team:"研究团队",

@@ -58,7 +58,7 @@
         ],
         pages:{
           active:1,
-          hidden:false,
+          hidden:true,
           page_list:[1,2,3,4],
         },
       }
