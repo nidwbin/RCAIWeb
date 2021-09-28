@@ -8,6 +8,12 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
+
+ * @FileDescription: django settings
+ * @Author: wenbin
+ * @Date: 2021-09-25
+ * @LastEditors: wenbin
+ * @LastEditTime: 2021-09-28
 """
 
 from pathlib import Path
@@ -125,9 +131,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_ALLOW_ALL = True
-CORS_ORIGIN_WHITELIST = (
-    '*'
-)
+# CORS_ORIGIN_WHITELIST = (
+#     '*'
+# )
 CORS_ALLOW_METHODS = (
     'DELETE',
     'GET',
@@ -139,10 +145,9 @@ CORS_ALLOW_METHODS = (
 )
 
 CORS_ALLOW_HEADERS = (
-    'Content-Type',
-    'X-Requested-With',
     'X-CSRFToken',
-    'Key'
+    'Key',
+    'Set-Cookie'
 )
 
 # CSRF_USE_SESSIONS = True

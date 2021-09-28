@@ -1,9 +1,9 @@
 <!--
- * @FileDescription: login page
+ * @FileDescription: login area
  * @Author: wenbin
  * @Date: 2021-09-26
  * @LastEditors: wenbin
- * @LastEditTime: 2021-09-26
+ * @LastEditTime: 2021-09-28
  -->
 <template>
 <div class="container mt-2 mb-2">
@@ -43,13 +43,12 @@
     },
     methods:{
       login(){
-        if(this.username!==''&&this.password!==''){
-          this.$axios.post(this.$cookies.get("backend-url")+'/login/',{
-            name:this.username,
+        if(this.username!==''&&this.password!==''&&this.$cookies.get("ajax-ready")){
+          this.$axios.post('/login/',{
+            username:this.username,
             password:this.password,
           }).then(
           (response)=>{
-            console.log(response);
             if(response.data['message']==='success'){
                 this.button_class="btn-success";
             }else{

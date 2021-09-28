@@ -7,7 +7,6 @@
  -->
 <template>
   <div>
-    <Init />
     <Nav />
     <SliderTwo />
     <NanoArea />
@@ -28,7 +27,6 @@
 </template>
 
 <script>
-  import Init from "../components/Init";
   import Nav from "../components/Nav";
   import NewsList from "../components/NewsList";
   import Footer from "../components/Footer";
@@ -48,7 +46,6 @@
   import BrandThreeArea from "../components/BrandArea";
   export default {
     components: {
-      Init,
       Nav,
       NewsList,
       Footer,
@@ -70,6 +67,8 @@
       return {
         title: "听觉智能研究中心"
       }
-    }
+    },
   }
+
+
 </script>

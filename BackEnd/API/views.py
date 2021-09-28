@@ -1,60 +1,53 @@
+'''
+ * @FileDescription: api views
+ * @Author: wenbin
+ * @Date: 2021-09-25
+ * @LastEditors: wenbin
+ * @LastEditTime: 2021-09-28
+'''
+
 import django.middleware.csrf
 from django.shortcuts import render
 from django.views.generic import View
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.http import HttpResponse, JsonResponse
-from BackEnd.settings import SECRET_KEY
 
+from API.function import set_key
 
 # Create your views here.
 
-def set_key(request, response, admin):
-    error = "Visitor"
-    if admin == 'next':
-        response['Key'] = 'Admin'
-    elif admin == 'first':
-        response['Key'] = 'Admin'
-    else:
-        response['Key'] = error
-    # response['Access-Control-Allow-Origin'] = "192.168.11.233:8000"
-    # response['Access-Control-Allow-Credentials'] = True
-    # response['Access-Control-Allow-Header'] = 'Content-Type, X-Requested-With,X-CSRFToken,COOKIES'
-    # response['Access-Control-Allow-Method'] = 'PUT,POST,PATCH,DELETE'
-    return response
-
-
 @ensure_csrf_cookie
 def get_csrf(request):
-    csrf = django.middleware.csrf.get_token(request)
-    request.session['_csrftoken'] = csrf
-    return set_key(request, JsonResponse({'csrf': csrf}), 'none')
-
-
-class Test(View):
-    def get(self, request):
-        return JsonResponse({1: "hello"})
-
-    def post(self, request):
-        name = request.POST.get('username', '')
-        print(name)
-        pwd = request.POST.get('password', '')
-        print(pwd)
-
-    def delete(self, request):
-        pass
+    return set_key(request, JsonResponse({}))
 
 
 class Login(View):
     def get(self, request):
-        return JsonResponse({1: "hello"})
+        pass
 
     def post(self, request):
         name = request.POST.get('username')
         pwd = request.POST.get('password')
         if name == 'hello' and pwd == '123456':
-            return set_key(request, JsonResponse({'message': 'success'}), 'first')
+            return set_key(request, JsonResponse({'message': 'success'}), set=True)
         else:
-            return set_key(request, JsonResponse({'message': 'error'}), 'none')
+            return set_key(request, JsonResponse({'message': 'error'}), next=False)
+
+    def delete(self, request):
+        return set_key(request,JsonResponse({}),next=False)
+
+
+class File(View):
+    def get(self, request):
+        type = request.GET.get('type')
+        filename = request.GET.get('filename')
+        return set_key(request, JsonResponse({'message':'success', 'content': '# ok'}))
+
+    def post(self, request):
+        type = request.POST.get('type')
+        filename = request.POST.get('filename')
+        content = request.POST.get('content')
+        return set_key(request, JsonResponse({'message':'success', 'content':'/images/logo.png'}))
 
     def delete(self, request):
         pass

@@ -3,45 +3,28 @@
  * @Author: wenbin
  * @Date: 2021-09-25
  * @LastEditors: wenbin
- * @LastEditTime: 2021-09-25
+ * @LastEditTime: 2021-09-28
  -->
 <template>
-    <section class="industri-services-area services-page">
+  <div class="news-area news-posts-area pt-120">
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-lg-4 col-md-6 col-sm-9" v-for="item in items">
-            <div class="services-item mt-30">
-              <div class="services-thumb">
+            <div class="news-item mt-30">
+              <div class="news-thumb">
                 <img :src="item.image" alt="news">
               </div>
-              <div class="services-content">
-                <h1 class="title">{{ item.title }}</h1>
-                <p>{{ item.date }}</p>
-                <p>{{ item.overview }}</p>
-                <nuxt-link :to="{name:'view', query:{type:'new', file:item.file}}">查看</nuxt-link>
+              <div class="news-content text-center">
+                <nuxt-link :to="{name:'view', query:{type:type, file:item.file}}">{{ item.title }}</nuxt-link>
+                <div class="date">
+                  <span>{{ item.date }}</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="container mt-4" :hidden="pages.hidden">
-      <div class="row">
-        <div class="col"></div>
-          <ul class="pagination">
-            <li :class="pages.active === pages.page_list[0] ? 'page-item disabled' : 'page-item'">
-              <a class="page-link" href="#" @click="change_page(-1)"><i class="fa fa-chevron-left" ></i></a>
-            </li>
-            <li v-for="page in pages.page_list" :class="pages.active === page ? 'page-item active' : 'page-item'" >
-              <a class="page-link" href="#" @click="change_page(page)">{{ page }}</a>
-            </li>
-            <li :class="pages.active === pages.page_list[pages.page_list.length-1] ? 'page-item disabled' : 'page-item'">
-              <a class="page-link" href="#" @click="change_page(0)"><i class="fa fa-chevron-right"></i></a>
-            </li>
-          </ul>
-        <div class="col"></div>
-      </div>
     </div>
-    </section>
 </template>
 
 <script>
@@ -49,43 +32,20 @@
     name:"NewsList",
     data(){
       return{
-        url_view_new:"/view",
+        type:'news',
 
         items:[
-          {title:"这是一条新闻",image:"/images/logo.png",date:"2021/9/10",overview:"something",file:"1",},
-          {title:"这是一条新闻",image:"/images/logo.png",date:"2021/9/10",overview:"something",file:"2"},
-          {title:"这是一条新闻",image:"/images/logo.png",date:"2021/9/10",overview:"something",file:"3"},
+          {title:"这是一条新闻",image:"/images/logo.png",date:"2021/9/10",file:"1",},
+          {title:"这是一条新闻",image:"/images/logo.png",date:"2021/9/10",file:"2"},
+          {title:"这是一条新闻",image:"/images/logo.png",date:"2021/9/10",file:"3"},
+          {title:"这是一条新闻",image:"/images/logo.png",date:"2021/9/10",file:"3"},
+          {title:"这是一条新闻",image:"/images/logo.png",date:"2021/9/10",file:"3"},
+          {title:"这是一条新闻",image:"/images/logo.png",date:"2021/9/10",file:"3"},
+          {title:"这是一条新闻",image:"/images/logo.png",date:"2021/9/10",file:"3"},
+          {title:"这是一条新闻",image:"/images/logo.png",date:"2021/9/10",file:"3"},
+          {title:"这是一条新闻",image:"/images/logo.png",date:"2021/9/10",file:"3"},
         ],
-        pages:{
-          active:1,
-          hidden:true,
-          page_list:[1,2,3,4],
-        },
       }
-    },
-    computed:{
-      is_admin(){
-        return this.$store.state.authority.is_admin;
-      }
-    },
-    methods:{
-      change_page(page){
-        if(page!==this.pages.active){
-          switch (page){
-            case -1:{
-              this.pages.active= this.pages.active-1;
-              break;
-            }
-            case 0:{
-              this.pages.active= this.pages.active+1;
-              break;
-            }
-            default:{
-              this.pages.active=page;
-            }
-          }
-        }
-      },
     }
   }
 </script>

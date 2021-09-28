@@ -1,5 +1,5 @@
 <template>
-<div class="container mt-2" :hidden="!is_admin">
+<div class="container mt-2" :hidden="!admin">
   <div class="card">
     <h3 class="card-header text-muted">
       <div class="btn btn-light btn-lg btn-block" @click="">
@@ -13,8 +13,8 @@
 <script>
 export default {
   computed:{
-    is_admin(){
-      return this.$store.state.authority.is_admin;
+    admin(){
+      return this.$store.state.admin;
     }
   },
   methods:{

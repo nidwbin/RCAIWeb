@@ -1,3 +1,10 @@
+<!--
+ * @FileDescription: nav
+ * @Author: liuyoude, wenbin
+ * @Date: 2021-09-10
+ * @LastEditors: wenbin
+ * @LastEditTime: 2021-09-27
+ -->
 <template>
     <div>
       <footer class="footer-area">
@@ -159,8 +166,8 @@
               mse_contact_teacher:"求贤若渴",
 
               email:"splab@hit.edu.cn",
-              phone:"123123123",
-              address:"哈尔滨",
+              phone:"0451-86417981",
+              address:"黑龙江省哈尔滨市哈尔滨工业大学综合楼6层",
 
               mobileToggle: false,
               scrollBtn: false,
