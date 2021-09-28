@@ -56,10 +56,16 @@ export default {
   modules: [
     'cookie-universal-nuxt',
     '@nuxtjs/axios',
+    '@nuxtjs/toast',
   ],
   /*
   ** Build configuration
   */
+  toast: {// toast模块的配置
+    position: 'top-right',
+    duration: 2000
+  },
+
   build: {
     /*
     ** You can extend webpack config here

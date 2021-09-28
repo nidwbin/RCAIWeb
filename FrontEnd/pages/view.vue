@@ -7,15 +7,13 @@
  -->
 <template>
   <div>
-    <Init/>
     <Nav/>
-    <Viewer :type="this.$route.query.type" :file="this.$route.query.file"/>
+    <Viewer :type="this.$route.query.type" :filename="this.$route.query.file"/>
     <Footer/>
   </div>
 </template>
 
 <script>
-  import Init from "../components/Init";
   import Nav from "../components/Nav";
   import PageHeader from "../components/PageHeader";
   import Viewer from "../components/Viewer";
@@ -23,7 +21,6 @@
 
   export default {
     components:{
-      Init,
       Nav,
       PageHeader,
       Viewer,
