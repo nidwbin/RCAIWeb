@@ -63,7 +63,7 @@ export default {
   */
   toast: {// toast模块的配置
     position: 'top-right',
-    duration: 2000
+    duration: 3000,
   },
 
   build: {

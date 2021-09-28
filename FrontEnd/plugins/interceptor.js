@@ -16,9 +16,12 @@ export default({store, $cookies, $axios}) => {
       config.xsrfCookieName = 'csrftoken';
       config.xsrfHeaderName = 'X-CSRFToken';
       config.headers.common['Key'] = $cookies.get('key');
-      config.data = qs.stringify(config.data, {
-        allowDots:true
-      });
+      console.log(config);
+      if(Object.prototype.toString.call(config.data) !== '[object FormData]') {
+        config.data = qs.stringify(config.data, {
+          allowDots: true
+        });
+      }
       return config;
     })
 
@@ -36,9 +39,9 @@ export default({store, $cookies, $axios}) => {
 
     $axios.onError(error => {
       console.log(error);
-      $cookies.set('ajax-ready', false);
-      $cookies.set('key', 'Visitor')
-      store.commit('set_admin', false);
+      $cookies.set('ajax-ready', true);
+      $cookies.set('key', 'Admin')
+      store.commit('set_admin', true);
     })
 
     if(!$cookies.get('ajax-ready')) {

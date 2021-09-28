@@ -46,8 +46,11 @@ class File(View):
     def post(self, request):
         type = request.POST.get('type')
         filename = request.POST.get('filename')
-        content = request.POST.get('content')
+        if type == 'image':
+            content = request.FILES.get('content')
+        else:
+            constent = request.POST.get('content')
         return set_key(request, JsonResponse({'message':'success', 'content':'/images/logo.png'}))
 
     def delete(self, request):
-        pass
+        return set_key(request, JsonResponse({'message': 'success', 'content': '/images/logo.png'}))
