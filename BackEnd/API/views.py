@@ -1,46 +1,24 @@
+'''
+ * @FileDescription: api views
+ * @Author: wenbin
+ * @Date: 2021-09-25
+ * @LastEditors: wenbin
+ * @LastEditTime: 2021-09-28
+'''
+
 import django.middleware.csrf
 from django.shortcuts import render
 from django.views.generic import View
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.http import HttpResponse, JsonResponse
-from BackEnd.settings import SECRET_KEY
 
+from function import set_key
 
 # Create your views here.
-
-def check_key(request, response, set=False):
-    if set or request.headers['Key'] == 'Admin':
-        response['Key'] = 'Admin'
-    else:
-        response['Key'] = 'Visitor'
-
-
-def set_key(request, response, next=True, set=False):
-    if set or (next and 'Key' in request.headers):
-        check_key(request,response,set)
-    else:
-        response['Key'] = 'Visitor'
-    response['Access-Control-Expose-Headers'] = "key,set-cookie"
-    return response
-
 
 @ensure_csrf_cookie
 def get_csrf(request):
     return set_key(request, JsonResponse({}))
-
-
-class Test(View):
-    def get(self, request):
-        return JsonResponse({1: "hello"})
-
-    def post(self, request):
-        name = request.POST.get('username', '')
-        print(name)
-        pwd = request.POST.get('password', '')
-        print(pwd)
-
-    def delete(self, request):
-        pass
 
 
 class Login(View):

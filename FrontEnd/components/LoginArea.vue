@@ -1,9 +1,9 @@
 <!--
- * @FileDescription: login page
+ * @FileDescription: login area
  * @Author: wenbin
  * @Date: 2021-09-26
  * @LastEditors: wenbin
- * @LastEditTime: 2021-09-26
+ * @LastEditTime: 2021-09-28
  -->
 <template>
 <div class="container mt-2 mb-2">

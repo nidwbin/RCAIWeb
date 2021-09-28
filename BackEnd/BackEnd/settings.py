@@ -8,6 +8,12 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
+
+ * @FileDescription: django settings
+ * @Author: wenbin
+ * @Date: 2021-09-25
+ * @LastEditors: wenbin
+ * @LastEditTime: 2021-09-28
 """
 
 from pathlib import Path

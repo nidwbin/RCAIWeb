@@ -1,3 +1,10 @@
+<!--
+ * @FileDescription: pages button list
+ * @Author: wenbin
+ * @Date: 2021-09-25
+ * @LastEditors: wenbin
+ * @LastEditTime: 2021-09-28
+ -->
 <template>
   <div class="container mb-40" :hidden="hidden">
       <div class="row">
