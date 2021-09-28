@@ -2081,13 +2081,13 @@ p {
   .client-area .client-title {
     padding-bottom: 25px; }
     .client-area .client-title .title {
-      font-size: 54px;
-      color: #192437;
-      font-weight: 400;
+      font-size: 36px;
+      color: rgba(33, 33, 33, 0.55);
+      font-weight: 500;
       text-transform: uppercase; }
       @media (max-width: 767px) {
         .client-area .client-title .title {
-          font-size: 40px; } }
+          font-size: 28px; } }
   .client-area .client-item {
     padding: 60px;
     border: 1px solid #eaeaea;
@@ -2119,17 +2119,26 @@ p {
         font-weight: 400;
         text-transform: uppercase; }
       .client-area .client-item .user span {
+        /*float: right;*/
+        margin-left: 50px;
         font-size: 14px;
         color: #ff5316;
         text-transform: uppercase;
-        left: 1px; }
+        left: 1px;}
+      .client-area .client-item .user h5 {
+         /*float: left;*/
+         margin-left: 50px;
+      }
       .client-area .client-item .user .user-thumb {
         position: absolute;
+        /*float: left;*/
         left: 0;
         top: 50%;
         transform: translateY(-50%); }
         .client-area .client-item .user .user-thumb i {
           position: absolute;
+          margin-left: 0;
+          /*float: left;*/
           right: 0;
           bottom: 0;
           height: 22px;
@@ -2140,7 +2149,7 @@ p {
           font-size: 12px;
           background: #ff5316; }
         .client-area .client-item .user .user-thumb img {
-          width: 100%; }
+          width: 120px; }
     .client-area .client-item .text p {
       padding-top: 42px;
       font-size: 18px;
@@ -4873,7 +4882,7 @@ p {
   .leadership-area.about-leadership {
     padding-top: 0px;
     margin-bottom: 0;
-    padding-bottom: 120px;
+    padding-bottom: 40px;
     position: relative;
     z-index: 10; }
     .leadership-area.about-leadership .shape {
@@ -4882,7 +4891,7 @@ p {
       top: 0px;
       z-index: -1; }
   .leadership-area.team-leadership {
-    padding-top: 90px; }
+    padding-top: 40px; }
 
 /*===========================
     15.NANO css
