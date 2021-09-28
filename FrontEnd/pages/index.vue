@@ -2,25 +2,15 @@
  * @FileDescription: home page
  * @Author: wenbin
  * @Date: 2021-09-25
- * @LastEditors: wenbin
- * @LastEditTime: 2021-09-25
+ * @LastEditors: liuyoude
+ * @LastEditTime: 2021-09-28
  -->
 <template>
   <div>
     <Nav />
-    <SliderTwo />
-    <NanoArea />
-    <AboutArea />
-    <EmailArea />
-    <ServicesTwoArea />
-    <VideoArea />
-    <MissionArea />
-    <ProjectThreeArea />
-    <ClientThreeArea />
+    <Slider />
+    <HotNewsPage />
     <FunfactsThreeArea />
-    <ExperienceArea />
-    <NewsList />
-    <BrandThreeArea />
     <Footer />
   </div>
 
@@ -28,40 +18,18 @@
 
 <script>
   import Nav from "../components/Nav";
-  import NewsList from "../components/NewsList";
   import Footer from "../components/Footer";
-
-
-  import SliderTwo from "../components/Slider";
-  import NanoArea from "../components/NanoArea";
-  import AboutArea from "../components/AboutArea";
-  import EmailArea from "../components/EmailArea";
-  import ServicesTwoArea from "../components/ServicesArea";
-  import VideoArea from "../components/VideoArea";
-  import MissionArea from "../components/MissionArea";
-  import ProjectThreeArea from "../components/ProjectArea";
-  import ClientThreeArea from "../components/ClientArea";
+  import Slider from "../components/Slider";
   import FunfactsThreeArea from "../components/FunfactsArea";
-  import ExperienceArea from "../components/ExperienceArea";
-  import BrandThreeArea from "../components/BrandArea";
+  import HotNewsPage from "../components/HotNewsPage";
   export default {
     components: {
       Nav,
-      NewsList,
       Footer,
 
-      BrandThreeArea,
-      ExperienceArea,
       FunfactsThreeArea,
-      ClientThreeArea,
-      ProjectThreeArea,
-      MissionArea,
-      VideoArea,
-      ServicesTwoArea,
-      EmailArea,
-      AboutArea,
-      NanoArea,
-      SliderTwo,
+      Slider,
+      HotNewsPage,
     },
     head(){
       return {
