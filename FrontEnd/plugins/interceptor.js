@@ -1,10 +1,10 @@
-<!--
- * @FileDescription: axios interceptor
- * @Author: wenbin
- * @Date: 2021-09-25
- * @LastEditors: wenbin
- * @LastEditTime: 2021-09-28
- -->
+// <!--
+//  * @FileDescription: axios interceptor
+//  * @Author: wenbin
+//  * @Date: 2021-09-25
+//  * @LastEditors: wenbin
+//  * @LastEditTime: 2021-09-28
+//  -->
 import qs from 'qs';
 
 export default({store, $cookies, $axios}) => {
