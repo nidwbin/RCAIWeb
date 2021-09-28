@@ -29,6 +29,9 @@
       PapersList,
       PagesList,
       Footer,
+    },
+    mounted() {
+      this.$cookies.set('location',this.$route.fullPath);
     }
   }
 </script>
