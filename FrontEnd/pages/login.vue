@@ -7,7 +7,6 @@
  -->
 <template>
   <div>
-    <Init/>
     <Nav/>
     <PageHeader title="登录"/>
     <LoginArea/>
@@ -16,7 +15,6 @@
 </template>
 
 <script>
-  import Init from "../components/Init";
   import Nav from "../components/Nav";
   import PageHeader from "../components/PageHeader";
   import LoginArea from "../components/LoginArea";
@@ -24,7 +22,6 @@
 
   export default {
     components:{
-      Init,
       Nav,
       PageHeader,
       LoginArea,

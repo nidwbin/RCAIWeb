@@ -12,7 +12,7 @@ from django.views.generic import View
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.http import HttpResponse, JsonResponse
 
-from function import set_key
+from API.function import set_key
 
 # Create your views here.
 
@@ -23,7 +23,7 @@ def get_csrf(request):
 
 class Login(View):
     def get(self, request):
-        return JsonResponse({1: "hello"})
+        pass
 
     def post(self, request):
         name = request.POST.get('username')
@@ -41,13 +41,13 @@ class File(View):
     def get(self, request):
         type = request.GET.get('type')
         filename = request.GET.get('filename')
-        return JsonResponse({'data': '# ok'})
+        return set_key(request, JsonResponse({'message':'success', 'content': '# ok'}))
 
     def post(self, request):
         type = request.POST.get('type')
         filename = request.POST.get('filename')
-        file = request.POST.get('file')
-        return JsonResponse({'message':'success', 'url':'/images/logo.png'})
+        content = request.POST.get('content')
+        return set_key(request, JsonResponse({'message':'success', 'content':'/images/logo.png'}))
 
     def delete(self, request):
         pass

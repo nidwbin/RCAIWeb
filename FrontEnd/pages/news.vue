@@ -7,7 +7,6 @@
  -->
 <template>
   <div>
-    <Init/>
     <Nav/>
     <PageHeader title="新闻"/>
     <NewsList/>
@@ -17,7 +16,6 @@
 </template>
 
 <script>
-  import Init from "../components/Init";
   import Nav from "../components/Nav";
   import PageHeader from "../components/PageHeader";
   import NewsList from "../components/NewsList";
@@ -26,7 +24,6 @@
 
   export default {
     components:{
-      Init,
       Nav,
       PageHeader,
       NewsList,
