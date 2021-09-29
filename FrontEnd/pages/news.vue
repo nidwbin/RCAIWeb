@@ -3,12 +3,13 @@
  * @Author: wenbin, liuyoude
  * @Date: 2021-09-25
  * @LastEditors: liuyoude
- * @LastEditTime: 2021-09-28
+ * @LastEditTime: 2021-09-29
  -->
 <template>
   <div>
     <Nav/>
     <PageHeader title_zh="新闻" title_en="News"/>
+    <NewsPage />
     <NewsList/>
     <PagesList/>
     <Footer/>
@@ -21,11 +22,13 @@
   import NewsList from "../components/NewsList";
   import PagesList from "../components/PagesList";
   import Footer from "../components/Footer";
+  import NewsPage from "../components/NewsPage";
 
   export default {
     components:{
       Nav,
       PageHeader,
+      NewsPage,
       NewsList,
       PagesList,
       Footer,
