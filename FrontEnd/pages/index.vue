@@ -1,9 +1,9 @@
 <!--
  * @FileDescription: home page
- * @Author: wenbin
+ * @Author: wenbin, liuyoude
  * @Date: 2021-09-25
  * @LastEditors: liuyoude
- * @LastEditTime: 2021-09-28
+ * @LastEditTime: 2021-09-29
  -->
 <template>
   <div>
@@ -11,6 +11,8 @@
     <Nav />
     <Slider />
     <HotNewsPage />
+    <IntroductionPage />
+    <HistoryPage />
     <FunfactsThreeArea />
     <Footer />
   </div>
@@ -22,6 +24,8 @@
   import Nav from "../components/Nav";
   import Footer from "../components/Footer";
   import Slider from "../components/Slider";
+  import IntroductionPage from "../components/IntroductionPage";
+  import HistoryPage from "../components/HistoryPage";
   import FunfactsThreeArea from "../components/FunfactsArea";
   import HotNewsPage from "../components/HotNewsPage";
   export default {
@@ -29,7 +33,8 @@
       Init,
       Nav,
       Footer,
-
+      HistoryPage,
+      IntroductionPage,
       FunfactsThreeArea,
       Slider,
       HotNewsPage,

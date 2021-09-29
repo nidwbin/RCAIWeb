@@ -3,7 +3,7 @@
  * @Author: liuyoude
  * @Date: 2021-09-28
  * @LastEditors: liuyoude
- * @LastEditTime: 2021-09-28
+ * @LastEditTime: 2021-09-29
  -->
 <template>
   <section class="client-area client-2-area client-about">
@@ -12,7 +12,7 @@
         <div class="row">
           <div class="col-lg-7">
             <div class="client-title">
-              <h6 class="title">相关新闻</h6>
+              <h6 class="title">近期新闻</h6>
             </div>
           </div>
         </div>
