@@ -7,7 +7,6 @@
  -->
 <template>
   <div>
-    <Init />
     <Nav />
     <Slider />
     <HotNewsPage />
@@ -20,7 +19,6 @@
 </template>
 
 <script>
-  import Init from "../components/Init";
   import Nav from "../components/Nav";
   import Footer from "../components/Footer";
   import Slider from "../components/Slider";
@@ -30,7 +28,6 @@
   import HotNewsPage from "../components/HotNewsPage";
   export default {
     components: {
-      Init,
       Nav,
       Footer,
       HistoryPage,
@@ -39,29 +36,13 @@
       Slider,
       HotNewsPage,
     },
+    mounted() {
+      this.$cookies.set('location', this.$route.fullPath);
+    },
     head(){
       return {
         title: "听觉智能研究中心"
       }
     },
   }
-
-export default {
-  components: {
-    Nav,
-    Footer,
-
-    FunfactsThreeArea,
-    Slider,
-    HotNewsPage,
-  },
-  mounted() {
-    this.$cookies.set('location', this.$route.fullPath);
-  },
-  head() {
-    return {
-      title: "听觉智能研究中心"
-    }
-  },
-}
 </script>
