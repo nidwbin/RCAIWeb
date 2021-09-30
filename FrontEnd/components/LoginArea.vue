@@ -44,6 +44,9 @@ export default {
   },
   methods: {
     login() {
+      if (this.$store.state.debug) {
+        console.log('before location', this.$cookies.get('location'));
+      }
       if (this.username !== '' && this.password !== '' && this.$cookies.get("ajax-ready")) {
         this.$axios.post('/login/', {
           username: this.username,
@@ -52,11 +55,12 @@ export default {
           (response) => {
             if (response.data['message'] === 'success') {
               this.button_class = "btn-success";
-
-              setTimeout(() => {
-                let location = this.$cookies.get('location');
-                this.$router.push(location===undefined?'/':location);
-              }, 3000);
+              if (!this.$store.state.debug) {
+                setTimeout(() => {
+                  let location = this.$cookies.get('location');
+                  this.$router.push(location === undefined ? '/' : location);
+                }, 3000);
+              }
             } else {
               this.button_class = "btn-danger";
             }

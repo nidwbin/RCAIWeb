@@ -18,7 +18,7 @@
         </div>
         <div class="row client-active">
           <swiper :options="swiperOptions">
-            <swiper-slide v-for="item in items">
+            <swiper-slide v-for="item in items" :key="item.file">
               <div class="client-item mt-30">
                 <div class="shape">
                   <img src="/images/shape/shape-4.png" alt="shape">

@@ -1,0 +1,15 @@
+/*
+ * @FileDescription: global css
+ * @Author: wenbin
+ * @Date: 2021-09-29
+ * @LastEditors: wenbin
+ * @LastEditTime: 2021-09-29
+ */
+.v-note-wrapper {
+  z-index: 0 !important;
+  border: none !important;
+}
+
+.markdown-body span{
+  display: inline !important;
+}

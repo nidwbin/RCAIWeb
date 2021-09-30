@@ -7,11 +7,15 @@
  -->
 <template>
   <div class="container mt-4 mb-4">
-    <div class="mavonEditor">
-      <mavon-editor ref=md v-model="text" :toolbars="toolbars" :editable="admin" :toolbarsFlag="admin"
-                    :defaultOpen="admin?null:'preview'" :preview="!admin" :subfield="admin"
-                    :boxShadow="false" @imgAdd="add_image" @imgDel="del_image" @save="save"
-      />
+    <div :class="admin?'showBorder':''">
+      <div class="mavonEditor">
+
+        <mavon-editor ref=md v-model="text" :toolbars="toolbars" :editable="admin" :toolbarsFlag="admin"
+                      :defaultOpen="admin?null:'preview'" :preview="!admin" :subfield="admin"
+                      :boxShadow="false" @imgAdd="add_image" @imgDel="del_image" @save="save"
+                      previewBackground="white"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -64,9 +68,9 @@ export default {
         subfield: true, // 单双栏模式
         preview: true, // 预览
       },
-      text: '哎呀！出错了╮(￣▽￣)╭',
+      text: '',
       images: {},
-      images_save: {}
+      images_saved: {}
     };
   },
   computed: {
@@ -76,7 +80,14 @@ export default {
   },
   created() {
     if (process.client) {
-      this.get_file();
+      this.get_file({type: this.type, filetype: 'markdown', filename: this.filename},
+        (data) => {
+          if (data['message'] === 'success') {
+            this.text = data['content'];
+          } else {
+            this.text = '哎呀！出错了╮(￣▽￣)╭';
+          }
+        });
       if (this.admin) {
         setInterval(() => {
           this.save(this.$refs.md.d_value, this.$refs.md.d_render);
@@ -85,21 +96,42 @@ export default {
     }
   },
   methods: {
-    get_file() {
-      if (this.type !== '' && this.filename !== '' && this.$cookies.get('ajax-ready')) {
-        this.$axios.get("/file", {
-          params: {
-            type: this.type,
-            filename: this.filename
-          }
-        }).then(
-          (response) => {
-            if (response.data['message'] === 'success') {
-              this.text = response.data['content'];
-            }
-          }
-        );
+    get_ready() {
+      let cnt = 10;
+      while (!this.$cookies.get('ajax-ready') && cnt) {
+        this.$axios.get('/csrf');
+        cnt--;
       }
+      return this.$cookies.get('ajax-ready');
+    },
+
+    get_file(data = null, func = undefined) {
+      let ans = null;
+      if (process.client && data !== null && func !== undefined && this.get_ready()) {
+        this.$axios.get("/file/", {params: data}).then(response => func(response.data)
+        ).catch(() => {
+          this.toast.error('网络错误');
+        });
+      } else {
+        if (this.$store.state.debug) {
+          console.log('get file', data, func);
+        }
+        this.toast.error('未知错误');
+      }
+    },
+
+    post_file(data = null, func = undefined) {
+      if (process.client && data !== null && func !== undefined && this.get_ready()) {
+        this.$axios.post('/file/', data).then(response => func(response.data)).catch(() => {
+          this.$toast.error('网络错误');
+        });
+      } else {
+        if (this.$store.state.debug) {
+          console.log('post file', data, func);
+        }
+        this.toast.error('未知错误');
+      }
+      return ans;
     },
 
     add_image(pos, $file) {
@@ -111,78 +143,62 @@ export default {
     },
 
     save(val, render) {
-      for(let i in this.images_save){
+      if (this.$store.state.debug) {
+        console.log('markdown val', val);
+        console.log('html render', render);
+        console.log('images', this.images);
+        console.log('images map', this.images_saved);
+      }
+      for (let i in this.images_saved) {
         let reg_str = "/(!\\[\[^\\[\]*?\\]\(?=\\(\)\)\\(\\s*\(" + i[0] + "\)\\s*\\)/g";
         let reg = eval(reg_str);
-        if(!val.match(reg)){
-          delete this.images_save[i[0]];
+        if (!val.match(reg)) {
+          delete this.images_saved[i[0]];
         }
       }
 
-      let cnt = 10;
-      while (!this.$cookies.get('ajax-ready') && cnt) {
-        this.$axios.get('/csrf');
-        cnt--;
-      }
-
-      if (this.$cookies.get('ajax-ready')) {
-        this.$axios.post('/file/', {
-          type: 'markdown',
-          filename: this.filename,
-          content: val,
-        }).then(
-          (response) => {
-            if (response.data['message'] === 'success') {
-              this.$toast.success('保存成功');
-            } else {
-              this.$toast.error('保存失败');
-            }
-          }
-        ).catch(() => {
-          this.$toast.error('网络错误');
-        });
-        this.$axios.post('/file/',{
-          type:'map',
-          filename: this.filename,
-          content: this.images_save,
-        }).then(
-          (response) => {
-            if (response.data['message'] === 'success') {
-              this.$toast.success('保存成功');
-            } else {
-              this.$toast.error('保存失败');
-            }
-          }
-        ).catch(() => {
-          this.$toast.error('网络错误');
-        });
-      }
+      this.post_file({
+        type: this.type, filetype: 'markdown', filename: this.filename, content: val,
+      }, data => {
+        if (data['message'] === 'success') {
+          this.$toast.success('保存成功');
+        } else {
+          this.$toast.error('保存失败');
+        }
+      });
 
       for (let i in this.images) {
         let reg_str = "/(!\\[\[^\\[\]*?\\]\(?=\\(\)\)\\(\\s*\(" + i[0] + "\)\\s*\\)/g";
         let reg = eval(reg_str);
         if (val.match(reg)) {
-          if (this.$cookies.get('ajax-ready') && !(i[0] in this.images_save)) {
+          if (!(i[0] in this.images_saved)) {
             let data = new FormData();
-            data.append('type', 'image');
+            data.append('type', this.type);
+            data.append('filetype', 'image');
             data.append('filename', i[0]);
             data.append('content', i[1]);
-            this.$axios.post('/file/', data).then(
-              (response) => {
-                if (response.data['message']) {
-                  this.images_save[i[0]] = response.data['content'];
-                } else {
-                  this.$toast.error('图片上传失败');
-                }
+            this.post_file(data, data => {
+              if (data['message'] === 'success') {
+                this.images_saved[i[0]] = data['content'];
+              } else {
+                this.$toast.error('图片上传失败');
               }
-            ).then(() => {
-              this.$toast.error('网络错误');
-            })
+            });
           }
         } else {
           this.del_image(i[0]);
         }
       }
+
+      this.post_file({
+        type: this.type, filetype: 'map', filename: this.filename, content: this.images_saved,
+      }, data => {
+        if (data['message'] === 'success') {
+          this.$toast.success('保存成功');
+        } else {
+          this.$toast.error('保存失败');
+        }
+      });
 
     }
   }
@@ -193,5 +209,8 @@ export default {
 .mavonEditor {
   width: 100%;
   height: 100%;
+}
+.showBorder {
+  border: 1px solid #f2f6fc;
 }
 </style>
