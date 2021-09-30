@@ -40,16 +40,20 @@ class Login(View):
 class File(View):
     def get(self, request):
         type = request.GET.get('type')
+        filetype = request.GET.get('filetype')
         filename = request.GET.get('filename')
         return set_key(request, JsonResponse({'message':'success', 'content': '# ok'}))
 
     def post(self, request):
         type = request.POST.get('type')
+        filetype = request.POST.get('filetype')
         filename = request.POST.get('filename')
-        if type == 'image':
+        if filetype == 'image':
             content = request.FILES.get('content')
         else:
             constent = request.POST.get('content')
+
+
         return set_key(request, JsonResponse({'message':'success', 'content':'/images/logo.png'}))
 
     def delete(self, request):
