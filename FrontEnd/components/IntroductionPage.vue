@@ -1,8 +1,15 @@
+<!--
+ * @FileDescription: home page
+ * @Author: liuyoude
+ * @Date: 2021-09-29
+ * @LastEditors: liuyoude
+ * @LastEditTime: 2021-10-01
+ -->
 <template>
   <section class="single-project-area pt-120">
     <div class="container">
       <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-7">
           <div class="single-project">
             <div class="single-project-thumb">
             </div>
@@ -15,9 +22,25 @@
               <p>目前，中心紧密围绕着国家重大需求、战略目标和国际学术前沿，立足于语音处理的发展方向，坚持需求与发展并举、理论与实践并重，在“语音分析、识别与合成技术、基于语音的信息安全技术、音频信息检索技术、数字音频水印与信息伪装、说话人识别技术”等方面的研究显示了自己的优势与特色，形成了一批具有自主知识产权的专利技术、一批有技术创新和显著经济效益的标志性成果，努力把中心建设成为科学高效、功能完备、体系齐全、人才辈出的科研平台。</p>
               <h3 class="title">承担项目</h3>
               <p>中心近年来承担了30余项科研工作项目，包括国家重大研究计划、国家自然科学基金重点项目、国家973项目、国家自然科学基金项目、国家863重点项目、国家863重大项目子课题、国家242项目、国家信息安全中心项目、国家重点实验室项目、教育部跨世纪优秀人才基金项目、省部委重点项目等。</p>
-              <h3 class="title">发展历史</h3>
             </div>
           </div>
+        </div>
+        <div class="col-lg-5">
+            <div class="history-area pt-115">
+              <div class="history-item">
+                <h3 class="title">发展历史</h3>
+                <div class="item d-block d-sm-flex align-items-center" v-for="item in items">
+                  <div class="thumb">
+    <!--                <img src="/assets/images/history-1.jpg" alt="">-->
+                    <span>{{ item.year }}</span>
+                  </div>
+                  <div class="content">
+                    <nuxt-link to="/single-project">Company was Founded</nuxt-link>
+                    <p>there are many variations of passages of lorem Ipsum available but the majority have suffered alteration in some form injected which don't look of available but the majority have suffered even slightly believable.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
         </div>
       </div>
     </div>
@@ -26,7 +49,19 @@
 
 <script>
     export default {
-        name: "ProjectSingle"
+        name: "ProjectSingle",
+        data () {
+            return{
+                items: [
+                    {year:1996},
+                    {year:2001},
+                    {year:2007},
+                    {year:2020},
+                ]
+
+            }
+
+        }
     }
 </script>
 
