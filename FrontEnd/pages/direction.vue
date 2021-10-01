@@ -1,17 +1,15 @@
 <!--
- * @FileDescription: news page
- * @Author: wenbin, liuyoude
- * @Date: 2021-09-25
+ * @FileDescription: research page
+ * @Author: liuyoude
+ * @Date: 2021-10-01
  * @LastEditors: liuyoude
  * @LastEditTime: 2021-10-01
  -->
 <template>
   <div>
     <Nav/>
-    <PageHeader title_zh="新闻" title_en="News"/>
-    <NewsPage />
-<!--    <NewsList/>-->
-    <PagesList/>
+    <PageHeader title_zh="研究方向" title_en="Research Direction"/>
+    <ResearchPage />
     <Footer/>
   </div>
 </template>
@@ -19,18 +17,14 @@
 <script>
   import Nav from "../components/Nav";
   import PageHeader from "../components/PageHeader";
-  import NewsList from "../components/NewsList";
-  import PagesList from "../components/PagesList";
+  import ResearchPage from "../components/ResearchPage";
   import Footer from "../components/Footer";
-  import NewsPage from "../components/NewsPage";
 
   export default {
     components:{
       Nav,
       PageHeader,
-      NewsPage,
-      NewsList,
-      PagesList,
+      ResearchPage,
       Footer,
     },
   mounted() {

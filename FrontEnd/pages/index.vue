@@ -11,8 +11,6 @@
     <Slider />
     <HotNewsPage />
     <IntroductionPage />
-<!--    <HistoryPage />-->
-
     <FunfactsThreeArea />
     <Footer />
   </div>
@@ -24,14 +22,12 @@
   import Footer from "../components/Footer";
   import Slider from "../components/Slider";
   import IntroductionPage from "../components/IntroductionPage";
-  import HistoryPage from "../components/HistoryPage";
   import FunfactsThreeArea from "../components/FunfactsArea";
   import HotNewsPage from "../components/HotNewsPage";
   export default {
     components: {
       Nav,
       Footer,
-      HistoryPage,
       IntroductionPage,
       FunfactsThreeArea,
       Slider,

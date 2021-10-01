@@ -3817,6 +3817,9 @@ p {
 .comment-one__content .comment-one__date span {
   margin-left: 5px;
   margin-right: 5px; }
+.comment-one__content h3 {
+  color: #1d2124!important;
+}
 
 .comment-one__image {
   min-width: 165px; }
@@ -5415,7 +5418,71 @@ p {
     bottom: 0;
     right: 0;
     z-index: -1; }
-
+/*===========================
+    Dirction css
+===========================*/
+.direction-area {
+  padding-bottom: 116px; }
+  .direction-area .direction-item .item {
+    border-bottom: 1px solid #eaeaea;
+    padding-bottom: 56px;
+    margin-bottom: 56px; }
+    .direction-area .direction-item .item .thumb {
+      min-width: 165px;
+      position: relative; }
+      .direction-area .direction-item .item .thumb img {
+        width: 100%; }
+      .direction-area .direction-item .item .thumb span {
+        position: absolute;
+        right: -23px;
+        bottom: 0;
+        height: 75px;
+        width: 75px;
+        text-align: center;
+        line-height: 75px;
+        background: #ff5316;
+        color: #fff; }
+    .direction-area .direction-item .item .content {
+      padding-left: 82px; }
+      @media only screen and (min-width: 768px) and (max-width: 991px) {
+        .direction-area .direction-item .item .content {
+          padding-left: 60px; } }
+      @media (max-width: 767px) {
+        .direction-area .direction-item .item .content {
+          padding-left: 0px;
+          padding-top: 20px; } }
+      @media only screen and (min-width: 576px) and (max-width: 767px) {
+        .direction-area .direction-item .item .content {
+          padding-left: 40px;
+          padding-top: 0; } }
+      .direction-area .direction-item .item .content a {
+        font-size: 24px;
+        font-weight: 400;
+        color: #192437;
+        text-transform: uppercase; }
+      .direction-area .direction-item .item .content p {
+        font-size: 18px;
+        font-weight: 300;
+        color: #7f8692;
+        line-height: 34px;
+        padding-right: 90px;
+        padding-top: 40px; }
+        @media only screen and (min-width: 992px) and (max-width: 1200px) {
+          .direction-area .direction-item .item .content p {
+            padding-right: 0; } }
+        @media only screen and (min-width: 768px) and (max-width: 991px) {
+          .direction-area .direction-item .item .content p {
+            padding-right: 0;
+            font-size: 16px; } }
+        @media (max-width: 767px) {
+          .direction-area .direction-item .item .content p {
+            padding-right: 0;
+            font-size: 15px;
+            padding-top: 15px; } }
+    .direction-area .direction-item .item.item-4 {
+      border-bottom: 0;
+      margin-bottom: 0;
+      padding-bottom: 0; }
 /*===========================
     18.HISTORY css
 ===========================*/
@@ -5423,7 +5490,7 @@ p {
   padding-bottom: 20px; padding-top: 40px;
   padding-left: 40px;
   padding-right: 20px;
-    background: rgba(164,161,160,0.55);
+    background: rgba(231, 233, 232, 0.8);
 }
   .history-area .history-item .title {
       font-size: 26px;
