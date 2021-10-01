@@ -2866,7 +2866,9 @@ p {
 
 .single-project-area {
   padding-bottom: 10px;
-  padding-top: 10px;}
+  padding-top: 10px;
+
+  }
   .single-project-area .single-project .single-project-thumb {
     position: relative;}
     .single-project-area .single-project .single-project-thumb img {
@@ -5418,13 +5420,24 @@ p {
     18.HISTORY css
 ===========================*/
 .history-area {
-  padding-bottom: 20px; padding-top: 60px;}
+  padding-bottom: 20px; padding-top: 40px;
+  padding-left: 40px;
+  padding-right: 20px;
+    background: rgba(164,161,160,0.55);
+}
+  .history-area .history-item .title {
+      font-size: 26px;
+      margin-top: 30px;
+      margin-bottom: 60px;
+      text-transform: uppercase;
+      color: #7f8692;
+      font-weight: 400; }
   .history-area .history-item .item {
     border-bottom: 1px solid #eaeaea;
-    padding-bottom: 56px;
-    margin-bottom: 56px; }
+    padding-bottom: 32px;
+    margin-bottom: 32px; }
     .history-area .history-item .item .thumb {
-      min-width: 165px;
+      min-width: 43px;
       position: relative; }
       .history-area .history-item .item .thumb img {
         width: 100%; }
@@ -5432,17 +5445,17 @@ p {
         position: absolute;
         right: -23px;
         bottom: 0;
-        height: 75px;
-        width: 75px;
+        height: 65px;
+        width: 65px;
         text-align: center;
-        line-height: 75px;
+        line-height: 65px;
         background: #ff5316;
         color: #fff; }
     .history-area .history-item .item .content {
-      padding-left: 82px; }
+      padding-left: 41px; }
       @media only screen and (min-width: 768px) and (max-width: 991px) {
         .history-area .history-item .item .content {
-          padding-left: 60px; } }
+          padding-left: 60px; }  }
       @media (max-width: 767px) {
         .history-area .history-item .item .content {
           padding-left: 0px;
@@ -5450,7 +5463,14 @@ p {
       @media only screen and (min-width: 576px) and (max-width: 767px) {
         .history-area .history-item .item .content {
           padding-left: 40px;
-          padding-top: 0; } }
+          padding-top: 0; }
+      }
+      @media (max-width: 575px) {
+        .history-area .history-item .item .thumb span {
+          bottom: -60px;
+          right: -10px;
+        }
+      }
       .history-area .history-item .item .content a {
         font-size: 24px;
         font-weight: 400;
@@ -5461,8 +5481,8 @@ p {
         font-weight: 300;
         color: #7f8692;
         line-height: 34px;
-        padding-right: 90px;
-        padding-top: 40px; }
+        padding-right: 30px;
+        padding-top: 20px; }
         @media only screen and (min-width: 992px) and (max-width: 1200px) {
           .history-area .history-item .item .content p {
             padding-right: 0; } }

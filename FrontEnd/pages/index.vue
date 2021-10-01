@@ -3,7 +3,7 @@
  * @Author: wenbin, liuyoude
  * @Date: 2021-09-25
  * @LastEditors: liuyoude
- * @LastEditTime: 2021-09-29
+ * @LastEditTime: 2021-10-01
  -->
 <template>
   <div>
@@ -11,7 +11,8 @@
     <Slider />
     <HotNewsPage />
     <IntroductionPage />
-    <HistoryPage />
+<!--    <HistoryPage />-->
+
     <FunfactsThreeArea />
     <Footer />
   </div>

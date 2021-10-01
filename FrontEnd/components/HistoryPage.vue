@@ -1,8 +1,15 @@
+<!--
+ * @FileDescription: home page
+ * @Author: liuyoude
+ * @Date: 2021-09-29
+ * @LastEditors: liuyoude
+ * @LastEditTime: 2021-10-01
+ -->
 <template>
   <div class="history-area pt-115">
     <div class="container">
       <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-5">
           <div class="history-item">
             <div class="item d-block d-sm-flex align-items-center" v-for="item in items">
               <div class="thumb">
