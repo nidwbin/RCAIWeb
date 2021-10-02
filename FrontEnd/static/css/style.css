@@ -3564,12 +3564,12 @@ p {
   padding-top: 120px;
   padding-bottom: 120px; }
 .paper-details .book-area {
-  background: rgba(231, 233, 232, 0.8);
+  /*background: rgba(231, 233, 232, 0.8);*/
   /*min-height: 2000px;*/
   padding-top: 20px;
 }
 .paper-details .book-area .title h3{
-  margin-left: 20px;
+  /*margin-left: 20px;*/
   color: #7f8692;
 }
 .paper-details .book-area .title span{
@@ -3639,7 +3639,7 @@ p {
   font-size: 15px;
   padding-left: 2px;
   max-width: 280px;
-  min-height: 145px;
+  /*min-height: 145px;*/
 }
 
 .paper-details .comment-one {
