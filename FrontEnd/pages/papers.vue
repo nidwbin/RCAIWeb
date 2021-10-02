@@ -8,8 +8,9 @@
 <template>
   <div>
     <Nav/>
-    <PageHeader title="论文"/>
-    <PapersList/>
+    <PageHeader title_zh="学术成果" title_en="Academic Achievements"/>
+    <PapersPage />
+<!--    <PapersList/>-->
     <PagesList/>
     <Footer/>
   </div>
@@ -18,6 +19,7 @@
 <script>
   import Nav from "../components/Nav";
   import PageHeader from "../components/PageHeader";
+  import PapersPage from "../components/PapersPage";
   import PapersList from "../components/PapersList";
   import PagesList from "../components/PagesList";
   import Footer from "../components/Footer";
@@ -26,6 +28,7 @@
     components:{
       Nav,
       PageHeader,
+      PapersPage,
       PapersList,
       PagesList,
       Footer,
