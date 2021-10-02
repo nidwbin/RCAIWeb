@@ -1,16 +1,15 @@
 <!--
  * @FileDescription: papers page
- * @Author: wenbin, liuyoude
- * @Date: 2021-09-25
+ * @Author: liuyoude
+ * @Date: 2021-10-02
  * @LastEditors: liuyoude
  * @LastEditTime: 2021-10-02
  -->
 <template>
   <div>
     <Nav/>
-    <PageHeader title_zh="学术成果" title_en="Academic Achievements"/>
-    <PapersPage />
-<!--    <PapersList/>-->
+    <PageHeader title_zh="科研项目" title_en="Scientific Research Project"/>
+    <ProjectsPage />
     <PagesList/>
     <Footer/>
   </div>
@@ -19,8 +18,7 @@
 <script>
   import Nav from "../components/Nav";
   import PageHeader from "../components/PageHeader";
-  import PapersPage from "../components/PapersPage";
-  import PapersList from "../components/PapersList";
+  import ProjectsPage from "../components/ProjectsPage";
   import PagesList from "../components/PagesList";
   import Footer from "../components/Footer";
 
@@ -28,8 +26,7 @@
     components:{
       Nav,
       PageHeader,
-      PapersPage,
-      PapersList,
+      ProjectsPage,
       PagesList,
       Footer,
     },

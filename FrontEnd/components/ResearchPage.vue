@@ -17,7 +17,7 @@
 <!--                <span>{{ item.year }}</span>-->
               </div>
               <div class="content">
-                <nuxt-link to="/single-project">{{ item.name }}</nuxt-link>
+                <nuxt-link to="/single-project"><span class="	fa fa-fire"></span>{{ item.name }}</nuxt-link>
                 <p>there are many variations of passages of lorem Ipsum available but the majority have suffered alteration in some form injected which don't look of available but the majority have suffered even slightly believable. Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
               </div>
             </div>

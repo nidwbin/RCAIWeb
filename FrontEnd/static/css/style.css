@@ -2866,9 +2866,15 @@ p {
         background: #fff; }
 
 .single-project-area {
+  margin-top: 80px;
   padding-bottom: 10px;
   padding-top: 10px;
 
+  }
+  .single-project-area .single-project {
+    padding-bottom: 80px;
+    border-bottom: 1px solid #626269;
+    margin-bottom: 80px;
   }
   .single-project-area .single-project .single-project-thumb {
     position: relative;}
@@ -2879,7 +2885,8 @@ p {
       right: 40px;
       bottom: -60px;
       min-width: 370px;
-      background: #ff5316;
+      /*background: #ff5316;*/
+      background: rgba(255, 83, 22, 0.9);
       padding: 29px 50px 29px; }
       @media only screen and (min-width: 768px) and (max-width: 991px) {
         .single-project-area .single-project .single-project-thumb .single-project-thumb-content {
@@ -2903,13 +2910,16 @@ p {
         .single-project-area .single-project .single-project-thumb .single-project-thumb-content ul.pl-95 {
           padding-left: 95px; } }
   .single-project-area .single-project .single-project-content-1 {
-    padding-top: 30px; }
+    padding-top: 60px; }
     .single-project-area .single-project .single-project-content-1 .title {
-      font-size: 30px;
+      font-size: 26px;
       margin-top: 30px;
       text-transform: uppercase;
       color: #7f8692;
       font-weight: 400; }
+    .single-project-area .single-project .single-project-content-1 span {
+      margin-right: 10px;
+    }
     .single-project-area .single-project .single-project-content-1 p {
       font-size: 18px;
       line-height: 34px;
@@ -5683,6 +5693,10 @@ p {
         .direction-area .direction-item .item .content {
           padding-left: 40px;
           padding-top: 0; } }
+      .direction-area .direction-item .item .content span {
+        color: rgb(255, 83, 22);
+        margin-right: 10px;
+      }
       .direction-area .direction-item .item .content a {
         font-size: 24px;
         font-weight: 400;
