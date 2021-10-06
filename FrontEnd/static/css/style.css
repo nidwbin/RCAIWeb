@@ -2092,7 +2092,7 @@ p {
         .client-area .client-title .title {
           font-size: 18px; } }
   .client-area .client-item {
-    min-height: 800px;
+    min-height: 60px;
     padding: 20px;
     height: 150px;
     border: 1px solid #eaeaea;
@@ -2287,6 +2287,113 @@ p {
       color: #fff;
       font-size: 12px;
       background: #ff5316; }
+
+
+/*===========================
+    teacher css
+===========================*/
+
+.teacher-area {
+  padding-bottom: 20px;
+  padding-top: 20px!important;
+  position: relative;
+  z-index: 10;
+  }
+  .teacher-area .teacher-item {
+    min-height: 600px;
+    padding: 20px;
+    height: 150px;
+    border: 1px solid #eaeaea;
+    box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.04);
+    position: relative;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background: #fff; }
+    @media only screen and (min-width: 768px) and (max-width: 991px) {
+      .teacher-area .teacher-item {
+        padding: 30px; } }
+    @media (max-width: 767px) {
+      .teacher-area .teacher-item {
+        padding: 30px; } }
+    @media only screen and (min-width: 576px) and (max-width: 767px) {
+      .teacher-area .teacher-item {
+        padding: 60px; } }
+    .teacher-area .teacher-item .shape {
+      position: absolute;
+      right: 26px;
+      top: 0; }
+    .teacher-area .teacher-item .user {
+      padding-left: 103px;
+      position: relative; }
+      @media (max-width: 767px) {
+        .teacher-area .teacher-item .user {
+          padding-left: 90px; } }
+      .teacher-area .teacher-item .user .title {
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase; }
+      .teacher-area .teacher-item .user span {
+        /*float: right;*/
+        margin-top: 10px;
+        margin-left: 105px;
+        font-size: 14px;
+        color: #ff5316;
+        text-transform: uppercase;
+        left: 1px;}
+      .teacher-area .teacher-item .contact {
+        /*float: right;*/
+        /*margin-top: 30px;*/
+        padding-top: 10px;
+        margin-left: 105px;
+        font-size: 14px;
+        text-transform: uppercase;
+        left: 1px;}
+      .teacher-area .teacher-item .contact p{
+        color: #747474;
+        font-weight: 600;
+      }
+      .teacher-area .teacher-item .contact span {
+        /*float: right;*/
+        margin-top: 10px;
+        margin-left: 10px;
+        font-size: 14px;
+        /*color: #ff5316;*/
+        color: #444a47!important;
+        text-transform: uppercase;
+        left: 1px;}
+      .teacher-area .teacher-item .user h5 {
+         /*float: left;*/
+         margin-left: 105px;
+      }
+      .teacher-area .teacher-item .user .user-thumb {
+        position: absolute;
+        /*float: left;*/
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%); }
+        .teacher-area .teacher-item .user .user-thumb i {
+          position: absolute;
+          margin-left: 0;
+          /*float: left;*/
+          right: 0;
+          bottom: 0;
+          height: 22px;
+          width: 22px;
+          text-align: center;
+          line-height: 22px;
+          color: #fff;
+          font-size: 12px;
+          background: #ff5316; }
+        .teacher-area .teacher-item .user .user-thumb img {
+          width: 200px;
+          /*margin-top: 10px;*/
+        }
+    .teacher-area .teacher-item .text p {
+      padding-top: 10px;
+      font-size: 16px;
+      font-weight: 300;
+      color: #7e8591;
+      line-height: 34px; }
 
 /*===========================
     8.FUN FACTS css

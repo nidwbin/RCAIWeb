@@ -6,11 +6,11 @@
  * @LastEditTime: 2021-10-03
  -->
 <template>
-  <section class="client-area pt-90 testimonials-client">
+  <section class="teacher-area pt-90 testimonials-client">
     <div class="container">
       <div class="row">
         <div class="col-lg-12" v-for="item in items">
-          <div class="client-item mt-30">
+          <div class="teacher-item mt-30">
             <div class="shape">
               <img src="/images/shape/shape-4.png" alt="shape">
             </div>
@@ -21,6 +21,13 @@
               </div>
               <h5 class="title">{{ item.name }}</h5>
               <span>{{ item.prof }}</span>
+              <div class="contact">
+                <p>电话：<span>0451-86417981</span></p>
+                <p>邮箱：<span>jqhan@hit.edu.cn</span></p>
+                <p>地址：<span>哈尔滨工业大学321信箱</span></p>
+                <p>主页：<span>http://homepage.hit.edu.cn/hanjiqing</span></p>
+              </div>
+
             </div>
             <div class="text">
               <p>{{ item.desc }}</p>
