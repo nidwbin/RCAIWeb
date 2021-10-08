@@ -4,6 +4,11 @@ from django.db import models
 from django.db import models
 
 
+class Admin(models.Model):
+    name = models.CharField(max_length=50, verbose_name="用户名")
+    password = models.CharField(max_length=20, verbose_name="密码")
+
+
 class News(models.Model):
     title = models.CharField(max_length=50, verbose_name="标题")
     overview = models.CharField(max_length=100, verbose_name="简述")
