@@ -42,3 +42,5 @@ class Authority:
         self.__check_key__(request, response, keep, put)
         response['Access-Control-Expose-Headers'] = "key,set-cookie"
         return response
+
+
