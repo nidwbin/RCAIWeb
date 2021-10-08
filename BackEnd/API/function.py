@@ -5,17 +5,40 @@
  * @LastEditors: wenbin
  * @LastEditTime: 2021-09-28
 '''
-def check_key(request, response, set=False):
-    if set or request.headers['Key'] == 'Admin':
-        response['Key'] = 'Admin'
-    else:
-        response['Key'] = 'Visitor'
+import datetime
+import hashlib
 
 
-def set_key(request, response, next=True, set=False):
-    if set or (next and 'Key' in request.headers):
-        check_key(request,response,set)
-    else:
-        response['Key'] = 'Visitor'
-    response['Access-Control-Expose-Headers'] = "key,set-cookie"
-    return response
+class Authority:
+    deadline = {}
+    visitor = 'Visitor'
+
+    @staticmethod
+    def __gen_key__(now_time, delay=15):
+        deadline = now_time + datetime.timedelta(minutes=delay)
+        key = hashlib.sha256(str(now_time).encode('utf-8')).hexdigest()
+        return deadline, key
+
+    def __check_pass__(self, now_time, request):
+        send_key = request.headers['key']
+        return send_key in self.deadline and now_time <= self.deadline[send_key]
+
+    def __set_key__(self, deadline, key, response):
+        if key != self.visitor:
+            self.deadline[key] = deadline
+        response['key'] = key
+
+    def __check_key__(self, request, response, keep=True, put=False):
+        now_time = datetime.datetime.now()
+        if put or (keep and 'key' in request.headers and self.__check_pass__(now_time, request)):
+            deadline, key = self.__gen_key__(now_time)
+            self.__set_key__(deadline, key, response)
+        else:
+            if self.deadline:
+                self.deadline.clear()
+            self.__set_key__(now_time, self.visitor, response)
+
+    def get_response(self, request, response, keep=True, put=False):
+        self.__check_key__(request, response, keep, put)
+        response['Access-Control-Expose-Headers'] = "key,set-cookie"
+        return response

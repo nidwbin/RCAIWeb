@@ -28,11 +28,15 @@
                     <img :src="item.image" alt="new">
                     <i class="fa fa-quote-left"></i>
                   </div>
-                  <h5 class="title">{{ item.title }}</h5>
+                  <h5 class="title">
+                    <nuxt-link :to="{name:'view', query:{type:type, filename:item.filename}}">
+                      {{ item.title }}
+                    </nuxt-link>
+                  </h5>
                   <span>{{ item.date }}</span>
                 </div>
                 <div class="text">
-                  <p>{{ item.file }}</p>
+                  <p>{{ item.overview }}</p>
                 </div>
               </div>
             </swiper-slide>
@@ -41,66 +45,66 @@
       </div>
     </div>
     <div class="client-shape animated wow fadeInLeft" data-wow-duration="1500ms" data-wow-delay="0ms">
-      <img src="/assets/images/shape/shape-16.png" alt="">
+      <img src="/images/shape/shape-16.png" alt="">
     </div>
   </section>
 </template>
 
 <script>
-  import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper';
-  import 'swiper/css/swiper.css';
+import {Swiper, SwiperSlide, directive} from 'vue-awesome-swiper';
+import 'swiper/css/swiper.css';
 
-  export default {
-    name: "HotNewsPage",
-    components: {
-      Swiper,
-      SwiperSlide
-    },
-    directives: {
-      swiper: directive
-    },
-    data() {
-      return {
-        swiperOptions: {
-          slidesPerView : 2,
-          loop: true,
-          speed: 1000,
-          spaceBetween : 30,
-          autoplay: {
-            delay: 3000,
-            disableOnInteraction: false
-          },
-          // Responsive breakpoints
-          breakpoints: {
-            1024:{
-              slidesPerView : 2
-            },
-            768:{
-              slidesPerView : 1
-            },
-            640:{
-              slidesPerView : 1
-            },
-            320:{
-              slidesPerView : 1
-            }
-          }
+export default {
+  name: "HotNewsPage",
+  components: {
+    Swiper,
+    SwiperSlide
+  },
+  directives: {
+    swiper: directive
+  },
+  data() {
+    return {
+      swiperOptions: {
+        slidesPerView: 2,
+        loop: true,
+        speed: 1000,
+        spaceBetween: 30,
+        autoplay: {
+          delay: 3000,
+          disableOnInteraction: false
         },
-
-        items:[
-          {title:"这是一条新闻",image:"/images/logo.png",date:"2021/9/10",file:"1",},
-          {title:"这是一条新闻",image:"/images/logo.png",date:"2021/9/10",file:"2"},
-          {title:"这是一条新闻",image:"/images/logo.png",date:"2021/9/10",file:"3"},
-          {title:"这是一条新闻",image:"/images/logo.png",date:"2021/9/10",file:"3"},
-          {title:"这是一条新闻",image:"/images/logo.png",date:"2021/9/10",file:"3"},
-          {title:"这是一条新闻",image:"/images/logo.png",date:"2021/9/10",file:"3"},
-          {title:"这是一条新闻",image:"/images/logo.png",date:"2021/9/10",file:"3"},
-          {title:"这是一条新闻",image:"/images/logo.png",date:"2021/9/10",file:"3"},
-          {title:"这是一条新闻",image:"/images/logo.png",date:"2021/9/10",file:"3"},
-        ],
-      }
-    },
-  }
+        // Responsive breakpoints
+        breakpoints: {
+          1024: {
+            slidesPerView: 2
+          },
+          768: {
+            slidesPerView: 1
+          },
+          640: {
+            slidesPerView: 1
+          },
+          320: {
+            slidesPerView: 1
+          }
+        }
+      },
+      type: 'news',
+      items: [
+        {title: "这是一条新闻", image: "/images/logo.png", date: "2021/9/10", filename: "1", overview: "新闻概览"},
+        {title: "这是一条新闻", image: "/images/logo.png", date: "2021/9/10", filename: "2", overview: "新闻概览"},
+        {title: "这是一条新闻", image: "/images/logo.png", date: "2021/9/10", filename: "3", overview: "新闻概览"},
+        {title: "这是一条新闻", image: "/images/logo.png", date: "2021/9/10", filename: "3", overview: "新闻概览"},
+        {title: "这是一条新闻", image: "/images/logo.png", date: "2021/9/10", filename: "3", overview: "新闻概览"},
+        {title: "这是一条新闻", image: "/images/logo.png", date: "2021/9/10", filename: "3", overview: "新闻概览"},
+        {title: "这是一条新闻", image: "/images/logo.png", date: "2021/9/10", filename: "3", overview: "新闻概览"},
+        {title: "这是一条新闻", image: "/images/logo.png", date: "2021/9/10", filename: "3", overview: "新闻概览"},
+        {title: "这是一条新闻", image: "/images/logo.png", date: "2021/9/10", filename: "3", overview: "新闻概览"},
+      ],
+    }
+  },
+}
 </script>
 
 <style scoped>

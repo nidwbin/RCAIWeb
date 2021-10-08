@@ -15,10 +15,19 @@
               <img :src="item.image" alt="news">
             </div>
             <div class="news-content text-center">
-              <nuxt-link :to="{name:'view', query:{type:type, filename:item.filename}}">{{ item.title }}</nuxt-link>
+              <nuxt-link :to="{name:'view', query:{type:type,filename:item.filename}}">{{ item.title }}</nuxt-link>
               <div class="date">
                 <span>{{ item.date }}</span>
               </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-9" v-if="admin">
+          <div class="news-item mt-30">
+            <div class="news-thumb">
+              <nuxt-link :to="{name:'view', query:{type:type, filename:'new'}}">
+                <img src="/images/add-button.png" alt="news">
+              </nuxt-link>
             </div>
           </div>
         </div>
@@ -28,14 +37,19 @@
 </template>
 
 <script>
+
 export default {
   name: "NewsList",
+  computed: {
+    admin() {
+      return this.$store.state.admin;
+    }
+  },
   data() {
     return {
       type: 'news',
-
       items: [
-        {title: "这是一条新闻", image: "/images/logo.png", date: "2021/9/10", filename: "1",},
+        {title: "这是一条新闻", image: "/images/logo.png", date: "2021/9/10", filename: "1"},
         {title: "这是一条新闻", image: "/images/logo.png", date: "2021/9/10", filename: "2"},
         {title: "这是一条新闻", image: "/images/logo.png", date: "2021/9/10", filename: "3"},
         {title: "这是一条新闻", image: "/images/logo.png", date: "2021/9/10", filename: "3"},
@@ -46,7 +60,8 @@ export default {
         {title: "这是一条新闻", image: "/images/logo.png", date: "2021/9/10", filename: "3"},
       ],
     }
-  }
+  },
+
 }
 </script>
 

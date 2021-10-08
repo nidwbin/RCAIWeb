@@ -18,7 +18,8 @@
             </div>
             <div class="form-group">
               <label for="password">密码</label>
-              <input type="password" class="form-control" id="password" v-model="password" placeholder="输入密码">
+              <input type="password" class="form-control" id="password" v-model="password" placeholder="输入密码"
+                     @keydown.enter="login">
             </div>
             <div class="row">
               <div class="col-4"></div>
@@ -59,7 +60,7 @@ export default {
                 setTimeout(() => {
                   let location = this.$cookies.get('location');
                   this.$router.push(location === undefined ? '/' : location);
-                }, 3000);
+                }, 1000);
               }
             } else {
               this.button_class = "btn-danger";

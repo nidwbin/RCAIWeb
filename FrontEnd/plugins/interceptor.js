@@ -40,7 +40,7 @@ export default ({store, $cookies, $axios}) => {
         }
         $cookies.set('ajax-ready', true)
         $cookies.set('key', key)
-        store.commit('set_admin', key === undefined ? store.state.debug : key !== 'Visitor');
+        store.commit('set_admin', key !== 'Visitor');
       }
     )
 
@@ -55,6 +55,8 @@ export default ({store, $cookies, $axios}) => {
 
     if (!$cookies.get('ajax-ready')) {
       $axios.get('/csrf');
+    } else {
+      store.commit('set_admin', $cookies.get('key') !== 'Visitor');
     }
   }
 }

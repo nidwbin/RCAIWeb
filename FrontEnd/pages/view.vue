@@ -8,7 +8,7 @@
 <template>
   <div>
     <Nav/>
-    <Viewer :type="this.$route.query.type" :filename="this.$route.query.file"/>
+    <Viewer :type="this.$route.query.type" :filename="this.$route.query.filename"/>
     <Footer/>
   </div>
 </template>
