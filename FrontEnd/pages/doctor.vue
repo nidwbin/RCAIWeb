@@ -7,33 +7,37 @@
  -->
 <template>
   <div>
-    <Nav />
-    <PageHeader title_zh="中心博士生" title_en="Doctors" />
-    <TeamPage />
-    <PagesList />
-    <Footer />
+    <Nav/>
+    <PageHeader title_zh="中心博士生" title_en="Doctors"/>
+    <TeamPage/>
+    <PagesList/>
+    <Footer/>
   </div>
 </template>
 
 <script>
 
-  import Nav from "../components/Nav";
-  import Footer from "../components/Footer";
-  import PageHeader from "../components/PageHeader";
-  import TeamPage from "../components/TeamPage";
-  import PagesList from "../components/PagesList";
-  export default {
-    components: {
-      Nav,
-      PageHeader,
-      TeamPage,
-      PagesList,
-      Footer,
-    },
-    head(){
-      return {
-        title: "Doctors of RCAI"
-      }
+import Nav from "../components/Nav";
+import Footer from "../components/Footer";
+import PageHeader from "../components/PageHeader";
+import TeamPage from "../components/TeamPage";
+import PagesList from "../components/PagesList";
+
+export default {
+  components: {
+    Nav,
+    PageHeader,
+    TeamPage,
+    PagesList,
+    Footer,
+  },
+  head() {
+    return {
+      title: "Doctors of RCAI"
     }
-  }
+  },
+  mounted() {
+    this.$cookies.set('location', this.$route.fullPath);
+  },
+}
 </script>

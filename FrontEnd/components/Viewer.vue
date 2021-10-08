@@ -117,7 +117,7 @@ export default {
         if (this.debug) {
           console.log('get file', data, func);
         }
-        this.toast.error('未知错误');
+        this.$toast.error('未知错误');
       }
     },
 
@@ -204,7 +204,7 @@ export default {
             this.post_file(data, data => {
               if (data['message'] === 'success') {
                 this.images_saved[i] = data['content'];
-                this.$refs.md.$img2Url(i, data['content']);
+                // this.$refs.md.$img2Url(i, data['content']);
               } else {
                 this.$toast.error('图片上传失败');
               }
@@ -214,8 +214,6 @@ export default {
           this.del_image(i);
         }
       }
-
-
     }
   }
 };
@@ -230,4 +228,6 @@ export default {
 .showBorder {
   border: 1px solid #f2f6fc;
 }
+
+
 </style>

@@ -9,26 +9,26 @@
   <div>
     <Nav/>
     <PageHeader title_zh="研究方向" title_en="Research Direction"/>
-    <ResearchPage />
+    <ResearchPage/>
     <Footer/>
   </div>
 </template>
 
 <script>
-  import Nav from "../components/Nav";
-  import PageHeader from "../components/PageHeader";
-  import ResearchPage from "../components/ResearchPage";
-  import Footer from "../components/Footer";
+import Nav from "../components/Nav";
+import PageHeader from "../components/PageHeader";
+import ResearchPage from "../components/ResearchPage";
+import Footer from "../components/Footer";
 
-  export default {
-    components:{
-      Nav,
-      PageHeader,
-      ResearchPage,
-      Footer,
-    },
-  mounted() {
-    this.$cookies.set('location',this.$route.fullPath);
+export default {
+  components: {
+    Nav,
+    PageHeader,
+    ResearchPage,
+    Footer,
   },
-  }
+  mounted() {
+    this.$cookies.set('location', this.$route.fullPath);
+  },
+}
 </script>

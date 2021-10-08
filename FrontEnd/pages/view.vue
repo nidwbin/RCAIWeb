@@ -14,20 +14,20 @@
 </template>
 
 <script>
-  import Nav from "../components/Nav";
-  import PageHeader from "../components/PageHeader";
-  import Viewer from "../components/Viewer";
-  import Footer from "../components/Footer";
+import Nav from "../components/Nav";
+import PageHeader from "../components/PageHeader";
+import Viewer from "../components/Viewer";
+import Footer from "../components/Footer";
 
-  export default {
-    components:{
-      Nav,
-      PageHeader,
-      Viewer,
-      Footer,
-    },
-    mounted() {
-      this.$cookies.set('location',this.$route.fullPath);
-    }
+export default {
+  components: {
+    Nav,
+    PageHeader,
+    Viewer,
+    Footer,
+  },
+  mounted() {
+    this.$cookies.set('location', this.$route.fullPath);
   }
+}
 </script>
