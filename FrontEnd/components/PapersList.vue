@@ -17,7 +17,7 @@
             <div class="services-content">
               <h1 class="title">{{ item.title }}</h1>
               <p>{{ item.date }}</p>
-              <p>{{ item.abstract }}</p>
+              <p>{{ item.overview }}</p>
               <nuxt-link :to="{name:'view', query:{type:type, filename:item.filename}}">查看</nuxt-link>
             </div>
           </div>
@@ -35,15 +35,15 @@ export default {
       type: 'paper',
 
       items: [
-        {title: "这是一篇论文", image: "/images/logo.png", date: "2021/9/10", abstract: "something", filename: "1",},
-        {title: "这是一篇论文", image: "/images/logo.png", date: "2021/9/10", abstract: "something", filename: "2"},
-        {title: "这是一篇论文", image: "/images/logo.png", date: "2021/9/10", abstract: "something", filename: "3"},
-        {title: "这是一篇论文", image: "/images/logo.png", date: "2021/9/10", abstract: "something", filename: "3"},
-        {title: "这是一篇论文", image: "/images/logo.png", date: "2021/9/10", abstract: "something", filename: "3"},
-        {title: "这是一篇论文", image: "/images/logo.png", date: "2021/9/10", abstract: "something", filename: "3"},
-        {title: "这是一篇论文", image: "/images/logo.png", date: "2021/9/10", abstract: "something", filename: "3"},
-        {title: "这是一篇论文", image: "/images/logo.png", date: "2021/9/10", abstract: "something", filename: "3"},
-        {title: "这是一篇论文", image: "/images/logo.png", date: "2021/9/10", abstract: "something", filename: "3"},
+        {title: "这是一篇论文", image: "/images/logo.png", date: "2021/9/10", overview: "something", filename: "1"},
+        {title: "这是一篇论文", image: "/images/logo.png", date: "2021/9/10", overview: "something", filename: "2"},
+        {title: "这是一篇论文", image: "/images/logo.png", date: "2021/9/10", overview: "something", filename: "3"},
+        {title: "这是一篇论文", image: "/images/logo.png", date: "2021/9/10", overview: "something", filename: "3"},
+        {title: "这是一篇论文", image: "/images/logo.png", date: "2021/9/10", overview: "something", filename: "3"},
+        {title: "这是一篇论文", image: "/images/logo.png", date: "2021/9/10", overview: "something", filename: "3"},
+        {title: "这是一篇论文", image: "/images/logo.png", date: "2021/9/10", overview: "something", filename: "3"},
+        {title: "这是一篇论文", image: "/images/logo.png", date: "2021/9/10", overview: "something", filename: "3"},
+        {title: "这是一篇论文", image: "/images/logo.png", date: "2021/9/10", overview: "something", filename: "3"},
       ],
     }
   },

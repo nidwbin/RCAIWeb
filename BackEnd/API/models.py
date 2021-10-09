@@ -4,18 +4,28 @@ from django.db import models
 from django.db import models
 
 
+class Admin(models.Model):
+    name = models.CharField(max_length=50, verbose_name="用户名")
+    password = models.CharField(max_length=20, verbose_name="密码")
+
+
 class News(models.Model):
     title = models.CharField(max_length=50, verbose_name="标题")
     overview = models.CharField(max_length=100, verbose_name="简述")
     content = models.TextField(null=True, blank=True, verbose_name="内容")
-    img = models.ImageField(upload_to='img')#封面图片
-    date = models.DateTimeField()#日期
-    text_file = models.FileField(upload_to='news')#文件
+    img = models.ImageField(upload_to='media')  # 封面图片
+    date = models.DateTimeField()  # 日期
+    text_file = models.FileField(upload_to='news')  # 文件
+
+
+class Image(models.Model):
+    name = models.CharField(max_length=50, verbose_name="文件名")
+    img = models.ImageField(upload_to='media')  # 图片
 
 
 class ResearchField(models.Model):
     name = models.CharField(max_length=50, verbose_name="名称")
-    text_file = models.FileField(upload_to='research')#文件
+    text_file = models.FileField(upload_to='research')  # 文件
 
 
 class Achievements(models.Model):

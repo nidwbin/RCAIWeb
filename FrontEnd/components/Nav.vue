@@ -40,7 +40,7 @@
       </div>
     </div>
     <div id="Nav" class="main-header">
-       <div class="header-btn" :hidden="!admin" @click="logout">
+       <div class="header-btn" @click="logout" v-if="admin">
            <a href="#">{{ mse_header }}</a>
        </div>
       <div class="container">

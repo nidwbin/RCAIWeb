@@ -34,6 +34,9 @@
       return {
         title: "Masters of RCAI"
       }
-    }
+    },
+  mounted() {
+    this.$cookies.set('location', this.$route.fullPath);
+  },
   }
 </script>

@@ -5,6 +5,6 @@ export const state = () => ({
 
 export const mutations = {
   set_admin(state, admin) {
-    state.admin = admin;
+    state.admin = state.debug ? true : admin;
   }
 };

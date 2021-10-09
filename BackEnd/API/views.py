@@ -12,13 +12,16 @@ from django.views.generic import View
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.http import HttpResponse, JsonResponse
 
-from API.function import set_key
+from API.function import Authority, check_admin_authority
+
+authority = Authority()
+
 
 # Create your views here.
 
 @ensure_csrf_cookie
 def get_csrf(request):
-    return set_key(request, JsonResponse({}))
+    return authority.get_response(request, JsonResponse({}))
 
 
 class Login(View):
@@ -26,15 +29,15 @@ class Login(View):
         pass
 
     def post(self, request):
-        name = request.POST.get('username')
-        pwd = request.POST.get('password')
-        if name == 'hello' and pwd == '123456':
-            return set_key(request, JsonResponse({'message': 'success'}), set=True)
+        username = request.POST.get("username")
+        password = request.POST.get('password')
+        if check_admin_authority(username, password):
+            return authority.get_response(request, JsonResponse({'message': 'success'}), put=True)
         else:
-            return set_key(request, JsonResponse({'message': 'error'}), next=False)
+            return authority.get_response(request, JsonResponse({'message': 'error'}), keep=False)
 
     def delete(self, request):
-        return set_key(request,JsonResponse({}),next=False)
+        return authority.get_response(request, JsonResponse({}), keep=False)
 
 
 class File(View):
@@ -42,7 +45,7 @@ class File(View):
         type = request.GET.get('type')
         filetype = request.GET.get('filetype')
         filename = request.GET.get('filename')
-        return set_key(request, JsonResponse({'message':'success', 'content': '# ok'}))
+        return authority.get_response(request, JsonResponse({'message': 'success', 'content': '# ok'}))
 
     def post(self, request):
         type = request.POST.get('type')
@@ -51,10 +54,9 @@ class File(View):
         if filetype == 'image':
             content = request.FILES.get('content')
         else:
-            constent = request.POST.get('content')
-
-
-        return set_key(request, JsonResponse({'message':'success', 'content':'/images/logo.png'}))
+            content = request.POST.get('content')
+            print(content)
+        return authority.get_response(request, JsonResponse({'message': 'success', 'content': '/images/logo.png'}))
 
     def delete(self, request):
-        return set_key(request, JsonResponse({'message': 'success', 'content': '/images/logo.png'}))
+        return authority.get_response(request, JsonResponse({'message': 'success', 'content': '/images/logo.png'}))
