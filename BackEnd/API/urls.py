@@ -6,8 +6,12 @@
  * @LastEditTime: 2021-09-28
 '''
 
+from django.views.static import serve
+
 from API import views
-from django.urls import path, include
+from django.urls import path, include, re_path
+
+from BackEnd import settings
 
 urlpatterns = [
     path('csrf/', views.get_csrf),

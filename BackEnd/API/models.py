@@ -13,9 +13,14 @@ class News(models.Model):
     title = models.CharField(max_length=50, verbose_name="标题")
     overview = models.CharField(max_length=100, verbose_name="简述")
     content = models.TextField(null=True, blank=True, verbose_name="内容")
-    img = models.ImageField(upload_to='img')  # 封面图片
+    img = models.ImageField(upload_to='media')  # 封面图片
     date = models.DateTimeField()  # 日期
     text_file = models.FileField(upload_to='news')  # 文件
+
+
+class Image(models.Model):
+    name = models.CharField(max_length=50, verbose_name="文件名")
+    img = models.ImageField(upload_to='media')  # 图片
 
 
 class ResearchField(models.Model):

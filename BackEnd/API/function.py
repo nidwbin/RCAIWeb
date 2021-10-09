@@ -8,6 +8,8 @@
 import datetime
 import hashlib
 
+from API.models import Admin
+
 
 class Authority:
     deadline = {}
@@ -44,3 +46,13 @@ class Authority:
         return response
 
 
+def check_admin_authority(username, password):
+    user = Admin.objects.filter(name=username).first()
+    if user:
+        db_password = user.password
+        if password == db_password:
+            return True
+        else:
+            return False
+    else:
+        return False

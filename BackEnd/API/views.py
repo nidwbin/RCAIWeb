@@ -12,8 +12,7 @@ from django.views.generic import View
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.http import HttpResponse, JsonResponse
 
-from API.function import Authority
-from API.models import Admin
+from API.function import Authority, check_admin_authority
 
 authority = Authority()
 
@@ -31,14 +30,9 @@ class Login(View):
 
     def post(self, request):
         username = request.POST.get("username")
-        user = Admin.objects.filter(name=username).first()
-        if user:
-            pwd = request.POST.get('password')
-            db_pwd = user.password
-            if pwd == db_pwd:
-                return authority.get_response(request, JsonResponse({'message': 'success'}), put=True)
-            else:
-                return authority.get_response(request, JsonResponse({'message': 'error'}), keep=False)
+        password = request.POST.get('password')
+        if check_admin_authority(username, password):
+            return authority.get_response(request, JsonResponse({'message': 'success'}), put=True)
         else:
             return authority.get_response(request, JsonResponse({'message': 'error'}), keep=False)
 
