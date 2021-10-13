@@ -19,7 +19,10 @@
   </div>
 </template>
 <script>
+import Functions from "./Functions";
+
 export default {
+  mixins: [Functions],
   props: {
     type: {
       type: String,
@@ -67,9 +70,10 @@ export default {
         subfield: true, // 单双栏模式
         preview: true, // 预览
       },
-      text: '',
+      text: '哎呀！出错了╮(￣▽￣)╭',
       images: {},
-      images_saved: {}
+      images_saved: {},
+      image_base: "/media/image/",
     };
   },
   computed: {
@@ -82,7 +86,7 @@ export default {
   },
   created() {
     if (process.client) {
-      this.get_file({type: this.type, filetype: 'markdown', filename: this.filename},
+      this.get("/file/", {type: this.type, filetype: 'markdown', filename: this.filename},
         (data) => {
           if (data['message'] === 'success') {
             this.text = data['content'];
@@ -98,54 +102,6 @@ export default {
     }
   },
   methods: {
-    get_ready() {
-      let cnt = 10;
-      while (!this.$cookies.get('ajax-ready') && cnt) {
-        this.$axios.get('/csrf');
-        cnt--;
-      }
-      return this.$cookies.get('ajax-ready');
-    },
-
-    get_file(data = null, func = undefined) {
-      if (process.client && data !== null && func !== undefined && this.get_ready()) {
-        this.$axios.get("/file/", {params: data}).then(response => func(response.data)
-        ).catch(() => {
-          this.toast.error('网络错误');
-        });
-      } else {
-        if (this.debug) {
-          console.log('get file', data, func);
-        }
-        this.$toast.error('未知错误');
-      }
-    },
-
-    post_file(data = null, func = undefined) {
-      if (process.client && data !== null && func !== undefined && this.get_ready()) {
-        this.$axios.post('/file/', data).then(response => func(response.data)).catch((error) => {
-          this.$toast.error('网络错误');
-        });
-      } else {
-        if (this.debug) {
-          console.log('post file', data, func);
-        }
-        this.toast.error('未知错误');
-      }
-    },
-    delete_file(data = null, func = undefined) {
-      if (process.client && data !== null && func !== undefined && this.get_ready()) {
-        this.$axios.delete('/file/', {params: data}).then(response => func(response.data)).catch((error) => {
-          this.$toast.error('网络错误');
-        });
-      } else {
-        if (this.debug) {
-          console.log('delete file', data, func);
-        }
-        this.toast.error('未知错误');
-      }
-    },
-
     add_image(pos, $file) {
       this.images[pos] = $file;
     },
@@ -154,12 +110,7 @@ export default {
       delete this.images[pos];
     },
 
-    save(val, render) {
-      if (this.debug) {
-        console.log('markdown val', val);
-        console.log('images', this.images);
-        console.log('images map', this.images_saved);
-      }
+    process_image_saved(val) {
       for (let i in this.images_saved) {
         let reg_str = "/(!\\[\[^\\[\]*?\\]\(?=\\(\)\)\\(\\s*\(" + this.images_saved[i].replace(/\//g, '\\/') + "\)\\s*\\)/g";
         let reg = eval(reg_str);
@@ -168,7 +119,7 @@ export default {
           if (this.debug) {
             console.log('delete unmatched image', i, this.images_saved[i]);
           }
-          this.delete_file({type: this.type, filetype: 'image', filename: this.images_saved[i],}, data => {
+          this.delete("/file/", {type: this.type, filetype: 'image', filename: this.images_saved[i],}, data => {
             if (data['message']) {
               delete this.images_saved[i];
             } else {
@@ -177,8 +128,10 @@ export default {
           });
         }
       }
+    },
 
-      this.post_file({
+    process_markdown(val) {
+      this.post("/file/", {
         type: this.type, filetype: 'markdown', filename: this.filename, content: val,
       }, data => {
         if (data['message'] === 'success') {
@@ -187,7 +140,9 @@ export default {
           this.$toast.error('保存失败');
         }
       });
+    },
 
+    process_image_upload(val) {
       for (let i in this.images) {
         let reg_str = "/(!\\[\[^\\[\]*?\\]\(?=\\(\)\)\\(\\s*\(" + i + "\)\\s*\\)/g";
         let reg = eval(reg_str);
@@ -201,10 +156,10 @@ export default {
             data.append('filetype', 'image');
             data.append('filename', i);
             data.append('content', this.images[i]);
-            this.post_file(data, data => {
+            this.post("/file/", data, data => {
               if (data['message'] === 'success') {
                 this.images_saved[i] = data['content'];
-                this.$refs.md.$img2Url(i, "http://localhost:8001"+data['content']);
+                this.$refs.md.$img2Url(i, this.image_base + data['content']);
               } else {
                 this.$toast.error('图片上传失败');
               }
@@ -214,8 +169,23 @@ export default {
           this.del_image(i);
         }
       }
+    },
+
+
+    save(val, render) {
+      if (this.debug) {
+        console.log('markdown val', val);
+        console.log('images', this.images);
+        console.log('images map', this.images_saved);
+      }
+
+      this.process_image_saved(val);
+
+      this.process_markdown(val);
+
+      this.process_image_upload(val);
     }
-  }
+  },
 };
 </script>
 
