@@ -69,5 +69,4 @@ class File(View):
         imagename = request.POST.get('imagename')
         if delete_Image(imagename):
             return authority.get_response(request, JsonResponse({'message': 'success'}))
-        else:
-            return authority.get_response(request, JsonResponse({'message': 'error'}))
+        return authority.get_response(request, JsonResponse({'message': 'error'}))
