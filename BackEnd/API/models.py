@@ -15,7 +15,7 @@ class News(models.Model):
     content = models.TextField(null=True, blank=True, verbose_name="内容")
     img = models.ImageField(upload_to='media')  # 封面图片
     date = models.DateTimeField()  # 日期
-    text_file = models.FileField(upload_to='news')  # 文件
+    text_file = models.FileField(upload_to='upload/news')  # 文件
 
 
 class Image(models.Model):
@@ -25,7 +25,7 @@ class Image(models.Model):
 
 class ResearchField(models.Model):
     name = models.CharField(max_length=50, verbose_name="名称")
-    text_file = models.FileField(upload_to='research')  # 文件
+    text_file = models.FileField(upload_to='upload/research')  # 文件
 
 
 class Achievements(models.Model):
