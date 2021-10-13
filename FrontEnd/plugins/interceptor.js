@@ -10,7 +10,7 @@ import qs from 'qs';
 export default ({store, $cookies, $axios}) => {
   if (process.client) {
     $axios.defaults.withCredentials = true;
-    $axios.defaults.baseURL = 'http://192.168.11.233:8001/backend';
+    $axios.defaults.baseURL = 'http://localhost:8001/backend';
 
     $axios.onRequest(config => {
       config.xsrfCookieName = 'csrftoken';
@@ -38,8 +38,8 @@ export default ({store, $cookies, $axios}) => {
         } else {
           key = 'Visitor';
         }
-        $cookies.set('ajax-ready', true)
-        $cookies.set('key', key)
+        $cookies.set('ajax-ready', true);
+        $cookies.set('key', key);
         store.commit('set_admin', key !== 'Visitor');
       }
     )
