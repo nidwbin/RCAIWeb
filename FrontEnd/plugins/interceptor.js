@@ -38,8 +38,8 @@ export default ({store, $cookies, $axios}) => {
         } else {
           key = 'Visitor';
         }
-        $cookies.set('ajax-ready', true)
-        $cookies.set('key', key)
+        $cookies.set('ajax-ready', true);
+        $cookies.set('key', key);
         store.commit('set_admin', key !== 'Visitor');
       }
     )

@@ -12,21 +12,21 @@
         <div class="col-lg-8">
           <div class="comment-one">
             <div class="comment-one__single" v-for="item in items">
-<!--              <div class="comment-one__image">-->
-<!--                <img src="/assets/images/comment-1-1.jpg" alt="">-->
-<!--              </div>&lt;!&ndash; /.comment-one__image &ndash;&gt;-->
+              <div class="comment-one__image">
+                <img :src="item.image" alt="">
+              </div><!-- /.comment-one__image -->
               <nuxt-link :to="{name:'view', query:{type:type, filename:item.filename}}">
                 <div class="comment-one__content">
-                    <h3>
-                      {{ item.title }}
-                      <span class="comment-one__date">{{ item.date }}</span>
-                    </h3>
-                    <p>Lorem ipsum is simply free text used by copytyping refreshing. Neque porro est qui dolorem ipsum quia quaed inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                  <h3>
+                    {{ item.title }}
+                    <span class="comment-one__date">{{ item.date }}</span>
+                  </h3>
+                  <p>{{ item.overview }}</p>
                 </div><!-- /.comment-one__content -->
               </nuxt-link>
-<!--              <div class="blog-btn">-->
-<!--                <a href="#" class="main-btn text-center">Reply</a>-->
-<!--              </div>-->
+              <!--              <div class="blog-btn">-->
+              <!--                <a href="#" class="main-btn text-center">Reply</a>-->
+              <!--              </div>-->
               <!-- /.thm-btn comment-one__btn -->
             </div><!-- /.comment-one__single -->
           </div><!-- /.comment-one -->
@@ -43,10 +43,10 @@
               <h3 class="sidebar__title">近期新闻</h3><!-- /.sidebar__title -->
               <div class="sidebar__post-wrap">
                 <div class="sidebar__post__single" v-for="item in items">
-<!--                  <div class="sidebar__post-image">-->
-<!--                    <div class="inner-block"><img src="/assets/images/post-1.png" alt="Awesome Image"></div>-->
-<!--                    &lt;!&ndash; /.inner-block &ndash;&gt;-->
-<!--                  </div>&lt;!&ndash; /.sidebar__post-image &ndash;&gt;-->
+                  <div class="sidebar__post-image">
+                    <div class="inner-block"><img :src="item.image" alt=""></div>
+                    <!-- /.inner-block -->
+                  </div><!-- /.sidebar__post-image -->
                   <nuxt-link :to="{name:'view', query:{type:type, filename:item.filename}}">
                     <div class="sidebar__post-content">
                       <span>{{ item.date }}</span>
@@ -90,26 +90,26 @@
 </template>
 
 <script>
-    export default {
-        name: "NewsList",
-        data() {
-            return {
-                type: 'news',
+export default {
+  name: "NewsList",
+  data() {
+    return {
+      type: 'news',
 
-                items: [
-                    {title: "这是一条新闻", image: "/images/logo.png", date: "2021/9/10", filename: "1",},
-                    {title: "这是一条新闻", image: "/images/logo.png", date: "2021/9/10", filename: "2"},
-                    {title: "这是一条新闻", image: "/images/logo.png", date: "2021/9/10", filename: "3"},
-                    {title: "这是一条新闻", image: "/images/logo.png", date: "2021/9/10", filename: "3"},
-                    {title: "这是一条新闻", image: "/images/logo.png", date: "2021/9/10", filename: "3"},
-                    {title: "这是一条新闻", image: "/images/logo.png", date: "2021/9/10", filename: "3"},
-                    {title: "这是一条新闻", image: "/images/logo.png", date: "2021/9/10", filename: "3"},
-                    {title: "这是一条新闻", image: "/images/logo.png", date: "2021/9/10", filename: "3"},
-                    {title: "这是一条新闻", image: "/images/logo.png", date: "2021/9/10", filename: "3"},
-                ],
-            }
-        }
+      items: [
+        {title: "这是一条新闻", image: "/images/logo.png", date: "2021/9/10", filename: "1", overview: "这是一条新闻"},
+        {title: "这是一条新闻", image: "/images/logo.png", date: "2021/9/10", filename: "2", overview: "这是一条新闻"},
+        {title: "这是一条新闻", image: "/images/logo.png", date: "2021/9/10", filename: "3", overview: "这是一条新闻"},
+        {title: "这是一条新闻", image: "/images/logo.png", date: "2021/9/10", filename: "3", overview: "这是一条新闻"},
+        {title: "这是一条新闻", image: "/images/logo.png", date: "2021/9/10", filename: "3", overview: "这是一条新闻"},
+        {title: "这是一条新闻", image: "/images/logo.png", date: "2021/9/10", filename: "3", overview: "这是一条新闻"},
+        {title: "这是一条新闻", image: "/images/logo.png", date: "2021/9/10", filename: "3", overview: "这是一条新闻"},
+        {title: "这是一条新闻", image: "/images/logo.png", date: "2021/9/10", filename: "3", overview: "这是一条新闻"},
+        {title: "这是一条新闻", image: "/images/logo.png", date: "2021/9/10", filename: "3", overview: "这是一条新闻"},
+      ],
     }
+  }
+}
 </script>
 
 <style scoped>
