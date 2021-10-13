@@ -10,7 +10,6 @@ import hashlib
 import os
 import uuid
 
-from django.http import JsonResponse
 from API.models import Admin, Image
 from BackEnd.settings import MEDIA_ROOT
 
@@ -26,8 +25,11 @@ class Authority:
         return deadline, key
 
     def __check_pass__(self, now_time, request):
-        send_key = request.headers['key']
-        return send_key in self.deadline and now_time <= self.deadline[send_key]
+        if 'key' in request.headers:
+            send_key = request.headers['key']
+            return send_key in self.deadline and now_time <= self.deadline[send_key]
+        else:
+            return False
 
     def __set_key__(self, deadline, key, response):
         if key != self.visitor:
@@ -36,13 +38,17 @@ class Authority:
 
     def __check_key__(self, request, response, keep=True, put=False):
         now_time = datetime.datetime.now()
-        if put or (keep and 'key' in request.headers and self.__check_pass__(now_time, request)):
+        if put or (keep and self.__check_pass__(now_time, request)):
             deadline, key = self.__gen_key__(now_time)
             self.__set_key__(deadline, key, response)
         else:
             if self.deadline:
                 self.deadline.clear()
             self.__set_key__(now_time, self.visitor, response)
+
+    def check_pass(self, request):
+        now_time = datetime.datetime.now()
+        return self.__check_pass__(now_time, request)
 
     def get_response(self, request, response, keep=True, put=False):
         self.__check_key__(request, response, keep, put)

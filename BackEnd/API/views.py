@@ -48,19 +48,22 @@ class File(View):
         return authority.get_response(request, JsonResponse({'message': 'success', 'content': '# ok'}))
 
     def post(self, request):
-        type = request.POST.get('type')
-        filetype = request.POST.get('filetype')
-        filename = request.POST.get('filename')
-        if filetype == 'image':
-            content = request.FILES.get('content')
-            imagename = add_Image(content, filename)
-            if imagename:
-                return authority.get_response(request, JsonResponse({'message': 'success', 'content': imagename}))
-            return authority.get_response(request, JsonResponse({'message': 'error'}))
+        if authority.check_pass(request):
+            type = request.POST.get('type')
+            filetype = request.POST.get('filetype')
+            filename = request.POST.get('filename')
+            if filetype == 'image':
+                content = request.FILES.get('content')
+                imagename = add_Image(content, filename)
+                if imagename:
+                    return authority.get_response(request, JsonResponse({'message': 'success', 'content': imagename}))
+                return authority.get_response(request, JsonResponse({'message': 'error'}))
+            else:
+                content = request.POST.get('content')
+                print(content)
+            return authority.get_response(request, JsonResponse({'message': 'success', 'content': '/images/logo.png'}))
         else:
-            content = request.POST.get('content')
-            print(content)
-        return authority.get_response(request, JsonResponse({'message': 'success', 'content': '/images/logo.png'}))
+            return authority.get_response(request, JsonResponse({'message': 'error'}))
 
     def delete(self, request):
         imagename = request.POST.get('imagename')
@@ -68,4 +71,3 @@ class File(View):
             return authority.get_response(request, JsonResponse({'message': 'success'}))
         else:
             return authority.get_response(request, JsonResponse({'message': 'error'}))
-
