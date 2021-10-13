@@ -2092,6 +2092,7 @@ p {
         .client-area .client-title .title {
           font-size: 18px; } }
   .client-area .client-item {
+    min-height: 60px;
     padding: 20px;
     height: 150px;
     border: 1px solid #eaeaea;
@@ -2286,6 +2287,113 @@ p {
       color: #fff;
       font-size: 12px;
       background: #ff5316; }
+
+
+/*===========================
+    teacher css
+===========================*/
+
+.teacher-area {
+  padding-bottom: 20px;
+  padding-top: 20px!important;
+  position: relative;
+  z-index: 10;
+  }
+  .teacher-area .teacher-item {
+    min-height: 600px;
+    padding: 20px;
+    height: 150px;
+    border: 1px solid #eaeaea;
+    box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.04);
+    position: relative;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background: #fff; }
+    @media only screen and (min-width: 768px) and (max-width: 991px) {
+      .teacher-area .teacher-item {
+        padding: 30px; } }
+    @media (max-width: 767px) {
+      .teacher-area .teacher-item {
+        padding: 30px; } }
+    @media only screen and (min-width: 576px) and (max-width: 767px) {
+      .teacher-area .teacher-item {
+        padding: 60px; } }
+    .teacher-area .teacher-item .shape {
+      position: absolute;
+      right: 26px;
+      top: 0; }
+    .teacher-area .teacher-item .user {
+      padding-left: 103px;
+      position: relative; }
+      @media (max-width: 767px) {
+        .teacher-area .teacher-item .user {
+          padding-left: 90px; } }
+      .teacher-area .teacher-item .user .title {
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase; }
+      .teacher-area .teacher-item .user span {
+        /*float: right;*/
+        margin-top: 10px;
+        margin-left: 105px;
+        font-size: 14px;
+        color: #ff5316;
+        text-transform: uppercase;
+        left: 1px;}
+      .teacher-area .teacher-item .contact {
+        /*float: right;*/
+        /*margin-top: 30px;*/
+        padding-top: 10px;
+        margin-left: 105px;
+        font-size: 14px;
+        text-transform: uppercase;
+        left: 1px;}
+      .teacher-area .teacher-item .contact p{
+        color: #747474;
+        font-weight: 600;
+      }
+      .teacher-area .teacher-item .contact span {
+        /*float: right;*/
+        margin-top: 10px;
+        margin-left: 10px;
+        font-size: 14px;
+        /*color: #ff5316;*/
+        color: #444a47!important;
+        text-transform: uppercase;
+        left: 1px;}
+      .teacher-area .teacher-item .user h5 {
+         /*float: left;*/
+         margin-left: 105px;
+      }
+      .teacher-area .teacher-item .user .user-thumb {
+        position: absolute;
+        /*float: left;*/
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%); }
+        .teacher-area .teacher-item .user .user-thumb i {
+          position: absolute;
+          margin-left: 0;
+          /*float: left;*/
+          right: 0;
+          bottom: 0;
+          height: 22px;
+          width: 22px;
+          text-align: center;
+          line-height: 22px;
+          color: #fff;
+          font-size: 12px;
+          background: #ff5316; }
+        .teacher-area .teacher-item .user .user-thumb img {
+          width: 200px;
+          /*margin-top: 10px;*/
+        }
+    .teacher-area .teacher-item .text p {
+      padding-top: 10px;
+      font-size: 16px;
+      font-weight: 300;
+      color: #7e8591;
+      line-height: 34px; }
 
 /*===========================
     8.FUN FACTS css
@@ -5669,7 +5777,8 @@ p {
       min-width: 165px;
       position: relative; }
       .direction-area .direction-item .item .thumb img {
-        width: 100%; }
+        width: 100%;
+        max-width: 480px;}
       .direction-area .direction-item .item .thumb span {
         position: absolute;
         right: -23px;
@@ -5680,6 +5789,66 @@ p {
         line-height: 75px;
         background: #ff5316;
         color: #fff; }
+    .direction-area .name_input {
+      float: right;
+    }
+    .direction-area .name_input input {
+      white-space: nowrap;
+      outline-style: none ;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 13px 14px;
+      width: 320px;
+      font-size: 18px;
+      font-weight: 900;
+    }
+    .direction-area .name_input input:focus{
+      border-color: #ff5316;
+      outline: 0;
+      -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(255, 83, 22, 0.91);
+      box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(255, 83, 22, 0.9)
+    }
+    .direction-area .desc_input textarea {
+      word-break: break-all;
+      outline-style: none ;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 13px 14px;
+      width: 460px;
+      height: 80px;
+      font-size: 16px;
+      font-weight: 600;
+    }
+    .direction-area .desc_input textarea:focus{
+      border-color: #ff5316;
+      outline: 0;
+      -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(255, 83, 22, 0.91);
+      box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(255, 83, 22, 0.9)
+    }
+    /*.direction-area .but {*/
+    /*  width: 120px;*/
+    /*  margin: 0 auto;*/
+    /*}*/
+    .direction-area .but span {
+      text-align: center;
+      margin-top: 20px;
+      width: 120px;
+      padding: 20px;
+      border-width: 0;
+      border-radius: 8px;
+      background: #ff5316;
+      cursor: pointer;
+      outline: none;
+      color: white!important;
+      font-size: 18px;
+      font-weight: 800;
+    }
+    .direction-area .but span:hover { /* 鼠标移入按钮范围时改变颜色 */
+      background: rgba(255, 83, 22, 0.6);
+    }
+    .direction-area .but span:focus { /* 鼠标移入按钮范围时改变颜色 */
+      background: rgba(255, 83, 22, 0.75);
+    }
     .direction-area .direction-item .item .content {
       padding-left: 82px; }
       @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -5812,113 +5981,109 @@ p {
 /*===========================
     19.CONTACT css
 ===========================*/
-.conatct-area {
-  padding-top: 106px; }
-  .conatct-area .conatct-info {
-    margin-right: 90px; }
-    @media only screen and (min-width: 992px) and (max-width: 1200px) {
-      .conatct-area .conatct-info {
-        margin-right: 30px; } }
-    @media only screen and (min-width: 768px) and (max-width: 991px) {
-      .conatct-area .conatct-info {
-        margin-right: 0px; } }
-    @media (max-width: 767px) {
-      .conatct-area .conatct-info {
-        margin-right: 0px; } }
-    .conatct-area .conatct-info .title {
-      font-size: 50px;
-      line-height: 60px;
+.contact-area {
+  padding-bottom: 20px; padding-top: 40px;
+  padding-left: 40px;
+  padding-right: 20px;
+    /*background: rgba(231, 233, 232, 0.8);*/
+}
+  .contact-area .contact-item .title {
+      font-size: 26px;
+      margin-top: 30px;
+      margin-bottom: 60px;
       text-transform: uppercase;
-      font-weight: 400;
-      letter-spacing: 2px; }
-      @media only screen and (min-width: 992px) and (max-width: 1200px) {
-        .conatct-area .conatct-info .title {
-          font-size: 44px; } }
-      @media (max-width: 767px) {
-        .conatct-area .conatct-info .title {
-          font-size: 34px;
-          line-height: 44px; } }
-      @media only screen and (min-width: 992px) and (max-width: 1200px) {
-        .conatct-area .conatct-info .title br {
-          display: none; } }
-      @media only screen and (min-width: 768px) and (max-width: 991px) {
-        .conatct-area .conatct-info .title br {
-          display: none; } }
-      @media (max-width: 767px) {
-        .conatct-area .conatct-info .title br {
-          display: none; } }
-    .conatct-area .conatct-info p {
-      font-size: 18px;
-      font-weight: 300;
-      line-height: 34px;
-      color: #7e8591;
-      letter-spacing: .7px;
-      padding-top: 41px;
-      padding-bottom: 44px; }
-  .conatct-area .conatct-info-item {
-    margin-right: 90px; }
-    @media only screen and (min-width: 992px) and (max-width: 1200px) {
-      .conatct-area .conatct-info-item {
-        margin-right: 30px; } }
-    @media only screen and (min-width: 768px) and (max-width: 991px) {
-      .conatct-area .conatct-info-item {
-        margin-right: 0px; } }
-    @media (max-width: 767px) {
-      .conatct-area .conatct-info-item {
-        margin-right: 0px; } }
-    .conatct-area .conatct-info-item .item {
-      padding-left: 58px;
+      color: #7f8692;
+      font-weight: 400; }
+  .contact-area .contact-item .about {
+    /*text-align: center;*/
+    padding-bottom: 100px;
+    border-bottom: 1px solid #cdcccc;
+  }
+  .contact-area .contact-item .about h3 {
+    color: #7b817e;
+    text-align: center;
+  }
+  .contact-area .contact-item .about .list {
+    margin: 0 auto;
+    width: 180px;
+    padding-top: 50px;
+  }
+  .contact-area .contact-item .about li {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .contact-area .contact-item .item {
+    border-bottom: 1px solid #eaeaea;
+    padding-bottom: 32px;
+    margin-bottom: 32px; }
+    .contact-area .contact-item .item .thumb {
+      min-width: 43px;
       position: relative; }
-      .conatct-area .conatct-info-item .item i {
+      .contact-area .contact-item .item .thumb img {
+        max-width: 180px;
+        width: 100%; }
+      .contact-area .contact-item .item .thumb span {
         position: absolute;
-        left: 0;
-        top: 50%;
-        transform: translateY(-50%);
-        font-size: 38px;
-        color: #ff5316; }
-      .conatct-area .conatct-info-item .item span {
-        font-size: 12px;
-        text-transform: uppercase;
+        right: -23px;
+        bottom: 0;
+        height: 65px;
+        width: 65px;
+        text-align: center;
+        line-height: 65px;
+        background: #ff5316;
+        color: #fff; }
+    .contact-area .contact-item .item .content {
+      padding-left: 41px; }
+      @media only screen and (min-width: 768px) and (max-width: 991px) {
+        .contact-area .contact-item .item .content {
+          padding-left: 60px; }  }
+      @media (max-width: 767px) {
+        .contact-area .contact-item .item .content {
+          padding-left: 0px;
+          padding-top: 20px; } }
+      @media only screen and (min-width: 576px) and (max-width: 767px) {
+        .contact-area .contact-item .item .content {
+          padding-left: 40px;
+          padding-top: 0; }
+      }
+      @media (max-width: 575px) {
+        .contact-area .contact-item .item .thumb span {
+          bottom: -60px;
+          right: -10px;
+        }
+      }
+      .contact-area .contact-item .item .content span {
+        color: #ff5316;
+        margin-right: 10px;
+      }
+      .contact-area .contact-item .item .content a {
+        font-size: 24px;
+        font-weight: 600;
+        color: #192437;
+        text-transform: uppercase; }
+      .contact-area .contact-item .item .content p {
+        font-size: 18px;
+        font-weight: 300;
         color: #7f8692;
-        letter-spacing: 1px; }
-      .conatct-area .conatct-info-item .item p {
-        font-size: 14px;
-        color: #192437; }
-      .conatct-area .conatct-info-item .item.center {
-        margin-top: 50px;
-        margin-bottom: 50px;
-        position: relative; }
-        .conatct-area .conatct-info-item .item.center::before {
-          position: absolute;
-          content: '';
-          left: 0;
-          top: -25px;
-          height: 1px;
-          width: 100%;
-          background: #eaeaea; }
-        .conatct-area .conatct-info-item .item.center::after {
-          position: absolute;
-          content: '';
-          left: 0;
-          bottom: -25px;
-          height: 1px;
-          width: 100%;
-          background: #eaeaea; }
-  .conatct-area .comment-form {
-    margin-left: -30px; }
-    @media only screen and (min-width: 992px) and (max-width: 1200px) {
-      .conatct-area .comment-form {
-        margin-left: 0; } }
-    @media only screen and (min-width: 768px) and (max-width: 991px) {
-      .conatct-area .comment-form {
-        margin-left: 0;
-        margin-top: 30px; } }
-    @media (max-width: 767px) {
-      .conatct-area .comment-form {
-        margin-left: 0;
-        margin-top: 30px; } }
-    .conatct-area .comment-form .input-box textarea {
-      height: 290px; }
+        line-height: 34px;
+        padding-right: 30px;
+        padding-top: 20px; }
+        @media only screen and (min-width: 992px) and (max-width: 1200px) {
+          .contact-area .contact-item .item .content p {
+            padding-right: 0; } }
+        @media only screen and (min-width: 768px) and (max-width: 991px) {
+          .contact-area .contact-item .item .content p {
+            padding-right: 0;
+            font-size: 16px; } }
+        @media (max-width: 767px) {
+          .contact-area .contact-item .item .content p {
+            padding-right: 0;
+            font-size: 15px;
+            padding-top: 15px; } }
+    .contact-area .contact-item .item.item-4 {
+      border-bottom: 0;
+      margin-bottom: 0;
+      padding-bottom: 0; }
 
 .map iframe {
   width: 100%;

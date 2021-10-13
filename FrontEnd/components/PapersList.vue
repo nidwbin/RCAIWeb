@@ -6,6 +6,7 @@
  * @LastEditTime: 2021-09-25
  -->
 <template>
+
   <section class="industri-services-area services-page">
     <div class="container">
       <div class="row justify-content-center">
@@ -25,6 +26,7 @@
       </div>
     </div>
   </section>
+
 </template>
 
 <script>
