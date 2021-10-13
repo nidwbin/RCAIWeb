@@ -7,8 +7,12 @@
 '''
 import datetime
 import hashlib
+import os
+import uuid
 
-from API.models import Admin
+from django.http import JsonResponse
+from API.models import Admin, Image
+from BackEnd.settings import MEDIA_ROOT
 
 
 class Authority:
@@ -56,3 +60,22 @@ def check_admin_authority(username, password):
             return False
     else:
         return False
+
+
+def add_Image(img, filename):
+    imagename = str(uuid.uuid4()) + os.path.splitext(img.name)[1]
+    save_path = os.path.join(MEDIA_ROOT, 'images')
+    try:
+        with open(os.path.join(save_path, imagename), "ab") as f:
+            for chunk in img.chunks():
+                f.write(chunk)
+        i = Image()
+        i.filename = filename
+        i.imagename = imagename
+        i.save()
+        return '/media/images/' + imagename
+    except Exception as e:
+        print(e)
+    return False
+
+def delete_Image

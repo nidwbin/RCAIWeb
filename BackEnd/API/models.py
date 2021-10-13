@@ -19,8 +19,8 @@ class News(models.Model):
 
 
 class Image(models.Model):
-    name = models.CharField(max_length=50, verbose_name="文件名")
-    img = models.ImageField(upload_to='media')  # 图片
+    filename = models.CharField(max_length=50, verbose_name="文件名")
+    imagename = models.ImageField(upload_to='media')  # 图片
 
 
 class ResearchField(models.Model):
