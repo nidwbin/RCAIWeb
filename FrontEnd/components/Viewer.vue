@@ -204,7 +204,7 @@ export default {
             this.post_file(data, data => {
               if (data['message'] === 'success') {
                 this.images_saved[i] = data['content'];
-                // this.$refs.md.$img2Url(i, data['content']);
+                this.$refs.md.$img2Url(i, "http://localhost:8001"+data['content']);
               } else {
                 this.$toast.error('图片上传失败');
               }
