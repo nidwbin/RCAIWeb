@@ -19,7 +19,7 @@ export default {
       if (process.client && url !== null && data !== null && func !== undefined && this.ready()) {
         this.$axios.get(url, {params: data}).then(response => func(response.data)
         ).catch(() => {
-          this.toast.error('网络错误');
+          this.$toast.error('网络错误');
         });
       } else {
         if (this.debug) {
@@ -38,7 +38,7 @@ export default {
         if (this.debug) {
           console.log('post', url, data, func);
         }
-        this.toast.error('未知错误');
+        this.$toast.error('未知错误');
       }
     },
 
@@ -51,7 +51,7 @@ export default {
         if (this.debug) {
           console.log('delete', url, data, func);
         }
-        this.toast.error('未知错误');
+        this.$toast.error('未知错误');
       }
     },
   }

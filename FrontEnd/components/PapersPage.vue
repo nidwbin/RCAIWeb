@@ -58,13 +58,16 @@
         </div><!-- /.col-lg-4 -->
       </div><!-- /.row -->
     </div><!-- /.container -->
+    <PagesList/>
   </section>
 </template>
 
 <script>
+    import PagesList from "./PagesList";
     export default {
         name: "NewsList",
-        data() {
+      components: {PagesList},
+      data() {
             return {
                 type: 'news',
 

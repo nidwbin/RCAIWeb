@@ -10,8 +10,9 @@ import hashlib
 import os
 import uuid
 
+from django.contrib.auth.hashers import make_password, check_password
 from API.models import Admin, Image
-from BackEnd.settings import MEDIA_ROOT
+from django.conf import settings
 
 
 class Authority:
@@ -56,37 +57,58 @@ class Authority:
         return response
 
 
-def check_admin_authority(username, password):
-    user = Admin.objects.filter(name=username).first()
-    if user:
-        db_password = user.password
-        if password == db_password:
-            return True
+class LoginOP:
+    @staticmethod
+    def check_admin(username, password):
+        user = Admin.objects.filter(name=username).first()
+        if user:
+            return check_password(password, user.password)
         else:
             return False
-    else:
+
+    @staticmethod
+    def set_admin(username, password):
+        password = make_password(password)
+        try:
+            user = Admin.objects.filter(name=username).first()
+            if user:
+                user.password = password
+                user.save()
+            else:
+                Admin.objects.create(name=username, password=password)
+            return True
+        except Exception as e:
+            print(e)
         return False
 
 
-def add_Image(img, filename):
-    imagename = str(uuid.uuid4()) + os.path.splitext(img.name)[1]
-    save_path = os.path.join(MEDIA_ROOT, 'images')
-    try:
-        with open(os.path.join(save_path, imagename), "ab") as f:
-            for chunk in img.chunks():
-                f.write(chunk)
-        i = Image()
-        i.filename = filename
-        i.imagename = imagename
-        i.save()
-        return imagename
-    except Exception as e:
-        print(e)
-    return False
+class ImageOP:
+    @staticmethod
+    def add_image(image, filename):
+        image_name = str(uuid.uuid4()) + os.path.splitext(image.name)[1]
+        try:
+            i = Image(filename=filename, image=image)
+            i.filename = filename
+            i.image.name = image_name
+            i.save()
+            return image_name
+        except Exception as e:
+            print(e)
+        return False
+
+    @staticmethod
+    def delete_image(name):
+        image = Image.objects.get(image_name=name)
+        try:
+            return image.delete()
+        except Exception as e:
+            print(e)
+        return False
 
 
-def delete_Image(imagename):
-    image = Image.objects.get(imagename=imagename)
-    if image.delete():
-        return True
-    return False
+class NewsOP(ImageOP):
+    pass
+
+
+class ResearchOP(ImageOP):
+    pass

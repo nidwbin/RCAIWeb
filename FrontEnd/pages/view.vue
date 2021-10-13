@@ -8,6 +8,7 @@
 <template>
   <div>
     <Nav/>
+    <ViewerHeader :type="this.$route.query.type" :filename="this.$route.query.filename"/>
     <Viewer :type="this.$route.query.type" :filename="this.$route.query.filename"/>
     <Footer/>
   </div>
@@ -15,14 +16,14 @@
 
 <script>
 import Nav from "../components/Nav";
-import PageHeader from "../components/PageHeader";
+import ViewerHeader from "../components/ViewerHeader";
 import Viewer from "../components/Viewer";
 import Footer from "../components/Footer";
 
 export default {
   components: {
     Nav,
-    PageHeader,
+    ViewerHeader,
     Viewer,
     Footer,
   },

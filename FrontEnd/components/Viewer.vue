@@ -73,7 +73,7 @@ export default {
       text: '哎呀！出错了╮(￣▽￣)╭',
       images: {},
       images_saved: {},
-      image_base: "/media/image/",
+      image_base: '/media/images/',
     };
   },
   computed: {
@@ -88,10 +88,18 @@ export default {
     if (process.client) {
       this.get("/file/", {type: this.type, filetype: 'markdown', filename: this.filename},
         (data) => {
-          if (data['message'] === 'success') {
-            this.text = data['content'];
-          } else {
-            this.text = '哎呀！出错了╮(￣▽￣)╭';
+          switch (data['message']) {
+            case 'success': {
+              this.text = data['content'];
+              break;
+            }
+            case 'error': {
+              this.text = '哎呀！出错了╮(￣▽￣)╭';
+              break;
+            }
+            default: {
+              this.$toast.info(data['message'])
+            }
           }
         });
       if (this.admin) {
@@ -120,10 +128,17 @@ export default {
             console.log('delete unmatched image', i, this.images_saved[i]);
           }
           this.delete("/file/", {type: this.type, filetype: 'image', filename: this.images_saved[i],}, data => {
-            if (data['message']) {
-              delete this.images_saved[i];
-            } else {
-              this.$toast.error('删除失败');
+            switch (data['message']) {
+              case 'success': {
+                break;
+              }
+              case 'error': {
+                this.$toast.error('删除失败');
+                break;
+              }
+              default: {
+                this.$toast.info(data['message'])
+              }
             }
           });
         }
@@ -134,10 +149,18 @@ export default {
       this.post("/file/", {
         type: this.type, filetype: 'markdown', filename: this.filename, content: val,
       }, data => {
-        if (data['message'] === 'success') {
-          this.$toast.success('保存成功');
-        } else {
-          this.$toast.error('保存失败');
+        switch (data['message']) {
+          case 'success': {
+            this.$toast.success('保存成功');
+            break;
+          }
+          case 'error': {
+            this.$toast.error('保存失败');
+            break;
+          }
+          default: {
+            this.$toast.info(data['message'])
+          }
         }
       });
     },
@@ -157,11 +180,19 @@ export default {
             data.append('filename', i);
             data.append('content', this.images[i]);
             this.post("/file/", data, data => {
-              if (data['message'] === 'success') {
-                this.images_saved[i] = data['content'];
-                this.$refs.md.$img2Url(i, this.image_base + data['content']);
-              } else {
-                this.$toast.error('图片上传失败');
+              switch (data['message']) {
+                case 'success': {
+                  this.images_saved[i] = data['content'];
+                  this.$refs.md.$img2Url(i, this.image_base + data['content']);
+                  break;
+                }
+                case 'error': {
+                  this.$toast.error('图片上传失败');
+                  break;
+                }
+                default: {
+                  this.$toast.info(data['message'])
+                }
               }
             });
           }
@@ -169,7 +200,8 @@ export default {
           this.del_image(i);
         }
       }
-    },
+    }
+    ,
 
 
     save(val, render) {

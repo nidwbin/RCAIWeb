@@ -11,7 +11,7 @@
       <div class="row">
         <div class="col-lg-8">
           <div class="comment-one">
-            <div class="comment-one__single" v-for="item in items">
+            <div class="comment-one__single" v-for="item in lists">
               <div class="comment-one__image">
                 <img :src="item.image" alt="">
               </div><!-- /.comment-one__image -->
@@ -30,19 +30,20 @@
               <!-- /.thm-btn comment-one__btn -->
             </div><!-- /.comment-one__single -->
           </div><!-- /.comment-one -->
+
         </div><!-- /.col-lg-8 -->
         <div class="col-lg-4">
           <div class="sidebar">
             <div class="sidebar__single sidebar__search">
               <form action="#" class="sidebar__search-form">
-                <input type="text" name="search" placeholder="Search here...">
+                <input type="text" name="search" placeholder="开始搜索...">
                 <button type="submit"><i class="fa fa-search"></i></button>
               </form>
             </div><!-- /.sidebar__single -->
             <div class="sidebar__single sidebar__post">
               <h3 class="sidebar__title">近期新闻</h3><!-- /.sidebar__title -->
               <div class="sidebar__post-wrap">
-                <div class="sidebar__post__single" v-for="item in items">
+                <div class="sidebar__post__single" v-for="item in hots">
                   <div class="sidebar__post-image">
                     <div class="inner-block"><img :src="item.image" alt=""></div>
                     <!-- /.inner-block -->
@@ -86,27 +87,68 @@
         </div><!-- /.col-lg-4 -->
       </div><!-- /.row -->
     </div><!-- /.container -->
+    <PagesList :type="type" @change_page="change_page"/>
   </section>
 </template>
 
 <script>
+import PagesList from "./PagesList";
+import Functions from "./Functions";
+
 export default {
   name: "NewsList",
+  mixins: [Functions],
+  components: {PagesList},
   data() {
     return {
       type: 'news',
-
-      items: [
-        {title: "这是一条新闻", image: "/images/logo.png", date: "2021/9/10", filename: "1", overview: "这是一条新闻"},
-        {title: "这是一条新闻", image: "/images/logo.png", date: "2021/9/10", filename: "2", overview: "这是一条新闻"},
-        {title: "这是一条新闻", image: "/images/logo.png", date: "2021/9/10", filename: "3", overview: "这是一条新闻"},
-        {title: "这是一条新闻", image: "/images/logo.png", date: "2021/9/10", filename: "3", overview: "这是一条新闻"},
-        {title: "这是一条新闻", image: "/images/logo.png", date: "2021/9/10", filename: "3", overview: "这是一条新闻"},
-        {title: "这是一条新闻", image: "/images/logo.png", date: "2021/9/10", filename: "3", overview: "这是一条新闻"},
-        {title: "这是一条新闻", image: "/images/logo.png", date: "2021/9/10", filename: "3", overview: "这是一条新闻"},
-        {title: "这是一条新闻", image: "/images/logo.png", date: "2021/9/10", filename: "3", overview: "这是一条新闻"},
-        {title: "这是一条新闻", image: "/images/logo.png", date: "2021/9/10", filename: "3", overview: "这是一条新闻"},
-      ],
+      lists: [],
+      hots: [],
+    }
+  },
+  mounted() {
+    this.change_page(1);
+    this.hot_list(5);
+  },
+  computed: {
+    admin() {
+      return this.$store.state.admin;
+    }
+  },
+  methods: {
+    change_page(page) {
+      this.get('/list/', {type: this.type, filename: 'lists', filetype: this.admin, content: page},
+        data => {
+          switch (data['message']) {
+            case 'success': {
+              this.lists = data['content'];
+              break;
+            }
+            case 'error': {
+              break;
+            }
+            default: {
+              this.$toast.info(data['message']);
+            }
+          }
+        })
+    },
+    hot_list(len) {
+      this.get('/list/', {type: this.type, filename: 'hots', filetype: this.admin, content: len},
+        data => {
+          switch (data['message']) {
+            case 'success': {
+              this.hots = data['content'];
+              break;
+            }
+            case 'error': {
+              break;
+            }
+            default: {
+              this.$toast.info(data['message']);
+            }
+          }
+        })
     }
   }
 }

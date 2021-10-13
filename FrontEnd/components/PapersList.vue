@@ -34,7 +34,7 @@ export default {
   name: "PapersList",
   data() {
     return {
-      type: 'paper',
+      type: 'papers',
 
       items: [
         {title: "这是一篇论文", image: "/images/logo.png", date: "2021/9/10", overview: "something", filename: "1"},

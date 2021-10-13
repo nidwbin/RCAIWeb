@@ -9,23 +9,28 @@ class Admin(models.Model):
     password = models.CharField(max_length=20, verbose_name="密码")
 
 
-class News(models.Model):
+class Header(models.Model):
     title = models.CharField(max_length=50, verbose_name="标题")
     overview = models.CharField(max_length=100, verbose_name="简述")
     content = models.TextField(null=True, blank=True, verbose_name="内容")
     img = models.ImageField(upload_to='media')  # 封面图片
     date = models.DateTimeField()  # 日期
+
+    class Meta:
+        abstract = True
+
+
+class News(Header):
     text_file = models.FileField(upload_to='upload/news')  # 文件
+
+
+class ResearchField(Header):
+    text_file = models.FileField(upload_to='upload/research')  # 文件
 
 
 class Image(models.Model):
     filename = models.CharField(max_length=50, verbose_name="文件名")
-    imagename = models.ImageField(upload_to='media')  # 图片
-
-
-class ResearchField(models.Model):
-    name = models.CharField(max_length=50, verbose_name="名称")
-    text_file = models.FileField(upload_to='upload/research')  # 文件
+    image = models.ImageField(upload_to='images')  # 图片
 
 
 class Achievements(models.Model):
@@ -49,23 +54,25 @@ class Project(models.Model):
     status = models.CharField(max_length=50, verbose_name="项目状态")
 
 
-class Teacher(models.Model):
+class People(models.Model):
     name = models.CharField(max_length=30, verbose_name="姓名")
+    homepage = models.CharField(max_length=50, null=True, blank=True, verbose_name="主页地址")
+    email = models.EmailField(max_length=100, null=True, blank=True, verbose_name="邮箱")
+    photo = models.ImageField(upload_to='photo')
+
+    class Meta:
+        abstract = True
+
+
+class Teacher(People):
     professional_title = models.CharField(max_length=30, verbose_name="职称")
     introduction = models.TextField(null=True, blank=True, verbose_name="基本信息")
-    homepage = models.CharField(max_length=50, null=True, blank=True, verbose_name="主页地址")
     mobile = models.CharField(null=True, blank=True, max_length=11, verbose_name="电话")
-    email = models.EmailField(max_length=100, null=True, blank=True, verbose_name="邮箱")
-    photo = models.ImageField(upload_to='photo')
 
 
-class Student(models.Model):
-    name = models.CharField(max_length=50, verbose_name="名称")
+class Student(People):
     degree = models.CharField(max_length=30, verbose_name="学位")
     overview = models.TextField(verbose_name="简介")
-    email = models.EmailField(max_length=100, null=True, blank=True, verbose_name="邮箱")
-    homepage = models.CharField(max_length=50, null=True, blank=True, verbose_name="主页地址")
-    photo = models.ImageField(upload_to='photo')
 
 
 class BasicInformation(models.Model):
