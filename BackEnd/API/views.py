@@ -12,7 +12,7 @@ from django.views.generic import View
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.http import HttpResponse, JsonResponse
 
-from API.function import Authority, check_admin_authority, add_Image
+from API.function import Authority, check_admin_authority, add_Image, delete_Image
 
 authority = Authority()
 
@@ -53,9 +53,9 @@ class File(View):
         filename = request.POST.get('filename')
         if filetype == 'image':
             content = request.FILES.get('content')
-            url = add_Image(content, filename)
-            if url:
-                return authority.get_response(request, JsonResponse({'message': 'success', 'content': url}))
+            imagename = add_Image(content, filename)
+            if imagename:
+                return authority.get_response(request, JsonResponse({'message': 'success', 'content': imagename}))
             return authority.get_response(request, JsonResponse({'message': 'error'}))
         else:
             content = request.POST.get('content')
@@ -63,6 +63,7 @@ class File(View):
         return authority.get_response(request, JsonResponse({'message': 'success', 'content': '/images/logo.png'}))
 
     def delete(self, request):
-        imagename = request.POST.get('filename')
-        delete_Image(imagename)
-        return authority.get_response(request, JsonResponse({'message': 'success', 'content': '/images/logo.png'}))
+        imagename = request.POST.get('imagename')
+        if delete_Image(imagename):
+            return authority.get_response(request, JsonResponse({'message': 'success'}))
+        return authority.get_response(request, JsonResponse({'message': 'error'}))

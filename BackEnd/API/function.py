@@ -73,9 +73,15 @@ def add_Image(img, filename):
         i.filename = filename
         i.imagename = imagename
         i.save()
-        return '/media/images/' + imagename
+        return imagename
     except Exception as e:
         print(e)
     return False
 
-def delete_Image
+
+def delete_Image(imagename):
+    image = Image.objects.get(imagename=imagename)
+    if image.delete():
+        return True
+    return False
+
