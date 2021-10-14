@@ -2,8 +2,8 @@
  * @FileDescription: news page
  * @Author: liuyoude
  * @Date: 2021-09-29
- * @LastEditors: liuyoude
- * @LastEditTime: 2021-10-01
+ * @LastEditors: liuyoude,wenbin
+ * @LastEditTime: 2021-10-13
  -->
 <template>
   <section class="blog-details">
@@ -11,6 +11,21 @@
       <div class="row">
         <div class="col-lg-8">
           <div class="comment-one">
+            <div class="comment-one__single" v-if="admin">
+              <div class="comment-one__image">
+                <img src="/images/add-button.png" alt="">
+              </div>
+              <nuxt-link :to="{name:'view', query:{type:type, filename:'new'}}">
+                <div class="comment-one__content">
+                  <h3>
+                    新建条目
+                    <span class="comment-one__date">****/**/**</span>
+                  </h3>
+                  <p>点击开始新建条目</p>
+                </div><!-- /.comment-one__content -->
+              </nuxt-link>
+            </div><!-- /.comment-one__single -->
+          </div><!-- /.comment-one -->
             <div class="comment-one__single" v-for="item in lists">
               <div class="comment-one__image">
                 <img :src="item.image" alt="">
@@ -117,7 +132,7 @@ export default {
   },
   methods: {
     change_page(page) {
-      this.get('/list/', {type: this.type, filename: 'lists', filetype: this.admin, content: page},
+      this.get('/list/', {type: this.type, filetype: 'lists', filename: this.admin, content: page},
         data => {
           switch (data['message']) {
             case 'success': {
@@ -134,7 +149,7 @@ export default {
         })
     },
     hot_list(len) {
-      this.get('/list/', {type: this.type, filename: 'hots', filetype: this.admin, content: len},
+      this.get('/list/', {type: this.type, filetype: 'hots', filename: this.admin, content: len},
         data => {
           switch (data['message']) {
             case 'success': {
