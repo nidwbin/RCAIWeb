@@ -94,9 +94,10 @@
 </template>
 
 <script>
+  import Functions from "./Functions";
     export default {
         name: "HistoryPage",
-
+        mixins:[Functions],
         data () {
             return{
                 items: [
@@ -126,17 +127,8 @@
                 for (var key in item) {
                     formData.append(key, this.item[key]);
                 }
-                axios({
-                    method: "post",
-                    url: "xxxxxxx",
-                    headers: {
-                        "Content-Type": "multipart/form-data"
-                    },
-                    withCredentials: true,
-                    data: formData
-                }).then((res) => {
-                    console.log(res);
-                });
+                this.post();
+                this.post();
             },
 
             changeImg(item) {
