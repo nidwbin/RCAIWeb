@@ -50,7 +50,7 @@
           <div class="col-lg-12">
 
             <div class="main-header-item">
-            <div class="main-header-menus d-flex justify-content-between align-items-center">
+            <div class="main-header-menus d-flex justify-content-center align-items-center">
                 <div class="toggle-btn ml-30 canvas_open">
                   <i @click="mobileToggle = !mobileToggle" class="fa fa-bars"></i>
                 </div>

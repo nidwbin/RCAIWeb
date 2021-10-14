@@ -36,7 +36,7 @@
           <div class="direction-item">
             <div class="item d-block d-sm-flex align-items-center" v-for="item in items_default">
                 <div class="thumb">
-                  <img id="img_item" src="images/direction/direction_1.jpg" alt="">
+                  <img id="img_item" :src="item.image" alt="">
                   <input id="img_file" type="file" @change="changeImg(item)" style="margin-top: 4px;">
                 </div>
                 <form>
@@ -63,7 +63,7 @@
             <div class="item d-block d-sm-flex align-items-center" v-for="item in items">
                 <div class="thumb">
                   <img :src="item.image" alt="" id="image_id">
-                  <input type="file" @change="changeImg(item)" id="img_file" style="margin-top: 4px;">
+                  <input type="file" @change="changeImg(item)" style="margin-top: 4px;">
                 </div>
                 <form>
                   <div class="content">

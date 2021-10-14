@@ -6,6 +6,7 @@
  * @LastEditTime: 2021-10-02
  -->
 <template>
+<!--  <div v-if="!admin"></div>-->
   <section class="paper-details">
     <div class="container">
       <div class="row">
@@ -20,9 +21,9 @@
                     <p>{{ item.index }}.{{ item.paper }}</p>
                 </div><!-- /.comment-one__content -->
               </nuxt-link>
-<!--              <div class="blog-btn">-->
-<!--                <a href="#" class="main-btn text-center">Reply</a>-->
-<!--              </div>-->
+              <div class="blog-btn">
+                <a href="#" class="main-btn text-center">Reply</a>
+              </div>
               <!-- /.thm-btn comment-one__btn -->
             </div><!-- /.comment-one__single -->
           </div><!-- /.comment-one -->
