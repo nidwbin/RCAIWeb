@@ -34,10 +34,10 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="direction-item">
-            <div class="item d-block d-sm-flex align-items-center">
+            <div class="item d-block d-sm-flex align-items-center" v-for="item in items_default">
                 <div class="thumb">
-                  <img src="images/direction/direction_1.jpg" alt="">
-                  <input type="file" @change="changeImg(item)" style="margin-top: 4px;">
+                  <img id="img_item" src="images/direction/direction_1.jpg" alt="">
+                  <input id="img_file" type="file" @change="changeImg(item)" style="margin-top: 4px;">
                 </div>
                 <form>
                   <div class="content">
@@ -53,7 +53,7 @@
                     </p>
                   </div>
                   <div class="but">
-                    <span class="fa fa-send-o" @click="onSubmit(item)">&nbsp;提&nbsp;交</span>
+                    <span class="fa fa-send-o" id="add_1" @click="onSubmit(item)">&nbsp;提&nbsp;交</span>
                   </div>
                 </div>
                 </form>
@@ -79,7 +79,8 @@
                     </p>
                   </div>
                   <div class="but">
-                    <span class="fa fa-send-o" @click="onSubmit(item)">&nbsp;提&nbsp;交</span>
+                    <span class="fa fa-send-o" id="add_2" @click="onSubmit(item)">&nbsp;提&nbsp;交</span>
+                    <span class="fa fa-trash-o" id="del" @click="onSubmit(item)">&nbsp;删&nbsp;除</span>
                   </div>
                 </div>
                 </form>
@@ -109,6 +110,9 @@
                     {desc:"方向相关描述", name:"VOIP电话语音分析", image:"./images/direction/direction_2.jpg"},
                     {desc:"方向相关描述", name:"机器的听觉智能", image:"./images/direction/direction_3.jpg"},
                     {desc:"方向相关描述", name:"声学事件检测", image:"./images/direction/direction_4.gif"},
+                ],
+                items_default: [
+                    {desc:"方向相关描述", name:"方向名称", image:"./images/direction/direction_1.jpg"},
                 ]
 
             }
@@ -133,12 +137,14 @@
 
             changeImg(item) {
                 var file =  document.getElementById('img_file').files[0];
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
                 console.log(file);
-                var re = new FileReader();
-                re.readAsDataURL(file);
-                console.log(re);
+                console.log(reader);
+                console.log(reader.result);
+                console.log(reader.readyState);
                 // item.image = re.target.result;
-                $('#img_id').attr("src", re.result);
+                $('img_item').attr("src", reader.result);
             }
         }
     }

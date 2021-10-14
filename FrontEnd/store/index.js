@@ -1,6 +1,6 @@
 export const state = () => ({
   admin: false,
-  debug: true,
+  debug: false,
 });
 
 export const mutations = {

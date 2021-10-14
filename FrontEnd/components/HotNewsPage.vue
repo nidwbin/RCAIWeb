@@ -44,9 +44,9 @@
         </div>
       </div>
     </div>
-    <div class="client-shape animated wow fadeInLeft" data-wow-duration="1500ms" data-wow-delay="0ms">
-      <img src="/images/shape/shape-16.png" alt="">
-    </div>
+<!--    <div class="client-shape animated wow fadeInLeft" data-wow-duration="1500ms" data-wow-delay="0ms">-->
+<!--      <img src="/images/shape/shape-7.png" alt="">-->
+<!--    </div>-->
   </section>
 </template>
 

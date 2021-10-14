@@ -2188,7 +2188,9 @@ p {
       background: #fff; }
     .client-area.client-2-area .client-shape {
       bottom: 0;
-      top: auto; }
+      /*left: 30px;*/
+      top: 60%;
+    }
   .client-area.client-about {
     padding-top: 168px;
     margin-top: -60px; }
@@ -5788,7 +5790,8 @@ p {
         text-align: center;
         line-height: 75px;
         background: #ff5316;
-        color: #fff; }
+        color: #fff;
+      }
     .direction-area .name_input {
       float: right;
     }
@@ -5836,12 +5839,24 @@ p {
       padding: 20px;
       border-width: 0;
       border-radius: 8px;
-      background: #ff5316;
+      /*background: #ff5316;*/
       cursor: pointer;
       outline: none;
-      color: white!important;
+      /*color: white!important;*/
       font-size: 18px;
       font-weight: 800;
+    }
+    .direction-area .but #add_1 {
+      background: #ff5316;
+      color: white!important;
+    }
+    .direction-area .but #add_2 {
+      background: #ff5316;
+      color: white!important;
+    }
+    .direction-area .but #del {
+      background: #7b817e;
+      color: white!important;
     }
     .direction-area .but span:hover { /* 鼠标移入按钮范围时改变颜色 */
       background: rgba(255, 83, 22, 0.6);
