@@ -1,85 +1,80 @@
 version: '3'
 
 networks:
-    django_mysql: 
-        driver: bridge
-    django_nuxt:
-        driver: bridge
-    django_nginx:
-        driver: bridge
-    nginx_nuxt:
-        driver: bridge
-    
+  web_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: "172.49.0.0/24"
 
 services:
-    mysql:
-        image: mysql:5.7
-        volumes:
-            - /RCAIWeb/mysql/conf.d/my.cnf:/etc/mysql/conf.d/my.cnf
-            - /RCAIWeb/mysql/logs:/logs:rw
-            - /RCAIWeb/mysql/data:/var/lib/mysql/:rw
-            - /RCAIWeb/mysql/init:/docker-entrypoint-initdb.d/
-        ports:
-            - "7000:3306"
-        environment:
-            - MYSQL_ROOT_PASSWORD=root
-            - MYSQL_DATABASE=RCAIDB
-            - MYSQL_USER=RCAI
-            - MYSQL_PASSWRD=0!!OH@MY@RCAI@DB!!0
-        networks:
-            - django_mysql
-        restart: always
+  mysql:
+    image: mysql:5.7
+    volumes:
+      - /RCAIWeb/mysql/conf.d/my.cnf:/etc/mysql/conf.d/my.cnf
+      - /RCAIWeb/mysql/logs:/logs:rw
+      - /RCAIWeb/mysql/data:/var/lib/mysql/:rw
+      - /RCAIWeb/mysql/init:/docker-entrypoint-initdb.d/
+    ports:
+      - "7000:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=RCAIDB
+      - MYSQL_USER=RCAI
+      - MYSQL_PASSWRD=0!!OH@MY@RCAI@DB!!0
+    networks:
+      web_net:
+        ipv4_address: 172.49.0.2
+    restart: always
 
-    django:
-        build: 
-          dockerfile: ./docker/django.dockerfile
-        command: python manage.py runserver 0.0.0.0:8000
-        volumes:
-            - /RCAIWeb/django:/django
-            - /RCAIWeb/media:/django/media
-        ports:
-            - "8000:8000"
-        depends_on:
-            - mysql
-        networks:
-            - django_mysql
-            - django_nuxt
-            - django_nginx
-        restart: always
+  django:
+    build:
+      dockerfile: ./docker/django.dockerfile
+    volumes:
+      - /RCAIWeb/django:/django
+      - /RCAIWeb/media:/django/media
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mysql
+    networks:
+      web_net:
+        ipv4_address: 172.49.0.3
+    restart: always
+    command: bash /django/run.sh
 
-    nuxt:
-        build: 
-          dockerfile: ./docker/nuxt.dockerfile
-        command: npm start
-        volumes:
-            - /RCAIWeb/nuxt:/nuxt
-            - /RCAIWeb/static:/nuxt/static
-        ports:
-            - "9000:9000"
-        depends_on:
-            - django
-        networks:
-            - django_nuxt
-            - nginx_nuxt
-        restart: always
+  nuxt:
+    build:
+      dockerfile: ./docker/nuxt.dockerfile
+    volumes:
+      - /RCAIWeb/nuxt:/nuxt
+      - /RCAIWeb/static:/nuxt/static
+    ports:
+      - "9000:9000"
+    depends_on:
+      - django
+    networks:
+      web_net:
+        ipv4_address: 172.49.0.4
+    restart: always
+    command: bash /nuxt/run.sh
 
-    nginx:
-        build: 
-          dockerfile: ./docker/nginx.dockerfile
-        command: nginx -g daemon off;
-        volumes:
-            - /RCAIWeb/nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf
-            - /RCAIWeb/nginx/ssl:/usr/share/nginx/ssl
-            - /RCAIWeb/nginx/log:/var/log/nginx
-            - /RCAIWeb/static:/static
-            - /RCAIWeb/media:/media
-        ports:
-            - "80:80"
-            - "443:443"
-        depends_on:
-            - nuxt
-            - django
-        networks:
-            - django_nginx
-            - nginx_nuxt
-        restart: always
+  nginx:
+    build:
+      dockerfile: ./docker/nginx.dockerfile
+    volumes:
+      - /RCAIWeb/nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf
+      - /RCAIWeb/nginx/ssl:/usr/share/nginx/ssl
+      - /RCAIWeb/nginx/log:/var/log/nginx
+      - /RCAIWeb/static:/static
+      - /RCAIWeb/media:/media
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - nuxt
+      - django
+    networks:
+      web_net:
+        ipv4_address: 172.49.0.5
+    restart: always

@@ -1,5 +1,5 @@
 # !/bin/bash
-workdir=/RCAIWeb/
+
 
 function install_docker(){
         cp /etc/apt/sources.list /etc/apt/sources.list.bak
@@ -38,47 +38,22 @@ function check() {
     if [ $? -eq 0 ]; then
         echo "Docker installed."
     else
-        echo "!!!Warining: I am trying to install docker!!!"
+        echo "!!!Warning: I am trying to install docker!!!"
         install_docker
     fi
     install_others
 }
 
 echo "!!!Must run by root!!!"
-echo "!!!Script for frist run!!!"
+echo "!!!Script for first run!!!"
 echo "!!!If not, please stop with Ctrl+C now!!!"
 sleep 20
 
-# check
+check
 
-# mkdir -p $workdir
-# git clone git@github.com:nidwbin/RCAIWeb.git $workdir/git
+if [ -f ./run.sh ]; then
+  bash ./run.sh
+else
+  echo "!!!Error: there is not run.sh in here!!!"
+fi
 
-echo "Make dirs..."
-mkdir -p $workdir/django
-mkdir -p $workdir/nuxt
-mkdir -p $workdir/mysql
-mkdir -p $workdir/nginx
-mkdir -p $workdir/media
-mkdir -p $workdir/static
-echo "Ok!"
-
-echo "Moving files..."
-shopt -s extglob
-cp -r $workdir/git/BackEnd/!(media) $workdir/django/
-shopt -u extglob
-cp -r $workdir/git/FrontEnd/.nuxt $workdir/nuxt/
-cp -r $workdir/git/FrontEnd/package.json $workdir/nuxt/
-cp -r $workdir/git/FrontEnd/package-lock.json $workdir/nuxt/
-cp -r $workdir/git/BackEnd/media/* $workdir/media/
-cp -r $workdir/git/FrontEnd/static/* $workdir/static/
-cp -r $workdir/git/Config/mysql/* $workdir/mysql/
-cp -r $workdir/git/Config/nginx/* $workdir/nginx/
-cp $workdir/django/requirements.txt $workdir/git/AutoScripts/docker/
-cp $workdir/nuxt/package.json $workdir/git/AutoScripts/docker/
-echo "Ok!"
-
-echo "Start run..."
-cd $workdir/git/AutoScripts
-docker-compose -f $workdir/git/AutoScripts/run.yml up
-echo "Ok!"

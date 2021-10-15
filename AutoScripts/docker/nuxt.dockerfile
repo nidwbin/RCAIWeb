@@ -10,3 +10,5 @@ COPY ./docker/package.json /nuxt
 RUN npm config set registry https://registry.npm.taobao.org && npm install
 
 EXPOSE 9000
+
+CMD ["bash", "/nuxt/run.sh"]
