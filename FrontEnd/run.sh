@@ -1,4 +1,4 @@
 # !/bin/bash
-nuxt install
-nuxt build
-nuxt run start
+npm install
+npm run build
+npm run start
