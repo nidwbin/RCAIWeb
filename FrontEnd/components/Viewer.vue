@@ -120,7 +120,8 @@ export default {
 
     process_image_saved(val) {
       for (let i in this.images_saved) {
-        let reg_str = "/(!\\[\[^\\[\]*?\\]\(?=\\(\)\)\\(\\s*\(" + this.images_saved[i].replace(/\//g, '\\/') + "\)\\s*\\)/g";
+        let url = (this.image_base + this.images_saved[i]);
+        let reg_str = "/(!\\[\[^\\[\]*?\\]\(?=\\(\)\)\\(\\s*\(" + url.replace(/\//g, '\\/') + "\)\\s*\\)/g";
         let reg = eval(reg_str);
 
         if (!val.match(reg)) {
@@ -130,6 +131,7 @@ export default {
           this.delete("/file/", {type: this.type, filetype: 'image', filename: this.images_saved[i],}, data => {
             switch (data['message']) {
               case 'success': {
+                delete this.images_saved[i];
                 break;
               }
               case 'error': {

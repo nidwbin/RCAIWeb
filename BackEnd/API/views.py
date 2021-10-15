@@ -69,18 +69,18 @@ class List(View):
                {'title': "这是一条新闻", 'image': "/images/logo.png", 'date': "2021/9/10", 'filename': "1",
                 'overview': "这是一条新闻"}, ]
         if view_type == 'news':
-            if filename == 'pages':
+            if filetype == 'pages':
                 return authority.get_response(request, JsonResponse({'message': 'success', 'content': 10}))
-            elif filename == 'lists':
+            elif filetype == 'lists':
                 return authority.get_response(request, JsonResponse({'message': 'success', 'content': ans}))
-            elif filename == 'hots':
+            elif filetype == 'hots':
                 return authority.get_response(request, JsonResponse({'message': 'success', 'content': ans}))
         elif view_type == 'papers':
-            if filename == 'pages':
+            if filetype == 'pages':
                 pass
-            elif filename == 'papers':
+            elif filetype == 'papers':
                 pass
-            elif filename == 'books':
+            elif filetype == 'books':
                 pass
         elif view_type == '':
             pass

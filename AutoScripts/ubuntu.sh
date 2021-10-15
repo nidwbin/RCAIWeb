@@ -1,30 +1,59 @@
 # !/bin/bash
-function check_docker() {
+
+
+function install_docker(){
+        cp /etc/apt/sources.list /etc/apt/sources.list.bak
+        sed -i s/archive.ubuntu.com/mirrors.tuna.tsinghua.edu.cn/g /etc/apt/sources.list
+        apt update && apt install -y apt-transport-https ca-certificates curl gnupg-agent software-properties-common
+        
+        curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+        curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+        
+        chmod +x /usr/local/bin/docker-compose
+        echo \
+        "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+        $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+        
+        apt update && apt install -y docker-ce docker-ce-cli containerd.io
+}
+
+function install_others() {
+    echo "Installing other dependencies..."
+    git --version
+    if [ ! $? -eq 0 ]; then
+        echo "Installing git..."
+        apt update && apt install -y git
+    fi
+    echo "Ok!"
+}
+
+function check() {
+    echo "Change apt sources..."
+    cp /etc/apt/sources.list /etc/apt/sources.list.bak
+    sed -i s/archive.ubuntu.com/mirrors.tuna.tsinghua.edu.cn/g /etc/apt/sources.list
+    echo "Ok!"
+
     echo "Checking docker..."
     docker -v
     if [ $? -eq 0 ]; then
         echo "Docker installed."
-        return 0
     else
-        echo "Error: please install docker!"
-        return 1
+        echo "!!!Warning: I am trying to install docker!!!"
+        install_docker
     fi
+    install_others
 }
 
-function install_dep() {
-    echo "Installing dependencies..."
-    check_docker
-    if [ $? -eq 0 ]; then
-        echo "Installing make git..."
-        sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak
-        sudo sed -i s/archive.ubuntu.com/mirrors.tuna.tsinghua.edu.cn/g /etc/apt/sources.list
-        sudo apt update && apt install -y make git 
-    fi
-}
+echo "!!!Must run by root!!!"
+echo "!!!Script for first run!!!"
+echo "!!!If not, please stop with Ctrl+C now!!!"
+sleep 20
 
-installed_dep
+check
 
-git clone git@github.com:nidwbin/RCAIWeb.git
+if [ -f ./run.sh ]; then
+  bash ./run.sh
+else
+  echo "!!!Error: there is not run.sh in here!!!"
+fi
 
-make build
-make run
