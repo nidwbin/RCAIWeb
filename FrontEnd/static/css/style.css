@@ -3700,6 +3700,9 @@ p {
   /*background: white;*/
   min-height: 400px;
   margin-top: 24px;
+  margin-bottom: 20px;
+  /*float: top;*/
+  position: relative;
   /*border-bottom: 2px solid #e4e4ee;*/
 }
 .book-area .book-single .name {
@@ -3731,7 +3734,8 @@ p {
   margin-left: 5px;
   color: #7f8692;
   min-width: 80px;
-  min-height: 65px;
+  /*min-height: 65px;*/
+  height: 100%;
 }
 .book-area .book-single .info p {
   float: left;
@@ -3751,7 +3755,8 @@ p {
   margin-left: 5px;
   color: #7f8692;
   min-width: 80px;
-  min-height: 145px;
+  /*min-height: 145px;*/
+  height: 100%;
 }
 .book-area .book-single .desc p {
   float: left;
@@ -3761,6 +3766,122 @@ p {
   max-width: 280px;
   /*min-height: 145px;*/
 }
+.book-area .book-single input {
+      margin-top: -10px;
+      white-space: nowrap;
+      outline-style: none ;
+      border: 2px solid #ccc;
+      border-radius: 5px;
+      padding: 5px 6px;
+      width: 270px;
+      font-size: 15px;
+      /*font-weight: 900;*/
+    }
+    .book-area .book-single input:focus{
+      border-color: #ff5316;
+      outline: 0;
+      -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(255, 83, 22, 0.91);
+      box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(255, 83, 22, 0.9)
+    }
+.book-area .book-single textarea {
+      word-break: break-all;
+      outline-style: none ;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 13px 14px;
+      width: 270px;
+      height: 100px;
+      font-size: 15px;
+    }
+    .book-area .book-single textarea:focus{
+      border-color: #ff5316;
+      outline: 0;
+      -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(255, 83, 22, 0.91);
+      box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(255, 83, 22, 0.9)
+    }
+@media (min-width: 993px) and (max-width: 1200px) {
+  .book-area .book-single .name input{
+    width: 200px;
+  }
+}
+@media only screen and (min-width: 767px) and (max-width: 992px) {
+  .book-area .book-single input{
+    width: 600px;
+  }
+  .book-area .book-single textarea{
+    width: 600px;
+  }
+}
+@media only screen and (min-width: 531px) and (max-width: 766px) {
+  .book-area .book-single input{
+    width: 400px;
+  }
+  .book-area .book-single textarea{
+    width: 400px;
+  }
+}
+@media only screen and (max-width: 530px) {
+  .book-area .book-single input{
+    width: 360px;
+  }
+  .book-area .book-single textarea{
+    width: 360px;
+  }
+}
+.book-area .but {
+  min-height: 60px;
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
+}
+.book-area .but span {
+      text-align: center;
+      margin-top: 10px;
+      /*margin-left: -30px;*/
+      width: 100px;
+      padding: 10px;
+      border-width: 0;
+      border-radius: 5px;
+      /*background: #ff5316;*/
+      cursor: pointer;
+      outline: none;
+      /*color: white!important;*/
+      font-size: 18px;
+      font-weight: 800;
+    }
+    .book-area .but #add_b_1 {
+      background: #ff5316;
+      color: white!important;
+    }
+    .book-area .but #add_b_2 {
+      background: #ff5316;
+      color: white!important;
+    }
+    .book-area .but #del_b {
+      background: #7b817e;
+      color: white!important;
+    }
+    .book-area .but #add_b_1:hover { /* 鼠标移入按钮范围时改变颜色 */
+      background: rgba(255, 83, 22, 0.6);
+    }
+    .book-area .but #add_b_1:focus { /* 鼠标移入按钮范围时改变颜色 */
+      background: rgba(255, 83, 22, 0.75);
+      border: 2px solid #f5f4f4;
+    }
+    .book-area .but #add_b_2:hover { /* 鼠标移入按钮范围时改变颜色 */
+      background: rgba(255, 83, 22, 0.6);
+    }
+    .book-area .but #add_b_2:focus { /* 鼠标移入按钮范围时改变颜色 */
+      background: rgba(255, 83, 22, 0.75);
+      border: 2px solid #f5f4f4;
+    }
+    .book-area .but #del_b:hover {
+      background: #999f9c;
+    }
+    .book-area .but #del_b:focus {
+      background: #636966;
+      border: 2px solid #f5f4f4;
+    }
 
 .paper-details .comment-one {
   margin-bottom: 45px; }
@@ -3774,6 +3895,8 @@ p {
   margin-right: 10px;
   color: #ff5316;
 }
+
+
 @media (max-width: 767px) {
     .paper-details .paper-aera h3 {
       margin-left: 20px; } }
@@ -3803,6 +3926,84 @@ p {
   padding-top: 4px!important;
   color: #1d2124!important;
 }
+    .paper-details .comment-one__single textarea {
+      word-break: break-all;
+      outline-style: none ;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 13px 14px;
+      width: 700px;
+      height: 100px;
+      font-size: 16px;
+      font-weight: 400;
+    }
+    @media (min-width: 576px) and (max-width: 1200px) {
+    .paper-details .comment-one__single textarea {
+      width: 540px;
+      height: 120px;}
+    }
+    @media only screen and (max-width: 575px) {
+    .paper-details .comment-one__single textarea {
+      width: 460px;
+      height: 130px; }
+    }
+    .paper-details .comment-one__single textarea:focus{
+      border-color: #ff5316;
+      outline: 0;
+      -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(255, 83, 22, 0.91);
+      box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(255, 83, 22, 0.9)
+    }
+    .paper-details .comment-one__single .but {
+      /*margin-left: 50px;*/
+    }
+    .paper-details .comment-one__single .but span {
+      text-align: center;
+      margin-top: 5px;
+      width: 80px;
+      padding: 5px;
+      border-width: 0;
+      border-radius: 4px;
+      /*background: #ff5316;*/
+      cursor: pointer;
+      outline: none;
+      /*color: white!important;*/
+      font-size: 14px;
+      font-weight: 800;
+      margin-left: 5px;
+    }
+    .paper-details .comment-one__single .but #add_1 {
+      background: #ff5316;
+      color: white!important;
+    }
+    .paper-details .comment-one__single .but #add_2 {
+      background: #ff5316;
+      color: white!important;
+    }
+    .paper-details .comment-one__single .but #del {
+      background: #7b817e;
+      color: white!important;
+    }
+    .paper-details .comment-one__single .but #add_1:hover { /* 鼠标移入按钮范围时改变颜色 */
+      background: rgba(255, 83, 22, 0.6);
+    }
+    .paper-details .comment-one__single .but #add_1:focus { /* 鼠标移入按钮范围时改变颜色 */
+      background: rgba(255, 83, 22, 0.75);
+      border: 2px solid #f5f4f4;
+    }
+    .paper-details .comment-one__single .but #add_2:hover { /* 鼠标移入按钮范围时改变颜色 */
+      background: rgba(255, 83, 22, 0.6);
+    }
+    .paper-details .comment-one__single .but #add_2:focus { /* 鼠标移入按钮范围时改变颜色 */
+      background: rgba(255, 83, 22, 0.75);
+      border: 2px solid #f5f4f4;
+    }
+    .paper-details .comment-one__single .but #del:hover {
+      background: #999f9c;
+    }
+    .paper-details .comment-one__single .but #del:focus {
+      background: #636966;
+      border: 2px solid #f5f4f4;
+    }
   @media (max-width: 767px) {
     .paper-details .comment-one__single {
       display: block; } }
@@ -5858,11 +6059,26 @@ p {
       background: #7b817e;
       color: white!important;
     }
-    .direction-area .but span:hover { /* 鼠标移入按钮范围时改变颜色 */
+    .direction-area .but #add_1:hover { /* 鼠标移入按钮范围时改变颜色 */
       background: rgba(255, 83, 22, 0.6);
     }
-    .direction-area .but span:focus { /* 鼠标移入按钮范围时改变颜色 */
+    .direction-area .but #add_1:focus { /* 鼠标移入按钮范围时改变颜色 */
       background: rgba(255, 83, 22, 0.75);
+      border: 2px solid #f5f4f4;
+    }
+    .direction-area .but #add_2:hover { /* 鼠标移入按钮范围时改变颜色 */
+      background: rgba(255, 83, 22, 0.6);
+    }
+    .direction-area .but #add_2:focus { /* 鼠标移入按钮范围时改变颜色 */
+      background: rgba(255, 83, 22, 0.75);
+      border: 2px solid #f5f4f4;
+    }
+    .direction-area .but #del:hover {
+      background: #999f9c;
+    }
+    .direction-area .but #del:focus {
+      background: #636966;
+      border: 2px solid #f5f4f4;
     }
     .direction-area .direction-item .item .content {
       padding-left: 82px; }

@@ -44,12 +44,12 @@
                   <nuxt-link to="#">
                     <span class="	fa fa-fire"></span>
                     <div class="name_input">
-                      <input name="direction_name" type="text" placeholder="方向名称">
+                      <input name="direction_name" type="text" :placeholder="item.name">
                     </div>
                   </nuxt-link>
                   <div class="desc_input">
                     <p>
-                      <textarea name="direction_desc" placeholder="方向相关描述"></textarea>
+                      <textarea name="direction_desc" :placeholder="item.desc"></textarea>
                     </p>
                   </div>
                   <div class="but">
@@ -61,6 +61,7 @@
             </div>
 
             <div class="item d-block d-sm-flex align-items-center" v-for="item in items">
+
                 <div class="thumb">
                   <img :src="item.image" alt="" id="image_id">
                   <input type="file" @change="changeImg(item)" style="margin-top: 4px;">
