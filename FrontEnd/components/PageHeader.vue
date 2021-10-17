@@ -39,8 +39,6 @@
           type: String
       }
     },
-
-
   }
 </script>
 
