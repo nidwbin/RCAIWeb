@@ -22,11 +22,7 @@ let store = {};
   if (process.client && module.hot) {
     // Whenever any Vuex module is updated...
     module.hot.accept([
-<<<<<<< HEAD
       '..\\store\\index.js',
-=======
-      '../store/index.js',
->>>>>>> fc060615d80a8a184305cd59f3062bd91f8ca24f
     ], () => {
       // Update `root.modules` with the latest definitions.
       updateModules()
