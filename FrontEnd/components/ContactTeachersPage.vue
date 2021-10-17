@@ -48,9 +48,9 @@
         data () {
             return {
                 items: [
-                    {treatment:"年薪30万，10万科研启动经费",name:"师资博士后/项目博士后", require:"30周岁以下", image:"/images/contact/teacher-2.png"},
-                    {treatment:"年薪28万，20万科研启动经费，20万安家费",name:"青年拔尖/准聘副教授", require:"32周岁以下", image:"/images/contact/teacher-1.png"},
-                    {treatment:"年薪35万，100万科研启动经费，60万安家费",name:"青年拔尖/准聘教授", require:"35周岁以下", image:"/images/contact/teacher-3.png"},
+                    {treatment:"年薪30万，10万科研启动经费",name:"师资博士后/项目博士后", require:"30周岁以下", image:"/static/images/contact/teacher-2.png"},
+                    {treatment:"年薪28万，20万科研启动经费，20万安家费",name:"青年拔尖/准聘副教授", require:"32周岁以下", image:"/static/images/contact/teacher-1.png"},
+                    {treatment:"年薪35万，100万科研启动经费，60万安家费",name:"青年拔尖/准聘教授", require:"35周岁以下", image:"/static/images/contact/teacher-3.png"},
                 ]
             }
         }

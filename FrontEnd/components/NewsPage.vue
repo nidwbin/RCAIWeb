@@ -13,40 +13,33 @@
           <div class="comment-one">
             <div class="comment-one__single" v-if="admin">
               <div class="comment-one__image">
-                <img src="/images/add-button.png" alt="">
               </div>
-              <nuxt-link :to="{name:'view', query:{type:type, filename:'new'}}">
-                <div class="comment-one__content">
-                  <h3>
-                    新建条目
-                    <span class="comment-one__date">****/**/**</span>
-                  </h3>
-                  <p>点击开始新建条目</p>
-                </div><!-- /.comment-one__content -->
-              </nuxt-link>
+              <div class="comment-one__content" @click="new_item">
+                <h3>
+                  新建条目
+                  <span class="comment-one__date">XXXX-XX-XX</span>
+                </h3>
+                <p>点击开始新建条目</p>
+              </div><!-- /.comment-one__content -->
             </div><!-- /.comment-one__single -->
           </div><!-- /.comment-one -->
-            <div class="comment-one__single" v-for="item in lists">
-              <div class="comment-one__image">
-                <img :src="item.image" alt="">
-              </div><!-- /.comment-one__image -->
-              <nuxt-link :to="{name:'view', query:{type:type, filename:item.filename}}">
-                <div class="comment-one__content">
-                  <h3>
-                    {{ item.title }}
-                    <span class="comment-one__date">{{ item.date }}</span>
-                  </h3>
-                  <p>{{ item.overview }}</p>
-                </div><!-- /.comment-one__content -->
-              </nuxt-link>
-              <!--              <div class="blog-btn">-->
-              <!--                <a href="#" class="main-btn text-center">Reply</a>-->
-              <!--              </div>-->
-              <!-- /.thm-btn comment-one__btn -->
-            </div><!-- /.comment-one__single -->
-          </div><!-- /.comment-one -->
-
-        </div><!-- /.col-lg-8 -->
+          <div class="comment-one__single" v-for="item in lists">
+            <div class="comment-one__image">
+              <img :src="item.image" alt="">
+            </div><!-- /.comment-one__image -->
+            <div class="comment-one__content" @click="view(item)">
+              <h3>
+                {{ item.title }}
+                <span :class="item.show?'comment-one__date':'comment-one__date text-muted'">{{ item.date }}</span>
+              </h3>
+              <p>{{ item.overview }}</p>
+            </div><!-- /.comment-one__content -->
+            <!--              <div class="blog-btn">-->
+            <!--                <a href="#" class="main-btn text-center">Reply</a>-->
+            <!--              </div>-->
+            <!-- /.thm-btn comment-one__btn -->
+          </div><!-- /.comment-one__single -->
+        </div><!-- /.comment-one -->
         <div class="col-lg-4">
           <div class="sidebar">
             <div class="sidebar__single sidebar__search">
@@ -102,6 +95,48 @@
         </div><!-- /.col-lg-4 -->
       </div><!-- /.row -->
     </div><!-- /.container -->
+    <div v-if="modal">
+      <div class="modal" v-on:click.self="modal=false">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">修改标题头</h4>
+              <button type="button" class="close" @click="modal=false">×</button>
+            </div>
+            <div class="modal-body">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">日期</span>
+                </div>
+                <input type="date" class="form-control" v-model="viewing_edit.date" aria-describedby="basic-addon1">
+              </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon2">标题</span>
+                </div>
+                <input type="text" class="form-control" v-model="viewing_edit.title" aria-describedby="basic-addon2">
+              </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon3">概述</span>
+                </div>
+                <textarea class="form-control" v-model="viewing_edit.overview" aria-describedby="basic-addon3"></textarea>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="switch" v-model="viewing_edit.show">
+                <label class="custom-control-label" for="switch">展示</label>
+              </div>
+              <button type="button" class="btn btn-success" @click="more"><i class="fa fa-fighter-jet"></i>查看</button>
+              <button type="button" class="btn btn-warning" @click="edit"><i class="fa fa-send"></i>修改</button>
+              <button type="button" class="btn btn-danger" @click="remove"><i class="fa fa-remove"></i>删除</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-backdrop show"></div>
+    </div>
     <PagesList :type="type" @change_page="change_page"/>
   </section>
 </template>
@@ -119,6 +154,9 @@ export default {
       type: 'news',
       lists: [],
       hots: [],
+      modal: false,
+      viewing: null,
+      viewing_edit: null,
     }
   },
   mounted() {
@@ -164,11 +202,53 @@ export default {
             }
           }
         })
+    },
+    view(item) {
+      if (this.admin) {
+        this.viewing=item;
+        this.viewing_edit=JSON.parse(JSON.stringify(item));
+        this.modal = true;
+      } else {
+        this.$router.push({name: 'view', query: {type: this.type, filename: this.viewing.filename}});
+      }
+    },
+    more() {
+      this.$router.push({name: 'view', query: {type: this.type, filename: this.viewing.filename}});
+    },
+    edit() {
+      this.viewing.images=this.viewing_edit.images;
+      this.viewing.date=this.viewing_edit.date;
+      this.viewing.show=this.viewing_edit.show;
+      this.viewing.title=this.viewing_edit.title;
+      this.viewing.overview=this.viewing_edit.overview;
+      this.modal = false;
+    },
+    remove() {
+      this.modal = false;
+    },
+    new_item(){
+      this.post('/list/',{type:this.type,filetype:'item',filename:'new',content:''},data=>{
+        switch (data['message']){
+          case 'success':{
+            this.$router.push({name: 'view', query: {type: this.type, filename: data['content']}});
+            break;
+          }
+          case 'error':{
+            break;
+          }
+          default:{
+            this.$toast.info(data['message']);
+          }
+        }
+      })
+
     }
   }
 }
 </script>
 
 <style scoped>
-
+.modal {
+  display: block;
+}
 </style>

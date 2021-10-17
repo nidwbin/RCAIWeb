@@ -21,7 +21,7 @@
             <swiper-slide v-for="item in items" :key="item.file">
               <div class="client-item mt-30">
                 <div class="shape">
-                  <img src="/images/shape/shape-4.png" alt="shape">
+                  <img src="/static/images/shape/shape-4.png" alt="shape">
                 </div>
                 <div class="user">
                   <div class="user-thumb">
@@ -44,9 +44,9 @@
         </div>
       </div>
     </div>
-    <div class="client-shape animated wow fadeInLeft" data-wow-duration="1500ms" data-wow-delay="0ms">
-      <img src="/images/shape/shape-16.png" alt="">
-    </div>
+<!--    <div class="client-shape animated wow fadeInLeft" data-wow-duration="1500ms" data-wow-delay="0ms">-->
+<!--      <img src="/static/images/shape/shape-7.png" alt="">-->
+<!--    </div>-->
   </section>
 </template>
 
@@ -92,15 +92,15 @@ export default {
       },
       type: 'news',
       items: [
-        {title: "这是一条新闻", image: "/images/logo.png", date: "2021/9/10", filename: "1", overview: "新闻概览"},
-        {title: "这是一条新闻", image: "/images/logo.png", date: "2021/9/10", filename: "2", overview: "新闻概览"},
-        {title: "这是一条新闻", image: "/images/logo.png", date: "2021/9/10", filename: "3", overview: "新闻概览"},
-        {title: "这是一条新闻", image: "/images/logo.png", date: "2021/9/10", filename: "3", overview: "新闻概览"},
-        {title: "这是一条新闻", image: "/images/logo.png", date: "2021/9/10", filename: "3", overview: "新闻概览"},
-        {title: "这是一条新闻", image: "/images/logo.png", date: "2021/9/10", filename: "3", overview: "新闻概览"},
-        {title: "这是一条新闻", image: "/images/logo.png", date: "2021/9/10", filename: "3", overview: "新闻概览"},
-        {title: "这是一条新闻", image: "/images/logo.png", date: "2021/9/10", filename: "3", overview: "新闻概览"},
-        {title: "这是一条新闻", image: "/images/logo.png", date: "2021/9/10", filename: "3", overview: "新闻概览"},
+        {title: "这是一条新闻", image: "/static/images/logo.png", date: "2021/9/10", filename: "1", overview: "新闻概览"},
+        {title: "这是一条新闻", image: "/static/images/logo.png", date: "2021/9/10", filename: "2", overview: "新闻概览"},
+        {title: "这是一条新闻", image: "/static/images/logo.png", date: "2021/9/10", filename: "3", overview: "新闻概览"},
+        {title: "这是一条新闻", image: "/static/images/logo.png", date: "2021/9/10", filename: "3", overview: "新闻概览"},
+        {title: "这是一条新闻", image: "/static/images/logo.png", date: "2021/9/10", filename: "3", overview: "新闻概览"},
+        {title: "这是一条新闻", image: "/static/images/logo.png", date: "2021/9/10", filename: "3", overview: "新闻概览"},
+        {title: "这是一条新闻", image: "/static/images/logo.png", date: "2021/9/10", filename: "3", overview: "新闻概览"},
+        {title: "这是一条新闻", image: "/static/images/logo.png", date: "2021/9/10", filename: "3", overview: "新闻概览"},
+        {title: "这是一条新闻", image: "/static/images/logo.png", date: "2021/9/10", filename: "3", overview: "新闻概览"},
       ],
     }
   },

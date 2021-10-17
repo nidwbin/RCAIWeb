@@ -47,9 +47,9 @@
         data () {
             return {
                 items: [
-                    {name:"本科生", require:"招生要求", image:"/images/contact/recruitment-1.png"},
-                    {name:"硕士研究生", require:"招生要求", image:"/images/contact/recruitment-2.png"},
-                    {name:"博士研究生", require:"招生要求", image:"/images/contact/recruitment-3.png"},
+                    {name:"本科生", require:"招生要求", image:"/static/images/contact/recruitment-1.png"},
+                    {name:"硕士研究生", require:"招生要求", image:"/static/images/contact/recruitment-2.png"},
+                    {name:"博士研究生", require:"招生要求", image:"/static/images/contact/recruitment-3.png"},
                 ]
             }
         }

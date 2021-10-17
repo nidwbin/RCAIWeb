@@ -83,7 +83,7 @@
                   <div class="footer-news-content">
                     <div class="news-item d-flex align-items-center">
                       <div class="news-item-thumb">
-                        <img src="/images_/footer-news-1.jpg" alt="">
+                        <img src="/static/images_/footer-news-1.jpg" alt="">
                       </div>
                       <div class="news-item-content">
                         <span>06 April, 2020</span>
@@ -109,10 +109,10 @@
           </div>
         </div>
         <div class="footer-shape-1">
-          <img src="/images/shape/shape-5.png" alt="">
+          <img src="/static/images/shape/shape-5.png" alt="">
         </div>
         <div class="footer-shape-2 animated wow fadeInLeft" data-wow-duration="1500ms" data-wow-delay="0ms">
-          <img src="/images/shape/shape-6.png" alt="">
+          <img src="/static/images/shape/shape-6.png" alt="">
         </div>
       </footer>
 

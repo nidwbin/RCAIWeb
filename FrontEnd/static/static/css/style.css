@@ -120,11 +120,11 @@ p {
   outline: 0; }
 
 .banner-slide .slide-bg1 {
-  background-image: url("/assets/images/background/teacher_team_600h.png");
+  background-image: url("/static/images/background/teacher_team_600h.png");
   height: 600px;
 }
 .banner-slide .slide-bg2 {
-  background-image: url("/assets/images/background/teacher_team_600h.png");
+  background-image: url("/static/images/background/teacher_team_600h.png");
   height: 600px;
 }
 
@@ -1908,7 +1908,7 @@ p {
     top: 0;
     height: 100%;
     width: 41%;
-    background-image: url(../images_/buildings-thumb.png);
+    background-image: url(/static/images/buildings-thumb.png);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat; }
@@ -2231,7 +2231,7 @@ p {
     bottom: 0;
     height: 370px;
     width: 100%;
-    background-image: url(../images_/news-bg-2.png);
+    background-image: url(../../images_/news-bg-2.png);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat; }
@@ -3459,7 +3459,7 @@ p {
     bottom: 0;
     height: 30%;
     width: 100%;
-    background-image: url(../images_/news-bg.png);
+    background-image: url(../../images_/news-bg.png);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat; }
@@ -5000,7 +5000,7 @@ p {
       top: 0;
       height: 100%;
       width: 50%;
-      background-image: url(../images_/relationships-bg.jpg); }
+      background-image: url(../../images_/relationships-bg.jpg); }
       @media only screen and (min-width: 768px) and (max-width: 991px) {
         .relationships-area .relationships-item::before {
           width: 0; } }
@@ -5489,7 +5489,7 @@ p {
     top: 0;
     height: 100%;
     min-width: 930px;
-    background-image: url(../images_/mission-bg.jpg);
+    background-image: url(../../images_/mission-bg.jpg);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat; }
@@ -5664,7 +5664,7 @@ p {
     bottom: 0;
     height: 310px;
     width: 100%;
-    background-image: url(../images_/news-bg-3.png);
+    background-image: url(../../images_/news-bg-3.png);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
