@@ -12,7 +12,7 @@
         <div class="col-lg-12" v-for="item in items">
           <div class="teacher-item mt-30">
             <div class="shape">
-              <img src="/images/shape/shape-4.png" alt="shape">
+              <img src="/static/images/shape/shape-4.png" alt="shape">
             </div>
             <div class="user">
               <div class="user-thumb">
@@ -45,10 +45,10 @@
         data () {
             return {
                 items:[
-                    {name:"韩纪庆",prof:"教授，博士生导师",desc:"简介",image:"/images/teacher/JQH.png"},
-                    {name:"韩纪庆",prof:"教授，博士生导师",desc:"简介",image:"/images/teacher/JQH.png"},
-                    {name:"韩纪庆",prof:"教授，博士生导师",desc:"简介",image:"/images/teacher/JQH.png"},
-                    {name:"韩纪庆",prof:"教授，博士生导师",desc:"简介",image:"/images/teacher/JQH.png"},
+                    {name:"韩纪庆",prof:"教授，博士生导师",desc:"简介",image:"/static/images/teacher/JQH.png"},
+                    {name:"韩纪庆",prof:"教授，博士生导师",desc:"简介",image:"/static/images/teacher/JQH.png"},
+                    {name:"韩纪庆",prof:"教授，博士生导师",desc:"简介",image:"/static/images/teacher/JQH.png"},
+                    {name:"韩纪庆",prof:"教授，博士生导师",desc:"简介",image:"/static/images/teacher/JQH.png"},
                 ]
             }
         }

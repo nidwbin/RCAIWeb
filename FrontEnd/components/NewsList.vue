@@ -26,7 +26,7 @@
           <div class="news-item mt-30">
             <div class="news-thumb">
               <nuxt-link :to="{name:'view', query:{type:type, filename:'new'}}">
-                <img src="/images/add-button.png" alt="news">
+                <img src="/static/images/add-button.png" alt="news">
               </nuxt-link>
             </div>
           </div>
@@ -49,15 +49,15 @@ export default {
     return {
       type: 'news',
       items: [
-        {title: "这是一条新闻", image: "/images/logo.png", date: "2021/9/10", filename: "1"},
-        {title: "这是一条新闻", image: "/images/logo.png", date: "2021/9/10", filename: "2"},
-        {title: "这是一条新闻", image: "/images/logo.png", date: "2021/9/10", filename: "3"},
-        {title: "这是一条新闻", image: "/images/logo.png", date: "2021/9/10", filename: "3"},
-        {title: "这是一条新闻", image: "/images/logo.png", date: "2021/9/10", filename: "3"},
-        {title: "这是一条新闻", image: "/images/logo.png", date: "2021/9/10", filename: "3"},
-        {title: "这是一条新闻", image: "/images/logo.png", date: "2021/9/10", filename: "3"},
-        {title: "这是一条新闻", image: "/images/logo.png", date: "2021/9/10", filename: "3"},
-        {title: "这是一条新闻", image: "/images/logo.png", date: "2021/9/10", filename: "3"},
+        {title: "这是一条新闻", image: "/static/images/logo.png", date: "2021/9/10", filename: "1"},
+        {title: "这是一条新闻", image: "/static/images/logo.png", date: "2021/9/10", filename: "2"},
+        {title: "这是一条新闻", image: "/static/images/logo.png", date: "2021/9/10", filename: "3"},
+        {title: "这是一条新闻", image: "/static/images/logo.png", date: "2021/9/10", filename: "3"},
+        {title: "这是一条新闻", image: "/static/images/logo.png", date: "2021/9/10", filename: "3"},
+        {title: "这是一条新闻", image: "/static/images/logo.png", date: "2021/9/10", filename: "3"},
+        {title: "这是一条新闻", image: "/static/images/logo.png", date: "2021/9/10", filename: "3"},
+        {title: "这是一条新闻", image: "/static/images/logo.png", date: "2021/9/10", filename: "3"},
+        {title: "这是一条新闻", image: "/static/images/logo.png", date: "2021/9/10", filename: "3"},
       ],
     }
   },

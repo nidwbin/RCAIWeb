@@ -13,7 +13,7 @@
           <div class="col-lg-12">
             <div class="header-top-items d-flex justify-content-between align-items-center">
               <div class="logo">
-                <a href="/"><img src="/assets/images/logo/logo.png" alt="" height="100px"></a>
+                <a href="/"><img src="/static/images/logo/logo.png" alt="" height="100px"></a>
               </div>
               <div class="header-top-info d-none d-md-block">
                 <ul>

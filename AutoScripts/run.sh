@@ -10,20 +10,23 @@ mkdir -p $workdir/mysql
 mkdir -p $workdir/nginx
 mkdir -p $workdir/media
 mkdir -p $workdir/static
+
+mkdir -p $workdir/mysql/conf.d
+mkdir -p $workdir/mysql/init
+mkdir -p $workdir/mysql/data
+mkdir -p $workdir/mysql/logs
+mkdir -p $workdir/nginx/log
+mkdir -p $workdir/nginx/ssl
 echo "Ok!"
 
 echo "Moving files..."
-shopt -s extglob
-cp -r $workdir/git/BackEnd/!(media) $workdir/django/
-cp -r $workdir/git/FrontEnd/!(static) $workdir/nuxt/
-shopt -u extglob
-cp -r $workdir/git/FrontEnd/.nuxt $workdir/nuxt/
+cp -ar $workdir/git/BackEnd/ $workdir/django/
+cp -ar $workdir/git/FrontEnd/ $workdir/nuxt/
+cp -ar $workdir/git/Config/mysql/* $workdir/mysql/
+cp -ar $workdir/git/Config/nginx/* $workdir/nginx/
 
-cp -r $workdir/git/BackEnd/media/* $workdir/media/
-cp -r $workdir/git/FrontEnd/static/* $workdir/static/
-
-cp -r $workdir/git/Config/mysql/* $workdir/mysql/
-cp -r $workdir/git/Config/nginx/* $workdir/nginx/
+mv $workdir/django/media/ $workdir/media/
+mv $workdir/nuxt/static/static/ $workdir/static/
 echo "Ok!"
 
 echo "Start run..."

@@ -52,22 +52,14 @@ class List(View):
         filename = request.GET.get('filename')
         filetype = request.GET.get('filetype')
         content = request.GET.get('content')
-        ans = [{'title': "这是一条新闻", 'image': "/images/logo.png", 'date': "2021/9/10", 'filename': "1",
-                'overview': "这是一条新闻"},
-               {'title': "这是一条新闻", 'image': "/images/logo.png", 'date': "2021/9/10", 'filename': "1",
-                'overview': "这是一条新闻"},
-               {'title': "这是一条新闻", 'image': "/images/logo.png", 'date': "2021/9/10", 'filename': "1",
-                'overview': "这是一条新闻"},
-               {'title': "这是一条新闻", 'image': "/images/logo.png", 'date': "2021/9/10", 'filename': "1",
-                'overview': "这是一条新闻"},
-               {'title': "这是一条新闻", 'image': "/images/logo.png", 'date': "2021/9/10", 'filename': "1",
-                'overview': "这是一条新闻"},
-               {'title': "这是一条新闻", 'image': "/images/logo.png", 'date': "2021/9/10", 'filename': "1",
-                'overview': "这是一条新闻"},
-               {'title': "这是一条新闻", 'image': "/images/logo.png", 'date': "2021/9/10", 'filename': "1",
-                'overview': "这是一条新闻"},
-               {'title': "这是一条新闻", 'image': "/images/logo.png", 'date': "2021/9/10", 'filename': "1",
-                'overview': "这是一条新闻"}, ]
+        ans = [{'title': "这是一条新闻", 'image': "/static/images/logo.png", 'date': "2021-09-10", 'filename': "1",
+                'show': True, 'overview': "这是一条新闻"},
+               {'title': "这是一条新闻1", 'image': "/static/images/logo.png", 'date': "2021-09-11", 'filename': "2",
+                'show': True, 'overview': "这是一条新闻"},
+               {'title': "这是一条新闻2", 'image': "/static/images/logo.png", 'date': "2021-09-12", 'filename': "3",
+                'show': True, 'overview': "这是一条新闻"},
+               {'title': "这是一条新闻3", 'image': "/static/images/logo.png", 'date': "2021-09-13", 'filename': "4",
+                'show': True, 'overview': "这是一条新闻"}, ]
         if view_type == 'news':
             if filetype == 'pages':
                 return authority.get_response(request, JsonResponse({'message': 'success', 'content': 10}))
@@ -75,6 +67,9 @@ class List(View):
                 return authority.get_response(request, JsonResponse({'message': 'success', 'content': ans}))
             elif filetype == 'hots':
                 return authority.get_response(request, JsonResponse({'message': 'success', 'content': ans}))
+            elif filetype == 'item':
+
+                return authority.get_response(request, JsonResponse({'message': 'success', 'content': ans[0]}))
         elif view_type == 'papers':
             if filetype == 'pages':
                 pass
@@ -87,7 +82,20 @@ class List(View):
         return authority.get_response(request, JsonResponse({'message': 'error'}))
 
     def post(self, request):
-        pass
+        if settings.DEBUG or authority.check_pass(request):
+            view_type = request.POST.get('type')
+            filename = request.POST.get('filename')
+            filetype = request.POST.get('filetype')
+            content = request.POST.get('content')
+            if view_type == 'news':
+                if filetype == 'item':
+                    if filename == 'new':
+                        return authority.get_response(request, JsonResponse({'message': 'success', 'content': '1'}))
+                    else:
+                        pass
+            elif view_type == 'papers':
+                pass
+        return authority.get_response(request, JsonResponse({'message': 'error'}))
 
     def delete(self, request):
         pass

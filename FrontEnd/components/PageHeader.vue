@@ -6,7 +6,7 @@
  * @LastEditTime: 2021-09-28
  -->
 <template>
-  <div class="page-title-area bg_cover pt-120" style="background-image: url(/images/banner-bg-1.jpg);">
+  <div class="page-title-area bg_cover pt-120" style="background-image: url(/static/images/banner-bg-1.jpg);">
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
@@ -23,7 +23,7 @@
       </div>
     </div>
     <div class="page-shadow">
-      <img src="/images/page-shadow.png" alt="">
+      <img src="/static/images/page-shadow.png" alt="">
     </div>
   </div>
 </template>

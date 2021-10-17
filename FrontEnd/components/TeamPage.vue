@@ -41,12 +41,12 @@
             return{
                 type: "student",
                 items:[
-                    {name:"David",image:"/images/team-1.png",class:"博一",email:"12345@qq.com",link:"https://www.baidu.com/",abstract:"There are many of lorem ipsum available but the have in some form, by injected humour."},
-                    {name:"David",image:"/images/team-1.png",class:"博一",email:"12345@qq.com",link:"https://www.baidu.com/",abstract:"There are many of lorem ipsum available but the have in some form, by injected humour."},
-                    {name:"David",image:"/images/team-1.png",class:"博一",email:"12345@qq.com",link:"https://www.baidu.com/",abstract:"There are many of lorem ipsum available but the have in some form, by injected humour."},
-                    {name:"David",image:"/images/team-1.png",class:"博一",email:"12345@qq.com",link:"https://www.baidu.com/",abstract:"There are many of lorem ipsum available but the have in some form, by injected humour."},
-                    {name:"David",image:"/images/team-1.png",class:"博一",email:"12345@qq.com",link:"https://www.baidu.com/",abstract:"There are many of lorem ipsum available but the have in some form, by injected humour."},
-                    {name:"David",image:"/images/team-1.png",class:"博一",email:"12345@qq.com",link:"https://www.baidu.com/",abstract:"There are many of lorem ipsum available but the have in some form, by injected humour."},
+                    {name:"David",image:"/static/images/team-1.png",class:"博一",email:"12345@qq.com",link:"https://www.baidu.com/",abstract:"There are many of lorem ipsum available but the have in some form, by injected humour."},
+                    {name:"David",image:"/static/images/team-1.png",class:"博一",email:"12345@qq.com",link:"https://www.baidu.com/",abstract:"There are many of lorem ipsum available but the have in some form, by injected humour."},
+                    {name:"David",image:"/static/images/team-1.png",class:"博一",email:"12345@qq.com",link:"https://www.baidu.com/",abstract:"There are many of lorem ipsum available but the have in some form, by injected humour."},
+                    {name:"David",image:"/static/images/team-1.png",class:"博一",email:"12345@qq.com",link:"https://www.baidu.com/",abstract:"There are many of lorem ipsum available but the have in some form, by injected humour."},
+                    {name:"David",image:"/static/images/team-1.png",class:"博一",email:"12345@qq.com",link:"https://www.baidu.com/",abstract:"There are many of lorem ipsum available but the have in some form, by injected humour."},
+                    {name:"David",image:"/static/images/team-1.png",class:"博一",email:"12345@qq.com",link:"https://www.baidu.com/",abstract:"There are many of lorem ipsum available but the have in some form, by injected humour."},
                 ],
 
                 pages:{

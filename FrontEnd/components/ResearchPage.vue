@@ -103,17 +103,17 @@
         data () {
             return{
                 items: [
-                    {desc:"方向相关描述", name:"基于机器学习的识别方法", image:"./images/direction/direction_1.jpg"},
-                    {desc:"方向相关描述", name:"语音特征选择方法", image:"./images/direction/direction_2.jpg"},
-                    {desc:"方向相关描述", name:"说话人识别", image:"./images/direction/direction_3.jpg"},
-                    {desc:"方向相关描述", name:"语音中的副语言信息识别", image:"./images/direction/direction_4.gif"},
-                    {desc:"方向相关描述", name:"关键词检出", image:"./images/direction/direction_1.jpg"},
-                    {desc:"方向相关描述", name:"VOIP电话语音分析", image:"./images/direction/direction_2.jpg"},
-                    {desc:"方向相关描述", name:"机器的听觉智能", image:"./images/direction/direction_3.jpg"},
-                    {desc:"方向相关描述", name:"声学事件检测", image:"./images/direction/direction_4.gif"},
+                    {desc:"方向相关描述", name:"基于机器学习的识别方法", image:"/static/images/direction/direction_1.jpg"},
+                    {desc:"方向相关描述", name:"语音特征选择方法", image:"/static/images/direction/direction_2.jpg"},
+                    {desc:"方向相关描述", name:"说话人识别", image:"/static/images/direction/direction_3.jpg"},
+                    {desc:"方向相关描述", name:"语音中的副语言信息识别", image:"/static/images/direction/direction_4.gif"},
+                    {desc:"方向相关描述", name:"关键词检出", image:"/static/images/direction/direction_1.jpg"},
+                    {desc:"方向相关描述", name:"VOIP电话语音分析", image:"/static/images/direction/direction_2.jpg"},
+                    {desc:"方向相关描述", name:"机器的听觉智能", image:"/static/images/direction/direction_3.jpg"},
+                    {desc:"方向相关描述", name:"声学事件检测", image:"/static/images/direction/direction_4.gif"},
                 ],
                 items_default: [
-                    {desc:"方向相关描述", name:"方向名称", image:"./images/direction/direction_1.jpg"},
+                    {desc:"方向相关描述", name:"方向名称", image:"/static/images/direction/direction_1.jpg"},
                 ]
 
             }
