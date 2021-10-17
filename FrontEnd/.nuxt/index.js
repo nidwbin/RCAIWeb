@@ -13,12 +13,12 @@ import { createStore } from './store.js'
 
 /* Plugins */
 
-import nuxt_plugin_toast_660bef59 from 'nuxt_plugin_toast_660bef59' // Source: ./toast.js (mode: 'client')
-import nuxt_plugin_axios_cc48baac from 'nuxt_plugin_axios_cc48baac' // Source: ./axios.js (mode: 'all')
-import nuxt_plugin_cookieuniversalnuxt_081eae52 from 'nuxt_plugin_cookieuniversalnuxt_081eae52' // Source: ./cookie-universal-nuxt.js (mode: 'all')
-import nuxt_plugin_owl_3acb1ae7 from 'nuxt_plugin_owl_3acb1ae7' // Source: ../plugins/owl.js (mode: 'client')
-import nuxt_plugin_vuemavoneditor_2c3808a3 from 'nuxt_plugin_vuemavoneditor_2c3808a3' // Source: ../plugins/vue-mavon-editor.js (mode: 'client')
-import nuxt_plugin_interceptor_56e9feb4 from 'nuxt_plugin_interceptor_56e9feb4' // Source: ../plugins/interceptor.js (mode: 'all')
+import nuxt_plugin_toast_9efc22c2 from 'nuxt_plugin_toast_9efc22c2' // Source: .\\toast.js (mode: 'client')
+import nuxt_plugin_axios_375cbc20 from 'nuxt_plugin_axios_375cbc20' // Source: .\\axios.js (mode: 'all')
+import nuxt_plugin_cookieuniversalnuxt_0b296198 from 'nuxt_plugin_cookieuniversalnuxt_0b296198' // Source: .\\cookie-universal-nuxt.js (mode: 'all')
+import nuxt_plugin_owl_3acb1ae7 from 'nuxt_plugin_owl_3acb1ae7' // Source: ..\\plugins\\owl.js (mode: 'client')
+import nuxt_plugin_vuemavoneditor_2c3808a3 from 'nuxt_plugin_vuemavoneditor_2c3808a3' // Source: ..\\plugins\\vue-mavon-editor.js (mode: 'client')
+import nuxt_plugin_interceptor_56e9feb4 from 'nuxt_plugin_interceptor_56e9feb4' // Source: ..\\plugins\\interceptor.js (mode: 'all')
 
 // Component: <ClientOnly>
 Vue.component(ClientOnly.name, ClientOnly)
@@ -47,11 +47,7 @@ Vue.component(Nuxt.name, Nuxt)
 
 Object.defineProperty(Vue.prototype, '$nuxt', {
   get() {
-    const globalNuxt = this.$root.$options.$nuxt
-    if (process.client && !globalNuxt && typeof window !== 'undefined') {
-      return window.$nuxt
-    }
-    return globalNuxt
+    return this.$root.$options.$nuxt
   },
   configurable: true
 })
@@ -61,18 +57,14 @@ Vue.use(Meta, {"keyName":"head","attribute":"data-n-head","ssrAttribute":"data-n
 const defaultTransition = {"name":"page","mode":"out-in","appear":false,"appearClass":"appear","appearActiveClass":"appear-active","appearToClass":"appear-to"}
 
 const originalRegisterModule = Vuex.Store.prototype.registerModule
+const baseStoreOptions = { preserveState: process.client }
 
 function registerModule (path, rawModule, options = {}) {
-  const preserveState = process.client && (
-    Array.isArray(path)
-      ? !!path.reduce((namespacedState, path) => namespacedState && namespacedState[path], this.state)
-      : path in this.state
-  )
-  return originalRegisterModule.call(this, path, rawModule, { preserveState, ...options })
+  return originalRegisterModule.call(this, path, rawModule, { ...baseStoreOptions, ...options })
 }
 
 async function createApp(ssrContext, config = {}) {
-  const router = await createRouter(ssrContext, config)
+  const router = await createRouter(ssrContext)
 
   const store = createStore(ssrContext)
   // Add this.$router into store actions/mutations
@@ -86,7 +78,7 @@ async function createApp(ssrContext, config = {}) {
   // here we inject the router and store to all child components,
   // making them available everywhere as `this.$router` and `this.$store`.
   const app = {
-    head: {"title":"indutri","meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":""}],"link":[{"rel":"shortcut icon","sizes":"180x180","type":"image\u002Fpng","href":"\u002Fassets\u002Fimages\u002Flogo\u002Ffacvicon.png"},{"rel":"stylesheet","href":"https:\u002F\u002Ffonts.googleapis.com\u002Fcss2?family=Oswald:wght@300;400;500;600;700&display=swap"},{"rel":"stylesheet","href":"\u002Fcss\u002Fbootstrap.min.css"},{"rel":"stylesheet","href":"\u002Fcss\u002Fanimate.min.css"},{"rel":"stylesheet","href":"\u002Fcss\u002Ffont-awesome.min.css"},{"rel":"stylesheet","href":"\u002Fplugins\u002Fglightbox\u002Fglightbox.min.css"},{"rel":"stylesheet","href":"\u002Fcss\u002Fflaticon.css"},{"rel":"stylesheet","href":"\u002Fcss\u002Fdefault.css"},{"rel":"stylesheet","href":"\u002Fcss\u002Fstyle.css"}],"script":[{"src":"\u002Fplugins\u002Fglightbox\u002Fglightbox.min.js","body":true},{"src":"\u002Fplugins\u002Faccordion\u002Faccordion.min.js","body":true}],"style":[]},
+    head: {"title":"indutri","meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":"Indutri - Vue Nuxt Industry & Factory Business Template"}],"link":[{"rel":"shortcut icon","sizes":"180x180","type":"image\u002Fpng","href":"\u002Fassets\u002Fimages\u002Flogo\u002Ffacvicon.png"},{"rel":"stylesheet","href":"https:\u002F\u002Ffonts.googleapis.com\u002Fcss2?family=Oswald:wght@300;400;500;600;700&display=swap"},{"rel":"stylesheet","href":"\u002Fcss\u002Fbootstrap.min.css"},{"rel":"stylesheet","href":"\u002Fcss\u002Fanimate.min.css"},{"rel":"stylesheet","href":"\u002Fcss\u002Ffont-awesome.min.css"},{"rel":"stylesheet","href":"\u002Fplugins\u002Fglightbox\u002Fglightbox.min.css"},{"rel":"stylesheet","href":"\u002Fcss\u002Fflaticon.css"},{"rel":"stylesheet","href":"\u002Fcss\u002Fdefault.css"},{"rel":"stylesheet","href":"\u002Fcss\u002Fstyle.css"}],"script":[{"src":"\u002Fplugins\u002Fglightbox\u002Fglightbox.min.js","body":true},{"src":"\u002Fplugins\u002Faccordion\u002Faccordion.min.js","body":true}],"style":[]},
 
     store,
     router,
@@ -215,16 +207,16 @@ async function createApp(ssrContext, config = {}) {
   }
   // Plugin execution
 
-  if (process.client && typeof nuxt_plugin_toast_660bef59 === 'function') {
-    await nuxt_plugin_toast_660bef59(app.context, inject)
+  if (process.client && typeof nuxt_plugin_toast_9efc22c2 === 'function') {
+    await nuxt_plugin_toast_9efc22c2(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_axios_cc48baac === 'function') {
-    await nuxt_plugin_axios_cc48baac(app.context, inject)
+  if (typeof nuxt_plugin_axios_375cbc20 === 'function') {
+    await nuxt_plugin_axios_375cbc20(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_cookieuniversalnuxt_081eae52 === 'function') {
-    await nuxt_plugin_cookieuniversalnuxt_081eae52(app.context, inject)
+  if (typeof nuxt_plugin_cookieuniversalnuxt_0b296198 === 'function') {
+    await nuxt_plugin_cookieuniversalnuxt_0b296198(app.context, inject)
   }
 
   if (process.client && typeof nuxt_plugin_owl_3acb1ae7 === 'function') {
@@ -246,33 +238,26 @@ async function createApp(ssrContext, config = {}) {
     }
   }
 
-  // Wait for async component to be resolved first
-  await new Promise((resolve, reject) => {
-    // Ignore 404s rather than blindly replacing URL in browser
-    if (process.client) {
-      const { route } = router.resolve(app.context.route.fullPath)
-      if (!route.matched.length) {
-        return resolve()
-      }
-    }
-    router.replace(app.context.route.fullPath, resolve, (err) => {
-      // https://github.com/vuejs/vue-router/blob/v3.4.3/src/util/errors.js
-      if (!err._isRouter) return reject(err)
-      if (err.type !== 2 /* NavigationFailureType.redirected */) return resolve()
+  // If server-side, wait for async component to be resolved first
+  if (process.server && ssrContext && ssrContext.url) {
+    await new Promise((resolve, reject) => {
+      router.push(ssrContext.url, resolve, (err) => {
+        // https://github.com/vuejs/vue-router/blob/v3.4.3/src/util/errors.js
+        if (!err._isRouter) return reject(err)
+        if (err.type !== 2 /* NavigationFailureType.redirected */) return resolve()
 
-      // navigated to a different route in router guard
-      const unregister = router.afterEach(async (to, from) => {
-        if (process.server && ssrContext && ssrContext.url) {
+        // navigated to a different route in router guard
+        const unregister = router.afterEach(async (to, from) => {
           ssrContext.url = to.fullPath
-        }
-        app.context.route = await getRouteData(to)
-        app.context.params = to.params || {}
-        app.context.query = to.query || {}
-        unregister()
-        resolve()
+          app.context.route = await getRouteData(to)
+          app.context.params = to.params || {}
+          app.context.query = to.query || {}
+          unregister()
+          resolve()
+        })
       })
     })
-  })
+  }
 
   return {
     store,
