@@ -82,11 +82,9 @@
             <div class="comment-one__single" v-for="item in items">
               <form>
                   <div class="comment-one__content">
-<!--                    <nuxt-link to="#">-->
-                    <p>{{ item.index }}.<label>
-                      <textarea name="paper_name" type="text" :placeholder="item.paper" v-model="item.paper"></textarea>
-                    </label></p>
-<!--                    </nuxt-link>-->
+                    <nuxt-link to="#">
+                    <p>{{ item.index }}.<textarea name="paper_name" type="text" :placeholder="item.paper" v-model="item.paper"></textarea></p>
+                    </nuxt-link>
                     <div class="but">
                       <span class="fa fa-send-o" id="add_2" @click="onSubmit(item)">&nbsp;提&nbsp;交</span>
                       <span class="fa fa-trash-o" id="del" @click="onSubmit(item)">&nbsp;删&nbsp;除</span>

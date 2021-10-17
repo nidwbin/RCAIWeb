@@ -68,7 +68,7 @@
                 </div>
                 <form>
                   <div class="content">
-                  <nuxt-link to="">
+                  <nuxt-link to="#">
                     <span class="	fa fa-fire"></span>
                     <div class="name_input">
                       <input name="direction_name" type="text" :placeholder="item.name" v-model="item.name">
