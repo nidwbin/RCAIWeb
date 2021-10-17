@@ -53,6 +53,20 @@ const logs = NUXT.logs || []
   console.groupEnd && console.groupEnd()
 }
 
+<<<<<<< HEAD
+=======
+Object.assign(Vue.config, {"silent":false,"performance":true})
+
+const logs = NUXT.logs || []
+  if (logs.length > 0) {
+  const ssrLogStyle = 'background: #2E495E;border-radius: 0.5em;color: white;font-weight: bold;padding: 2px 0.5em;'
+  console.group && console.group ('%cNuxt SSR', ssrLogStyle)
+  logs.forEach(logObj => (console[logObj.type] || console.log)(...logObj.args))
+  delete NUXT.logs
+  console.groupEnd && console.groupEnd()
+}
+
+>>>>>>> fc060615d80a8a184305cd59f3062bd91f8ca24f
 // Setup global Vue error handler
 if (!Vue.config.$nuxt) {
   const defaultErrorHandler = Vue.config.errorHandler
