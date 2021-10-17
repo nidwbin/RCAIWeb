@@ -140,7 +140,7 @@ class File(View):
         return authority.get_response(request, JsonResponse({'message': 'error'}))
 
     def delete(self, request):
-        image_name = request.DELETE.get('filename')
+        image_name = request.GET.get('filename')
         if NewsOP.delete_image(image_name):
             return authority.get_response(request, JsonResponse({'message': 'success'}))
         return authority.get_response(request, JsonResponse({'message': 'error'}))

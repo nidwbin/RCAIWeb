@@ -12,9 +12,9 @@ class Admin(models.Model):
 class Header(models.Model):
     title = models.CharField(max_length=50, verbose_name="标题")
     overview = models.CharField(max_length=100, verbose_name="简述")
-    content = models.TextField(null=True, blank=True, verbose_name="内容")
+    filename = models.TextField(null=True, blank=True, verbose_name="文件名")
     img = models.ImageField(upload_to='media')  # 封面图片
-    date = models.DateTimeField()  # 日期
+    date = models.CharField(max_length=50, verbose_name="日期")  # 日期
 
     class Meta:
         abstract = True
@@ -24,21 +24,22 @@ class News(Header):
     text_file = models.FileField(upload_to='upload/news')  # 文件
 
 
-class ResearchField(Header):
-    text_file = models.FileField(upload_to='upload/research')  # 文件
+class Papers(Header):
+    text_file = models.FileField(upload_to='upload/papers')  # 文件
 
 
 class Image(models.Model):
     filename = models.CharField(max_length=50, verbose_name="文件名")
-    image = models.ImageField(upload_to='images')  # 图片
+    image_name = models.CharField(max_length=50, verbose_name="图片名")
+    image = models.ImageField(upload_to='media/images')  # 图片
 
 
 class Achievements(models.Model):
     name = models.CharField(max_length=50, verbose_name="名称")
     genre = models.CharField(max_length=30, verbose_name="类别")
     author = models.CharField(max_length=30, verbose_name="作者")
-    pub_date = models.DateField(null=True, blank=True, verbose_name="出版时间")
-    finish_date = models.DateField(null=True, blank=True, verbose_name="完成时间")
+    pub_date = models.CharField(max_length=50, null=True, blank=True, verbose_name="出版时间")
+    finish_date = models.CharField(max_length=50, null=True, blank=True, verbose_name="完成时间")
     publisher = models.CharField(max_length=30, verbose_name="出版社")
     overview = models.TextField(verbose_name="简介")
 
@@ -47,8 +48,8 @@ class Project(models.Model):
     name = models.CharField(max_length=50, verbose_name="名称")
     genre = models.CharField(max_length=30, verbose_name="类别")
     source = models.CharField(max_length=50, verbose_name="来源")
-    start_date = models.DateField(null=True, blank=True, verbose_name="开始时间")
-    finish_date = models.DateField(null=True, blank=True, verbose_name="完成时间")
+    start_date = models.CharField(max_length=50, null=True, blank=True, verbose_name="开始时间")
+    finish_date = models.CharField(max_length=50, null=True, blank=True, verbose_name="完成时间")
     budget = models.FloatField(verbose_name="项目经费")
     role = models.CharField(max_length=30, verbose_name="担任角色")
     status = models.CharField(max_length=50, verbose_name="项目状态")
@@ -58,7 +59,7 @@ class People(models.Model):
     name = models.CharField(max_length=30, verbose_name="姓名")
     homepage = models.CharField(max_length=50, null=True, blank=True, verbose_name="主页地址")
     email = models.EmailField(max_length=100, null=True, blank=True, verbose_name="邮箱")
-    photo = models.ImageField(upload_to='photo')
+    photo = models.ImageField(upload_to='media/images')
 
     class Meta:
         abstract = True

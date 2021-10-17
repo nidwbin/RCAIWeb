@@ -87,9 +87,7 @@ class ImageOP:
     def add_image(image, filename):
         image_name = str(uuid.uuid4()) + os.path.splitext(image.name)[1]
         try:
-            i = Image(filename=filename, image=image)
-            i.filename = filename
-            i.image.name = image_name
+            i = Image(filename=filename, image_name=image_name, image=image)
             i.save()
             return image_name
         except Exception as e:
@@ -99,16 +97,40 @@ class ImageOP:
     @staticmethod
     def delete_image(name):
         image = Image.objects.get(image_name=name)
-        try:
-            return image.delete()
+        try
+            image.image.delete()
+            image.delete()
+            return
         except Exception as e:
             print(e)
         return False
 
 
 class NewsOP(ImageOP):
-    pass
+    @staticmethod
+    def change_file(filename, content):
+        try:
+            news = News.object.get(filename = filename)
+            news.text_file = content
+            news.save()
+        except Exception as e:
+            print(e)
+        return False
 
+    @staticmethod
+    def create():
+        news = News(title="新建条目", date="xxxx-xx-xx",overview = "点击开始新建条目")
+        news.filename = str(uuid.uuid4()) + ".md"
+        news.save()
+        return news.filename
 
 class ResearchOP(ImageOP):
-    pass
+    @staticmethod
+    def change_file(filename, content):
+        try:
+            papers = Papers.object.get(filename=filename)
+            papers.text_file = content
+            papers.save()
+        except Exception as e:
+            print(e)
+        return False
