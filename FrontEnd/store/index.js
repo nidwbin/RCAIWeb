@@ -1,5 +1,5 @@
 export const state = () => ({
-  admin: true,
+  admin: false,
   debug: true,
 });
 

@@ -93,8 +93,8 @@ export default {
         case 'success': {
           this.title = data['content']['title'];
           this.date = data['content']['date'];
-          this.show = date['content']['show'];
-          this.overview = date['content']['overview'];
+          this.show = data['content']['show'];
+          this.overview = data['content']['overview'];
           break;
         }
         case 'error': {
