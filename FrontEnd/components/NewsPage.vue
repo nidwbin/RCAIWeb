@@ -100,10 +100,23 @@
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">修改标题头</h4>
+              <h4 class="modal-title">编辑</h4>
               <button type="button" class="close" @click="modal=false">×</button>
             </div>
             <div class="modal-body">
+<!--              <div class="input-group mb-3" style="height: 100px;">-->
+<!--                <div class="input-group-prepend">-->
+<!--                  <span class="input-group-text" id="basic-addon0">封面图片</span>-->
+<!--                </div>-->
+<!--                <div class="custom-file">-->
+<!--                  <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">-->
+<!--                  <label class="custom-file-label" for="inputGroupFile01">-->
+<!--                      <div class="card" style="width: 100%; margin-top:30px;">-->
+<!--                        <img :src="viewing_edit.image" class="card-img">-->
+<!--                      </div>-->
+<!--                  </label>-->
+<!--                </div>-->
+<!--              </div>-->
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1">日期</span>

@@ -3,84 +3,72 @@
     "name": "contact-students",
     "path": "/contact-students",
     "component": "D:\\\\A_MySpace\\\\HIT\\\\SPLab\\\\RCAIWeb\\\\FrontEnd\\\\pages\\\\contact-students.vue",
-    "chunkName": "pages/contact-students",
-    "_name": "_3612ccbe"
+    "chunkName": "pages/contact-students"
   },
   {
     "name": "contact-teachers",
     "path": "/contact-teachers",
     "component": "D:\\\\A_MySpace\\\\HIT\\\\SPLab\\\\RCAIWeb\\\\FrontEnd\\\\pages\\\\contact-teachers.vue",
-    "chunkName": "pages/contact-teachers",
-    "_name": "_3d3b7f4c"
+    "chunkName": "pages/contact-teachers"
   },
   {
     "name": "direction",
     "path": "/direction",
     "component": "D:\\\\A_MySpace\\\\HIT\\\\SPLab\\\\RCAIWeb\\\\FrontEnd\\\\pages\\\\direction.vue",
-    "chunkName": "pages/direction",
-    "_name": "_3efd6233"
+    "chunkName": "pages/direction"
   },
   {
     "name": "doctor",
     "path": "/doctor",
     "component": "D:\\\\A_MySpace\\\\HIT\\\\SPLab\\\\RCAIWeb\\\\FrontEnd\\\\pages\\\\doctor.vue",
-    "chunkName": "pages/doctor",
-    "_name": "_c418bbca"
+    "chunkName": "pages/doctor"
   },
   {
     "name": "login",
     "path": "/login",
     "component": "D:\\\\A_MySpace\\\\HIT\\\\SPLab\\\\RCAIWeb\\\\FrontEnd\\\\pages\\\\login.vue",
-    "chunkName": "pages/login",
-    "_name": "_5fa1731d"
+    "chunkName": "pages/login"
   },
   {
     "name": "master",
     "path": "/master",
     "component": "D:\\\\A_MySpace\\\\HIT\\\\SPLab\\\\RCAIWeb\\\\FrontEnd\\\\pages\\\\master.vue",
-    "chunkName": "pages/master",
-    "_name": "_f4663c44"
+    "chunkName": "pages/master"
   },
   {
     "name": "news",
     "path": "/news",
     "component": "D:\\\\A_MySpace\\\\HIT\\\\SPLab\\\\RCAIWeb\\\\FrontEnd\\\\pages\\\\news.vue",
-    "chunkName": "pages/news",
-    "_name": "_a7e86a62"
+    "chunkName": "pages/news"
   },
   {
     "name": "papers",
     "path": "/papers",
     "component": "D:\\\\A_MySpace\\\\HIT\\\\SPLab\\\\RCAIWeb\\\\FrontEnd\\\\pages\\\\papers.vue",
-    "chunkName": "pages/papers",
-    "_name": "_27c54d63"
+    "chunkName": "pages/papers"
   },
   {
     "name": "projects",
     "path": "/projects",
     "component": "D:\\\\A_MySpace\\\\HIT\\\\SPLab\\\\RCAIWeb\\\\FrontEnd\\\\pages\\\\projects.vue",
-    "chunkName": "pages/projects",
-    "_name": "_023a1af6"
+    "chunkName": "pages/projects"
   },
   {
     "name": "teacher",
     "path": "/teacher",
     "component": "D:\\\\A_MySpace\\\\HIT\\\\SPLab\\\\RCAIWeb\\\\FrontEnd\\\\pages\\\\teacher.vue",
-    "chunkName": "pages/teacher",
-    "_name": "_50937416"
+    "chunkName": "pages/teacher"
   },
   {
     "name": "view",
     "path": "/view",
     "component": "D:\\\\A_MySpace\\\\HIT\\\\SPLab\\\\RCAIWeb\\\\FrontEnd\\\\pages\\\\view.vue",
-    "chunkName": "pages/view",
-    "_name": "_bfa17cbe"
+    "chunkName": "pages/view"
   },
   {
     "name": "index",
     "path": "/",
     "component": "D:\\\\A_MySpace\\\\HIT\\\\SPLab\\\\RCAIWeb\\\\FrontEnd\\\\pages\\\\index.vue",
-    "chunkName": "pages/index",
-    "_name": "_d40c5ff4"
+    "chunkName": "pages/index"
   }
 ]

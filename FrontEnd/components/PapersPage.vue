@@ -122,7 +122,7 @@
                   <p><textarea name="book_desc" type="text" :placeholder="book.desc"></textarea></p>
                 </div>
                 <div class="but">
-                    <span class="fa fa-send-o" id="add_b_1" @click="onSubmit(item)">&nbsp;提&nbsp;交</span>
+                    <span class="fa fa-send-o" id="add_b_1" @click="onSubmit(item)">&nbsp;新&nbsp;增</span>
                 </div>
               </form>
             </div>

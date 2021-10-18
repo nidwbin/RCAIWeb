@@ -97,7 +97,7 @@ class ImageOP:
     @staticmethod
     def delete_image(name):
         image = Image.objects.get(image_name=name)
-        try
+        try:
             image.image.delete()
             image.delete()
             return
