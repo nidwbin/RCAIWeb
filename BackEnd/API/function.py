@@ -100,7 +100,7 @@ class ImageOP:
         try:
             image.image.delete()
             image.delete()
-            return
+            return True
         except Exception as e:
             print(e)
         return False
@@ -110,7 +110,7 @@ class NewsOP(ImageOP):
     @staticmethod
     def change_file(filename, content):
         try:
-            news = News.objects.get(filename=filename)
+            news = News.objects.get(filename = filename)
             news.text_file = content
             news.save()
             return True
@@ -121,7 +121,7 @@ class NewsOP(ImageOP):
     @staticmethod
     def create():
         try:
-            news = News(title="新建条目", date="XXXX-XX-XX",overview="点击开始新建条目",filename=str(uuid.uuid4()) + ".md")
+            news = News(title="新建条目", date="xxxx-xx-xx", overview="点击开始新建条目", filename=str(uuid.uuid4()) + ".md")
             news.save()
             return news.filename
         except Exception as e:
