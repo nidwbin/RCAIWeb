@@ -22,6 +22,7 @@ class Header(models.Model):
 
 class News(Header):
     text_file = models.FileField(upload_to='upload/news')  # 文件
+    show = models.BooleanField(blank=True)
 
 
 class Papers(Header):

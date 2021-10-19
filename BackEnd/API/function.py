@@ -9,6 +9,7 @@ import datetime
 import hashlib
 import os
 import uuid
+import math
 
 from django.contrib.auth.hashers import make_password, check_password
 from API.models import Admin, Image, News, Papers
@@ -111,10 +112,14 @@ class NewsOP(ImageOP):
     def change_file(filename, content):
         try:
 <<<<<<< HEAD
+<<<<<<< HEAD
             news = News.objects.get(filename = filename)
 =======
             news = News.objects.get(filename=filename)
 >>>>>>> fb89fde3f6baf227940a40ad9e54dec3e10ded40
+=======
+            news = News.objects.get(filename = filename)
+>>>>>>> zxy
             news.text_file = content
             news.save()
             return True
@@ -126,16 +131,84 @@ class NewsOP(ImageOP):
     def create():
         try:
 <<<<<<< HEAD
+<<<<<<< HEAD
             news = News(title="新建条目", date="xxxx-xx-xx", overview="点击开始新建条目", filename=str(uuid.uuid4()) + ".md")
 =======
             news = News(title="新建条目", date="XXXX-XX-XX",overview="点击开始新建条目",filename=str(uuid.uuid4()) + ".md")
 >>>>>>> fb89fde3f6baf227940a40ad9e54dec3e10ded40
+=======
+            news = News(title="新建条目", date="xxxx-xx-xx", overview="点击开始新建条目", filename=str(uuid.uuid4()) + ".md")
+>>>>>>> zxy
             news.save()
             return news.filename
         except Exception as e:
             print(e)
         return False
 
+    @staticmethod
+    def count(show,pages):
+        try:
+            news = News.objects.filter(show=True) if show else News.objects.filter()
+            len = math.ceil(len(news)/pages)
+            return len
+        except Exception as e:
+            print(e)
+        return False
+
+    @staticmethod
+    def search_news(show,page):
+        try:
+            news = News.objects.filter(show=True).order_by('-date')[(page-1)*10:page*10] if show else News.objects.filter()
+            list = []
+            dict = {}
+            for i in news:
+                dict['title'] = i.title
+                dict['image'] = i.img
+                dict['date'] = i.date
+                dict['filename'] = i.filename
+                dict['show'] = i.show
+                dict['overview'] = i.overview
+                list.append(dict)
+            return list
+        except Exception as e:
+            print(e)
+        return False
+
+    @staticmethod
+    def search_hots(num):
+        try:
+            news = News.objects.filter(show=True).order_by('-date')[:num]
+            list = []
+            dict = {}
+            for i in news:
+                dict['title'] = i.title
+                dict['image'] = i.img
+                dict['date'] = i.date
+                dict['filename'] = i.filename
+                dict['show'] = i.show
+                dict['overview'] = i.overview
+                list.append(dict)
+            return list
+        except Exception as e:
+            print(e)
+        return False
+
+    def search_item(filename):
+        try:
+            news = News.objects.get(filename=filename)
+            list = []
+            dict = {}
+            dict['title'] = news.title
+            dict['image'] = news.img
+            dict['date'] = news.date
+            dict['filename'] = news.filename
+            dict['show'] = news.show
+            dict['overview'] = news.overview
+            list.append(dict)
+            return list
+        except Exception as e:
+            print(e)
+        return False
 
 class PapersOP(ImageOP):
     @staticmethod

@@ -62,14 +62,16 @@ class List(View):
                 'show': True, 'overview': "这是一条新闻"}, ]
         if view_type == 'news':
             if filetype == 'pages':
-                return authority.get_response(request, JsonResponse({'message': 'success', 'content': 10}))
+                return authority.get_response(request, JsonResponse({'message': 'success', 'content': NewsOP.count(True,10)}))
             elif filetype == 'lists':
+                ans = NewsOP.search_news(True,1)
                 return authority.get_response(request, JsonResponse({'message': 'success', 'content': ans}))
             elif filetype == 'hots':
+                ans = NewsOP.search_hots(5)
                 return authority.get_response(request, JsonResponse({'message': 'success', 'content': ans}))
             elif filetype == 'item':
-
-                return authority.get_response(request, JsonResponse({'message': 'success', 'content': ans[0]}))
+                ans = NewsOP.search_item(filename)
+                return authority.get_response(request, JsonResponse({'message': 'success', 'content': ans}))
         elif view_type == 'papers':
             if filetype == 'pages':
                 pass
