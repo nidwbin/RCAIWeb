@@ -11,7 +11,7 @@ import os
 import uuid
 
 from django.contrib.auth.hashers import make_password, check_password
-from API.models import Admin, Image
+from API.models import Admin, Image, News, Papers
 from django.conf import settings
 
 
@@ -97,10 +97,10 @@ class ImageOP:
     @staticmethod
     def delete_image(name):
         image = Image.objects.get(image_name=name)
-        try
+        try:
             image.image.delete()
             image.delete()
-            return
+            return True
         except Exception as e:
             print(e)
         return False
@@ -110,25 +110,29 @@ class NewsOP(ImageOP):
     @staticmethod
     def change_file(filename, content):
         try:
-            news = News.object.get(filename = filename)
+            news = News.objects.get(filename = filename)
             news.text_file = content
             news.save()
+            return True
         except Exception as e:
             print(e)
         return False
 
     @staticmethod
     def create():
-        news = News(title="新建条目", date="xxxx-xx-xx",overview = "点击开始新建条目")
-        news.filename = str(uuid.uuid4()) + ".md"
-        news.save()
-        return news.filename
+        try:
+            news = News(title="新建条目", date="xxxx-xx-xx", overview="点击开始新建条目", filename=str(uuid.uuid4()) + ".md")
+            news.save()
+            return news.filename
+        except Exception as e:
+            print(e)
+        return False
 
 class ResearchOP(ImageOP):
     @staticmethod
     def change_file(filename, content):
         try:
-            papers = Papers.object.get(filename=filename)
+            papers = Papers.objects.get(filename=filename)
             papers.text_file = content
             papers.save()
         except Exception as e:

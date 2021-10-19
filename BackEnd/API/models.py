@@ -12,7 +12,7 @@ class Admin(models.Model):
 class Header(models.Model):
     title = models.CharField(max_length=50, verbose_name="标题")
     overview = models.CharField(max_length=100, verbose_name="简述")
-    filename = models.TextField(null=True, blank=True, verbose_name="文件名")
+    filename = models.CharField(max_length=50, null=True, blank=True, verbose_name="文件名")
     img = models.ImageField(upload_to='media')  # 封面图片
     date = models.CharField(max_length=50, verbose_name="日期")  # 日期
 
