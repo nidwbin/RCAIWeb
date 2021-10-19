@@ -104,6 +104,18 @@
               <button type="button" class="close" @click="modal=false">×</button>
             </div>
             <div class="modal-body">
+              <div class="card">
+                <img :src="viewing_edit.image" class="card-img-top" alt="">
+              </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="image1">图片</span>
+                </div>
+                <div class="custom-file">
+                  <input type="file" id="image2" aria-describedby="image1" @change="change_image($event)">
+                  <label class="custom-file-label" for="image2">选择图片</label>
+                </div>
+              </div>
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1">日期</span>
@@ -120,7 +132,8 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon3">概述</span>
                 </div>
-                <textarea class="form-control" v-model="viewing_edit.overview" aria-describedby="basic-addon3"></textarea>
+                <textarea class="form-control" v-model="viewing_edit.overview"
+                          aria-describedby="basic-addon3"></textarea>
               </div>
             </div>
             <div class="modal-footer">
@@ -157,6 +170,7 @@ export default {
       modal: false,
       viewing: null,
       viewing_edit: null,
+      update_image: null,
     }
   },
   mounted() {
@@ -203,10 +217,15 @@ export default {
           }
         })
     },
+    change_image(e) {
+      let file = e.target.files[0];
+      this.update_image = file;
+      this.viewing_edit.image=window.URL.createObjectURL(file);
+    },
     view(item) {
+      this.viewing = item;
       if (this.admin) {
-        this.viewing=item;
-        this.viewing_edit=JSON.parse(JSON.stringify(item));
+        this.viewing_edit = JSON.parse(JSON.stringify(item));
         this.modal = true;
       } else {
         this.$router.push({name: 'view', query: {type: this.type, filename: this.viewing.filename}});
@@ -216,27 +235,27 @@ export default {
       this.$router.push({name: 'view', query: {type: this.type, filename: this.viewing.filename}});
     },
     edit() {
-      this.viewing.images=this.viewing_edit.images;
-      this.viewing.date=this.viewing_edit.date;
-      this.viewing.show=this.viewing_edit.show;
-      this.viewing.title=this.viewing_edit.title;
-      this.viewing.overview=this.viewing_edit.overview;
+      this.viewing.images = this.viewing_edit.images;
+      this.viewing.date = this.viewing_edit.date;
+      this.viewing.show = this.viewing_edit.show;
+      this.viewing.title = this.viewing_edit.title;
+      this.viewing.overview = this.viewing_edit.overview;
       this.modal = false;
     },
     remove() {
       this.modal = false;
     },
-    new_item(){
-      this.post('/list/',{type:this.type,filetype:'item',filename:'new',content:''},data=>{
-        switch (data['message']){
-          case 'success':{
+    new_item() {
+      this.post('/list/', {type: this.type, filetype: 'item', filename: 'new', content: ''}, data => {
+        switch (data['message']) {
+          case 'success': {
             this.$router.push({name: 'view', query: {type: this.type, filename: data['content']}});
             break;
           }
-          case 'error':{
+          case 'error': {
             break;
           }
-          default:{
+          default: {
             this.$toast.info(data['message']);
           }
         }

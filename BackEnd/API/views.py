@@ -11,7 +11,7 @@ from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt
 from django.http import JsonResponse
 from django.conf import settings
 
-from API.function import Authority, LoginOP, NewsOP, ResearchOP
+from API.function import Authority, LoginOP, NewsOP, PapersOP
 
 authority = Authority()
 
@@ -43,7 +43,7 @@ class Login(View):
             return authority.get_response(request, JsonResponse({'message': 'error'}), keep=False)
 
     def delete(self, request):
-        return authority.get_response(request, JsonResponse({}), keep=False)
+        return authority.get_response(request, JsonResponse({'message': 'success'}), keep=False)
 
 
 class List(View):
@@ -82,7 +82,7 @@ class List(View):
         return authority.get_response(request, JsonResponse({'message': 'error'}))
 
     def post(self, request):
-        if settings.DEBUG or authority.check_pass(request):
+        if authority.check_pass(request) or settings.DEBUG:
             view_type = request.POST.get('type')
             filename = request.POST.get('filename')
             filetype = request.POST.get('filetype')
@@ -98,7 +98,9 @@ class List(View):
         return authority.get_response(request, JsonResponse({'message': 'error'}))
 
     def delete(self, request):
-        pass
+        if authority.check_pass(request) or settings.DEBUG:
+            pass
+        return authority.get_response(request, JsonResponse({'message': 'error'}))
 
 
 class File(View):
@@ -115,7 +117,7 @@ class File(View):
         return authority.get_response(request, JsonResponse({'message': 'error'}))
 
     def post(self, request):
-        if authority.check_pass(request):
+        if authority.check_pass(request) or settings.DEBUG:
             view_type = request.POST.get('type')
             filetype = request.POST.get('filetype')
             filename = request.POST.get('filename')
@@ -124,23 +126,26 @@ class File(View):
             else:
                 content = request.POST.get('content')
 
-            if view_type == 'news':
+            if view_type == 'news' or view_type == 'papers':
+                OP = NewsOP if view_type == 'news' else PapersOP
                 if filetype == 'image':
-                    image_name = NewsOP.add_image(content, filename)
+                    image_name = OP.add_image(content, filename)
                     if image_name:
                         return authority.get_response(request,
                                                       JsonResponse({'message': 'success', 'content': image_name}))
                 elif filetype == 'markdown':
-                    pass
-            elif view_type == 'papers':
-                if filetype == 'image':
-                    NewsOP.add_image(content, filename)
-                elif filetype == 'markdown':
-                    pass
+                    return authority.get_response(request,
+                                                  JsonResponse({'message': 'success' if OP.change_file(filename, content) else 'error'}))
         return authority.get_response(request, JsonResponse({'message': 'error'}))
 
     def delete(self, request):
-        image_name = request.GET.get('filename')
-        if NewsOP.delete_image(image_name):
-            return authority.get_response(request, JsonResponse({'message': 'success'}))
+        if authority.check_pass(request) or settings.DEBUG:
+            view_type = request.GET.get('type')
+            filetype = request.GET.get('filetype')
+            image_name = request.GET.get('filename')
+            if view_type == 'news' or view_type == 'papers':
+                OP = NewsOP if view_type == 'news' else PapersOP
+                if filetype == 'image':
+                    return authority.get_response(request,
+                                                  JsonResponse({'message': 'success' if OP.delete_image(image_name) else 'error'}))
         return authority.get_response(request, JsonResponse({'message': 'error'}))

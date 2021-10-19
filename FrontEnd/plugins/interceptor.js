@@ -10,7 +10,7 @@ import qs from 'qs';
 export default ({store, $cookies, $axios}) => {
   if (process.client) {
     $axios.defaults.withCredentials = true;
-    $axios.defaults.baseURL = 'http://localhost:8001/backend';
+    $axios.defaults.baseURL = 'http://localhost:8000/backend';
 
     $axios.onRequest(config => {
       config.xsrfCookieName = 'csrftoken';
