@@ -19,6 +19,7 @@ import nuxt_plugin_cookieuniversalnuxt_081eae52 from 'nuxt_plugin_cookieuniversa
 import nuxt_plugin_owl_3acb1ae7 from 'nuxt_plugin_owl_3acb1ae7' // Source: ../plugins/owl.js (mode: 'client')
 import nuxt_plugin_vuemavoneditor_2c3808a3 from 'nuxt_plugin_vuemavoneditor_2c3808a3' // Source: ../plugins/vue-mavon-editor.js (mode: 'client')
 import nuxt_plugin_interceptor_56e9feb4 from 'nuxt_plugin_interceptor_56e9feb4' // Source: ../plugins/interceptor.js (mode: 'all')
+import nuxt_plugin_bus_24831a6b from 'nuxt_plugin_bus_24831a6b' // Source: ../plugins/bus.js (mode: 'client')
 
 // Component: <ClientOnly>
 Vue.component(ClientOnly.name, ClientOnly)
@@ -237,6 +238,10 @@ async function createApp(ssrContext, config = {}) {
 
   if (typeof nuxt_plugin_interceptor_56e9feb4 === 'function') {
     await nuxt_plugin_interceptor_56e9feb4(app.context, inject)
+  }
+
+  if (process.client && typeof nuxt_plugin_bus_24831a6b === 'function') {
+    await nuxt_plugin_bus_24831a6b(app.context, inject)
   }
 
   // Lock enablePreview in context

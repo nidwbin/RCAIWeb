@@ -9,7 +9,7 @@
           </div>
           <div class="modal-body">
             <div class="card">
-              <img :src="viewing_edit.image" class="card-img-top" alt="">
+              <img :src="(local?'':image_base)+viewing_edit.image" class="card-img-top" alt="">
             </div>
             <div class="input-group mb-3">
               <div class="input-group-prepend">
@@ -62,7 +62,7 @@
 import Functions from "./Functions";
 
 export default {
-  name: "HeaderArea.vue",
+  name: "HeaderArea",
   mixins: [Functions],
   props: {
     type: {
@@ -77,9 +77,11 @@ export default {
   data() {
     return {
       modal: false,
+      local: false,
       viewing: null,
       viewing_edit: null,
-      update_image: null,
+      upload_image: null,
+      image_base: this.$store.state.image_base + 'header/',
     }
   },
   computed: {
@@ -90,7 +92,8 @@ export default {
   methods: {
     change_image(e) {
       let file = e.target.files[0];
-      this.update_image = file;
+      this.upload_image = file;
+      this.local = true;
       this.viewing_edit.image = window.URL.createObjectURL(file);
     },
     view(item) {
@@ -106,14 +109,24 @@ export default {
       this.$router.push({name: 'view', query: {type: this.type, filename: this.viewing.filename}});
     },
     remove() {
+      this.delete('/list/', {type: this.type, filetype: 'item', filename: this.viewing_edit.filename}, data => {
+        switch (data['message']) {
+          case 'success': {
+            this.$emit('reload_page');
+            break;
+          }
+          case 'error': {
+            this.$toast.error('删除失败');
+            break;
+          }
+          default: {
+            this.$toast.info(data['message']);
+          }
+        }
+      });
       this.modal = false;
     },
     edit() {
-      this.viewing.filename = this.viewing_edit.filename;
-      this.viewing.date = this.viewing_edit.date;
-      this.viewing.show = this.viewing_edit.show;
-      this.viewing.title = this.viewing_edit.title;
-      this.viewing.overview = this.viewing_edit.overview;
       let data = new FormData();
       data.append('type', this.type);
       data.append('filetype', 'item');
@@ -122,7 +135,7 @@ export default {
       data.append('show', this.viewing_edit.show);
       data.append('title', this.viewing_edit.title);
       data.append('overview', this.viewing_edit.overview);
-      data.append('image', this.viewing_edit.image);
+      data.append('image', this.upload_image);
       this.post('/list/', data, data => {
         switch (data['message']) {
           case 'success': {
@@ -131,10 +144,12 @@ export default {
             this.viewing.show = this.viewing_edit.show;
             this.viewing.title = this.viewing_edit.title;
             this.viewing.overview = this.viewing_edit.overview;
-            // this.viewing.image = data['content'];
+            this.local = false;
+            this.viewing.image = data['content'];
             break;
           }
           case 'error': {
+            this.$toast.error('修改失败');
             break;
           }
           default: {

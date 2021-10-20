@@ -25,7 +25,7 @@
           </div><!-- /.comment-one -->
           <div class="comment-one__single" v-for="item in lists">
             <div class="comment-one__image">
-              <img :src="item.image" alt="">
+              <img :src="image_base+item.image" alt="">
             </div><!-- /.comment-one__image -->
             <div class="comment-one__content" @click="view(item)">
               <h3>
@@ -53,7 +53,7 @@
               <div class="sidebar__post-wrap">
                 <div class="sidebar__post__single" v-for="item in hots">
                   <div class="sidebar__post-image">
-                    <div class="inner-block"><img :src="item.image" alt=""></div>
+                    <div class="inner-block"><img :src="image_base+item.image" alt=""></div>
                     <!-- /.inner-block -->
                   </div><!-- /.sidebar__post-image -->
                   <nuxt-link :to="{name:'view', query:{type:type, filename:item.filename}}">
@@ -95,8 +95,8 @@
         </div><!-- /.col-lg-4 -->
       </div><!-- /.row -->
     </div><!-- /.container -->
-    <HeaderArea ref="header" :type="type" :btn_more="true"/>
-    <PagesList :type="type" @change_page="change_page"/>
+    <HeaderArea ref="header" :type="type" :btn_more="true" @reload_page="reload_page"/>
+    <PagesList ref="page" :type="type" @change_page="change_page"/>
   </section>
 </template>
 
@@ -114,6 +114,7 @@ export default {
       type: 'news',
       lists: [],
       hots: [],
+      image_base: this.$store.state.image_base + 'header/'
     }
   },
   mounted() {
@@ -178,6 +179,9 @@ export default {
     },
     view(item) {
       this.$refs.header.view(item);
+    },
+    reload_page() {
+      this.$refs.page.$change_page(-2);
     }
   }
 }

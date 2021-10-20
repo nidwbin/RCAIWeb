@@ -71,8 +71,8 @@ class LoginOP:
 
     @staticmethod
     def set_admin(username, password):
-        password = make_password(password)
         try:
+            password = make_password(password)
             user = Admin.objects.filter(name=username).first()
             if user:
                 user.password = password
@@ -88,8 +88,8 @@ class LoginOP:
 class ImageOP:
     @staticmethod
     def add_image(image, filename):
-        image_name = str(uuid.uuid4()) + os.path.splitext(image.name)[1]
         try:
+            image_name = str(uuid.uuid4()) + os.path.splitext(image.name)[1]
             image = Image(filename=filename, image_name=image_name, image=image)
             image.image.name = image_name
             image.save()
@@ -100,8 +100,8 @@ class ImageOP:
 
     @staticmethod
     def delete_image(name):
-        image = Image.objects.get(image_name=name)
         try:
+            image = Image.objects.get(image_name=name)
             image.image.delete()
             image.delete()
             return True
@@ -164,6 +164,21 @@ class HeaderOP:
             print(e)
         return False
 
+    def delete(self, filename: str):
+        try:
+            item = self.Obj.objects.get(filename=filename)
+            item.img.delete()
+            item.text_file.delete()
+            item.delete()
+            items = Image.objects.filter(filename=filename)
+            for i in items:
+                i.image.delete()
+                i.delete()
+            return True
+        except Exception as e:
+            print(e)
+        return False
+
     def count(self, admin: bool = False, pages: int = 10):
         try:
             items = self.Obj.objects.filter() if admin else self.Obj.objects.filter(show=True)
@@ -173,7 +188,7 @@ class HeaderOP:
             print(e)
         return False
 
-    def search_items(self, admin: bool = False, page: int = 1):
+    def get_items(self, admin: bool = False, page: int = 1):
         try:
             items = self.Obj.objects.filter() if admin else self.Obj.objects.filter(show=True)
             items = items.order_by('-date')[(page - 1) * 10:page * 10]
@@ -182,7 +197,7 @@ class HeaderOP:
             print(e)
         return False
 
-    def search_hots(self, tops: int = 5):
+    def get_hots(self, tops: int = 5):
         try:
             items = self.Obj.objects.filter(show=True).order_by('-date')[:tops]
             return HeaderOP.__get_list__(items)
@@ -190,10 +205,31 @@ class HeaderOP:
             print(e)
         return False
 
-    def search_item(self, filename: str):
+    def get_item(self, filename: str):
         try:
             item = self.Obj.objects.get(filename=filename)
             return HeaderOP.__get_dict__(item)
+        except Exception as e:
+            print(e)
+        return False
+
+    def set_header(self, filename: str, date: str, title: str, overview: str, show: bool, image):
+        try:
+            item = self.Obj.objects.get(filename=filename)
+            item.show = show
+            item.date = date
+            item.overview = overview
+            item.title = title
+            if image:
+                image_name = str(uuid.uuid4()) + os.path.splitext(image.name)[1]
+                item.img.delete()
+                item.img_name = image_name
+                item.img = image
+                item.img.name = image_name
+            else:
+                image_name = item.img_name
+            item.save()
+            return image_name
         except Exception as e:
             print(e)
         return False

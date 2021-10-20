@@ -73,7 +73,7 @@ export default {
       text: '哎呀！出错了╮(￣▽￣)╭',
       images: {},
       images_saved: {},
-      image_base: 'http://localhost:8000/media/images/body/',
+      image_base: this.$store.state.image_base + 'body/',
     };
   },
   computed: {

@@ -78,6 +78,9 @@ export default {
     $change_page(page) {
       if (page !== this.pages.active) {
         switch (page) {
+          case -2: {
+            break;
+          }
           case -1: {
             this.pages.active = this.pages.active - 1;
             break;
@@ -93,7 +96,7 @@ export default {
         this.$emit('change_page', this.pages.active);
       }
     },
-  }
+  },
 }
 </script>
 

@@ -56,22 +56,20 @@ class List(View):
 
         if view_type == 'news':
             if filetype == 'pages':
-                ans = newsOP.count(admin=request.GET.get('admin'), pages=int(request.GET.get('per_page')))
+                ans = newsOP.count(admin=request.GET.get('admin') == 'true', pages=int(request.GET.get('per_page')))
             elif filetype == 'lists':
-                ans = newsOP.search_items(admin=request.GET.get('admin'), page=int(request.GET.get('page')))
+                ans = newsOP.get_items(admin=request.GET.get('admin') == 'true', page=int(request.GET.get('page')))
             elif filetype == 'hots':
-                ans = newsOP.search_hots(tops=int(request.GET.get('len')))
+                ans = newsOP.get_hots(tops=int(request.GET.get('len')))
             elif filetype == 'item':
-                ans = newsOP.search_item(filename=request.GET.get('filename'))
+                ans = newsOP.get_item(filename=request.GET.get('filename'))
         elif view_type == 'papers':
             if filetype == 'pages':
-                ans = papersOP.count(admin=request.GET.get('admin'), pages=int(request.GET.get('per_page')))
+                ans = papersOP.count(admin=request.GET.get('admin') == 'true', pages=int(request.GET.get('per_page')))
             elif filetype == 'papers':
-                ans = papersOP.search_items(admin=request.GET.get('admin'), page=int(request.GET.get('page')))
+                ans = papersOP.get_items(admin=request.GET.get('admin') == 'true', page=int(request.GET.get('page')))
             elif filetype == 'books':
                 pass
-        elif view_type == '':
-            pass
 
         if ans:
             return authority.get_response(request, JsonResponse({'message': 'success', 'content': ans}))
@@ -90,18 +88,26 @@ class List(View):
                     if filename == 'new':
                         ans = newsOP.create()
                     else:
-                        return authority.get_response(request, JsonResponse(
-                            {'message': 'success', 'content': '/static/images/logo.png'}))
+                        ans = newsOP.set_header(filename, request.POST.get('date'), request.POST.get('title'),
+                                                request.POST.get('overview'), request.POST.get('show') == 'true',
+                                                request.FILES.get('image'))
             elif view_type == 'papers':
                 pass
-
             if ans:
                 return authority.get_response(request, JsonResponse({'message': 'success', 'content': ans}))
         return authority.get_response(request, JsonResponse({'message': 'error'}))
 
     def delete(self, request):
         if authority.check_pass(request) or settings.DEBUG:
-            pass
+            view_type = request.GET.get('type')
+            filetype = request.GET.get('filetype')
+            filename = request.GET.get('filename')
+            ans = False
+            if view_type == 'news':
+                if filetype == 'item':
+                    ans = newsOP.delete(filename)
+            if ans:
+                return authority.get_response(request, JsonResponse({'message': 'success'}))
         return authority.get_response(request, JsonResponse({'message': 'error'}))
 
 

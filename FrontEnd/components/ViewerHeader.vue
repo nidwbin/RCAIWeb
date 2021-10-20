@@ -20,7 +20,7 @@
         <img src="/static/images/page-shadow.png" alt="">
       </div>
     </div>
-    <HeaderArea ref="header" :type="type" :btn_more="false"/>
+    <HeaderArea ref="header" :type="type" :btn_more="false" @reload_page="reload_page"/>
   </div>
 </template>
 
@@ -79,6 +79,9 @@ export default {
   methods: {
     view() {
       this.$refs.header.view(this.viewing);
+    },
+    reload_page() {
+      this.$router.back();
     }
   },
 }

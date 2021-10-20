@@ -14,7 +14,7 @@ class Header(models.Model):
     overview = models.CharField(max_length=100, verbose_name="简述", default="点击开始新建条目")
     filename = models.CharField(max_length=50, null=True, blank=True, verbose_name="文件名")
     img = models.ImageField(upload_to='images/header')  # 封面图片
-    img_name = models.CharField(max_length=50, verbose_name="图片名", default="/static/images/default/header.png")
+    img_name = models.CharField(max_length=50, verbose_name="图片名", default="header.png")
     date = models.CharField(max_length=50, verbose_name="日期", default='XXXX-XX-XX')  # 日期
     show = models.BooleanField(blank=True, default=False)
 
