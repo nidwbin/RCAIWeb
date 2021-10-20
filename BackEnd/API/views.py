@@ -14,6 +14,8 @@ from django.conf import settings
 from API.function import Authority, LoginOP, NewsOP, PapersOP
 
 authority = Authority()
+newsOP = NewsOP()
+papersOP = PapersOP()
 
 
 # Create your views here.
@@ -49,54 +51,52 @@ class Login(View):
 class List(View):
     def get(self, request):
         view_type = request.GET.get('type')
-        filename = request.GET.get('filename')
         filetype = request.GET.get('filetype')
-        content = request.GET.get('content')
-        ans = [{'title': "这是一条新闻", 'image': "/static/images/logo.png", 'date': "2021-09-10", 'filename': "1",
-                'show': True, 'overview': "这是一条新闻"},
-               {'title': "这是一条新闻1", 'image': "/static/images/logo.png", 'date': "2021-09-11", 'filename': "2",
-                'show': True, 'overview': "这是一条新闻"},
-               {'title': "这是一条新闻2", 'image': "/static/images/logo.png", 'date': "2021-09-12", 'filename': "3",
-                'show': True, 'overview': "这是一条新闻"},
-               {'title': "这是一条新闻3", 'image': "/static/images/logo.png", 'date': "2021-09-13", 'filename': "4",
-                'show': True, 'overview': "这是一条新闻"}, ]
+        ans = False
+
         if view_type == 'news':
             if filetype == 'pages':
-                return authority.get_response(request, JsonResponse({'message': 'success', 'content': NewsOP.count(True,10)}))
+                ans = newsOP.count(admin=request.GET.get('admin'), pages=int(request.GET.get('per_page')))
             elif filetype == 'lists':
-                ans = NewsOP.search_news(True,1)
-                return authority.get_response(request, JsonResponse({'message': 'success', 'content': ans}))
+                ans = newsOP.search_items(admin=request.GET.get('admin'), page=int(request.GET.get('page')))
             elif filetype == 'hots':
-                ans = NewsOP.search_hots(5)
-                return authority.get_response(request, JsonResponse({'message': 'success', 'content': ans}))
+                ans = newsOP.search_hots(tops=int(request.GET.get('len')))
             elif filetype == 'item':
-                ans = NewsOP.search_item(filename)
-                return authority.get_response(request, JsonResponse({'message': 'success', 'content': ans}))
+                ans = newsOP.search_item(filename=request.GET.get('filename'))
         elif view_type == 'papers':
             if filetype == 'pages':
-                pass
+                ans = papersOP.count(admin=request.GET.get('admin'), pages=int(request.GET.get('per_page')))
             elif filetype == 'papers':
-                pass
+                ans = papersOP.search_items(admin=request.GET.get('admin'), page=int(request.GET.get('page')))
             elif filetype == 'books':
                 pass
         elif view_type == '':
             pass
-        return authority.get_response(request, JsonResponse({'message': 'error'}))
+
+        if ans:
+            return authority.get_response(request, JsonResponse({'message': 'success', 'content': ans}))
+        else:
+            return authority.get_response(request, JsonResponse({'message': 'error'}))
 
     def post(self, request):
         if authority.check_pass(request) or settings.DEBUG:
             view_type = request.POST.get('type')
             filename = request.POST.get('filename')
             filetype = request.POST.get('filetype')
-            content = request.POST.get('content')
+
+            ans = False
             if view_type == 'news':
                 if filetype == 'item':
                     if filename == 'new':
-                        return authority.get_response(request, JsonResponse({'message': 'success', 'content': '1'}))
+                        ans = newsOP.create()
                     else:
-                        pass
+                        return authority.get_response(request, JsonResponse(
+                            {'message': 'success', 'content': '/static/images/logo.png'}))
             elif view_type == 'papers':
                 pass
+
+            if ans:
+                return authority.get_response(request, JsonResponse({'message': 'success', 'content': ans}))
         return authority.get_response(request, JsonResponse({'message': 'error'}))
 
     def delete(self, request):
@@ -110,13 +110,17 @@ class File(View):
         view_type = request.GET.get('type')
         filetype = request.GET.get('filetype')
         filename = request.GET.get('filename')
+        ans = False
         if view_type == 'news':
-            pass
-            return authority.get_response(request, JsonResponse({'message': 'success', 'content': '# ok'}))
+            if filetype == 'markdown':
+                ans = newsOP.read_file(filename)
         elif view_type == 'papers':
             pass
             return authority.get_response(request, JsonResponse({'message': 'success', 'content': '# ok'}))
-        return authority.get_response(request, JsonResponse({'message': 'error'}))
+        if ans is not False:
+            return authority.get_response(request, JsonResponse({'message': 'success', 'content': ans}))
+        else:
+            return authority.get_response(request, JsonResponse({'message': 'error'}))
 
     def post(self, request):
         if authority.check_pass(request) or settings.DEBUG:
@@ -129,7 +133,7 @@ class File(View):
                 content = request.POST.get('content')
 
             if view_type == 'news' or view_type == 'papers':
-                OP = NewsOP if view_type == 'news' else PapersOP
+                OP = newsOP if view_type == 'news' else papersOP
                 if filetype == 'image':
                     image_name = OP.add_image(content, filename)
                     if image_name:
@@ -137,7 +141,8 @@ class File(View):
                                                       JsonResponse({'message': 'success', 'content': image_name}))
                 elif filetype == 'markdown':
                     return authority.get_response(request,
-                                                  JsonResponse({'message': 'success' if OP.change_file(filename, content) else 'error'}))
+                                                  JsonResponse({'message': 'success' if OP.change_file(filename,
+                                                                                                       content) else 'error'}))
         return authority.get_response(request, JsonResponse({'message': 'error'}))
 
     def delete(self, request):
@@ -149,5 +154,6 @@ class File(View):
                 OP = NewsOP if view_type == 'news' else PapersOP
                 if filetype == 'image':
                     return authority.get_response(request,
-                                                  JsonResponse({'message': 'success' if OP.delete_image(image_name) else 'error'}))
+                                                  JsonResponse({'message': 'success' if OP.delete_image(
+                                                      image_name) else 'error'}))
         return authority.get_response(request, JsonResponse({'message': 'error'}))

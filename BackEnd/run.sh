@@ -3,4 +3,4 @@ pip install -r ./requirements.txt
 python manage.py makemigrations
 python manage.py migrate
 uwsgi --ini uwsgi.ini
-tail -f /dev/nul
+tail -f /dev/null

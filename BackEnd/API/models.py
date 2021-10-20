@@ -10,29 +10,30 @@ class Admin(models.Model):
 
 
 class Header(models.Model):
-    title = models.CharField(max_length=50, verbose_name="标题")
-    overview = models.CharField(max_length=100, verbose_name="简述")
+    title = models.CharField(max_length=50, verbose_name="标题", default="新建条目")
+    overview = models.CharField(max_length=100, verbose_name="简述", default="点击开始新建条目")
     filename = models.CharField(max_length=50, null=True, blank=True, verbose_name="文件名")
-    img = models.ImageField(upload_to='media')  # 封面图片
-    date = models.CharField(max_length=50, verbose_name="日期")  # 日期
+    img = models.ImageField(upload_to='images/header')  # 封面图片
+    img_name = models.CharField(max_length=50, verbose_name="图片名", default="/static/images/default/header.png")
+    date = models.CharField(max_length=50, verbose_name="日期", default='XXXX-XX-XX')  # 日期
+    show = models.BooleanField(blank=True, default=False)
 
     class Meta:
         abstract = True
 
 
 class News(Header):
-    text_file = models.FileField(upload_to='upload/news')  # 文件
-    show = models.BooleanField(blank=True)
+    text_file = models.FileField(upload_to='markdown/news')  # 文件
 
 
 class Papers(Header):
-    text_file = models.FileField(upload_to='upload/papers')  # 文件
+    text_file = models.FileField(upload_to='markdown/papers')  # 文件
 
 
 class Image(models.Model):
     filename = models.CharField(max_length=50, verbose_name="文件名")
     image_name = models.CharField(max_length=50, verbose_name="图片名")
-    image = models.ImageField(upload_to='media/images')  # 图片
+    image = models.ImageField(upload_to='images/body')  # 图片
 
 
 class Achievements(models.Model):

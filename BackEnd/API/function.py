@@ -11,6 +11,7 @@ import os
 import uuid
 import math
 
+from django.core.files.base import ContentFile
 from django.contrib.auth.hashers import make_password, check_password
 from API.models import Admin, Image, News, Papers
 from django.conf import settings
@@ -61,11 +62,12 @@ class Authority:
 class LoginOP:
     @staticmethod
     def check_admin(username, password):
-        user = Admin.objects.filter(name=username).first()
-        if user:
-            return check_password(password, user.password)
-        else:
-            return False
+        try:
+            user = Admin.objects.filter(name=username).first()
+            return check_password(password, user.password) if user else False
+        except Exception as e:
+            print(e)
+        return False
 
     @staticmethod
     def set_admin(username, password):
@@ -88,8 +90,9 @@ class ImageOP:
     def add_image(image, filename):
         image_name = str(uuid.uuid4()) + os.path.splitext(image.name)[1]
         try:
-            i = Image(filename=filename, image_name=image_name, image=image)
-            i.save()
+            image = Image(filename=filename, image_name=image_name, image=image)
+            image.image.name = image_name
+            image.save()
             return image_name
         except Exception as e:
             print(e)
@@ -107,117 +110,100 @@ class ImageOP:
         return False
 
 
-class NewsOP(ImageOP):
+class HeaderOP:
+
     @staticmethod
-    def change_file(filename, content):
+    def __get_dict__(item):
+        ret_dict = {'title': item.title, 'image': item.img_name, 'date': item.date, 'filename': item.filename,
+                    'show': item.show, 'overview': item.overview}
+        return ret_dict.copy()
+
+    @staticmethod
+    def __get_list__(items):
+        ret_list = []
+        for i in items:
+            ret_list.append(HeaderOP.__get_dict__(i))
+        return ret_list.copy()
+
+    def __init__(self, obj):
+        self.Obj = obj
+
+    def change_file(self, filename: str, content: str):
         try:
-<<<<<<< HEAD
-<<<<<<< HEAD
-            news = News.objects.get(filename = filename)
-=======
-            news = News.objects.get(filename=filename)
->>>>>>> fb89fde3f6baf227940a40ad9e54dec3e10ded40
-=======
-            news = News.objects.get(filename = filename)
->>>>>>> zxy
-            news.text_file = content
-            news.save()
+            items = self.Obj.objects.get(filename=filename)
+            with items.text_file.open(mode='w') as file:
+                file.write(content)
+            images = Image.objects.filter(filename=filename)
+            for i in images:
+                image_name = i.image_name
+                if image_name not in content:
+                    i.image.delete()
+                    i.delete()
             return True
         except Exception as e:
             print(e)
         return False
 
-    @staticmethod
-    def create():
+    def read_file(self, filename: str):
         try:
-<<<<<<< HEAD
-<<<<<<< HEAD
-            news = News(title="新建条目", date="xxxx-xx-xx", overview="点击开始新建条目", filename=str(uuid.uuid4()) + ".md")
-=======
-            news = News(title="新建条目", date="XXXX-XX-XX",overview="点击开始新建条目",filename=str(uuid.uuid4()) + ".md")
->>>>>>> fb89fde3f6baf227940a40ad9e54dec3e10ded40
-=======
-            news = News(title="新建条目", date="xxxx-xx-xx", overview="点击开始新建条目", filename=str(uuid.uuid4()) + ".md")
->>>>>>> zxy
-            news.save()
-            return news.filename
+            news = self.Obj.objects.get(filename=filename)
+            with news.text_file.open(mode='r') as file:
+                content = file.read()
+            return content
         except Exception as e:
             print(e)
         return False
 
-    @staticmethod
-    def count(show,pages):
+    def create(self):
         try:
-            news = News.objects.filter(show=True) if show else News.objects.filter()
-            len = math.ceil(len(news)/pages)
-            return len
+            filename = str(uuid.uuid4()) + ".md"
+            item = self.Obj(filename=filename)
+            item.text_file.save(name=filename, content=ContentFile(''))
+            return filename
         except Exception as e:
             print(e)
         return False
 
-    @staticmethod
-    def search_news(show,page):
+    def count(self, admin: bool = False, pages: int = 10):
         try:
-            news = News.objects.filter(show=True).order_by('-date')[(page-1)*10:page*10] if show else News.objects.filter()
-            list = []
-            dict = {}
-            for i in news:
-                dict['title'] = i.title
-                dict['image'] = i.img
-                dict['date'] = i.date
-                dict['filename'] = i.filename
-                dict['show'] = i.show
-                dict['overview'] = i.overview
-                list.append(dict)
-            return list
+            items = self.Obj.objects.filter() if admin else self.Obj.objects.filter(show=True)
+            length = math.ceil(len(items) / pages)
+            return length
         except Exception as e:
             print(e)
         return False
 
-    @staticmethod
-    def search_hots(num):
+    def search_items(self, admin: bool = False, page: int = 1):
         try:
-            news = News.objects.filter(show=True).order_by('-date')[:num]
-            list = []
-            dict = {}
-            for i in news:
-                dict['title'] = i.title
-                dict['image'] = i.img
-                dict['date'] = i.date
-                dict['filename'] = i.filename
-                dict['show'] = i.show
-                dict['overview'] = i.overview
-                list.append(dict)
-            return list
+            items = self.Obj.objects.filter() if admin else self.Obj.objects.filter(show=True)
+            items = items.order_by('-date')[(page - 1) * 10:page * 10]
+            return HeaderOP.__get_list__(items)
         except Exception as e:
             print(e)
         return False
 
-    def search_item(filename):
+    def search_hots(self, tops: int = 5):
         try:
-            news = News.objects.get(filename=filename)
-            list = []
-            dict = {}
-            dict['title'] = news.title
-            dict['image'] = news.img
-            dict['date'] = news.date
-            dict['filename'] = news.filename
-            dict['show'] = news.show
-            dict['overview'] = news.overview
-            list.append(dict)
-            return list
+            items = self.Obj.objects.filter(show=True).order_by('-date')[:tops]
+            return HeaderOP.__get_list__(items)
         except Exception as e:
             print(e)
         return False
 
-class PapersOP(ImageOP):
-    @staticmethod
-    def change_file(filename, content):
+    def search_item(self, filename: str):
         try:
-            papers = Papers.objects.get(filename=filename)
-            papers.text_file = content
-            papers.save()
-            return True
+            item = self.Obj.objects.get(filename=filename)
+            return HeaderOP.__get_dict__(item)
         except Exception as e:
             print(e)
         return False
+
+
+class NewsOP(ImageOP, HeaderOP):
+    def __init__(self):
+        super(NewsOP, self).__init__(obj=News)
+
+
+class PapersOP(ImageOP, HeaderOP):
+    def __init__(self):
+        super(PapersOP, self).__init__(obj=Papers)
