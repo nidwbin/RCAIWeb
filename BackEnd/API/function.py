@@ -102,8 +102,8 @@ class ImageOP:
     def delete_image(image_name: str):
         try:
             image = Image.objects.get(image_name=image_name)
-            image.image.delete_header()
-            image.delete_header()
+            image.image.delete()
+            image.delete()
             return True
         except Exception as e:
             print(e)
@@ -114,8 +114,8 @@ class ImageOP:
         try:
             items = Image.objects.filter(filename=filename)
             for i in items:
-                i.image.delete_header()
-                i.delete_header()
+                i.image.delete()
+                i.delete()
             return True
         except Exception as e:
             print(e)
@@ -127,8 +127,8 @@ class ImageOP:
             for i in images:
                 image_name = i.image_name
                 if image_name not in string:
-                    i.image.delete_header()
-                    i.delete_header()
+                    i.image.delete()
+                    i.delete()
             return True
         except Exception as e:
             print(e)
@@ -139,7 +139,7 @@ class HeaderOP:
 
     @staticmethod
     def __get_dict__(item):
-        ret_dict = {'title': item.title, 'image': item.img_name, 'date': item.date, 'filename': item.filename,
+        ret_dict = {'title': item.title, 'image': item.image_name, 'date': item.date, 'filename': item.filename,
                     'show': item.show, 'overview': item.overview}
         return ret_dict.copy()
 
@@ -186,13 +186,9 @@ class HeaderOP:
     def delete_header(self, filename: str):
         try:
             item = self.Obj.objects.get(filename=filename)
-            item.img.delete_header()
-            item.text_file.delete_header()
-            item.delete_header()
-            items = Image.objects.filter(filename=filename)
-            for i in items:
-                i.image.delete_header()
-                i.delete_header()
+            item.image.delete()
+            item.text_file.delete()
+            item.delete()
             return True
         except Exception as e:
             print(e)
@@ -241,12 +237,12 @@ class HeaderOP:
             item.title = title
             if image:
                 image_name = str(uuid.uuid4()) + os.path.splitext(image.name)[1]
-                item.img.delete_header()
-                item.img_name = image_name
-                item.img = image
-                item.img.name = image_name
+                item.image.delete()
+                item.image_name = image_name
+                item.image = image
+                item.image.name = image_name
             else:
-                image_name = item.img_name
+                image_name = item.image_name
             item.save()
             return image_name
         except Exception as e:
