@@ -71,7 +71,7 @@ class List(View):
             elif filetype == 'books':
                 pass
 
-        if ans:
+        if ans is not False:
             return authority.get_response(request, JsonResponse({'message': 'success', 'content': ans}))
         else:
             return authority.get_response(request, JsonResponse({'message': 'error'}))
@@ -106,7 +106,7 @@ class List(View):
             if view_type == 'news':
                 if filetype == 'item':
                     ans = newsOP.delete(filename)
-            if ans:
+            if ans is not False:
                 return authority.get_response(request, JsonResponse({'message': 'success'}))
         return authority.get_response(request, JsonResponse({'message': 'error'}))
 
