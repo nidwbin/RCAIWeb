@@ -19,13 +19,17 @@ from django.conf import settings
 
 class Authority:
     deadline = {}
-    visitor = 'Visitor'
+    chain = {}
 
     @staticmethod
     def __gen_key__(now_time, delay=15):
         deadline = now_time + datetime.timedelta(minutes=delay)
         key = hashlib.sha256(str(now_time).encode('utf-8')).hexdigest()
         return deadline, key
+
+    @staticmethod
+    def __get_key__(request):
+        return request.headers['key'] if 'key' in request.headers else 'Visitor'
 
     def __check_pass__(self, now_time, request):
         if 'key' in request.headers:
@@ -34,20 +38,26 @@ class Authority:
         else:
             return False
 
-    def __set_key__(self, deadline, key, response):
-        if key != self.visitor:
+    def __set_key__(self, deadline, key, response, request):
+        if key != 'Visitor' and key not in self.chain:
             self.deadline[key] = deadline
+            self.chain[self.__get_key__(request)] = key
         response['key'] = key
 
     def __check_key__(self, request, response, keep=True, put=False):
         now_time = datetime.datetime.now()
         if put or (keep and self.__check_pass__(now_time, request)):
-            deadline, key = self.__gen_key__(now_time)
-            self.__set_key__(deadline, key, response)
+            key = self.__get_key__(request)
+            if key in self.chain:
+                key = self.chain[key]
+                deadline = self.deadline[key]
+            else:
+                deadline, key = self.__gen_key__(now_time)
+            self.__set_key__(deadline, key, response, request)
         else:
             if self.deadline:
                 self.deadline.clear()
-            self.__set_key__(now_time, self.visitor, response)
+            self.__set_key__(now_time, 'Visitor', response, request)
 
     def check_pass(self, request):
         now_time = datetime.datetime.now()
