@@ -25,8 +25,8 @@ mkdir -p $workdir/nginx/ssl
 echo "Ok!"
 
 echo "Moving files..."
-cp -ar $workdir/git/BackEnd/ $workdir/django/
-cp -ar $workdir/git/FrontEnd/ $workdir/nuxt/
+cp -ar $workdir/git/BackEnd/* $workdir/django/
+cp -ar $workdir/git/FrontEnd/* $workdir/nuxt/
 cp -ar $workdir/git/Config/mysql/* $workdir/mysql/
 cp -ar $workdir/git/Config/nginx/* $workdir/nginx/
 
