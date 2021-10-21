@@ -1,6 +1,7 @@
 export const state = () => ({
-  admin: true,
-  debug: true,
+  admin: false,
+  debug: false,
+  image_base: 'http://localhost:8000/media/images/',
 });
 
 export const mutations = {

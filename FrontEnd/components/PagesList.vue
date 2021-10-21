@@ -41,7 +41,7 @@ export default {
     return {
       pages: {
         active: 1,
-        page_list: [1, 2],
+        page_list: [1],
       },
     }
   },
@@ -54,7 +54,7 @@ export default {
     }
   },
   mounted() {
-    this.get('/list/', {type: this.type, filename: 'pages', filetype: this.admin, content: 10},
+    this.get('/list/', {type: this.type, filetype: 'pages', admin: this.admin, per_page: 10},
       data => {
         switch (data['message']) {
           case 'success': {
@@ -78,6 +78,9 @@ export default {
     $change_page(page) {
       if (page !== this.pages.active) {
         switch (page) {
+          case -2: {
+            break;
+          }
           case -1: {
             this.pages.active = this.pages.active - 1;
             break;
@@ -93,7 +96,7 @@ export default {
         this.$emit('change_page', this.pages.active);
       }
     },
-  }
+  },
 }
 </script>
 

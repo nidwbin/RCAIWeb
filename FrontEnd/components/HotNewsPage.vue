@@ -18,14 +18,14 @@
         </div>
         <div class="row client-active">
           <swiper :options="swiperOptions">
-            <swiper-slide v-for="item in items" :key="item.file">
+            <swiper-slide v-for="item in hots">
               <div class="client-item mt-30">
                 <div class="shape">
                   <img src="/static/images/shape/shape-4.png" alt="shape">
                 </div>
                 <div class="user">
                   <div class="user-thumb">
-                    <img :src="item.image" alt="new">
+                    <img :src="image_base+item.image" alt="new">
                     <i class="fa fa-quote-left"></i>
                   </div>
                   <h5 class="title">
@@ -44,24 +44,29 @@
         </div>
       </div>
     </div>
-<!--    <div class="client-shape animated wow fadeInLeft" data-wow-duration="1500ms" data-wow-delay="0ms">-->
-<!--      <img src="/static/images/shape/shape-7.png" alt="">-->
-<!--    </div>-->
+    <!--    <div class="client-shape animated wow fadeInLeft" data-wow-duration="1500ms" data-wow-delay="0ms">-->
+    <!--      <img src="/static/images/shape/shape-7.png" alt="">-->
+    <!--    </div>-->
   </section>
 </template>
 
 <script>
 import {Swiper, SwiperSlide, directive} from 'vue-awesome-swiper';
+import Functions from "./Functions";
 import 'swiper/css/swiper.css';
 
 export default {
   name: "HotNewsPage",
+  mixins: [Functions],
   components: {
     Swiper,
     SwiperSlide
   },
   directives: {
     swiper: directive
+  },
+  mounted() {
+    this.load_data(5);
   },
   data() {
     return {
@@ -91,17 +96,27 @@ export default {
         }
       },
       type: 'news',
-      items: [
-        {title: "这是一条新闻", image: "/static/images/logo.png", date: "2021/9/10", filename: "1", overview: "新闻概览"},
-        {title: "这是一条新闻", image: "/static/images/logo.png", date: "2021/9/10", filename: "2", overview: "新闻概览"},
-        {title: "这是一条新闻", image: "/static/images/logo.png", date: "2021/9/10", filename: "3", overview: "新闻概览"},
-        {title: "这是一条新闻", image: "/static/images/logo.png", date: "2021/9/10", filename: "3", overview: "新闻概览"},
-        {title: "这是一条新闻", image: "/static/images/logo.png", date: "2021/9/10", filename: "3", overview: "新闻概览"},
-        {title: "这是一条新闻", image: "/static/images/logo.png", date: "2021/9/10", filename: "3", overview: "新闻概览"},
-        {title: "这是一条新闻", image: "/static/images/logo.png", date: "2021/9/10", filename: "3", overview: "新闻概览"},
-        {title: "这是一条新闻", image: "/static/images/logo.png", date: "2021/9/10", filename: "3", overview: "新闻概览"},
-        {title: "这是一条新闻", image: "/static/images/logo.png", date: "2021/9/10", filename: "3", overview: "新闻概览"},
-      ],
+      hots: [],
+      image_base: this.$store.state.image_base + 'header/',
+    }
+  },
+  methods: {
+    load_data(len) {
+      this.get('/list/', {type: this.type, filetype: 'hots', len: len},
+        data => {
+          switch (data['message']) {
+            case 'success': {
+              this.hots = data['content'];
+              break;
+            }
+            case 'error': {
+              break;
+            }
+            default: {
+              this.$toast.info(data['message']);
+            }
+          }
+        })
     }
   },
 }

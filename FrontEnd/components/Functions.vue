@@ -17,8 +17,11 @@ export default {
 
     get(url = null, data = null, func = undefined) {
       if (process.client && url !== null && data !== null && func !== undefined && this.ready()) {
-        this.$axios.get(url, {params: data}).then(response => func(response.data)
-        ).catch(() => {
+        return this.$axios.get(url, {params: data}).then(response => func(response.data)
+        ).catch(error => {
+          if (this.$store.state.debug) {
+            console.log('get error', error);
+          }
           this.$toast.error('网络错误');
         });
       } else {
@@ -31,7 +34,10 @@ export default {
 
     post(url = null, data = null, func = undefined) {
       if (process.client && url !== null && data !== null && func !== undefined && this.ready()) {
-        this.$axios.post(url, data).then(response => func(response.data)).catch(() => {
+        return this.$axios.post(url, data).then(response => func(response.data)).catch(error => {
+          if (this.$store.state.debug) {
+            console.log('post error', error);
+          }
           this.$toast.error('网络错误');
         });
       } else {
@@ -44,7 +50,10 @@ export default {
 
     delete(url = null, data = null, func = undefined) {
       if (process.client && url !== null && data !== null && func !== undefined && this.ready()) {
-        this.$axios.delete(url, {params: data}).then(response => func(response.data)).catch((error) => {
+        return this.$axios.delete(url, {params: data}).then(response => func(response.data)).catch(error => {
+          if (this.$store.state.debug) {
+            console.log('delete error', error);
+          }
           this.$toast.error('网络错误');
         });
       } else {

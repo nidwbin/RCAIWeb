@@ -1,7 +1,12 @@
 # !/bin/bash
-workdir=/RCAIWeb/
-# mkdir -p $workdir
-# git clone git@github.com:nidwbin/RCAIWeb.git $workdir/git
+workdir=/RCAIWeb
+mkdir -p $workdir
+if [ -d $workdir/git ];then
+    cd $workdir/git
+    git pull origin
+else
+    git clone git@github.com:nidwbin/RCAIWeb.git $workdir/git
+fi
 
 echo "Make dirs..."
 mkdir -p $workdir/django
@@ -20,13 +25,13 @@ mkdir -p $workdir/nginx/ssl
 echo "Ok!"
 
 echo "Moving files..."
-cp -ar $workdir/git/BackEnd/ $workdir/django/
-cp -ar $workdir/git/FrontEnd/ $workdir/nuxt/
+cp -ar $workdir/git/BackEnd/* $workdir/django/
+cp -ar $workdir/git/FrontEnd/* $workdir/nuxt/
 cp -ar $workdir/git/Config/mysql/* $workdir/mysql/
 cp -ar $workdir/git/Config/nginx/* $workdir/nginx/
 
-mv $workdir/django/media/ $workdir/media/
-mv $workdir/nuxt/static/static/ $workdir/static/
+mv $workdir/django/media/ $workdir/
+mv $workdir/nuxt/static/static/ $workdir/
 echo "Ok!"
 
 echo "Start run..."

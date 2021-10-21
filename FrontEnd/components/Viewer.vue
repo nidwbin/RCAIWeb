@@ -73,7 +73,7 @@ export default {
       text: '哎呀！出错了╮(￣▽￣)╭',
       images: {},
       images_saved: {},
-      image_base: '/media/images/',
+      image_base: this.$store.state.image_base + 'body/',
     };
   },
   computed: {
@@ -118,7 +118,7 @@ export default {
       delete this.images[pos];
     },
 
-    process_image_saved(val) {
+    async process_image_saved(val) {
       for (let i in this.images_saved) {
         let url = (this.image_base + this.images_saved[i]);
         let reg_str = "/(!\\[\[^\\[\]*?\\]\(?=\\(\)\)\\(\\s*\(" + url.replace(/\//g, '\\/') + "\)\\s*\\)/g";
@@ -128,7 +128,7 @@ export default {
           if (this.debug) {
             console.log('delete unmatched image', i, this.images_saved[i]);
           }
-          this.delete("/file/", {type: this.type, filetype: 'image', filename: this.images_saved[i],}, data => {
+          await this.delete("/file/", {type: this.type, filetype: 'image', filename: this.images_saved[i],}, data => {
             switch (data['message']) {
               case 'success': {
                 delete this.images_saved[i];
@@ -167,7 +167,7 @@ export default {
       });
     },
 
-    process_image_upload(val) {
+    async process_image_upload(val) {
       for (let i in this.images) {
         let reg_str = "/(!\\[\[^\\[\]*?\\]\(?=\\(\)\)\\(\\s*\(" + i + "\)\\s*\\)/g";
         let reg = eval(reg_str);
@@ -179,9 +179,9 @@ export default {
             let data = new FormData();
             data.append('type', this.type);
             data.append('filetype', 'image');
-            data.append('filename', i);
+            data.append('filename', this.filename);
             data.append('content', this.images[i]);
-            this.post("/file/", data, data => {
+            await this.post("/file/", data, data => {
               switch (data['message']) {
                 case 'success': {
                   this.images_saved[i] = data['content'];
@@ -202,10 +202,8 @@ export default {
           this.del_image(i);
         }
       }
-    }
-    ,
-
-
+      return this.$refs.md.d_value;
+    },
     save(val, render) {
       if (this.debug) {
         console.log('markdown val', val);
@@ -213,11 +211,11 @@ export default {
         console.log('images map', this.images_saved);
       }
 
-      this.process_image_saved(val);
-
-      this.process_markdown(val);
-
-      this.process_image_upload(val);
+      this.process_image_saved(val).then(() => {
+        this.process_image_upload(val).then((value) => {
+          this.process_markdown(value);
+        })
+      });
     }
   },
 };

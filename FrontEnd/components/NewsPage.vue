@@ -23,9 +23,9 @@
               </div><!-- /.comment-one__content -->
             </div><!-- /.comment-one__single -->
           </div><!-- /.comment-one -->
-          <div class="comment-one__single" v-for="item in lists">
+          <div class="comment-one__single" v-for="item in lists" v-if="item.show || admin">
             <div class="comment-one__image">
-              <img :src="item.image" alt="">
+              <img :src="image_base+item.image" alt="">
             </div><!-- /.comment-one__image -->
             <div class="comment-one__content" @click="view(item)">
               <h3>
@@ -53,7 +53,7 @@
               <div class="sidebar__post-wrap">
                 <div class="sidebar__post__single" v-for="item in hots">
                   <div class="sidebar__post-image">
-                    <div class="inner-block"><img :src="item.image" alt=""></div>
+                    <div class="inner-block"><img :src="image_base+item.image" alt=""></div>
                     <!-- /.inner-block -->
                   </div><!-- /.sidebar__post-image -->
                   <nuxt-link :to="{name:'view', query:{type:type, filename:item.filename}}">
@@ -95,6 +95,7 @@
         </div><!-- /.col-lg-4 -->
       </div><!-- /.row -->
     </div><!-- /.container -->
+<<<<<<< HEAD
     <div v-if="modal">
       <div class="modal" v-on:click.self="modal=false">
         <div class="modal-dialog modal-dialog-centered">
@@ -151,25 +152,28 @@
       <div class="modal-backdrop show"></div>
     </div>
     <PagesList :type="type" @change_page="change_page"/>
+=======
+    <HeaderArea ref="header" :type="type" :btn_more="true" @reload_page="reload_page"/>
+    <PagesList ref="page" :type="type" @change_page="change_page"/>
+>>>>>>> dev
   </section>
 </template>
 
 <script>
 import PagesList from "./PagesList";
 import Functions from "./Functions";
+import HeaderArea from "./HeaderArea";
 
 export default {
   name: "NewsList",
   mixins: [Functions],
-  components: {PagesList},
+  components: {PagesList, HeaderArea},
   data() {
     return {
       type: 'news',
       lists: [],
       hots: [],
-      modal: false,
-      viewing: null,
-      viewing_edit: null,
+      image_base: this.$store.state.image_base + 'header/'
     }
   },
   mounted() {
@@ -183,7 +187,7 @@ export default {
   },
   methods: {
     change_page(page) {
-      this.get('/list/', {type: this.type, filetype: 'lists', filename: this.admin, content: page},
+      this.get('/list/', {type: this.type, filetype: 'lists', admin: this.admin, page: page},
         data => {
           switch (data['message']) {
             case 'success': {
@@ -200,7 +204,7 @@ export default {
         })
     },
     hot_list(len) {
-      this.get('/list/', {type: this.type, filetype: 'hots', filename: this.admin, content: len},
+      this.get('/list/', {type: this.type, filetype: 'hots', len: len},
         data => {
           switch (data['message']) {
             case 'success': {
@@ -216,52 +220,32 @@ export default {
           }
         })
     },
-    view(item) {
-      if (this.admin) {
-        this.viewing=item;
-        this.viewing_edit=JSON.parse(JSON.stringify(item));
-        this.modal = true;
-      } else {
-        this.$router.push({name: 'view', query: {type: this.type, filename: this.viewing.filename}});
-      }
-    },
-    more() {
-      this.$router.push({name: 'view', query: {type: this.type, filename: this.viewing.filename}});
-    },
-    edit() {
-      this.viewing.images=this.viewing_edit.images;
-      this.viewing.date=this.viewing_edit.date;
-      this.viewing.show=this.viewing_edit.show;
-      this.viewing.title=this.viewing_edit.title;
-      this.viewing.overview=this.viewing_edit.overview;
-      this.modal = false;
-    },
-    remove() {
-      this.modal = false;
-    },
-    new_item(){
-      this.post('/list/',{type:this.type,filetype:'item',filename:'new',content:''},data=>{
-        switch (data['message']){
-          case 'success':{
+    new_item() {
+      this.post('/list/', {type: this.type, filetype: 'item', filename: 'new'}, data => {
+        switch (data['message']) {
+          case 'success': {
             this.$router.push({name: 'view', query: {type: this.type, filename: data['content']}});
             break;
           }
-          case 'error':{
+          case 'error': {
             break;
           }
-          default:{
+          default: {
             this.$toast.info(data['message']);
           }
         }
       })
-
+    },
+    view(item) {
+      this.$refs.header.view(item);
+    },
+    reload_page() {
+      this.$refs.page.$change_page(-2);
     }
   }
 }
 </script>
 
 <style scoped>
-.modal {
-  display: block;
-}
+
 </style>
