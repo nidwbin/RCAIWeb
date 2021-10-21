@@ -57,6 +57,8 @@ class Authority:
         else:
             if self.deadline:
                 self.deadline.clear()
+            if self.chain:
+                self.chain.clear()
             self.__set_key__(now_time, 'Visitor', response, request)
 
     def check_pass(self, request):

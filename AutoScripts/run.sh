@@ -16,6 +16,7 @@ mkdir -p $workdir/nginx
 mkdir -p $workdir/media
 mkdir -p $workdir/static
 
+mkdir -p $workdir/django/run
 mkdir -p $workdir/mysql/conf.d
 mkdir -p $workdir/mysql/init
 mkdir -p $workdir/mysql/data
