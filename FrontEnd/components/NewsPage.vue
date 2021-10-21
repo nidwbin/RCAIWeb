@@ -23,7 +23,7 @@
               </div><!-- /.comment-one__content -->
             </div><!-- /.comment-one__single -->
           </div><!-- /.comment-one -->
-          <div class="comment-one__single" v-for="item in lists">
+          <div class="comment-one__single" v-for="item in lists" v-if="item.show || admin">
             <div class="comment-one__image">
               <img :src="image_base+item.image" alt="">
             </div><!-- /.comment-one__image -->

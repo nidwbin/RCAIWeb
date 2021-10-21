@@ -121,7 +121,8 @@ class ImageOP:
             print(e)
         return False
 
-    def delete_not_in_str(self, filename: str, string: str):
+    @staticmethod
+    def delete_not_in_str(filename: str, string: str):
         try:
             images = Image.objects.filter(filename=filename)
             for i in images:

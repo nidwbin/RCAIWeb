@@ -47,7 +47,6 @@ export default {
     {src: '@/plugins/owl.js', ssr: false},
     {src: '@/plugins/vue-mavon-editor.js', ssr: false},
     {src: '@/plugins/interceptor.js'},
-    {src: "@/plugins/bus.js", ssr: false},
   ],
   /*
   ** Nuxt.js dev-modules

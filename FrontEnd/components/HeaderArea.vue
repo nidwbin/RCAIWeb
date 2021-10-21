@@ -8,7 +8,7 @@
             <button type="button" class="close" @click="modal=false">×</button>
           </div>
           <div class="modal-body">
-            <div class="card">
+            <div class="card mb-1">
               <img :src="(local?'':image_base)+viewing_edit.image" class="card-img-top" alt="">
             </div>
             <div class="input-group mb-3">
