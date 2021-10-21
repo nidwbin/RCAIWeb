@@ -2,7 +2,7 @@
 workdir=/RCAIWeb
 mkdir -p $workdir
 if [ -d $workdir/git ];then
-    cd $workdir/github
+    cd $workdir/git
     git pull origin
 else
     git clone git@github.com:nidwbin/RCAIWeb.git $workdir/git
