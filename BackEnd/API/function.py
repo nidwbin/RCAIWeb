@@ -87,7 +87,7 @@ class LoginOP:
 
 class ImageOP:
     @staticmethod
-    def add_image(image, filename):
+    def add_image(image, filename: str):
         try:
             image_name = str(uuid.uuid4()) + os.path.splitext(image.name)[1]
             image = Image(filename=filename, image_name=image_name, image=image)
@@ -99,11 +99,36 @@ class ImageOP:
         return False
 
     @staticmethod
-    def delete_image(name):
+    def delete_image(image_name: str):
         try:
-            image = Image.objects.get(image_name=name)
-            image.image.delete()
-            image.delete()
+            image = Image.objects.get(image_name=image_name)
+            image.image.delete_header()
+            image.delete_header()
+            return True
+        except Exception as e:
+            print(e)
+        return False
+
+    @staticmethod
+    def delete_images(filename: str):
+        try:
+            items = Image.objects.filter(filename=filename)
+            for i in items:
+                i.image.delete_header()
+                i.delete_header()
+            return True
+        except Exception as e:
+            print(e)
+        return False
+
+    def delete_not_in_str(self, filename: str, string: str):
+        try:
+            images = Image.objects.filter(filename=filename)
+            for i in images:
+                image_name = i.image_name
+                if image_name not in string:
+                    i.image.delete_header()
+                    i.delete_header()
             return True
         except Exception as e:
             print(e)
@@ -133,12 +158,6 @@ class HeaderOP:
             items = self.Obj.objects.get(filename=filename)
             with items.text_file.open(mode='w') as file:
                 file.write(content)
-            images = Image.objects.filter(filename=filename)
-            for i in images:
-                image_name = i.image_name
-                if image_name not in content:
-                    i.image.delete()
-                    i.delete()
             return True
         except Exception as e:
             print(e)
@@ -154,7 +173,7 @@ class HeaderOP:
             print(e)
         return False
 
-    def create(self):
+    def create_header(self):
         try:
             filename = str(uuid.uuid4()) + ".md"
             item = self.Obj(filename=filename)
@@ -164,16 +183,16 @@ class HeaderOP:
             print(e)
         return False
 
-    def delete(self, filename: str):
+    def delete_header(self, filename: str):
         try:
             item = self.Obj.objects.get(filename=filename)
-            item.img.delete()
-            item.text_file.delete()
-            item.delete()
+            item.img.delete_header()
+            item.text_file.delete_header()
+            item.delete_header()
             items = Image.objects.filter(filename=filename)
             for i in items:
-                i.image.delete()
-                i.delete()
+                i.image.delete_header()
+                i.delete_header()
             return True
         except Exception as e:
             print(e)
@@ -222,7 +241,7 @@ class HeaderOP:
             item.title = title
             if image:
                 image_name = str(uuid.uuid4()) + os.path.splitext(image.name)[1]
-                item.img.delete()
+                item.img.delete_header()
                 item.img_name = image_name
                 item.img = image
                 item.img.name = image_name
@@ -239,7 +258,27 @@ class NewsOP(ImageOP, HeaderOP):
     def __init__(self):
         super(NewsOP, self).__init__(obj=News)
 
+    def create(self):
+        return super(NewsOP, self).create_header()
+
+    def change_file(self, filename: str, content: str):
+        return super(NewsOP, self).delete_not_in_str(filename, content) \
+            if super(NewsOP, self).change_file(filename, content) else False
+
+    def delete(self, filename: str):
+        return super(NewsOP, self).delete_images(filename) if super(NewsOP, self).delete_header(filename) else False
+
 
 class PapersOP(ImageOP, HeaderOP):
     def __init__(self):
         super(PapersOP, self).__init__(obj=Papers)
+
+    def create(self):
+        return super(PapersOP, self).create_header()
+
+    def change_file(self, filename: str, content: str):
+        return super(PapersOP, self).delete_not_in_str(filename, content) \
+            if super(PapersOP, self).change_file(filename, content) else False
+
+    def delete(self, filename: str):
+        return super(PapersOP, self).delete_images(filename) if super(PapersOP, self).delete_header(filename) else False

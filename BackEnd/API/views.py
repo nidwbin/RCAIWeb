@@ -146,9 +146,8 @@ class File(View):
                         return authority.get_response(request,
                                                       JsonResponse({'message': 'success', 'content': image_name}))
                 elif filetype == 'markdown':
-                    return authority.get_response(request,
-                                                  JsonResponse({'message': 'success' if OP.change_file(filename,
-                                                                                                       content) else 'error'}))
+                    return authority.get_response(request, JsonResponse(
+                        {'message': 'success' if OP.change_file(filename, content) else 'error'}))
         return authority.get_response(request, JsonResponse({'message': 'error'}))
 
     def delete(self, request):
@@ -159,7 +158,6 @@ class File(View):
             if view_type == 'news' or view_type == 'papers':
                 OP = NewsOP if view_type == 'news' else PapersOP
                 if filetype == 'image':
-                    return authority.get_response(request,
-                                                  JsonResponse({'message': 'success' if OP.delete_image(
-                                                      image_name) else 'error'}))
+                    return authority.get_response(request, JsonResponse(
+                        {'message': 'success' if OP.delete_image(image_name) else 'error'}))
         return authority.get_response(request, JsonResponse({'message': 'error'}))
