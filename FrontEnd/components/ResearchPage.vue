@@ -53,7 +53,7 @@
                     </p>
                   </div>
                   <div class="but">
-                    <span class="fa fa-send-o" id="add_1" @click="onSubmit(item)">&nbsp;新&nbsp;增</span>
+                    <span class="fa fa-send-o" id="add_1" @click="onSubmit(item)">&nbsp;提&nbsp;交</span>
                   </div>
                 </div>
                 </form>

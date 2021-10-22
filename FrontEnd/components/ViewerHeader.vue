@@ -4,7 +4,7 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-12">
-            <div class="page-title-item text-center">
+            <div class="page-title-item text-center" @click="view">
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item active" aria-current="page">{{ viewing.date }}</li>
@@ -12,6 +12,9 @@
               </nav>
               <h3 class="title">{{ viewing.title }}</h3>
               <p class="mt-40">{{ viewing.overview }}</p>
+              <button type="button" class="btn btn-primary btn-lg mt-40 card-text">
+                <span class="fa fa-edit"></span>&nbsp;&nbsp;&nbsp;&nbsp;编&nbsp;辑
+              </button>
             </div>
           </div>
         </div>
@@ -25,70 +28,70 @@
 </template>
 
 <script>
-import Functions from "./Functions";
-import HeaderArea from "./HeaderArea"
+    import Functions from "./Functions";
+    import HeaderArea from "./HeaderArea"
 
-export default {
-  name: "ViewerHeader",
-  components: {HeaderArea},
-  mixins: [Functions],
-  props: {
-    type: {
-      type: String,
-      default: '',
-    },
-    filename: {
-      type: String,
-      default: '',
+    export default {
+        name: "ViewerHeader",
+        components: {HeaderArea},
+        mixins: [Functions],
+        props: {
+            type: {
+                type: String,
+                default: '',
+            },
+            filename: {
+                type: String,
+                default: '',
+            }
+        },
+        data() {
+            return {
+                modal: false,
+                viewing: {
+                    title: '开始新建',
+                    date: 'XXXX-XX-XX',
+                    overview: '点击开始新建条目',
+                },
+            }
+        },
+        mounted() {
+            this.get('/list/', {type: this.type, filetype: 'item', filename: this.filename}, data => {
+                switch (data['message']) {
+                    case 'success': {
+                        this.viewing = data['content'];
+                        break;
+                    }
+                    case 'error': {
+                        break;
+                    }
+                    default: {
+                        this.$toast.info(data['message']);
+                    }
+                }
+            });
+        },
+        computed: {
+            admin() {
+                return this.$store.state.admin;
+            },
+            debug() {
+                return this.$store.state.debug;
+            }
+        },
+        methods: {
+            view() {
+                this.$refs.header.view(this.viewing);
+            },
+            reload_page() {
+                this.$router.back();
+            }
+        },
     }
-  },
-  data() {
-    return {
-      modal: false,
-      viewing: {
-        title: '开始新建',
-        date: 'XXXX-XX-XX',
-        overview: '点击开始新建条目',
-      },
-    }
-  },
-  mounted() {
-    this.get('/list/', {type: this.type, filetype: 'item', filename: this.filename}, data => {
-      switch (data['message']) {
-        case 'success': {
-          this.viewing = data['content'];
-          break;
-        }
-        case 'error': {
-          break;
-        }
-        default: {
-          this.$toast.info(data['message']);
-        }
-      }
-    });
-  },
-  computed: {
-    admin() {
-      return this.$store.state.admin;
-    },
-    debug() {
-      return this.$store.state.debug;
-    }
-  },
-  methods: {
-    view() {
-      this.$refs.header.view(this.viewing);
-    },
-    reload_page() {
-      this.$router.back();
-    }
-  },
-}
 </script>
 
 <style scoped>
-.modal {
-  display: block;
-}
+  .modal {
+    display: block;
+  }
 </style>

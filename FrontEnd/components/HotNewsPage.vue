@@ -18,7 +18,7 @@
         </div>
         <div class="row client-active">
           <swiper :options="swiperOptions">
-            <swiper-slide v-for="item in hots">
+            <swiper-slide v-for="item in hots" :key="item.filename">
               <div class="client-item mt-30">
                 <div class="shape">
                   <img src="/static/images/shape/shape-4.png" alt="shape">
@@ -54,11 +54,13 @@
 import {Swiper, SwiperSlide, directive} from 'vue-awesome-swiper';
 import Functions from "./Functions";
 import 'swiper/css/swiper.css';
+import ClientThreeArea from "~/components/ClientArea";
 
 export default {
   name: "HotNewsPage",
   mixins: [Functions],
   components: {
+    ClientThreeArea,
     Swiper,
     SwiperSlide
   },
