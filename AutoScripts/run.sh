@@ -29,9 +29,10 @@ cp -ar $workdir/git/BackEnd/* $workdir/django/
 cp -ar $workdir/git/FrontEnd/* $workdir/nuxt/
 cp -ar $workdir/git/Config/mysql/* $workdir/mysql/
 cp -ar $workdir/git/Config/nginx/* $workdir/nginx/
-
-mv $workdir/django/media/ $workdir/
-mv $workdir/nuxt/static/static/ $workdir/
+cp -ar $workdir/django/media/* $workdir/media/
+cp -ar $workdir/nuxt/static/static/* $workdir/static/
+rm -r $workdir/django/media/
+rm -r $workdir/nuxt/static/static/
 echo "Ok!"
 
 echo "Start run..."
