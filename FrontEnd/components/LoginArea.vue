@@ -87,10 +87,15 @@ export default {
     }
   },
   methods: {
-    response(data, message, btn) {
+    response(data, message, mode) {
       switch (data['message']) {
         case 'success': {
-          btn = 'btn-success';
+          if (mode === 'login') {
+            this.btn_login = 'btn-success';
+          }
+          if (mode === 'change') {
+            this.btn_change = 'btn-success';
+          }
           if (!this.$store.state.debug) {
             setTimeout(() => {
               let location = this.$cookies.get('location');
@@ -101,7 +106,12 @@ export default {
         }
         case 'error': {
           this.$toast.error(message);
-          btn = 'btn-danger';
+          if (mode === 'login') {
+            this.btn_login = 'btn-danger';
+          }
+          if (mode === 'change') {
+            this.btn_change = 'btn-danger';
+          }
           break;
         }
         default: {
@@ -115,13 +125,13 @@ export default {
       }
       if (this.username !== '' && this.password !== '') {
         this.post('/login/', {username: this.username, password: this.password}, data => {
-          this.response(data, '登录失败', this.btn_login)
+          this.response(data, '登录失败', 'login')
         })
       } else {
         this.btn_login = 'btn-danger';
       }
     },
-    change(e) {
+    change() {
       if (this.username !== '' && this.password !== ''
         && this.username_ !== '' && this.password_ !== ''
         && this.password_ === this.password__) {
@@ -131,7 +141,7 @@ export default {
           username_: this.username_,
           password_: this.password_
         }, data => {
-          this.response(data, '修改失败', this.btn_change);
+          this.response(data, '修改失败', 'change');
         })
       } else {
         this.btn_change = 'btn-danger';
