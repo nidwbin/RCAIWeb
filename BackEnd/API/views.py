@@ -115,7 +115,7 @@ class List(View):
                                                 request.FILES.get('image'))
             elif view_type == 'papers':
                 pass
-            if ans:
+            if ans is not False:
                 return authority.get_response(request, JsonResponse({'message': 'success', 'content': ans}))
         return authority.get_response(request, JsonResponse({'message': 'error'}))
 
