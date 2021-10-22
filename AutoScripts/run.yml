@@ -18,10 +18,10 @@ services:
     ports:
       - "7000:3306"
     environment:
-      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_ROOT_PASSWORD=0!!OH@MY@RCAI@DB!!0
       - MYSQL_DATABASE=RCAIDB
       - MYSQL_USER=RCAI
-      - MYSQL_PASSWRD=0!!OH@MY@RCAI@DB!!0
+      - MYSQL_PASSWORD=1!!OH@MY@RCAI@DB!!1
     networks:
       web_net:
         ipv4_address: 172.49.0.2

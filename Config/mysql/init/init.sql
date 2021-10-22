@@ -1,3 +1,3 @@
-ALTER user 'RCAI'@'%' IDENTIFIED WITH mysql_native_password BY '0!!OH@MY@RCAI@DB!!0';
+ALTER USER 'RCAI'@'%' IDENTIFIED WITH mysql_native_password BY '1!!OH@MY@RCAI@DB!!1';
 GRANT ALL PRIVILEGES ON RCAIDB.* TO 'RCAI'@'%';
 FLUSH PRIVILEGES;

@@ -54,7 +54,7 @@
         </div>
       </div>
     </div>
-    <div class="modal-backdrop show"></div>
+    <div class="modal-backdrop show" style="z-index: 2000"></div>
   </div>
 </template>
 
@@ -165,6 +165,7 @@ export default {
 
 <style scoped>
 .modal {
+  z-index: 2001;
   display: block;
 }
 </style>

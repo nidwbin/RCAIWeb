@@ -14,7 +14,7 @@ function install_docker(){
         "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
         $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
         
-        apt update && apt install -y docker-ce docker-ce-cli containerd.io
+        apt update && apt install -y docker-ce docker-ce-cli containerd.io && systemctl enable docker
 }
 
 function install_others() {
