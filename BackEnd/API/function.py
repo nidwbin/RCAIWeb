@@ -71,7 +71,7 @@ class Authority:
         return response
 
 
-class LoginOP:
+class AdminOP:
     @staticmethod
     def check_admin(username, password):
         try:
@@ -95,6 +95,15 @@ class LoginOP:
         except Exception as e:
             print(e)
         return False
+
+    @staticmethod
+    def delete_admin(username):
+        try:
+            user = Admin.objects.get(name=username)
+            user.delete()
+            return True
+        except Exception as e:
+            print(e)
 
 
 class ImageOP:

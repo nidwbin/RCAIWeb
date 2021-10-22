@@ -11,7 +11,7 @@ from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt
 from django.http import JsonResponse
 from django.conf import settings
 
-from API.function import Authority, LoginOP, NewsOP, PapersOP
+from API.function import Authority, AdminOP, NewsOP, PapersOP
 
 authority = Authority()
 newsOP = NewsOP()
@@ -30,19 +30,41 @@ def set_admin(request):
     if settings.DEBUG and request.method == 'PUT':
         username = request.GET.get('username')
         password = request.GET.get('password')
-        if LoginOP.set_admin(username, password):
+        if AdminOP.set_admin(username, password):
             return JsonResponse({'message': 'success'})
     return JsonResponse({'message': 'error'})
+
+
+class Admin(View):
+    def post(self, request):
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        if AdminOP.check_admin(username, password) or settings.DEBUG:
+            username_ = request.POST.get('username_')
+            password_ = request.POST.get('password_')
+            if AdminOP.set_admin(username_, password_):
+                return authority.get_response(request, JsonResponse({'message': 'success'}), put=True)
+        return authority.get_response(request, JsonResponse({'message': 'error'}), keep=False)
+
+    def delete(self, request):
+        username = request.GET.get('username')
+        password = request.GET.get('password')
+        username_ = request.GET.get('username_')
+        password_ = request.GET.get('password_')
+        if username_ != 'RCAIROOT' and AdminOP.check_admin(username, password) \
+                and AdminOP.check_admin(username_, password_):
+            if AdminOP.delete_admin(username_):
+                return authority.get_response(request, JsonResponse({'message': 'success'}), put=True)
+        return authority.get_response(request, JsonResponse({'message': 'error'}), keep=False)
 
 
 class Login(View):
     def post(self, request):
         username = request.POST.get('username')
         password = request.POST.get('password')
-        if LoginOP.check_admin(username, password):
+        if AdminOP.check_admin(username, password) or settings.DEBUG:
             return authority.get_response(request, JsonResponse({'message': 'success'}), put=True)
-        else:
-            return authority.get_response(request, JsonResponse({'message': 'error'}), keep=False)
+        return authority.get_response(request, JsonResponse({'message': 'error'}), keep=False)
 
     def delete(self, request):
         return authority.get_response(request, JsonResponse({'message': 'success'}), keep=False)
