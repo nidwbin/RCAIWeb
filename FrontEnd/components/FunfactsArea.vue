@@ -55,7 +55,6 @@
         if (isVisible){
           this.startCounter = true;
         }
-
       },
     }
   }
