@@ -111,9 +111,9 @@ class ImageOP:
         return False
 
     @staticmethod
-    def delete_image(image_name: str):
+    def delete_image(name):
+        image = Image.objects.get(image_name=name)
         try:
-            image = Image.objects.get(image_name=image_name)
             image.image.delete()
             image.delete()
             return True

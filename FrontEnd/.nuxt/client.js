@@ -15,8 +15,7 @@ import {
   compile,
   getQueryDiff,
   globalHandleError,
-  isSamePath,
-  urlJoin
+  isSamePath
 } from './utils.js'
 import { createApp, NuxtError } from './index.js'
 import fetchMixin from './mixins/fetch.client'
@@ -43,12 +42,75 @@ let store
 // Try to rehydrate SSR data from window
 const NUXT = window.__NUXT__ || {}
 
+<<<<<<< HEAD
 const $config = NUXT.config || {}
 if ($config._app) {
   __webpack_public_path__ = urlJoin($config._app.cdnURL, $config._app.assetsPath)
 }
 
 Object.assign(Vue.config, {"silent":true,"performance":false})
+=======
+Object.assign(Vue.config, {"silent":false,"performance":true})
+
+const logs = NUXT.logs || []
+  if (logs.length > 0) {
+  const ssrLogStyle = 'background: #2E495E;border-radius: 0.5em;color: white;font-weight: bold;padding: 2px 0.5em;'
+  console.group && console.group ('%cNuxt SSR', ssrLogStyle)
+  logs.forEach(logObj => (console[logObj.type] || console.log)(...logObj.args))
+  delete NUXT.logs
+  console.groupEnd && console.groupEnd()
+}
+
+// Setup global Vue error handler
+if (!Vue.config.$nuxt) {
+  const defaultErrorHandler = Vue.config.errorHandler
+  Vue.config.errorHandler = async (err, vm, info, ...rest) => {
+    // Call other handler if exist
+    let handled = null
+    if (typeof defaultErrorHandler === 'function') {
+      handled = defaultErrorHandler(err, vm, info, ...rest)
+    }
+    if (handled === true) {
+      return handled
+    }
+
+    if (vm && vm.$root) {
+      const nuxtApp = Object.keys(Vue.config.$nuxt)
+        .find(nuxtInstance => vm.$root[nuxtInstance])
+
+      // Show Nuxt Error Page
+      if (nuxtApp && vm.$root[nuxtApp].error && info !== 'render function') {
+        const currentApp = vm.$root[nuxtApp]
+
+        // Load error layout
+        let layout = (NuxtError.options || NuxtError).layout
+        if (typeof layout === 'function') {
+          layout = layout(currentApp.context)
+        }
+        if (layout) {
+          await currentApp.loadLayout(layout).catch(() => {})
+        }
+        currentApp.setLayout(layout)
+
+        currentApp.error(err)
+      }
+    }
+
+    if (typeof defaultErrorHandler === 'function') {
+      return handled
+    }
+
+    // Log to console
+    if (process.env.NODE_ENV !== 'production') {
+      console.error(err)
+    } else {
+      console.error(err.message || err)
+    }
+  }
+  Vue.config.$nuxt = {}
+}
+Vue.config.$nuxt.$nuxt = true
+>>>>>>> liuyoude
 
 const errorHandler = Vue.config.errorHandler || console.error
 
@@ -157,8 +219,10 @@ function applySSRData (Component, ssrData) {
 }
 
 // Get matched components
-function resolveComponents (route) {
-  return flatMapComponents(route, async (Component, _, match, key, index) => {
+function resolveComponents (router) {
+  const path = getLocation(router.options.base, router.options.mode)
+
+  return flatMapComponents(router.match(path), async (Component, _, match, key, index) => {
     // If component is not resolved yet, resolve it
     if (typeof Component === 'function' && !Component.options) {
       Component = await Component()
@@ -500,8 +564,6 @@ function fixPrepatch (to, ___) {
   const instances = getMatchedComponentsInstances(to)
   const Components = getMatchedComponents(to)
 
-  let triggerScroll = false
-
   Vue.nextTick(() => {
     instances.forEach((instance, i) => {
       if (!instance || instance._isDestroyed) {
@@ -519,17 +581,12 @@ function fixPrepatch (to, ___) {
           Vue.set(instance.$data, key, newData[key])
         }
 
-        triggerScroll = true
+        // Ensure to trigger scroll event after calling scrollBehavior
+        window.$nuxt.$nextTick(() => {
+          window.$nuxt.$emit('triggerScroll')
+        })
       }
     })
-
-    if (triggerScroll) {
-      // Ensure to trigger scroll event after calling scrollBehavior
-      window.$nuxt.$nextTick(() => {
-        window.$nuxt.$emit('triggerScroll')
-      })
-    }
-
     checkForErrors(this)
   })
 }
@@ -584,7 +641,7 @@ async function mountApp (__app) {
   }
 
   // Resolve route components
-  const Components = await Promise.all(resolveComponents(app.context.route))
+  const Components = await Promise.all(resolveComponents(router))
 
   // Enable transitions
   _app.setTransitions = _app.$options.nuxt.setTransitions.bind(_app)
