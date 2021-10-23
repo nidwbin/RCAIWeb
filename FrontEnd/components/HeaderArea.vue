@@ -45,11 +45,11 @@
               <input type="checkbox" class="custom-control-input" id="switch" v-model="viewing_edit.show">
               <label class="custom-control-label" for="switch">展示</label>
             </div>
-            <button type="button" class="btn btn-success" @click="more" v-if="btn_more"><i
-              class="fa fa-fighter-jet"></i>查看
+            <button type="button" class="btn btn-primary" @click="more" v-if="btn_more"><i
+              class="fa fa-eye"></i>查看
             </button>
-            <button type="button" class="btn btn-warning" @click="edit"><i class="fa fa-send"></i>修改</button>
-            <button type="button" class="btn btn-danger" @click="remove(viewing_edit)"><i class="fa fa-remove"></i>删除
+            <button type="button" class="btn btn-warning" @click="edit"><i class="fa fa-edit"></i>修改</button>
+            <button type="button" class="btn btn-danger" @click="remove(viewing_edit)"><i class="fa fa-trash-o"></i>删除
             </button>
           </div>
         </div>
