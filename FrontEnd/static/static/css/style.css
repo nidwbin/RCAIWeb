@@ -7652,6 +7652,9 @@ p {
 .leadership-area .leadership-item .leadership-thumb {
   position: relative;
 }
+.leadership-area .leadership-item .leadership-thumb img:hover {
+  filter: brightness(80%);
+}
 
 .leadership-area .leadership-item .leadership-thumb .social {
   position: absolute;
