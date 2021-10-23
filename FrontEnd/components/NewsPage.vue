@@ -105,122 +105,115 @@
         </div><!-- /.col-lg-4 -->
       </div><!-- /.row -->
     </div><!-- /.container -->
-    <HeaderArea ref="header" :type="type" :btn_more="true" @reload_page="reload_page"/>
-    <PagesList ref="page" :type="type" @change_page="change_page"/>
+    <HeaderArea ref="header" :type="type" :btn_more="true"/>
+    <PagesList ref="page" :type="type" @change_page="load_list"/>
   </section>
 </template>
 
 <script>
-    import PagesList from "./PagesList";
-    import Functions from "./Functions";
-    import HeaderArea from "./HeaderArea";
+import PagesList from "./PagesList";
+import Functions from "./Functions";
+import HeaderArea from "./HeaderArea";
+import {bus} from "@/plugins/bus";
 
-    export default {
-        name: "NewsList",
-        mixins: [Functions],
-        components: {PagesList, HeaderArea},
-        data() {
-            return {
-                type: 'news',
-                lists: [],
-                hots: [],
-                image_base: this.$store.state.image_base + 'header/'
-            }
-        },
-        mounted() {
-            this.change_page(1);
-            this.hot_list(5);
-        },
-        computed: {
-            admin() {
-                return this.$store.state.admin;
-            }
-        },
-        methods: {
-            more(item) {
-                this.$router.push({name: 'view', query: {type: this.type, filename: item.filename}});
-            },
-            remove(item) {
-                console.log(this.type);
-                this.delete('/list/', {
-                    type: this.type,
-                    filetype: 'item',
-                    filename: item.filename
-                }, data => {
-                    switch (data['message']) {
-                        case 'success': {
-                            this.reload_page();
-                            break;
-                        }
-                        case 'error': {
-                            this.$toast.error('删除失败');
-                            break;
-                        }
-                        default: {
-                            this.$toast.info(data['message']);
-                        }
-                    }
-                });
-                this.$refs.header.modal = false;
-            },
-            change_page(page) {
-                this.get('/list/', {type: this.type, filetype: 'lists', admin: this.admin, page: page},
-                    data => {
-                        switch (data['message']) {
-                            case 'success': {
-                                this.lists = data['content'];
-                                break;
-                            }
-                            case 'error': {
-                                break;
-                            }
-                            default: {
-                                this.$toast.info(data['message']);
-                            }
-                        }
-                    })
-            },
-            hot_list(len) {
-                this.get('/list/', {type: this.type, filetype: 'hots', len: len},
-                    data => {
-                        switch (data['message']) {
-                            case 'success': {
-                                this.hots = data['content'];
-                                break;
-                            }
-                            case 'error': {
-                                break;
-                            }
-                            default: {
-                                this.$toast.info(data['message']);
-                            }
-                        }
-                    })
-            },
-            new_item() {
-                this.post('/list/', {type: this.type, filetype: 'item', filename: 'new'}, data => {
-                    switch (data['message']) {
-                        case 'success': {
-                            this.$router.push({name: 'view', query: {type: this.type, filename: data['content']}});
-                            break;
-                        }
-                        case 'error': {
-                            break;
-                        }
-                        default: {
-                            this.$toast.info(data['message']);
-                        }
-                    }
-                })
-            },
-            view(item) {
-                this.$refs.header.view(item);
-            },
-            reload_page() {
-                this.$refs.page.$change_page(-2);
-            }
-        }
+export default {
+  name: "NewsList",
+  mixins: [Functions],
+  components: {PagesList, HeaderArea},
+  data() {
+    return {
+      type: 'news',
+      lists: [],
+      hots: [],
+      image_base: this.$store.state.image_base + 'header/'
     }
+  },
+  mounted() {
+    this.load_list(1);
+    this.load_hots(5);
+    this.listen_events();
+  },
+  computed: {
+    admin() {
+      return this.$store.state.admin;
+    }
+  },
+  methods: {
+    listen_events() {
+      bus.$on('reload_list', () => {
+        this.$refs.page.change_page(-2);
+      });
+      bus.$on('reload_hots', () => {
+        this.load_hots(5);
+      });
+    },
+    stop_listen() {
+      bus.$off(['reload_list', 'reload_hots']);
+    },
+    more(item) {
+      this.$router.push({name: 'view', query: {type: this.type, filename: item.filename}});
+    },
+    remove(item) {
+      this.$refs.header.remove(item);
+    },
+    view(item) {
+      this.$refs.header.view(item);
+    },
+    load_list(page) {
+      this.get('/list/', {type: this.type, filetype: 'lists', admin: this.admin, page: page},
+        data => {
+          switch (data['message']) {
+            case 'success': {
+              this.lists = data['content'];
+              break;
+            }
+            case 'error': {
+              break;
+            }
+            default: {
+              this.$toast.info(data['message']);
+            }
+          }
+        })
+    },
+    load_hots(len) {
+      this.get('/list/', {type: this.type, filetype: 'hots', len: len},
+        data => {
+          switch (data['message']) {
+            case 'success': {
+              this.hots = data['content'];
+              break;
+            }
+            case 'error': {
+              break;
+            }
+            default: {
+              this.$toast.info(data['message']);
+            }
+          }
+        })
+    },
+    new_item() {
+      this.post('/list/', {type: this.type, filetype: 'item', filename: 'new'}, data => {
+        switch (data['message']) {
+          case 'success': {
+            this.$router.push({name: 'view', query: {type: this.type, filename: data['content']}});
+            break;
+          }
+          case 'error': {
+            break;
+          }
+          default: {
+            this.$toast.info(data['message']);
+          }
+        }
+      })
+    },
+  },
+  destroyed() {
+    this.stop_listen();
+  }
+}
 </script>
 
 <style scoped>

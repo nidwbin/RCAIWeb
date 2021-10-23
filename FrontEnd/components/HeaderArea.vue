@@ -49,7 +49,8 @@
               class="fa fa-fighter-jet"></i>查看
             </button>
             <button type="button" class="btn btn-warning" @click="edit"><i class="fa fa-send"></i>修改</button>
-            <button type="button" class="btn btn-danger" @click="remove"><i class="fa fa-remove"></i>删除</button>
+            <button type="button" class="btn btn-danger" @click="remove(viewing_edit)"><i class="fa fa-remove"></i>删除
+            </button>
           </div>
         </div>
       </div>
@@ -60,6 +61,7 @@
 
 <script>
 import Functions from "./Functions";
+import {bus} from "@/plugins/bus";
 
 export default {
   name: "HeaderArea",
@@ -108,11 +110,12 @@ export default {
     more() {
       this.$router.push({name: 'view', query: {type: this.type, filename: this.viewing.filename}});
     },
-    remove() {
-      this.delete('/list/', {type: this.type, filetype: 'item', filename: this.viewing_edit.filename}, data => {
+    remove(item) {
+      this.delete('/list/', {type: this.type, filetype: 'item', filename: item.filename}, data => {
         switch (data['message']) {
           case 'success': {
-            this.$emit('reload_page');
+            bus.$emit('reload_list');
+            bus.$emit('reload_hots');
             break;
           }
           case 'error': {
@@ -146,6 +149,7 @@ export default {
             this.viewing.overview = this.viewing_edit.overview;
             this.local = false;
             this.viewing.image = data['content'];
+            bus.$emit('reload_hots');
             break;
           }
           case 'error': {

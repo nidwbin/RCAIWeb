@@ -10,14 +10,14 @@
     <div class="row">
       <div class="col"></div>
       <ul class="pagination">
-        <li :class="pages.active === pages.page_list[0] ? 'page-item disabled' : 'page-item'">
-          <a class="page-link" href="#" @click="$change_page(-1)"><i class="fa fa-chevron-left"></i></a>
+        <li :class="active === pages[0] ? 'page-item disabled' : 'page-item'">
+          <a class="page-link" href="#" @click="change_page(-1)"><i class="fa fa-chevron-left"></i></a>
         </li>
-        <li v-for="page in pages.page_list" :class="pages.active === page ? 'page-item active' : 'page-item'">
-          <a class="page-link" href="#" @click="$change_page(page)">{{ page }}</a>
+        <li v-for="page in pages" :class="active === page ? 'page-item active' : 'page-item'">
+          <a class="page-link" href="#" @click="change_page(page)">{{ page }}</a>
         </li>
-        <li :class="pages.active === pages.page_list[pages.page_list.length-1] ? 'page-item disabled' : 'page-item'">
-          <a class="page-link" href="#" @click="$change_page(0)"><i class="fa fa-chevron-right"></i></a>
+        <li :class="active === pages[pages.length-1] ? 'page-item disabled' : 'page-item'">
+          <a class="page-link" href="#" @click="change_page(0)"><i class="fa fa-chevron-right"></i></a>
         </li>
       </ul>
       <div class="col"></div>
@@ -27,6 +27,7 @@
 
 <script>
 import Functions from "./Functions";
+import {bus} from "@/plugins/bus";
 
 export default {
   name: "PagesList",
@@ -39,10 +40,8 @@ export default {
   },
   data() {
     return {
-      pages: {
-        active: 1,
-        page_list: [1],
-      },
+      active: 1,
+      pages: [1],
     }
   },
   computed: {
@@ -50,50 +49,53 @@ export default {
       return this.$store.state.admin;
     },
     hidden() {
-      return this.pages.page_list.length === 1
+      return this.pages.length === 1
     }
   },
   mounted() {
-    this.get('/list/', {type: this.type, filetype: 'pages', admin: this.admin, per_page: 10},
-      data => {
-        switch (data['message']) {
-          case 'success': {
-            let array = [];
-            for (let i = 1; i <= data['content']; ++i) {
-              array.push(i);
-            }
-            this.pages.page_list = array;
-            break;
-          }
-          case 'error': {
-            break;
-          }
-          default: {
-            this.$toast.info(data['message']);
-          }
-        }
-      });
+    this.get_pages();
   },
   methods: {
-    $change_page(page) {
-      if (page !== this.pages.active) {
+    get_pages() {
+      this.get('/list/', {type: this.type, filetype: 'pages', admin: this.admin, per_page: 10},
+        data => {
+          switch (data['message']) {
+            case 'success': {
+              let array = [];
+              for (let i = 1; i <= data['content']; ++i) {
+                array.push(i);
+              }
+              this.pages = array;
+              break;
+            }
+            case 'error': {
+              break;
+            }
+            default: {
+              this.$toast.info(data['message']);
+            }
+          }
+        });
+    },
+    change_page(page) {
+      if (page !== this.active) {
         switch (page) {
           case -2: {
             break;
           }
           case -1: {
-            this.pages.active = this.pages.active - 1;
+            this.active = this.active - 1;
             break;
           }
           case 0: {
-            this.pages.active = this.pages.active + 1;
+            this.active = this.active + 1;
             break;
           }
           default: {
-            this.pages.active = page;
+            this.active = page;
           }
         }
-        this.$emit('change_page', this.pages.active);
+        this.$emit('change_page', this.active);
       }
     },
   },

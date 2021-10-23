@@ -259,6 +259,4 @@
   .showBorder {
     border: 1px solid #f2f6fc;
   }
-
-
 </style>
