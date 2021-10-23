@@ -11,9 +11,9 @@
                 </ol>
               </nav>
               <h3 class="title">{{ viewing.title }}</h3>
-              <p class="mt-40">{{ viewing.overview }}</p>
+              <p class="mt-40" style="color: whitesmoke!important;">{{ viewing.overview }}</p>
               <button type="button" class="btn btn-primary btn-lg mt-40 card-text">
-                <span class="fa fa-edit"></span>&nbsp;&nbsp;&nbsp;&nbsp;编&nbsp;辑
+                <span class="fa fa-edit"></span>&nbsp;&nbsp;&nbsp;&nbsp;编&nbsp;辑&nbsp;标&nbsp;题
               </button>
             </div>
           </div>

@@ -4,12 +4,12 @@
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
-            <h4 class="modal-title">修改标题头</h4>
+            <h4 class="modal-title">编辑新闻标题</h4>
             <button type="button" class="close" @click="modal=false">×</button>
           </div>
           <div class="modal-body">
             <div class="card mb-1">
-              <img :src="(local?'':image_base)+viewing_edit.image" class="card-img-top" alt="">
+              <img :src="(local?'':image_base)+viewing_edit.image" class="card-img-top" alt="" style="max-height: 500px;">
             </div>
             <div class="input-group mb-3">
               <div class="input-group-prepend">
@@ -45,11 +45,11 @@
               <input type="checkbox" class="custom-control-input" id="switch" v-model="viewing_edit.show">
               <label class="custom-control-label" for="switch">展示</label>
             </div>
-            <button type="button" class="btn btn-success" @click="more" v-if="btn_more"><i
-              class="fa fa-fighter-jet"></i>查看
+            <button type="button" class="btn btn-primary" @click="more" v-if="btn_more">
+              <span class="fa fa-eye"></span>&nbsp;&nbsp;查看
             </button>
-            <button type="button" class="btn btn-warning" @click="edit"><i class="fa fa-send"></i>修改</button>
-            <button type="button" class="btn btn-danger" @click="remove"><i class="fa fa-remove"></i>删除</button>
+            <button type="button" class="btn btn-warning" @click="edit"><span class="fa fa-edit"></span>&nbsp;&nbsp;修改</button>
+            <button type="button" class="btn btn-danger" @click="remove"><span class="fa fa-trash-o"></span>&nbsp;&nbsp;删除</button>
           </div>
         </div>
       </div>

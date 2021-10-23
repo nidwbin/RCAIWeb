@@ -6435,6 +6435,11 @@ p {
   }
 }
 
+.sidebar .new_add:hover {
+  filter: brightness(80%);
+  cursor: pointer;
+}
+
 .sidebar__title {
   margin: 0;
   color: #192437;
@@ -7634,6 +7639,15 @@ p {
     padding: 60px 60px 52px;
   }
 }
+
+.leadership-area .leadership-item .admin-btn {
+  display: block;
+  padding: 0 auto;
+  margin-top: 10px;
+}
+/*.leadership-area .leadership-item .admin-btn .btn {*/
+/*  margin-left: 26px;*/
+/*}*/
 
 .leadership-area .leadership-item .leadership-thumb {
   position: relative;

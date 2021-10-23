@@ -10,14 +10,14 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-8">
-          <div class="news_new_area">
-            <div class="card text-center mb-3" v-if="admin">
-              <h5 class="card-header">
-                发布新闻
-              </h5>
-              <button type="button" class="btn btn-outline-primary btn-lg btn-block" @click="new_item">+</button>
-            </div>
-          </div><!-- /.comment-one -->
+          <!--          <div class="news_new_area">-->
+          <!--&lt;!&ndash;            <div class="card text-center mb-3" v-if="admin">&ndash;&gt;-->
+          <!--&lt;!&ndash;              <h5 class="card-header">&ndash;&gt;-->
+          <!--&lt;!&ndash;                发布新闻&ndash;&gt;-->
+          <!--&lt;!&ndash;              </h5>&ndash;&gt;-->
+          <!--&lt;!&ndash;              <button type="button" class="btn btn-outline-primary btn-lg btn-block" @click="new_item">+</button>&ndash;&gt;-->
+          <!--&lt;!&ndash;            </div>&ndash;&gt;-->
+          <!--          </div>&lt;!&ndash; /.comment-one &ndash;&gt;-->
           <div v-for="item in lists" v-if="item.show || admin">
             <div class="comment-one__single">
               <div class="comment-one__image">
@@ -52,6 +52,9 @@
         </div><!-- /.comment-one -->
         <div class="col-lg-4">
           <div class="sidebar">
+            <div class="new_add mb-4" v-if="admin">
+              <img :src="add_btn_image" @click="new_item">
+            </div>
             <div class="sidebar__single sidebar__search">
               <form action="#" class="sidebar__search-form">
                 <input type="text" name="search" placeholder="开始搜索...">
@@ -124,7 +127,8 @@
                 type: 'news',
                 lists: [],
                 hots: [],
-                image_base: this.$store.state.image_base + 'header/'
+                image_base: this.$store.state.image_base + 'header/',
+                add_btn_image: '/static/images/default/header.png',
             }
         },
         mounted() {

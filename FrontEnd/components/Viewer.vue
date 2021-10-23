@@ -7,39 +7,17 @@
  -->
 <template>
   <div class="container mt-4 mb-4">
-<!--    <div class="row">-->
-<!--      <div class="col-lg-10">-->
-<!--        <div class="card text-center">-->
-<!--          <h5 class="card-header">-->
-<!--            编辑新闻标题-->
-<!--          </h5>-->
-<!--          <button type="button" class="btn btn-outline-primary btn-lg btn-block" @click="new_item">-->
-<!--            +-->
-<!--          </button>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class="col-lg-2">-->
-<!--        <div class="card text-center">-->
-<!--          <h5 class="card-header">-->
-<!--            删除编辑-->
-<!--          </h5>-->
-<!--          <button type="button" class="btn btn-outline-danger btn-lg btn-block" @click="new_item">-->
-<!--            ×-->
-<!--          </button>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
     <div :class="admin?'showBorder':''">
       <div class="mavonEditor">
         <mavon-editor ref=md v-model="text" :toolbars="toolbars" :editable="admin" :toolbarsFlag="admin"
                       :defaultOpen="admin?null:'preview'" :preview="!admin" :subfield="admin"
                       :boxShadow="false" @imgAdd="add_image" @imgDel="del_image" @save="save"
-                      previewBackground="white"
+                      previewBackground="white" fontSize="18px"
         />
       </div>
     </div>
-<!--    <HeaderArea ref="header" :type="type" :btn_more="true" @reload_page="reload_page"/>-->
   </div>
+
 </template>
 <script>
     import Functions from "./Functions";
