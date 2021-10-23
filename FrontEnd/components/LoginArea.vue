@@ -106,16 +106,12 @@ export default {
         }
         case 'error': {
           this.$toast.error(message);
-<<<<<<< HEAD
-          btn = 'btn-danger';
-=======
           if (mode === 'login') {
             this.btn_login = 'btn-danger';
           }
           if (mode === 'change') {
             this.btn_change = 'btn-danger';
           }
->>>>>>> origin/dev
           break;
         }
         default: {
@@ -129,21 +125,13 @@ export default {
       }
       if (this.username !== '' && this.password !== '') {
         this.post('/login/', {username: this.username, password: this.password}, data => {
-<<<<<<< HEAD
-          this.response(data, '登录失败', this.btn_login)
-=======
           this.response(data, '登录失败', 'login')
->>>>>>> origin/dev
         })
       } else {
         this.btn_login = 'btn-danger';
       }
     },
-<<<<<<< HEAD
-    change(e) {
-=======
     change() {
->>>>>>> origin/dev
       if (this.username !== '' && this.password !== ''
         && this.username_ !== '' && this.password_ !== ''
         && this.password_ === this.password__) {
@@ -153,11 +141,7 @@ export default {
           username_: this.username_,
           password_: this.password_
         }, data => {
-<<<<<<< HEAD
-          this.response(data, '修改失败', this.btn_change);
-=======
           this.response(data, '修改失败', 'change');
->>>>>>> origin/dev
         })
       } else {
         this.btn_change = 'btn-danger';

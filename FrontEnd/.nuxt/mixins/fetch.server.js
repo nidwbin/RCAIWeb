@@ -25,13 +25,7 @@ async function serverPrefetch() {
   attrs['data-fetch-key'] = this._fetchKey
 
   // Add to ssrContext for window.__NUXT__.fetch
-<<<<<<< HEAD
-
-  this.$ssrContext.nuxt.fetch[this._fetchKey] =
-    this.$fetchState.error ? { _error: this.$fetchState.error } : purifyData(this._data)
-=======
   this.$ssrContext.nuxt.fetch.push(this.$fetchState.error ? { _error: this.$fetchState.error } : this._data)
->>>>>>> liuyoude
 }
 
 export default {
