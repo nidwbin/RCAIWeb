@@ -11,8 +11,16 @@
       <div class="row">
         <div class="col-lg-8">
           <div class="news_new_area">
-
+            <div class="new_add mb-4" v-if="admin">
+              <img :src="add_btn_image" @click="new_item" style="filter: brightness(98%)" width="100%">
+              <div class="footer">
+                发布新闻
+              </div>
+            </div>
           </div><!-- /.comment-one -->
+          <div class="card-header mb-3">
+            <div class="h2">新闻</div>
+          </div>
           <div v-for="item in lists" v-if="item.show || admin">
             <div class="comment-one__single">
               <div class="comment-one__image">
@@ -47,8 +55,11 @@
         </div><!-- /.comment-one -->
         <div class="col-lg-4">
           <div class="sidebar">
-            <div class="new_add mb-4" v-if="admin">
+            <div class="new_add mb-4 text-center" v-if="admin">
               <img :src="add_btn_image" @click="new_item" style="filter: brightness(98%)" width="100%">
+              <div class="footer">
+                发布新闻
+              </div>
             </div>
             <div class="sidebar__single sidebar__search">
               <form action="#" class="sidebar__search-form">
