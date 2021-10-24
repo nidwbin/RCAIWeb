@@ -332,15 +332,27 @@
                 data.append('type', this.type);
                 data.append('filetype', 'item');
                 data.append('name', this.viewing_edit.name);
+                data.append('source', this.viewing_edit.source);
+                data.append('bg_time', this.viewing_edit.bg_time);
+                data.append('ed_time', this.viewing_edit.ed_time);
+                data.append('value', this.viewing_edit.value);
+                data.append('principal', this.viewing_edit.principal);
                 data.append('class', this.viewing_edit.class);
-                data.append('abstract', this.viewing_edit.abstract);
+                data.append('state', this.viewing_edit.state);
+                data.append('desc', this.viewing_edit.desc);
                 data.append('image', this.upload_image);
                 this.post('/list/', data, data => {
                     switch (data['message']) {
                         case 'success': {
                             this.viewing.name = this.viewing_edit.name;
+                            this.viewing.source = this.viewing_edit.source;
+                            this.viewing.bg_time = this.viewing_edit.bg_time;
+                            this.viewing.ed_time = this.viewing_edit.ed_time;
+                            this.viewing.value = this.viewing_edit.value;
+                            this.viewing.principal = this.viewing_edit.principal;
                             this.viewing.class = this.viewing_edit.class;
-                            this.viewing.abstract = this.viewing_edit.abstract;
+                            this.viewing.state = this.viewing_edit.state;
+                            this.viewing.deac = this.viewing_edit.deac;
                             this.local = true;
                             this.viewing.image = data['content'];
                             bus.$emit('reload_hots');
