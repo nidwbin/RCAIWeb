@@ -12,3 +12,7 @@
 .markdown-body span{
   display: inline !important;
 }
+.v-note-panel{
+  min-height: 600px !important;
+}
+
