@@ -2221,6 +2221,8 @@ p {
 
 .single-service-area .single-project .single-project-thumb img {
   width: 100%;
+  max-height: 600px!important;
+  min-height: 300px!important;
 }
 
 .single-service-area .single-project .single-project-content .title {
