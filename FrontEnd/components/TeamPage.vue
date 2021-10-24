@@ -236,7 +236,6 @@
             },
             view(item) {
                 this.viewing = item;
-                console.log(item.image);
                 if (this.admin) {
                     this.viewing_edit = JSON.parse(JSON.stringify(item));
                     this.modal = true;

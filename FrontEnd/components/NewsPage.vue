@@ -11,7 +11,7 @@
       <div class="row">
         <div class="col-lg-8">
           <div class="news_new_area">
-            <div class="new_add mb-4" v-if="admin">
+            <div class="new_add mb-4 border-bottom" v-if="admin">
               <img :src="add_btn_image" @click="new_item" style="filter: brightness(98%)" width="100%">
               <div class="footer">
                 发布新闻
@@ -55,7 +55,7 @@
         </div><!-- /.comment-one -->
         <div class="col-lg-4">
           <div class="sidebar">
-            <div class="new_add mb-4 text-center" v-if="admin">
+            <div class="new_add mb-4 text-center border-bottom" v-if="admin">
               <img :src="add_btn_image" @click="new_item" style="filter: brightness(98%)" width="100%">
               <div class="footer">
                 发布新闻
