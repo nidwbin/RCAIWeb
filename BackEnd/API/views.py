@@ -10,12 +10,12 @@ from django.views.generic import View
 from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt
 from django.http import JsonResponse
 from django.conf import settings
-
-from API.function import Authority, AdminOP, NewsOP, PapersOP
+from API.function import Authority, AdminOP, NewsOP, PapersOP, StudentsOP
 
 authority = Authority()
 newsOP = NewsOP()
 papersOP = PapersOP()
+studentsOP = StudentsOP()
 
 
 # Create your views here.
@@ -80,7 +80,8 @@ class List(View):
             if filetype == 'pages':
                 ans = newsOP.count(admin=request.GET.get('admin') == 'true', pages=int(request.GET.get('per_page')))
             elif filetype == 'lists':
-                ans = newsOP.get_items(admin=request.GET.get('admin') == 'true', page=int(request.GET.get('page')))
+                ans = newsOP.get_items(admin=request.GET.get('admin') == 'true', page=int(request.GET.get('page')),
+                                       pages=int(request.GET.get('per_page')))
             elif filetype == 'hots':
                 ans = newsOP.get_hots(tops=int(request.GET.get('len')))
             elif filetype == 'item':
@@ -92,7 +93,12 @@ class List(View):
                 ans = papersOP.get_items(admin=request.GET.get('admin') == 'true', page=int(request.GET.get('page')))
             elif filetype == 'books':
                 pass
-
+        elif view_type == 'master' or view_type == 'doctor':
+            if filetype == 'pages':
+                ans = studentsOP.count(degree_type=view_type, pages=int(request.GET.get('per_page')))
+            elif filetype == 'lists':
+                ans = studentsOP.get_lists(degree_type=view_type, page=int(request.GET.get('page')),
+                                           pages=int(request.GET.get('per_page')))
         if ans is not False:
             return authority.get_response(request, JsonResponse({'message': 'success', 'content': ans}))
         else:
@@ -101,12 +107,12 @@ class List(View):
     def post(self, request):
         if authority.check_pass(request) or settings.DEBUG:
             view_type = request.POST.get('type')
-            filename = request.POST.get('filename')
             filetype = request.POST.get('filetype')
 
             ans = False
             if view_type == 'news':
                 if filetype == 'item':
+                    filename = request.POST.get('filename')
                     if filename == 'new':
                         ans = newsOP.create()
                     else:
@@ -115,6 +121,18 @@ class List(View):
                                                 request.FILES.get('image'))
             elif view_type == 'papers':
                 pass
+            elif view_type == 'master' or view_type == 'doctor':
+                id_ = request.POST.get('id')
+                if id_ == 'new':
+                    ans = studentsOP.create(name=request.POST.get('name'), homepage=request.POST.get('link'),
+                                            email=request.POST.get('email'), degree_type=view_type,
+                                            degree=request.POST.get('class'), overview=request.POST.get('abstract'),
+                                            image=request.FILES.get('image_file'))
+                else:
+                    ans = studentsOP.change(id_=id_, name=request.POST.get('name'), homepage=request.POST.get('link'),
+                                            email=request.POST.get('email'), degree_type=view_type,
+                                            degree=request.POST.get('class'), overview=request.POST.get('abstract'),
+                                            image=request.FILES.get('image_file'))
             if ans is not False:
                 return authority.get_response(request, JsonResponse({'message': 'success', 'content': ans}))
         return authority.get_response(request, JsonResponse({'message': 'error'}))
@@ -128,6 +146,8 @@ class List(View):
             if view_type == 'news':
                 if filetype == 'item':
                     ans = newsOP.delete(filename)
+            elif view_type == 'master' or view_type == 'doctor':
+                ans = studentsOP.delete(filename)
             if ans is not False:
                 return authority.get_response(request, JsonResponse({'message': 'success'}))
         return authority.get_response(request, JsonResponse({'message': 'error'}))

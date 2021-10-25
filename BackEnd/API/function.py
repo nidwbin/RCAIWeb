@@ -13,7 +13,7 @@ import math
 
 from django.core.files.base import ContentFile
 from django.contrib.auth.hashers import make_password, check_password
-from API.models import Admin, Image, News, Papers
+from API.models import Admin, Image, News, Papers, People, Student
 from django.conf import settings
 
 
@@ -161,9 +161,8 @@ class HeaderOP:
 
     @staticmethod
     def __get_dict__(item):
-        ret_dict = {'title': item.title, 'image': item.image_name, 'date': item.date, 'filename': item.filename,
-                    'show': item.show, 'overview': item.overview}
-        return ret_dict.copy()
+        return {'title': item.title, 'image': item.image_name, 'date': item.date, 'filename': item.filename,
+                'show': item.show, 'overview': item.overview}.copy()
 
     @staticmethod
     def __get_list__(items):
@@ -225,10 +224,10 @@ class HeaderOP:
             print(e)
         return False
 
-    def get_items(self, admin: bool = False, page: int = 1):
+    def get_items(self, admin: bool = False, page: int = 1, pages: int = 10):
         try:
             items = self.Obj.objects.filter() if admin else self.Obj.objects.filter(show=True)
-            items = items.order_by('-date')[(page - 1) * 10:page * 10]
+            items = items.order_by('-date')[(page - 1) * pages:page * pages]
             return HeaderOP.__get_list__(items)
         except Exception as e:
             print(e)
@@ -300,3 +299,109 @@ class PapersOP(ImageOP, HeaderOP):
 
     def delete(self, filename: str):
         return super(PapersOP, self).delete_images(filename) if super(PapersOP, self).delete_header(filename) else False
+
+
+class PeopleOP:
+    def __init__(self, obj):
+        self.Obj = obj
+
+    def change_info(self, id_: int, name: str, homepage: str, email: str, image):
+        try:
+            people = self.Obj.objects.get(id=id_)
+            people.name = name
+            people.homepage = homepage
+            people.email = email
+            if image:
+                image_name = str(uuid.uuid4()) + os.path.splitext(image.name)[1]
+                people.image.delete()
+                people.image_name = image_name
+                people.image = image
+                people.image.name = image_name
+            people.save()
+            return True
+        except Exception as e:
+            print(e)
+        return False
+
+    def delete_info(self, id_: int):
+        try:
+            people = self.Obj.objects.get(id=id_)
+            people.image.delete()
+            people.delete()
+            return True
+        except Exception as e:
+            print(e)
+        return False
+
+
+class StudentsOP(PeopleOP):
+    def __init__(self):
+        super(StudentsOP, self).__init__(Student)
+
+    @staticmethod
+    def __get_dict__(student):
+        return {'id': student.id,
+                'name': student.name,
+                'image': student.image_name,
+                'class': student.degree,
+                'email': student.email,
+                'link': student.homepage,
+                'abstract': student.overview}.copy()
+
+    @staticmethod
+    def __get_list__(students):
+        ret_list = []
+        for i in students:
+            ret_list.append(StudentsOP.__get_dict__(i))
+        return ret_list.copy()
+
+    @staticmethod
+    def count(degree_type: str, pages: int):
+        try:
+            students = Student.objects.filter(degree_type=degree_type)
+            length = math.ceil(len(students) / pages)
+            return length
+        except Exception as e:
+            print(e)
+        return False
+
+    @staticmethod
+    def get_lists(degree_type: str, page: int = 1, pages: int = 6):
+        try:
+            students = Student.objects.filter(degree_type=degree_type)
+            return StudentsOP.__get_list__(students[(page - 1) * pages:page * pages])
+        except Exception as e:
+            print(e)
+        return False
+
+    @staticmethod
+    def create(name: str, homepage: str, email: str, degree_type: str, degree: str, overview: str, image):
+        try:
+            if image:
+                image_name = str(uuid.uuid4()) + os.path.splitext(image.name)[1]
+            else:
+                image_name = ''
+            student = Student(name=name, homepage=homepage, email=email, degree_type=degree_type, degree=degree,
+                              overview=overview, image_name=image_name)
+            if image:
+                student.image = image
+                student.image.name = image_name
+            student.save()
+            return True
+        except Exception as e:
+            print(e)
+        return False
+
+    def change(self, id_: int, name: str, homepage: str, email: str, degree_type: str, degree: str, overview: str,
+               image):
+        try:
+            student = Student.objects.get(id=id_, degree_type=degree_type)
+            student.degree = degree
+            student.overview = overview
+            return self.change_info(id_, name, homepage, email, image)
+        except Exception as e:
+            print(e)
+        return False
+
+    def delete(self, id_: int):
+        return self.delete_info(id_)

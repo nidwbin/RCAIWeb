@@ -61,7 +61,8 @@ class People(models.Model):
     name = models.CharField(max_length=30, verbose_name="姓名")
     homepage = models.CharField(max_length=50, null=True, blank=True, verbose_name="主页地址")
     email = models.EmailField(max_length=100, null=True, blank=True, verbose_name="邮箱")
-    photo = models.ImageField(upload_to='media/images')
+    image = models.ImageField(upload_to='images/people')
+    image_name = models.CharField(max_length=50, verbose_name="图片名")
 
     class Meta:
         abstract = True
@@ -74,6 +75,7 @@ class Teacher(People):
 
 
 class Student(People):
+    degree_type = models.CharField(max_length=30, verbose_name="学位类型")
     degree = models.CharField(max_length=30, verbose_name="学位")
     overview = models.TextField(verbose_name="简介")
 

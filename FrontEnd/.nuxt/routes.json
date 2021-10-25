@@ -2,85 +2,85 @@
   {
     "name": "contact-students",
     "path": "/contact-students",
-    "component": "D:\\\\A_MySpace\\\\HIT\\\\SPLab\\\\RCAIWeb\\\\FrontEnd\\\\pages\\\\contact-students.vue",
+    "component": "/home/benjamin/codes/python/RACIWeb/FrontEnd/pages/contact-students.vue",
     "chunkName": "pages/contact-students",
-    "_name": "_3612ccbe"
+    "_name": "_4112f673"
   },
   {
     "name": "contact-teachers",
     "path": "/contact-teachers",
-    "component": "D:\\\\A_MySpace\\\\HIT\\\\SPLab\\\\RCAIWeb\\\\FrontEnd\\\\pages\\\\contact-teachers.vue",
+    "component": "/home/benjamin/codes/python/RACIWeb/FrontEnd/pages/contact-teachers.vue",
     "chunkName": "pages/contact-teachers",
-    "_name": "_3d3b7f4c"
+    "_name": "_3d7e9d2c"
   },
   {
     "name": "direction",
     "path": "/direction",
-    "component": "D:\\\\A_MySpace\\\\HIT\\\\SPLab\\\\RCAIWeb\\\\FrontEnd\\\\pages\\\\direction.vue",
+    "component": "/home/benjamin/codes/python/RACIWeb/FrontEnd/pages/direction.vue",
     "chunkName": "pages/direction",
-    "_name": "_3efd6233"
+    "_name": "_6abfeda1"
   },
   {
     "name": "doctor",
     "path": "/doctor",
-    "component": "D:\\\\A_MySpace\\\\HIT\\\\SPLab\\\\RCAIWeb\\\\FrontEnd\\\\pages\\\\doctor.vue",
+    "component": "/home/benjamin/codes/python/RACIWeb/FrontEnd/pages/doctor.vue",
     "chunkName": "pages/doctor",
-    "_name": "_c418bbca"
+    "_name": "_4fe47d6d"
   },
   {
     "name": "login",
     "path": "/login",
-    "component": "D:\\\\A_MySpace\\\\HIT\\\\SPLab\\\\RCAIWeb\\\\FrontEnd\\\\pages\\\\login.vue",
+    "component": "/home/benjamin/codes/python/RACIWeb/FrontEnd/pages/login.vue",
     "chunkName": "pages/login",
-    "_name": "_5fa1731d"
+    "_name": "_655ee58b"
   },
   {
     "name": "master",
     "path": "/master",
-    "component": "D:\\\\A_MySpace\\\\HIT\\\\SPLab\\\\RCAIWeb\\\\FrontEnd\\\\pages\\\\master.vue",
+    "component": "/home/benjamin/codes/python/RACIWeb/FrontEnd/pages/master.vue",
     "chunkName": "pages/master",
-    "_name": "_f4663c44"
+    "_name": "_37bdbd30"
   },
   {
     "name": "news",
     "path": "/news",
-    "component": "D:\\\\A_MySpace\\\\HIT\\\\SPLab\\\\RCAIWeb\\\\FrontEnd\\\\pages\\\\news.vue",
+    "component": "/home/benjamin/codes/python/RACIWeb/FrontEnd/pages/news.vue",
     "chunkName": "pages/news",
-    "_name": "_a7e86a62"
+    "_name": "_86815abe"
   },
   {
     "name": "papers",
     "path": "/papers",
-    "component": "D:\\\\A_MySpace\\\\HIT\\\\SPLab\\\\RCAIWeb\\\\FrontEnd\\\\pages\\\\papers.vue",
+    "component": "/home/benjamin/codes/python/RACIWeb/FrontEnd/pages/papers.vue",
     "chunkName": "pages/papers",
-    "_name": "_27c54d63"
+    "_name": "_4c93ae96"
   },
   {
     "name": "projects",
     "path": "/projects",
-    "component": "D:\\\\A_MySpace\\\\HIT\\\\SPLab\\\\RCAIWeb\\\\FrontEnd\\\\pages\\\\projects.vue",
+    "component": "/home/benjamin/codes/python/RACIWeb/FrontEnd/pages/projects.vue",
     "chunkName": "pages/projects",
-    "_name": "_023a1af6"
+    "_name": "_093d2c70"
   },
   {
     "name": "teacher",
     "path": "/teacher",
-    "component": "D:\\\\A_MySpace\\\\HIT\\\\SPLab\\\\RCAIWeb\\\\FrontEnd\\\\pages\\\\teacher.vue",
+    "component": "/home/benjamin/codes/python/RACIWeb/FrontEnd/pages/teacher.vue",
     "chunkName": "pages/teacher",
-    "_name": "_50937416"
+    "_name": "_4683f9f8"
   },
   {
     "name": "view",
     "path": "/view",
-    "component": "D:\\\\A_MySpace\\\\HIT\\\\SPLab\\\\RCAIWeb\\\\FrontEnd\\\\pages\\\\view.vue",
+    "component": "/home/benjamin/codes/python/RACIWeb/FrontEnd/pages/view.vue",
     "chunkName": "pages/view",
-    "_name": "_bfa17cbe"
+    "_name": "_9e3a6d1a"
   },
   {
     "name": "index",
     "path": "/",
-    "component": "D:\\\\A_MySpace\\\\HIT\\\\SPLab\\\\RCAIWeb\\\\FrontEnd\\\\pages\\\\index.vue",
+    "component": "/home/benjamin/codes/python/RACIWeb/FrontEnd/pages/index.vue",
     "chunkName": "pages/index",
-    "_name": "_d40c5ff4"
+    "_name": "_c8917b18"
   }
 ]

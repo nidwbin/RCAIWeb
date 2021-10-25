@@ -12,7 +12,7 @@
         <div class="col-lg-8">
           <div class="news_new_area">
             <div class="new_add mb-4 border-bottom" v-if="admin">
-              <img :src="add_btn_image" @click="new_item" style="filter: brightness(98%)" width="100%">
+              <img :src="add_btn_image" class="img_filter" @click="new_item" width="100%">
               <div class="footer">
                 发布新闻
               </div>
@@ -56,7 +56,7 @@
         <div class="col-lg-4">
           <div class="sidebar">
             <div class="new_add mb-4 text-center border-bottom" v-if="admin">
-              <img :src="add_btn_image" @click="new_item" style="filter: brightness(98%)" width="100%">
+              <img :src="add_btn_image" @click="new_item" class="img_filter" width="100%">
               <div class="footer">
                 发布新闻
               </div>
@@ -115,117 +115,120 @@
       </div><!-- /.row -->
     </div><!-- /.container -->
     <HeaderArea ref="header" :type="type" :btn_more="true"/>
-    <PagesList ref="page" :type="type" @change_page="load_list"/>
+    <PagesList ref="page" :type="type" :per_page="per_page" @change_page="load_list"/>
   </section>
 </template>
 
 <script>
-    import PagesList from "./PagesList";
-    import Functions from "./Functions";
-    import HeaderArea from "./HeaderArea";
-    import {bus} from "@/plugins/bus";
+import PagesList from "./PagesList";
+import Functions from "./Functions";
+import HeaderArea from "./HeaderArea";
+import {bus} from "@/plugins/bus";
 
-    export default {
-        name: "NewsPage",
-        mixins: [Functions],
-        components: {PagesList, HeaderArea},
-        data() {
-            return {
-                type: 'news',
-                lists: [],
-                hots: [],
-                image_base: this.$store.state.image_base + 'header/',
-                add_btn_image: '/static/images/default/header.png',
-            }
-        },
-        mounted() {
-            this.load_list(1);
-            this.load_hots(5);
-            this.listen_events();
-        },
-        computed: {
-            admin() {
-                return this.$store.state.admin;
-            }
-        },
-        methods: {
-            listen_events() {
-                bus.$on('reload_list', () => {
-                    this.$refs.page.change_page(-2);
-                });
-                bus.$on('reload_hots', () => {
-                    this.load_hots(5);
-                });
-            },
-            stop_listen() {
-                bus.$off(['reload_list', 'reload_hots']);
-            },
-            more(item) {
-                this.$router.push({name: 'view', query: {type: this.type, filename: item.filename}});
-            },
-            remove(item) {
-                this.$refs.header.remove(item);
-            },
-            view(item) {
-                this.$refs.header.view(item);
-            },
-            load_list(page) {
-                this.get('/list/', {type: this.type, filetype: 'lists', admin: this.admin, page: page},
-                    data => {
-                        switch (data['message']) {
-                            case 'success': {
-                                this.lists = data['content'];
-                                break;
-                            }
-                            case 'error': {
-                                break;
-                            }
-                            default: {
-                                this.$toast.info(data['message']);
-                            }
-                        }
-                    })
-            },
-            load_hots(len) {
-                this.get('/list/', {type: this.type, filetype: 'hots', len: len},
-                    data => {
-                        switch (data['message']) {
-                            case 'success': {
-                                this.hots = data['content'];
-                                break;
-                            }
-                            case 'error': {
-                                break;
-                            }
-                            default: {
-                                this.$toast.info(data['message']);
-                            }
-                        }
-                    })
-            },
-            new_item() {
-                this.post('/list/', {type: this.type, filetype: 'item', filename: 'new'}, data => {
-                    switch (data['message']) {
-                        case 'success': {
-                            this.$router.push({name: 'view', query: {type: this.type, filename: data['content']}});
-                            break;
-                        }
-                        case 'error': {
-                            break;
-                        }
-                        default: {
-                            this.$toast.info(data['message']);
-                        }
-                    }
-                })
-            },
-        },
-        destroyed() {
-            this.stop_listen();
-        }
+export default {
+  name: "NewsPage",
+  mixins: [Functions],
+  components: {PagesList, HeaderArea},
+  data() {
+    return {
+      type: 'news',
+      lists: [],
+      hots: [],
+      per_page: 10,
+      image_base: this.$store.state.image_base + 'header/',
+      add_btn_image: '/static/images/default/header.png',
     }
+  },
+  mounted() {
+    this.load_list(1);
+    this.load_hots(5);
+    this.listen_events();
+  },
+  computed: {
+    admin() {
+      return this.$store.state.admin;
+    }
+  },
+  methods: {
+    listen_events() {
+      bus.$on('reload_list', () => {
+        this.$refs.page.change_page(-2);
+      });
+      bus.$on('reload_hots', () => {
+        this.load_hots(5);
+      });
+    },
+    stop_listen() {
+      bus.$off(['reload_list', 'reload_hots']);
+    },
+    more(item) {
+      this.$router.push({name: 'view', query: {type: this.type, filename: item.filename}});
+    },
+    remove(item) {
+      this.$refs.header.remove(item);
+    },
+    view(item) {
+      this.$refs.header.view(item);
+    },
+    load_list(page) {
+      this.get('/list/', {type: this.type, filetype: 'lists', admin: this.admin, page: page, per_page: this.per_page},
+        data => {
+          switch (data['message']) {
+            case 'success': {
+              this.lists = data['content'];
+              break;
+            }
+            case 'error': {
+              break;
+            }
+            default: {
+              this.$toast.info(data['message']);
+            }
+          }
+        })
+    },
+    load_hots(len) {
+      this.get('/list/', {type: this.type, filetype: 'hots', len: len},
+        data => {
+          switch (data['message']) {
+            case 'success': {
+              this.hots = data['content'];
+              break;
+            }
+            case 'error': {
+              break;
+            }
+            default: {
+              this.$toast.info(data['message']);
+            }
+          }
+        })
+    },
+    new_item() {
+      this.post('/list/', {type: this.type, filetype: 'item', filename: 'new'}, data => {
+        switch (data['message']) {
+          case 'success': {
+            this.$router.push({name: 'view', query: {type: this.type, filename: data['content']}});
+            break;
+          }
+          case 'error': {
+            break;
+          }
+          default: {
+            this.$toast.info(data['message']);
+          }
+        }
+      })
+    },
+  },
+  destroyed() {
+    this.stop_listen();
+  }
+}
 </script>
 
 <style scoped>
-
+.img_filter {
+  filter: brightness(98%)
+}
 </style>

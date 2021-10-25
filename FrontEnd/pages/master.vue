@@ -9,8 +9,7 @@
   <div>
     <Nav />
     <PageHeader title_zh="中心研究生" title_en="Masters" />
-    <TeamPage />
-    <PagesList />
+    <TeamPage type="master"/>
     <Footer />
   </div>
 </template>
@@ -21,13 +20,11 @@
   import Footer from "../components/Footer";
   import PageHeader from "../components/PageHeader";
   import TeamPage from "../components/TeamPage";
-  import PagesList from "../components/PagesList";
   export default {
     components: {
       Nav,
       PageHeader,
       TeamPage,
-      PagesList,
       Footer,
     },
     head(){
