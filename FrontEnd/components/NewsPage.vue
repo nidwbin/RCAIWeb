@@ -19,7 +19,7 @@
             </div>
           </div><!-- /.comment-one -->
           <div class="card-header mb-3">
-            <div class="h2">新闻</div>
+            <div class="h2"><span class="	fa fa-newspaper-o">&nbsp;&nbsp;</span>新闻</div>
           </div>
           <div v-for="item in lists" v-if="item.show || admin">
             <div class="comment-one__single">
