@@ -11,11 +11,11 @@
             <div class="card mb-1">
               <div v-if="viewing_edit.image === 'header.png'">
                 <img :src="default_image" class="card-img-top" alt=""
-                   style="max-height: 500px;">
+                     style="max-height: 500px;">
               </div>
               <div v-else>
                 <img :src="(local?'':image_base)+viewing_edit.image" class="card-img-top" alt=""
-                   style="max-height: 500px;">
+                     style="max-height: 500px;">
               </div>
             </div>
             <div class="input-group mb-3">
@@ -55,8 +55,10 @@
             <button type="button" class="btn btn-primary" @click="more" v-if="btn_more">
               <span class="fa fa-eye"></span>&nbsp;&nbsp;查看
             </button>
-            <button type="button" class="btn btn-warning" @click="edit"><span class="fa fa-edit"></span>&nbsp;&nbsp;修改</button>
-            <button type="button" class="btn btn-danger" @click="remove(viewing_edit)"><span class="fa fa-trash-o"></span>&nbsp;&nbsp;删除
+            <button type="button" class="btn btn-warning" @click="edit"><span class="fa fa-edit"></span>&nbsp;&nbsp;修改
+            </button>
+            <button type="button" class="btn btn-danger" @click="remove(viewing_edit)"><span
+              class="fa fa-trash-o"></span>&nbsp;&nbsp;删除
             </button>
           </div>
         </div>
@@ -67,117 +69,118 @@
 </template>
 
 <script>
-    import Functions from "./Functions";
-    import {bus} from "@/plugins/bus";
+import Functions from "./Functions";
+import {bus} from "@/plugins/bus";
 
-    export default {
-        name: "HeaderArea",
-        mixins: [Functions],
-        props: {
-            type: {
-                type: String,
-                default: '',
-            },
-            btn_more: {
-                type: Boolean,
-                default: false,
-            }
-        },
-        data() {
-            return {
-                modal: false,
-                local: false,
-                viewing: null,
-                viewing_edit: null,
-                upload_image: null,
-                image_base: this.$store.state.image_base + 'header/',
-                default_image: "/static/images/default/image.jpg",
-            }
-        },
-        computed: {
-            admin() {
-                return this.$store.state.admin;
-            }
-        },
-        methods: {
-            change_image(e) {
-                let file = e.target.files[0];
-                this.upload_image = file;
-                this.local = true;
-                this.viewing_edit.image = window.URL.createObjectURL(file);
-            },
-            view(item) {
-                this.viewing = item;
-                if (this.admin) {
-                    this.viewing_edit = JSON.parse(JSON.stringify(item));
-                    this.modal = true;
-                } else {
-                    this.$router.push({name: 'view', query: {type: this.type, filename: this.viewing.filename}});
-                }
-            },
-            more() {
-                this.$router.push({name: 'view', query: {type: this.type, filename: this.viewing.filename}});
-            },
-            remove(item) {
-                this.delete('/list/', {type: this.type, filetype: 'item', filename: item.filename}, data => {
-                    switch (data['message']) {
-                        case 'success': {
-                            bus.$emit('reload_list');
-                            bus.$emit('reload_hots');
-                            break;
-                        }
-                        case 'error': {
-                            this.$toast.error('删除失败');
-                            break;
-                        }
-                        default: {
-                            this.$toast.info(data['message']);
-                        }
-                    }
-                });
-                this.modal = false;
-            },
-            edit() {
-                let data = new FormData();
-                data.append('type', this.type);
-                data.append('filetype', 'item');
-                data.append('filename', this.viewing_edit.filename);
-                data.append('date', this.viewing_edit.date);
-                data.append('show', this.viewing_edit.show);
-                data.append('title', this.viewing_edit.title);
-                data.append('overview', this.viewing_edit.overview);
-                data.append('image', this.upload_image);
-                this.post('/list/', data, data => {
-                    switch (data['message']) {
-                        case 'success': {
-                            this.viewing.filename = this.viewing_edit.filename;
-                            this.viewing.date = this.viewing_edit.date;
-                            this.viewing.show = this.viewing_edit.show;
-                            this.viewing.title = this.viewing_edit.title;
-                            this.viewing.overview = this.viewing_edit.overview;
-                            this.local = false;
-                            this.viewing.image = data['content'];
-                            bus.$emit('reload_hots');
-                            break;
-                        }
-                        case 'error': {
-                            this.$toast.error('修改失败');
-                            break;
-                        }
-                        default: {
-                            this.$toast.info(data['message']);
-                        }
-                    }
-                })
-                this.modal = false;
-            },
-        }
+export default {
+  name: "HeaderArea",
+  mixins: [Functions],
+  props: {
+    type: {
+      type: String,
+      default: '',
+    },
+    btn_more: {
+      type: Boolean,
+      default: false,
     }
+  },
+  data() {
+    return {
+      modal: false,
+      local: false,
+      viewing: null,
+      viewing_edit: null,
+      upload_image: null,
+      image_base: this.$store.state.image_base + 'header/',
+      default_image: "/static/images/default/image.jpg",
+    }
+  },
+  computed: {
+    admin() {
+      return this.$store.state.admin;
+    }
+  },
+  methods: {
+    change_image(e) {
+      let file = e.target.files[0];
+      this.upload_image = file;
+      this.local = true;
+      this.viewing_edit.image = window.URL.createObjectURL(file);
+    },
+    view(item) {
+      this.viewing = item;
+      if (this.admin) {
+        this.viewing_edit = JSON.parse(JSON.stringify(item));
+        this.modal = true;
+      } else {
+        this.$router.push({name: 'view', query: {type: this.type, filename: this.viewing.filename}});
+      }
+    },
+    more() {
+      this.$router.push({name: 'view', query: {type: this.type, filename: this.viewing.filename}});
+    },
+    remove(item) {
+      this.delete('/list/', {type: this.type, filetype: 'item', filename: item.filename}, data => {
+        switch (data['message']) {
+          case 'success': {
+            bus.$emit('reload_list');
+            bus.$emit('reload_hots');
+            break;
+          }
+          case 'error': {
+            this.$toast.error('删除失败');
+            break;
+          }
+          default: {
+            this.$toast.info(data['message']);
+          }
+        }
+      });
+      this.modal = false;
+    },
+    edit() {
+      let data = new FormData();
+      data.append('type', this.type);
+      data.append('filetype', 'item');
+      data.append('filename', this.viewing_edit.filename);
+      data.append('date', this.viewing_edit.date);
+      data.append('show', this.viewing_edit.show);
+      data.append('title', this.viewing_edit.title);
+      data.append('overview', this.viewing_edit.overview);
+      data.append('image', this.upload_image);
+      this.post('/list/', data, data => {
+        switch (data['message']) {
+          case 'success': {
+            this.viewing.filename = this.viewing_edit.filename;
+            this.viewing.date = this.viewing_edit.date;
+            this.viewing.show = this.viewing_edit.show;
+            this.viewing.title = this.viewing_edit.title;
+            this.viewing.overview = this.viewing_edit.overview;
+            this.local = false;
+            this.viewing.image = data['content'];
+            bus.$emit('reload_hots');
+            break;
+          }
+          case 'error': {
+            this.$toast.error('修改失败');
+            break;
+          }
+          default: {
+            this.$toast.info(data['message']);
+          }
+        }
+      })
+      this.modal = false;
+    },
+  }
+}
 </script>
 
 <style scoped>
-  .modal {
-    z-index: 2001;
-    display: block;
-  }
+.modal {
+  display: block;
+  z-index: 2001;
+}
+
 </style>

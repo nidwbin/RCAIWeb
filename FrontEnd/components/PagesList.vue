@@ -37,6 +37,10 @@ export default {
       type: String,
       default: '',
     },
+    per_page: {
+      type: Number,
+      default: 10,
+    }
   },
   data() {
     return {
@@ -49,7 +53,7 @@ export default {
       return this.$store.state.admin;
     },
     hidden() {
-      return this.pages.length === 1
+      return this.pages.length <= 1;
     }
   },
   mounted() {
@@ -57,7 +61,7 @@ export default {
   },
   methods: {
     get_pages() {
-      this.get('/list/', {type: this.type, filetype: 'pages', admin: this.admin, per_page: 10},
+      this.get('/list/', {type: this.type, filetype: 'pages', admin: this.admin, per_page: this.per_page},
         data => {
           switch (data['message']) {
             case 'success': {
