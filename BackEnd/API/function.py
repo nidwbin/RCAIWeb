@@ -13,7 +13,7 @@ import math
 
 from django.core.files.base import ContentFile
 from django.contrib.auth.hashers import make_password, check_password
-from API.models import Admin, Image, News, Papers, People, Student
+from API.models import Admin, Image, News, Papers, People, Student, Project, Fields
 from django.conf import settings
 
 
@@ -405,3 +405,178 @@ class StudentsOP(PeopleOP):
 
     def delete(self, id_: int):
         return self.delete_info(id_)
+
+
+class ProjectsOP:
+    @staticmethod
+    def __get_dict__(project):
+        return {'id': project.id,
+                'name': project.name,
+                'genre': project.genre,
+                'source': project.source,
+                'start_date': project.start_date,
+                'finish_date': project.finish_date,
+                'budget': project.budget,
+                'role': project.role,
+                'status': project.status,
+                'image': project.image_name}.copy()
+
+    @staticmethod
+    def __get_list__(projects):
+        ret_list = []
+        for i in projects:
+            ret_list.append(ProjectsOP.__get_dict__(i))
+        return ret_list.copy()
+
+    @staticmethod
+    def count(pages: int):
+        try:
+            projects = Project.objects.filter()
+            length = math.ceil(len(projects) / pages)
+            return length
+        except Exception as e:
+            print(e)
+        return False
+
+    @staticmethod
+    def get_lists(page: int = 1, pages: int = 6):
+        try:
+            projects = Project.objects.filter()
+            return ProjectsOP.__get_list__(projects[(page - 1) * pages:page * pages])
+        except Exception as e:
+            print(e)
+        return False
+
+    @staticmethod
+    def create(name: str, genre: str, source: str, start_date: str, finish_date: str, budget: str, role: str,
+               status: str, image):
+        try:
+            if image:
+                image_name = str(uuid.uuid4()) + os.path.splitext(image.name)[1]
+            else:
+                image_name = ''
+            project = Project(name=name, genre=genre, source=source, start_date=start_date, finish_date=finish_date,
+                              budget=budget, role=role, status=status, image_name=image_name)
+            if image:
+                project.image = image
+                project.image.name = image_name
+            project.save()
+            return True
+        except Exception as e:
+            print(e)
+        return False
+
+    @staticmethod
+    def change(id_: int, name: str, genre: str, source: str, start_date: str, finish_date: str, budget: str, role: str,
+               status: str, image):
+        try:
+            project = Project.objects.get(id=id_)
+            project.name = name
+            project.genre = genre
+            project.source = source
+            project.start_date = start_date
+            project.finish_date = finish_date
+            project.budget = budget
+            project.role = role
+            project.status = status
+            if image:
+                image_name = str(uuid.uuid4()) + os.path.splitext(image.name)[1]
+                project.image.delete()
+                project.image_name = image_name
+                project.image = image
+                project.image.name = image_name
+            project.save()
+        except Exception as e:
+            print(e)
+        return False
+
+    @staticmethod
+    def delete(id_: int):
+        try:
+            project = Project.objects.get(id=id_)
+            project.image.delete()
+            project.delete()
+            return True
+        except Exception as e:
+            print(e)
+        return False
+
+
+class FieldsOP:
+    @staticmethod
+    def __get_dict__(field):
+        return {'id': field.id,
+                'name': field.name,
+                'genre': field.genre,
+                'image': field.image_name}.copy()
+
+    @staticmethod
+    def __get_list__(fields):
+        ret_list = []
+        for i in fields:
+            ret_list.append(FieldsOP.__get_dict__(i))
+        return ret_list.copy()
+
+    @staticmethod
+    def count(pages: int):
+        try:
+            fields = Fields.objects.filter()
+            length = math.ceil(len(fields) / pages)
+            return length
+        except Exception as e:
+            print(e)
+        return False
+
+    @staticmethod
+    def get_lists(page: int = 1, pages: int = 6):
+        try:
+            fields = Fields.objects.filter()
+            return FieldsOP.__get_list__(fields[(page - 1) * pages:page * pages])
+        except Exception as e:
+            print(e)
+        return False
+
+    @staticmethod
+    def create(name: str, description: str, image):
+        try:
+            if image:
+                image_name = str(uuid.uuid4()) + os.path.splitext(image.name)[1]
+            else:
+                image_name = ''
+            fields = Fields(name=name, description=description,  image_name=image_name)
+            if image:
+                fields.image = image
+                fields.image.name = image_name
+            fields.save()
+            return True
+        except Exception as e:
+            print(e)
+        return False
+
+    @staticmethod
+    def change(id_: int, name: str, description: str, image):
+        try:
+            fields = Fields.objects.get(id=id_)
+            fields.name = name
+            fields.description = description
+            if image:
+                image_name = str(uuid.uuid4()) + os.path.splitext(image.name)[1]
+                fields.image.delete()
+                fields.image_name = image_name
+                fields.image = image
+                fields.image.name = image_name
+            fields.save()
+        except Exception as e:
+            print(e)
+        return False
+
+    @staticmethod
+    def delete(id_: int):
+        try:
+            fields = Fields.objects.get(id=id_)
+            fields.image.delete()
+            fields.delete()
+            return True
+        except Exception as e:
+            print(e)
+        return False
