@@ -270,10 +270,7 @@
                 data.append('filetype', 'item');
                 data.append('id', this.viewing_edit.id);
                 data.append('name', this.viewing_edit.name);
-                data.append('email', this.viewing_edit.email);
-                data.append('link', this.viewing_edit.link);
-                data.append('class', this.viewing_edit.class);
-                data.append('abstract', this.viewing_edit.abstract);
+                data.append('desc', this.viewing_edit.desc);
                 data.append('image', this.viewing_edit.image);
                 data.append('image_file', this.upload_image);
                 this.post('/list/', data, data => {
