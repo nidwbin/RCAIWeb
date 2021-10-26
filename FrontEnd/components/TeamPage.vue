@@ -29,7 +29,7 @@
         <div class="col-lg-4 col-md-6 col-sm-9" v-for="item in items">
           <div class="leadership-item mt-30">
             <div class="leadership-thumb">
-              <img :src=" item.image===''?default_image:(local?'':image_base)+item.image" alt="doctors">
+              <img :src=" item.image===''?default_image:image_base+item.image" alt="doctors">
               <div class="social">
                 <a href="#"><i class="fa fa-plus"></i></a>
                 <ul>
@@ -196,7 +196,7 @@
                 let file = e.target.files[0];
                 this.upload_image = file;
                 this.local = true;
-                this.viewing_edit.image = window.URL.createObjectURL(file);
+                this.viewing_edit.image = file ? window.URL.createObjectURL(file) : this.viewing_edit.image;
             },
             create() {
                 this.view(JSON.parse(JSON.stringify(this.new_item)), true);

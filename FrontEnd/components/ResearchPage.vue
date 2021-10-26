@@ -23,7 +23,7 @@
                     <p>{{ item.desc }}</p>
                   </div>
                 </div>
-                <div class="mt-4 mb-4" v-if="admin">
+                <div class="pt-2 pb-2" v-if="admin">
                   <button type="button" class="btn btn-primary btn-lg float-right" @click="create">
                     <span class="fa fa-edit"></span>&nbsp;&nbsp;新增
                   </button>
@@ -31,7 +31,7 @@
                 <div class="item_footer"></div>
               </div>
               <div class="card-header mb-5">
-                <h2><span class="	fa fa-codepen"></span>&nbsp;&nbsp;研究方向</h2>
+                <div class="h2"><span class="	fa fa-codepen" style="color: #ff5316"></span>&nbsp;&nbsp;研究方向</div>
               </div>
               <div v-for="item in items">
                 <div class="item d-block d-sm-flex align-items-center">
@@ -44,7 +44,7 @@
                     <p>{{ item.desc }}</p>
                   </div>
                 </div>
-                <div class="mt-4 mb-4" v-if="admin">
+                <div class=" pt-2 pb-2" v-if="admin">
                   <button type="button" class="btn btn-danger btn-lg float-right" @click="remove(item)">
                     <span class="fa fa-trash-o"></span>&nbsp;&nbsp;删除
                   </button>
@@ -117,7 +117,7 @@
       </div>
       <div class="modal-backdrop show" style=" z-index: 2000"></div>
     </div>
-
+    <PagesList ref="page" :type="this.type" @change_page="load_list"/>
     <div>
       <!--  <div v-else>-->
       <!--    <div class="direction-area pt-115">-->

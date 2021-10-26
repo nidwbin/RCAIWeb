@@ -19,7 +19,7 @@
             </div>
           </div><!-- /.comment-one -->
           <div class="card-header mb-3">
-            <div class="h2"><span class="	fa fa-newspaper-o">&nbsp;&nbsp;</span>新闻</div>
+            <div class="h2"><span class="	fa fa-newspaper-o" style="color: #ff5316;">&nbsp;&nbsp;</span>新闻</div>
           </div>
           <div v-for="item in lists" v-if="item.show || admin">
             <div class="comment-one__single">
@@ -40,16 +40,21 @@
               <!--              </div>-->
               <!-- /.thm-btn comment-one__btn -->
             </div><!-- /.comment-one__single -->
-            <div class="comment-one__footer">
-              <button type="button" class="btn btn-primary" v-if="admin" @click="more(item)">
-                <span class="fa fa-eye"></span>&nbsp;&nbsp;查看
-              </button>
-              <button type="button" class="btn btn-warning" v-if="admin" @click="view(item)">
-                <span class="fa fa-edit"></span>&nbsp;&nbsp;编辑
-              </button>
-              <button type="button" class="btn btn-danger" v-if="admin" @click="remove(item)">
+            <div class="pb-5 pt-1" v-if="admin">
+              <button type="button" class="btn btn-danger float-right" v-if="admin" @click="remove(item)">
                 <span class="fa fa-trash-o"></span>&nbsp;&nbsp;删除
               </button>
+              <span class="float-right">&nbsp;</span>
+              <button type="button" class="btn btn-warning float-right" v-if="admin" @click="view(item)">
+                <span class="fa fa-edit"></span>&nbsp;&nbsp;编辑
+              </button>
+              <span class="float-right">&nbsp;</span>
+              <button type="button" class="btn btn-primary float-right display-1" v-if="admin" @click="more(item)">
+                <span class="fa fa-eye"></span>&nbsp;&nbsp;查看
+              </button>
+            </div>
+            <div class="comment-one__footer">
+
             </div>
           </div>
         </div><!-- /.comment-one -->
