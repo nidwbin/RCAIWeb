@@ -36,6 +36,13 @@ class Image(models.Model):
     image = models.ImageField(upload_to='images/body')  # 图片
 
 
+class Fields(models.Model):  # 研究方向
+    name = models.CharField(max_length=50, verbose_name="名称")
+    description = models.CharField(max_length=50, verbose_name="描述")
+    image_name = models.CharField(max_length=50, verbose_name="图片名")
+    image = models.ImageField(upload_to='images/fields')  # 图片
+
+
 class Achievements(models.Model):
     name = models.CharField(max_length=50, verbose_name="名称")
     genre = models.CharField(max_length=30, verbose_name="类别")
@@ -52,9 +59,11 @@ class Project(models.Model):
     source = models.CharField(max_length=50, verbose_name="来源")
     start_date = models.CharField(max_length=50, null=True, blank=True, verbose_name="开始时间")
     finish_date = models.CharField(max_length=50, null=True, blank=True, verbose_name="完成时间")
-    budget = models.FloatField(verbose_name="项目经费")
+    budget = models.CharField(max_length=50, verbose_name="项目经费")
     role = models.CharField(max_length=30, verbose_name="担任角色")
     status = models.CharField(max_length=50, verbose_name="项目状态")
+    image = models.ImageField(upload_to='images/project')
+    image_name = models.CharField(max_length=50, verbose_name="图片名")
 
 
 class People(models.Model):
