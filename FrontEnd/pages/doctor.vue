@@ -9,7 +9,7 @@
   <div>
     <Nav/>
     <PageHeader title_zh="中心博士生" title_en="Doctors"/>
-    <TeamPage/>
+    <TeamPage />
     <PagesList/>
     <Footer/>
   </div>
