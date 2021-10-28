@@ -12,27 +12,25 @@
         <div class="row">
           <div class="col-lg-12">
             <div class="direction-item">
-              <div v-if="admin">
-                <div class="item d-block d-sm-flex align-items-center">
-                  <div class="thumb">
-                    <img :src="btn_image" style="filter: brightness(98%); cursor: pointer" alt="direction"
-                         @click="create">
-                    <!--                <span>{{ item.year }}</span>-->
-                  </div>
-                  <div class="content">
-                    <nuxt-link to="#"><span class="	fa fa-fire"></span>{{ new_item.name }}</nuxt-link>
-                    <p>{{ new_item.desc }}</p>
-                  </div>
-                  <div class="pt-2 pb-2">
-                    <button type="button" class="btn btn-primary btn-lg float-right" @click="create">
-                      <span class="fa fa-edit"></span>&nbsp;&nbsp;新增
-                    </button>
-                  </div>
-                  <div class="item_footer"></div>
+              <div class="item d-block d-sm-flex align-items-center" v-if="admin">
+                <div class="thumb">
+                  <img :src="btn_image" style="filter: brightness(98%); cursor: pointer" alt="direction"
+                       @click="create">
+                  <!--                <span>{{ item.year }}</span>-->
                 </div>
-                <div class="card-header mt-5 mb-5">
-                  <div class="h2"><span class="	fa fa-codepen" style="color: #ff5316"></span>&nbsp;&nbsp;研究方向</div>
+                <div class="content">
+                  <nuxt-link to="#"><span class="	fa fa-fire"></span>{{ new_item.name }}</nuxt-link>
+                  <p>{{ new_item.desc }}</p>
                 </div>
+                <div class="pt-2 pb-2">
+                  <button type="button" class="btn btn-primary btn-lg float-right" @click="create">
+                    <span class="fa fa-edit"></span>&nbsp;&nbsp;新增
+                  </button>
+                </div>
+                <div class="item_footer"></div>
+              </div>
+              <div class="card-header mt-5 mb-5">
+                <div class="h2"><span class="	fa fa-codepen" style="color: #ff5316"></span>&nbsp;&nbsp;研究方向</div>
               </div>
               <div v-for="item in items">
                 <div class="item d-block d-sm-flex align-items-center">

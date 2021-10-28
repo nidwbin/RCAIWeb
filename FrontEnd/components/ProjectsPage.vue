@@ -10,44 +10,42 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
-          <div v-if="admin">
-            <div class="single-project" >
-              <div class="single-project-thumb">
-                <img class="add" :src=" btn_image" alt="project" @click="create">
-                <div class="single-project-thumb-content d-flex">
-                  <ul>
-                    <li>项目来源:</li>
-                    <li>开始时间:</li>
-                    <li>结束时间:</li>
-                    <li>项目经费:</li>
-                    <li>担任角色:</li>
-                    <li>项目类别:</li>
-                    <li>项目状态:</li>
-                  </ul>
-                  <ul class="pl-125">
-                    <li>{{ new_item.source }}</li>
-                    <li>{{ new_item.bg_time }}</li>
-                    <li>{{ new_item.ed_time }}</li>
-                    <li>{{ new_item.value }}</li>
-                    <li>{{ new_item.principal }}</li>
-                    <li>{{ new_item.class }}</li>
-                    <li>{{ new_item.state }}</li>
-                  </ul>
-                </div>
-              </div>
-              <div class="single-project-content-1">
-                <h3 class="title"><span class="	fa fa-clipboard"></span>{{ new_item.name }}</h3>
-                <p>{{ new_item.desc }}</p>
-              </div>
-              <div class="mt-5" v-if="admin" style="text-align: center">
-                <button type="button" class="btn btn-primary btn-lg" @click="create">
-                  <span class="fa fa-edit"></span>&nbsp;&nbsp;&nbsp;&nbsp;新&nbsp;增
-                </button>
+          <div class="single-project" v-if="admin">
+            <div class="single-project-thumb">
+              <img class="add" :src=" btn_image" alt="project" @click="create">
+              <div class="single-project-thumb-content d-flex">
+                <ul>
+                  <li>项目来源:</li>
+                  <li>开始时间:</li>
+                  <li>结束时间:</li>
+                  <li>项目经费:</li>
+                  <li>担任角色:</li>
+                  <li>项目类别:</li>
+                  <li>项目状态:</li>
+                </ul>
+                <ul class="pl-125">
+                  <li>{{ new_item.source }}</li>
+                  <li>{{ new_item.bg_time }}</li>
+                  <li>{{ new_item.ed_time }}</li>
+                  <li>{{ new_item.value }}</li>
+                  <li>{{ new_item.principal }}</li>
+                  <li>{{ new_item.class }}</li>
+                  <li>{{ new_item.state }}</li>
+                </ul>
               </div>
             </div>
-            <div class="card-header mb-1">
-              <div class="h2">科研项目</div>
+            <div class="single-project-content-1">
+              <h3 class="title"><span class="	fa fa-clipboard"></span>{{ new_item.name }}</h3>
+              <p>{{ new_item.desc }}</p>
             </div>
+            <div class="mt-5" v-if="admin" style="text-align: center">
+              <button type="button" class="btn btn-primary btn-lg" @click="create">
+                <span class="fa fa-edit"></span>&nbsp;&nbsp;&nbsp;&nbsp;新&nbsp;增
+              </button>
+            </div>
+          </div>
+          <div class="card-header mb-1">
+            <div class="h2">科研项目</div>
           </div>
           <div class="single-project" v-for="item in items">
             <div class="single-project-thumb">
