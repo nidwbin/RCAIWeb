@@ -14,7 +14,7 @@ class Header(models.Model):
     overview = models.CharField(max_length=100, verbose_name="简述", default="点击开始新建条目")
     filename = models.CharField(max_length=50, null=True, blank=True, verbose_name="文件名")
     image = models.ImageField(upload_to='images/header', default='')  # 封面图片
-    image_name = models.CharField(max_length=50, verbose_name="图片名", default="header.png")
+    image_name = models.CharField(max_length=50, verbose_name="图片名", default='')
     date = models.CharField(max_length=50, verbose_name="日期", default='XXXX-XX-XX')  # 日期
     show = models.BooleanField(blank=True, default=False)
 
@@ -62,7 +62,8 @@ class Project(models.Model):
     budget = models.CharField(max_length=50, verbose_name="项目经费")
     role = models.CharField(max_length=30, verbose_name="担任角色")
     status = models.CharField(max_length=50, verbose_name="项目状态")
-    image = models.ImageField(upload_to='images/project')
+    description = models.CharField(max_length=50, verbose_name="描述",default='')
+    image = models.ImageField(upload_to='images/projects')
     image_name = models.CharField(max_length=50, verbose_name="图片名")
 
 

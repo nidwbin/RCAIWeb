@@ -13,7 +13,7 @@ import math
 
 from django.core.files.base import ContentFile
 from django.contrib.auth.hashers import make_password, check_password
-from API.models import Admin, Image, News, Papers, People, Student, Project, Fields
+from API.models import Admin, Image, News, Papers, Student, Project, Fields
 from django.conf import settings
 
 
@@ -412,13 +412,14 @@ class ProjectsOP:
     def __get_dict__(project):
         return {'id': project.id,
                 'name': project.name,
-                'genre': project.genre,
+                'class': project.genre,
                 'source': project.source,
-                'start_date': project.start_date,
-                'finish_date': project.finish_date,
-                'budget': project.budget,
-                'role': project.role,
+                'bg_time': project.start_date,
+                'ed_time': project.finish_date,
+                'value': project.budget,
+                'principal': project.role,
                 'status': project.status,
+                'desc': project.description,
                 'image': project.image_name}.copy()
 
     @staticmethod
@@ -449,14 +450,14 @@ class ProjectsOP:
 
     @staticmethod
     def create(name: str, genre: str, source: str, start_date: str, finish_date: str, budget: str, role: str,
-               status: str, image):
+               status: str, description: str, image):
         try:
             if image:
                 image_name = str(uuid.uuid4()) + os.path.splitext(image.name)[1]
             else:
                 image_name = ''
             project = Project(name=name, genre=genre, source=source, start_date=start_date, finish_date=finish_date,
-                              budget=budget, role=role, status=status, image_name=image_name)
+                              budget=budget, role=role, status=status, description=description, image_name=image_name)
             if image:
                 project.image = image
                 project.image.name = image_name
@@ -468,7 +469,7 @@ class ProjectsOP:
 
     @staticmethod
     def change(id_: int, name: str, genre: str, source: str, start_date: str, finish_date: str, budget: str, role: str,
-               status: str, image):
+               status: str, description: str, image):
         try:
             project = Project.objects.get(id=id_)
             project.name = name
@@ -479,6 +480,7 @@ class ProjectsOP:
             project.budget = budget
             project.role = role
             project.status = status
+            project.description = description
             if image:
                 image_name = str(uuid.uuid4()) + os.path.splitext(image.name)[1]
                 project.image.delete()
@@ -486,6 +488,7 @@ class ProjectsOP:
                 project.image = image
                 project.image.name = image_name
             project.save()
+            return True
         except Exception as e:
             print(e)
         return False
@@ -507,7 +510,7 @@ class FieldsOP:
     def __get_dict__(field):
         return {'id': field.id,
                 'name': field.name,
-                'genre': field.genre,
+                'desc': field.description,
                 'image': field.image_name}.copy()
 
     @staticmethod
@@ -543,7 +546,7 @@ class FieldsOP:
                 image_name = str(uuid.uuid4()) + os.path.splitext(image.name)[1]
             else:
                 image_name = ''
-            fields = Fields(name=name, description=description,  image_name=image_name)
+            fields = Fields(name=name, description=description, image_name=image_name)
             if image:
                 fields.image = image
                 fields.image.name = image_name
@@ -566,6 +569,7 @@ class FieldsOP:
                 fields.image = image
                 fields.image.name = image_name
             fields.save()
+            return True
         except Exception as e:
             print(e)
         return False

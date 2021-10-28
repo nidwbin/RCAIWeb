@@ -23,75 +23,93 @@
         <img src="/static/images/page-shadow.png" alt="">
       </div>
     </div>
-    <HeaderArea ref="header" :type="type" :btn_more="false" @reload_page="reload_page"/>
+    <HeaderArea ref="header" :type="type" :btn_more="false" @deleted="back" @saved="saved"/>
   </div>
 </template>
 
 <script>
-    import Functions from "./Functions";
-    import HeaderArea from "./HeaderArea"
+import Functions from "./Functions";
+import HeaderArea from "./HeaderArea"
+import {bus} from "@/plugins/bus";
 
-    export default {
-        name: "ViewerHeader",
-        components: {HeaderArea},
-        mixins: [Functions],
-        props: {
-            type: {
-                type: String,
-                default: '',
-            },
-            filename: {
-                type: String,
-                default: '',
-            }
-        },
-        data() {
-            return {
-                modal: false,
-                viewing: {
-                    title: '开始新建',
-                    date: 'XXXX-XX-XX',
-                    overview: '点击开始新建条目',
-                },
-            }
-        },
-        mounted() {
-            this.get('/list/', {type: this.type, filetype: 'item', filename: this.filename}, data => {
-                switch (data['message']) {
-                    case 'success': {
-                        this.viewing = data['content'];
-                        break;
-                    }
-                    case 'error': {
-                        break;
-                    }
-                    default: {
-                        this.$toast.info(data['message']);
-                    }
-                }
-            });
-        },
-        computed: {
-            admin() {
-                return this.$store.state.admin;
-            },
-            debug() {
-                return this.$store.state.debug;
-            }
-        },
-        methods: {
-            view() {
-                this.$refs.header.view(this.viewing);
-            },
-            reload_page() {
-                this.$router.back();
-            }
-        },
+export default {
+  name: "ViewerHeader",
+  components: {HeaderArea},
+  mixins: [Functions],
+  props: {
+    type: {
+      type: String,
+      default: '',
+    },
+    filename: {
+      type: String,
+      default: '',
     }
+  },
+  data() {
+    return {
+      modal: false,
+      viewing: {},
+    }
+  },
+  mounted() {
+    this.get('/list/', {type: this.type, filetype: 'item', filename: this.filename}, data => {
+      switch (data['message']) {
+        case 'success': {
+          this.viewing = data['content'];
+          break;
+        }
+        case 'error': {
+          break;
+        }
+        default: {
+          this.$toast.info(data['message']);
+        }
+      }
+    });
+    this.listen_events();
+  },
+  computed: {
+    admin() {
+      return this.$store.state.admin;
+    },
+    debug() {
+      return this.$store.state.debug;
+    }
+  },
+  methods: {
+    listen_events() {
+      bus.$on('delete', () => {
+        this.view();
+      });
+      bus.$on('finish', () => {
+        this.viewing.show=true;
+        this.$refs.header.view(this.viewing, false);
+        this.$refs.header.edit();
+        this.back();
+      });
+    },
+    stop_listen() {
+      bus.$off(['delete', 'send']);
+    },
+    saved() {
+      bus.$emit('save');
+    },
+    view() {
+      this.$refs.header.view(this.viewing);
+    },
+    back() {
+      this.$router.back();
+    }
+  },
+  destroyed() {
+    this.stop_listen();
+  },
+}
 </script>
 
 <style scoped>
-  .modal {
-    display: block;
-  }
+.modal {
+  display: block;
+}
 </style>

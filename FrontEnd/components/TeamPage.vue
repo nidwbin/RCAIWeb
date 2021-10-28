@@ -137,190 +137,190 @@
       </div>
       <div class="modal-backdrop show" style=" z-index: 2000"></div>
     </div>
-    <PagesList ref="page" :type="this.type" @change_page="load_list"/>
+    <PagesList ref="page" :type="this.type" :per_page="per_page" @change_page="load_list"/>
   </section>
 </template>
 
 <script>
-    import Functions from "./Functions";
-    import PagesList from "@/components/PagesList";
+import Functions from "./Functions";
+import PagesList from "@/components/PagesList";
 
-    export default {
-        name: "TeamPage",
-        components: {PagesList},
-        mixins: [Functions],
-        props: {
-            type: {
-                type: String,
-                default: '',
-            }
-        },
-        mounted() {
-            this.load_list(1);
-        },
-        data() {
-            return {
-                modal: false,
-                viewing: null,
-                viewing_edit: null,
-                local: false,
-                create_flag: false,
-                upload_image: null,
-                image_base: this.$store.state.image_base + 'people/',
-                btn_image: '/static/images/default/header.png',
-                default_image: '/static/images/default/image.jpg',
-                items: [],
-                new_item: {
-                    id: 'new',
-                    name: "姓名",
-                    image: '',
-                    class: this.type === "doctor" ? "博一" : "研一",
-                    email: "example@exa.com",
-                    link: "#",
-                    abstract: "描述",
-                },
-                classes: this.type === "doctor" ? ['博一', '博二', '博三', '博四', '博五'] : ['研一', '研二', '研三'],
-            }
-        },
-        computed: {
-            per_page() {
-                return this.$store.state.admin ? 5 : 6;
-            },
-            admin() {
-                return this.$store.state.admin;
-            }
-        },
-
-        methods: {
-            change_image(e) {
-                let file = e.target.files[0];
-                this.upload_image = file;
-                this.local = true;
-                this.viewing_edit.image = file ? window.URL.createObjectURL(file) : this.viewing_edit.image;
-            },
-            create() {
-                this.view(JSON.parse(JSON.stringify(this.new_item)), true);
-            },
-            view(item, flag) {
-                this.viewing = item;
-                this.create_flag = flag;
-                if (this.admin) {
-                    this.viewing_edit = JSON.parse(JSON.stringify(item));
-                    this.modal = true;
-                } else {
-                    this.$toast.error('没有权限');
-                }
-            },
-            edit() {
-                let data = new FormData();
-                data.append('type', this.type);
-                data.append('filetype', 'item');
-                data.append('id', this.viewing_edit.id);
-                data.append('name', this.viewing_edit.name);
-                data.append('email', this.viewing_edit.email);
-                data.append('link', this.viewing_edit.link);
-                data.append('class', this.viewing_edit.class);
-                data.append('abstract', this.viewing_edit.abstract);
-                data.append('image', this.viewing_edit.image);
-                data.append('image_file', this.upload_image);
-                this.post('/list/', data, data => {
-                    switch (data['message']) {
-                        case 'success': {
-                            this.reload_list();
-                            break;
-                        }
-                        case 'error': {
-                            this.$toast.error('修改失败');
-                            break;
-                        }
-                        default: {
-                            this.$toast.info(data['message']);
-                        }
-                    }
-                })
-                this.modal = false;
-            },
-            remove(item) {
-                this.delete('/list/', {type: this.type, filetype: 'item', filename: item.id}, data => {
-                    switch (data['message']) {
-                        case 'success': {
-                            this.reload_list();
-                            break;
-                        }
-                        case 'error': {
-                            this.$toast.error('删除失败');
-                            break;
-                        }
-                        default: {
-                            this.$toast.info(data['message']);
-                        }
-                    }
-                });
-                this.modal = false;
-            },
-            goto_link(link) {
-                window.location.href = link;
-                // window.open(link, "_blank");
-            },
-            load_list(page) {
-                this.get('/list/', {type: this.type, filetype: 'lists', page: page, per_page: this.per_page}, data => {
-                    switch (data['message']) {
-                        case 'success': {
-                            this.items = data['content'];
-                            break;
-                        }
-                        case 'error': {
-                            break;
-                        }
-                        default: {
-                            this.$toast.info(data['message']);
-                        }
-                    }
-                })
-            },
-            reload_list() {
-                this.create_flag = false;
-                this.local = false;
-                this.$refs.page.change_page(-2);
-            },
-        }
-
+export default {
+  name: "TeamPage",
+  components: {PagesList},
+  mixins: [Functions],
+  props: {
+    type: {
+      type: String,
+      default: '',
     }
+  },
+  mounted() {
+    this.load_list(1);
+  },
+  data() {
+    return {
+      modal: false,
+      viewing: null,
+      viewing_edit: null,
+      local: false,
+      create_flag: false,
+      upload_image: null,
+      image_base: this.$store.state.image_base + 'people/',
+      btn_image: '/static/images/default/add.png',
+      default_image: '/static/images/default/image.jpg',
+      items: [],
+      new_item: {
+        id: 'new',
+        name: "姓名",
+        image: '',
+        class: this.type === "doctor" ? "博一" : "研一",
+        email: "example@exa.com",
+        link: "#",
+        abstract: "描述",
+      },
+      classes: this.type === "doctor" ? ['博一', '博二', '博三', '博四', '博五'] : ['研一', '研二', '研三'],
+    }
+  },
+  computed: {
+    per_page() {
+      return this.$store.state.admin ? 5 : 6;
+    },
+    admin() {
+      return this.$store.state.admin;
+    }
+  },
+
+  methods: {
+    change_image(e) {
+      let file = e.target.files[0];
+      this.upload_image = file;
+      this.local = true;
+      this.viewing_edit.image = file ? window.URL.createObjectURL(file) : this.viewing_edit.image;
+    },
+    create() {
+      this.view(JSON.parse(JSON.stringify(this.new_item)), true);
+    },
+    view(item, flag) {
+      this.viewing = item;
+      this.create_flag = flag;
+      if (this.admin) {
+        this.viewing_edit = JSON.parse(JSON.stringify(item));
+        this.modal = true;
+      } else {
+        this.$toast.error('没有权限');
+      }
+    },
+    edit() {
+      let data = new FormData();
+      data.append('type', this.type);
+      data.append('filetype', 'item');
+      data.append('id', this.viewing_edit.id);
+      data.append('name', this.viewing_edit.name);
+      data.append('email', this.viewing_edit.email);
+      data.append('link', this.viewing_edit.link);
+      data.append('class', this.viewing_edit.class);
+      data.append('abstract', this.viewing_edit.abstract);
+      data.append('image', this.viewing_edit.image);
+      data.append('image_file', this.upload_image);
+      this.post('/list/', data, data => {
+        switch (data['message']) {
+          case 'success': {
+            this.reload_list();
+            break;
+          }
+          case 'error': {
+            this.$toast.error('修改失败');
+            break;
+          }
+          default: {
+            this.$toast.info(data['message']);
+          }
+        }
+      })
+      this.modal = false;
+    },
+    remove(item) {
+      this.delete('/list/', {type: this.type, filetype: 'item', filename: item.id}, data => {
+        switch (data['message']) {
+          case 'success': {
+            this.reload_list();
+            break;
+          }
+          case 'error': {
+            this.$toast.error('删除失败');
+            break;
+          }
+          default: {
+            this.$toast.info(data['message']);
+          }
+        }
+      });
+      this.modal = false;
+    },
+    goto_link(link) {
+      window.location.href = link;
+      // window.open(link, "_blank");
+    },
+    load_list(page) {
+      this.get('/list/', {type: this.type, filetype: 'lists', page: page, per_page: this.per_page}, data => {
+        switch (data['message']) {
+          case 'success': {
+            this.items = data['content'];
+            break;
+          }
+          case 'error': {
+            break;
+          }
+          default: {
+            this.$toast.info(data['message']);
+          }
+        }
+      })
+    },
+    reload_list() {
+      this.create_flag = false;
+      this.local = false;
+      this.$refs.page.reload();
+    },
+  }
+
+}
 </script>
 
 <style scoped>
-  .modal {
-    display: block;
-    z-index: 2001;
-  }
+.modal {
+  display: block;
+  z-index: 2001;
+}
 
-  .modal-dialog {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-  }
+.modal-dialog {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
 
-  .modal-content {
-    /*overflow-y: scroll; */
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 100%;
-  }
+.modal-content {
+  /*overflow-y: scroll; */
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
 
-  .modal-body {
-    overflow-y: scroll;
-    position: absolute;
-    top: 68px;
-    bottom: 70px;
-    width: 100%;
-  }
+.modal-body {
+  overflow-y: scroll;
+  position: absolute;
+  top: 68px;
+  bottom: 70px;
+  width: 100%;
+}
 
-  .modal-footer {
-    position: absolute;
-    width: 100%;
-    bottom: 0;
-  }
+.modal-footer {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+}
 </style>

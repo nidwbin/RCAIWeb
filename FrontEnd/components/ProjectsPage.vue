@@ -10,46 +10,48 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
-          <div class="single-project" v-for="item in new_items" v-if="admin">
-            <div class="single-project-thumb">
-              <img class="add" :src="item.image" alt="project" @click="view(item)">
-              <div class="single-project-thumb-content d-flex">
-                <ul>
-                  <li>项目来源:</li>
-                  <li>开始时间:</li>
-                  <li>结束时间:</li>
-                  <li>项目经费:</li>
-                  <li>担任角色:</li>
-                  <li>项目类别:</li>
-                  <li>项目状态:</li>
-                </ul>
-                <ul class="pl-125">
-                  <li>{{item.source }}</li>
-                  <li>{{item.bg_time }}</li>
-                  <li>{{item.ed_time }}</li>
-                  <li>{{item.value }}</li>
-                  <li>{{item.principal }}</li>
-                  <li>{{item.class }}</li>
-                  <li>{{item.state }}</li>
-                </ul>
+          <div v-if="admin">
+            <div class="single-project" >
+              <div class="single-project-thumb">
+                <img class="add" :src=" btn_image" alt="project" @click="create">
+                <div class="single-project-thumb-content d-flex">
+                  <ul>
+                    <li>项目来源:</li>
+                    <li>开始时间:</li>
+                    <li>结束时间:</li>
+                    <li>项目经费:</li>
+                    <li>担任角色:</li>
+                    <li>项目类别:</li>
+                    <li>项目状态:</li>
+                  </ul>
+                  <ul class="pl-125">
+                    <li>{{ new_item.source }}</li>
+                    <li>{{ new_item.bg_time }}</li>
+                    <li>{{ new_item.ed_time }}</li>
+                    <li>{{ new_item.value }}</li>
+                    <li>{{ new_item.principal }}</li>
+                    <li>{{ new_item.class }}</li>
+                    <li>{{ new_item.state }}</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="single-project-content-1">
+                <h3 class="title"><span class="	fa fa-clipboard"></span>{{ new_item.name }}</h3>
+                <p>{{ new_item.desc }}</p>
+              </div>
+              <div class="mt-5" v-if="admin" style="text-align: center">
+                <button type="button" class="btn btn-primary btn-lg" @click="create">
+                  <span class="fa fa-edit"></span>&nbsp;&nbsp;&nbsp;&nbsp;新&nbsp;增
+                </button>
               </div>
             </div>
-            <div class="single-project-content-1">
-              <h3 class="title"><span class="	fa fa-clipboard"></span>{{ item.name }}</h3>
-              <p>{{ item.desc }}</p>
+            <div class="card-header mb-1">
+              <div class="h2">科研项目</div>
             </div>
-            <div class="mt-5" v-if="admin" style="text-align: center">
-              <button type="button" class="btn btn-primary btn-lg" @click="view(item)">
-                <span class="fa fa-edit"></span>&nbsp;&nbsp;&nbsp;&nbsp;新&nbsp;增
-              </button>
-            </div>
-          </div>
-          <div class="card-header mb-1">
-            <div class="h2">科研项目</div>
           </div>
           <div class="single-project" v-for="item in items">
             <div class="single-project-thumb">
-              <img :src="item.image" alt="project">
+              <img :src="item.image===''?default_image:image_base+item.image" alt="project">
               <div class="single-project-thumb-content d-flex">
                 <ul>
                   <li>项目来源:</li>
@@ -61,13 +63,13 @@
                   <li>项目状态:</li>
                 </ul>
                 <ul class="pl-125">
-                  <li>{{item.source }}</li>
-                  <li>{{item.bg_time }}</li>
-                  <li>{{item.ed_time }}</li>
-                  <li>{{item.value }}</li>
-                  <li>{{item.principal }}</li>
-                  <li>{{item.class }}</li>
-                  <li>{{item.state }}</li>
+                  <li>{{ item.source }}</li>
+                  <li>{{ item.bg_time }}</li>
+                  <li>{{ item.ed_time }}</li>
+                  <li>{{ item.value }}</li>
+                  <li>{{ item.principal }}</li>
+                  <li>{{ item.class }}</li>
+                  <li>{{ item.state }}</li>
                 </ul>
               </div>
             </div>
@@ -101,14 +103,8 @@
             </div>
             <div class="modal-body">
               <div class="card mb-1">
-                <div v-if="viewing_edit.image === default_image">
-                  <img :src="(local?'':image_base)+default_edit_image" class="card-img-top" alt=""
-                       style="max-height: 400px;">
-                </div>
-                <div v-else>
-                  <img :src="(local?'':image_base)+viewing_edit.image" class="card-img-top" alt=""
-                       style="max-height: 500px;">
-                </div>
+                <img :src="viewing_edit.image===''?default_image:(local?'':image_base)+viewing_edit.image"
+                     class="card-img-top" alt="" style="max-height: 500px;">
               </div>
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
@@ -135,13 +131,13 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon3">开始时间</span>
                 </div>
-                <input type="time" class="form-control" v-model="viewing_edit.bg_time" aria-describedby="basic-addon3">
+                <input type="date" class="form-control" v-model="viewing_edit.bg_time" aria-describedby="basic-addon3">
               </div>
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon4">结束时间</span>
                 </div>
-                <input type="time" class="form-control" v-model="viewing_edit.ed_time" aria-describedby="basic-addon4">
+                <input type="date" class="form-control" v-model="viewing_edit.ed_time" aria-describedby="basic-addon4">
               </div>
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
@@ -177,7 +173,7 @@
               </div>
             </div>
             <div class="modal-footer">
-              <div v-if="viewing_edit.image === default_image">
+              <div v-if="viewing_edit.id === 'new'">
                 <button type="button" class="btn btn-primary" @click="edit"><span class="fa fa-edit"></span>&nbsp;&nbsp;确定
                 </button>
               </div>
@@ -194,238 +190,250 @@
       </div>
       <div class="modal-backdrop show" style="z-index: 2000"></div>
     </div>
+    <PagesList ref="page" :type="type" :per_page="per_page" @change_page="load_list"/>
   </section>
 </template>
 
 <script>
-    import Functions from "./Functions";
-    import {bus} from "@/plugins/bus";
+import Functions from "./Functions";
+import PagesList from "@/components/PagesList";
 
-    export default {
-        name: "ProjectSingle",
-        mixins: [Functions],
-        data() {
-            return {
-                type: 'project',
-                modal: false,
-                viewing: null,
-                viewing_edit: null,
-                local: true,
-                upload_image: null,
-                image_base: this.$store.state.image_base,
-                default_edit_image: "/static/images/default/image.jpg",
-                default_image: '/static/images/default/header.png',
-                items: [
-                    {
-                        image: "/static/images/project/project_1.jpg",
-                        name: "复杂声学环境下声学事件检测与音频场景识别方法研究",
-                        source: "国家重点研发项目子课题",
-                        bg_time: "2017-10",
-                        ed_time: "2021-09",
-                        value: "153.5万",
-                        principal: "负责",
-                        class: "纵向项目",
-                        state: "进行中",
-                        desc: "Lorem ipsum is simply free text used by copytyping refreshing. Neque porro est qui dolorem ipsum quia\n" +
-                            "                quaed inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Aelltes port lacus quis\n" +
-                            "                enim var sed efficitur turpis gilla sed sit amet finibus eros. Lorem Ipsum is simply dummy text of the\n" +
-                            "                printing and typesetting industry. Lorem Ipsum has been the ndustry standard dummy text ever since the\n" +
-                            "                1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It\n" +
-                            "                has survived not only five centuries. Lorem Ipsum is simply dummy text of the new design printng and\n" +
-                            "                type setting Ipsum Take a look at our round up of the best shows coming soon to your telly box has been\n" +
-                            "                the is industrys. When an unknown printer took a galley of type and scrambled it to make a type specimen\n" +
-                            "                book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining\n" +
-                            "                essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets\n" +
-                            "                containing."
-                    },
-                    {
-                        image: "/static/images/project/project_2.jpg",
-                        name: "面向自然口语交互的情境化语义理解和多轮对话交互管理技术",
-                        source: "国家自然科学基金重点项目",
-                        bg_time: "2015-01-01",
-                        ed_time: "2018-12-01",
-                        value: "86万",
-                        principal: "负责",
-                        class: "纵向项目",
-                        state: "进行中",
-                        desc: "Lorem ipsum is simply free text used by copytyping refreshing. Neque porro est qui dolorem ipsum quia\n" +
-                            "                quaed inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Aelltes port lacus quis\n" +
-                            "                enim var sed efficitur turpis gilla sed sit amet finibus eros. Lorem Ipsum is simply dummy text of the\n" +
-                            "                printing and typesetting industry. Lorem Ipsum has been the ndustry standard dummy text ever since the\n" +
-                            "                1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It\n" +
-                            "                has survived not only five centuries. Lorem Ipsum is simply dummy text of the new design printng and\n" +
-                            "                type setting Ipsum Take a look at our round up of the best shows coming soon to your telly box has been\n" +
-                            "                the is industrys. When an unknown printer took a galley of type and scrambled it to make a type specimen\n" +
-                            "                book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining\n" +
-                            "                essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets\n" +
-                            "                containing."
-                    },
-                    {
-                        image: "/static/images/project/project_3.jpg",
-                        name: "复杂声学环境下声学事件检测与音频场景识别方法研究",
-                        source: "国家自然科学基金重点项目",
-                        bg_time: "2018-01",
-                        ed_time: "2021-12",
-                        value: "256万（直接）",
-                        principal: "负责",
-                        class: "纵向项目",
-                        state: "进行中",
-                        desc: "Lorem ipsum is simply free text used by copytyping refreshing. Neque porro est qui dolorem ipsum quia\n" +
-                            "                quaed inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Aelltes port lacus quis\n" +
-                            "                enim var sed efficitur turpis gilla sed sit amet finibus eros. Lorem Ipsum is simply dummy text of the\n" +
-                            "                printing and typesetting industry. Lorem Ipsum has been the ndustry standard dummy text ever since the\n" +
-                            "                1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It\n" +
-                            "                has survived not only five centuries. Lorem Ipsum is simply dummy text of the new design printng and\n" +
-                            "                type setting Ipsum Take a look at our round up of the best shows coming soon to your telly box has been\n" +
-                            "                the is industrys. When an unknown printer took a galley of type and scrambled it to make a type specimen\n" +
-                            "                book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining\n" +
-                            "                essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets\n" +
-                            "                containing."
-                    },
-                ],
-                new_items: [
-                    {
-                        image: "/static/images/default/header.png",
-                        name: "项目名称",
-                        source: "xxxxxxxx",
-                        bg_time: "xxxx-xx",
-                        ed_time: "xxxx-xx",
-                        value: "xxx",
-                        principal: "xx",
-                        class: "xxxx",
-                        state: "xx",
-                        desc: "项目具体内容的描述......"
-                    },
-                ],
-
-                pages: {
-                    active: 1,
-                    hidden: true,
-                    page_list: [1, 2, 3, 4],
-                },
-            }
+export default {
+  name: "ProjectSingle",
+  components: {PagesList},
+  mixins: [Functions],
+  data() {
+    return {
+      type: 'projects',
+      modal: false,
+      viewing: null,
+      viewing_edit: null,
+      local: false,
+      upload_image: null,
+      image_base: this.$store.state.image_base + 'projects/',
+      btn_image: '/static/images/default/add.png',
+      default_image: "/static/images/default/image.jpg",
+      per_page: 5,
+      items: [
+        {
+          image: "/static/images/project/project_1.jpg",
+          name: "复杂声学环境下声学事件检测与音频场景识别方法研究",
+          source: "国家重点研发项目子课题",
+          bg_time: "2017-10",
+          ed_time: "2021-09",
+          value: "153.5万",
+          principal: "负责",
+          class: "纵向项目",
+          state: "进行中",
+          desc: "Lorem ipsum is simply free text used by copytyping refreshing. Neque porro est qui dolorem ipsum quia\n" +
+            "                quaed inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Aelltes port lacus quis\n" +
+            "                enim var sed efficitur turpis gilla sed sit amet finibus eros. Lorem Ipsum is simply dummy text of the\n" +
+            "                printing and typesetting industry. Lorem Ipsum has been the ndustry standard dummy text ever since the\n" +
+            "                1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It\n" +
+            "                has survived not only five centuries. Lorem Ipsum is simply dummy text of the new design printng and\n" +
+            "                type setting Ipsum Take a look at our round up of the best shows coming soon to your telly box has been\n" +
+            "                the is industrys. When an unknown printer took a galley of type and scrambled it to make a type specimen\n" +
+            "                book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining\n" +
+            "                essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets\n" +
+            "                containing."
         },
-        computed: {
-            admin() {
-                return this.$store.state.admin;
-            }
+        {
+          image: "/static/images/project/project_2.jpg",
+          name: "面向自然口语交互的情境化语义理解和多轮对话交互管理技术",
+          source: "国家自然科学基金重点项目",
+          bg_time: "2015-01-01",
+          ed_time: "2018-12-01",
+          value: "86万",
+          principal: "负责",
+          class: "纵向项目",
+          state: "进行中",
+          desc: "Lorem ipsum is simply free text used by copytyping refreshing. Neque porro est qui dolorem ipsum quia\n" +
+            "                quaed inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Aelltes port lacus quis\n" +
+            "                enim var sed efficitur turpis gilla sed sit amet finibus eros. Lorem Ipsum is simply dummy text of the\n" +
+            "                printing and typesetting industry. Lorem Ipsum has been the ndustry standard dummy text ever since the\n" +
+            "                1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It\n" +
+            "                has survived not only five centuries. Lorem Ipsum is simply dummy text of the new design printng and\n" +
+            "                type setting Ipsum Take a look at our round up of the best shows coming soon to your telly box has been\n" +
+            "                the is industrys. When an unknown printer took a galley of type and scrambled it to make a type specimen\n" +
+            "                book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining\n" +
+            "                essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets\n" +
+            "                containing."
         },
-
-        methods: {
-            change_image(e) {
-                let file = e.target.files[0];
-                this.upload_image = file;
-                this.local = true;
-                this.viewing_edit.image = window.URL.createObjectURL(file);
-            },
-            view(item) {
-                this.viewing = item;
-                if (this.admin) {
-                    this.viewing_edit = JSON.parse(JSON.stringify(item));
-                    this.modal = true;
-                } else {
-                    this.$toast.info('没有权限');
-                }
-            },
-            edit() {
-                let data = new FormData();
-                data.append('type', this.type);
-                data.append('filetype', 'item');
-                data.append('name', this.viewing_edit.name);
-                data.append('source', this.viewing_edit.source);
-                data.append('bg_time', this.viewing_edit.bg_time);
-                data.append('ed_time', this.viewing_edit.ed_time);
-                data.append('value', this.viewing_edit.value);
-                data.append('principal', this.viewing_edit.principal);
-                data.append('class', this.viewing_edit.class);
-                data.append('state', this.viewing_edit.state);
-                data.append('desc', this.viewing_edit.desc);
-                data.append('image', this.upload_image);
-                this.post('/list/', data, data => {
-                    switch (data['message']) {
-                        case 'success': {
-                            this.viewing.name = this.viewing_edit.name;
-                            this.viewing.source = this.viewing_edit.source;
-                            this.viewing.bg_time = this.viewing_edit.bg_time;
-                            this.viewing.ed_time = this.viewing_edit.ed_time;
-                            this.viewing.value = this.viewing_edit.value;
-                            this.viewing.principal = this.viewing_edit.principal;
-                            this.viewing.class = this.viewing_edit.class;
-                            this.viewing.state = this.viewing_edit.state;
-                            this.viewing.deac = this.viewing_edit.deac;
-                            this.local = true;
-                            this.viewing.image = data['content'];
-                            bus.$emit('reload_hots');
-                            break;
-                        }
-                        case 'error': {
-                            this.$toast.error('修改失败');
-                            break;
-                        }
-                        default: {
-                            this.$toast.info(data['message']);
-                        }
-                    }
-                })
-                this.modal = false;
-            },
-            remove(item) {
-                this.delete('/list/', {type: this.type, filetype: 'item', filename: item.filename}, data => {
-                    switch (data['message']) {
-                        case 'success': {
-                            bus.$emit('reload_list');
-                            bus.$emit('reload_hots');
-                            break;
-                        }
-                        case 'error': {
-                            this.$toast.error('删除失败');
-                            break;
-                        }
-                        default: {
-                            this.$toast.info(data['message']);
-                        }
-                    }
-                });
-                this.modal = false;
-            },
-        }
-
+        {
+          image: "/static/images/project/project_3.jpg",
+          name: "复杂声学环境下声学事件检测与音频场景识别方法研究",
+          source: "国家自然科学基金重点项目",
+          bg_time: "2018-01",
+          ed_time: "2021-12",
+          value: "256万（直接）",
+          principal: "负责",
+          class: "纵向项目",
+          state: "进行中",
+          desc: "Lorem ipsum is simply free text used by copytyping refreshing. Neque porro est qui dolorem ipsum quia\n" +
+            "                quaed inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Aelltes port lacus quis\n" +
+            "                enim var sed efficitur turpis gilla sed sit amet finibus eros. Lorem Ipsum is simply dummy text of the\n" +
+            "                printing and typesetting industry. Lorem Ipsum has been the ndustry standard dummy text ever since the\n" +
+            "                1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It\n" +
+            "                has survived not only five centuries. Lorem Ipsum is simply dummy text of the new design printng and\n" +
+            "                type setting Ipsum Take a look at our round up of the best shows coming soon to your telly box has been\n" +
+            "                the is industrys. When an unknown printer took a galley of type and scrambled it to make a type specimen\n" +
+            "                book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining\n" +
+            "                essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets\n" +
+            "                containing."
+        },
+      ],
+      new_item: {
+        id: 'new',
+        image: "",
+        name: "项目名称",
+        source: "xxxxxxxx",
+        bg_time: "XXXX-XX-XX",
+        ed_time: "XXXX-XX-XX",
+        value: "xxx",
+        principal: "xx",
+        class: "xxxx",
+        state: "xx",
+        desc: "项目具体内容的描述......"
+      },
     }
+  },
+  mounted() {
+    this.load_list(1);
+  },
+  computed: {
+    admin() {
+      return this.$store.state.admin;
+    }
+  },
+
+  methods: {
+    change_image(e) {
+      let file = e.target.files[0];
+      this.upload_image = file;
+      this.local = true;
+      this.viewing_edit.image = window.URL.createObjectURL(file);
+    },
+    create() {
+      this.view(JSON.parse(JSON.stringify(this.new_item)), true);
+    },
+    view(item) {
+      this.viewing = item;
+      if (this.admin) {
+        this.viewing_edit = JSON.parse(JSON.stringify(item));
+        this.modal = true;
+      } else {
+        this.$toast.info('没有权限');
+      }
+    },
+    edit() {
+      let data = new FormData();
+      data.append('type', this.type);
+      data.append('filetype', 'item');
+      data.append('id', this.viewing_edit.id);
+      data.append('name', this.viewing_edit.name);
+      data.append('source', this.viewing_edit.source);
+      data.append('bg_time', this.viewing_edit.bg_time);
+      data.append('ed_time', this.viewing_edit.ed_time);
+      data.append('value', this.viewing_edit.value);
+      data.append('principal', this.viewing_edit.principal);
+      data.append('class', this.viewing_edit.class);
+      data.append('state', this.viewing_edit.state);
+      data.append('desc', this.viewing_edit.desc);
+      data.append('image', this.image);
+      data.append('image_file', this.upload_image);
+      this.post('/list/', data, data => {
+        switch (data['message']) {
+          case 'success': {
+            this.reload_list();
+            break;
+          }
+          case 'error': {
+            this.$toast.error('修改失败');
+            break;
+          }
+          default: {
+            this.$toast.info(data['message']);
+          }
+        }
+      })
+      this.modal = false;
+    },
+    remove(item) {
+      this.delete('/list/', {type: this.type, filetype: 'item', filename: item.id}, data => {
+        switch (data['message']) {
+          case 'success': {
+            this.reload_list();
+            break;
+          }
+          case 'error': {
+            this.$toast.error('删除失败');
+            break;
+          }
+          default: {
+            this.$toast.info(data['message']);
+          }
+        }
+      });
+      this.modal = false;
+    },
+    load_list(page) {
+      this.get('/list/', {type: this.type, filetype: 'lists', page: page, per_page: this.per_page}, data => {
+        switch (data['message']) {
+          case 'success': {
+            this.items = data['content'];
+            break;
+          }
+          case 'error': {
+            break;
+          }
+          default: {
+            this.$toast.info(data['message']);
+          }
+        }
+      })
+    },
+    reload_list() {
+      this.local = false;
+      this.$refs.page.reload();
+    },
+  }
+
+}
 </script>
 
 <style scoped>
-  .modal {
-    z-index: 2001;
-    display: block;
-  }
+.modal {
+  z-index: 2001;
+  display: block;
+}
 
-  .modal-dialog {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-  }
+.modal-dialog {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
 
-  .modal-content {
-    /*overflow-y: scroll; */
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 100%;
-  }
+.modal-content {
+  /*overflow-y: scroll; */
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
 
-  .modal-body {
-    overflow-y: scroll;
-    position: absolute;
-    top: 68px;
-    bottom: 70px;
-    width: 100%;
-  }
+.modal-body {
+  overflow-y: scroll;
+  position: absolute;
+  top: 68px;
+  bottom: 70px;
+  width: 100%;
+}
 
-  .modal-footer {
-    position: absolute;
-    width: 100%;
-    bottom: 0;
-  }
+.modal-footer {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+}
 </style>

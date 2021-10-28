@@ -12,31 +12,32 @@
         <div class="row">
           <div class="col-lg-12">
             <div class="direction-item">
-              <div v-for="item in new_item">
+              <div v-if="admin">
                 <div class="item d-block d-sm-flex align-items-center">
                   <div class="thumb">
-                    <img :src="item.image" style="filter: brightness(98%); cursor: pointer" alt="direction" @click="create">
+                    <img :src="btn_image" style="filter: brightness(98%); cursor: pointer" alt="direction"
+                         @click="create">
                     <!--                <span>{{ item.year }}</span>-->
                   </div>
                   <div class="content">
-                    <nuxt-link to="#"><span class="	fa fa-fire"></span>{{ item.name }}</nuxt-link>
-                    <p>{{ item.desc }}</p>
+                    <nuxt-link to="#"><span class="	fa fa-fire"></span>{{ new_item.name }}</nuxt-link>
+                    <p>{{ new_item.desc }}</p>
                   </div>
+                  <div class="pt-2 pb-2">
+                    <button type="button" class="btn btn-primary btn-lg float-right" @click="create">
+                      <span class="fa fa-edit"></span>&nbsp;&nbsp;新增
+                    </button>
+                  </div>
+                  <div class="item_footer"></div>
                 </div>
-                <div class="pt-2 pb-2" v-if="admin">
-                  <button type="button" class="btn btn-primary btn-lg float-right" @click="create">
-                    <span class="fa fa-edit"></span>&nbsp;&nbsp;新增
-                  </button>
+                <div class="card-header mt-5 mb-5">
+                  <div class="h2"><span class="	fa fa-codepen" style="color: #ff5316"></span>&nbsp;&nbsp;研究方向</div>
                 </div>
-                <div class="item_footer"></div>
-              </div>
-              <div class="card-header mb-5">
-                <div class="h2"><span class="	fa fa-codepen" style="color: #ff5316"></span>&nbsp;&nbsp;研究方向</div>
               </div>
               <div v-for="item in items">
                 <div class="item d-block d-sm-flex align-items-center">
                   <div class="thumb">
-                    <img :src="item.image" alt="">
+                    <img :src="item.image===''?default_image:image_base+item.image" alt="">
                     <!--                <span>{{ item.year }}</span>-->
                   </div>
                   <div class="content">
@@ -117,7 +118,7 @@
       </div>
       <div class="modal-backdrop show" style=" z-index: 2000"></div>
     </div>
-    <PagesList ref="page" :type="this.type" @change_page="load_list"/>
+    <PagesList ref="page" :type="this.type" :per_page="per_page" @change_page="load_list"/>
     <div>
       <!--  <div v-else>-->
       <!--    <div class="direction-area pt-115">-->
@@ -189,153 +190,132 @@
 </template>
 
 <script>
-    import Functions from "./Functions";
-    import PagesList from "@/components/PagesList";
+import Functions from "./Functions";
+import PagesList from "@/components/PagesList";
 
-    export default {
-        name: "ResearchPage",
-        components: {PagesList},
-        mixins: [Functions],
-        props: {
-            type: {
-                type: String,
-                default: '',
-            }
-        },
-        mounted() {
-            this.load_list(1);
-        },
-        data() {
-            return {
-                modal: false,
-                viewing: null,
-                viewing_edit: null,
-                local: false,
-                create_flag: false,
-                upload_image: null,
-                image_base: this.$store.state.image_base + 'direction/',
-                btn_image: '/static/images/default/header.png',
-                default_image: '/static/images/default/image.jpg',
+export default {
+  name: "ResearchPage",
+  components: {PagesList},
+  mixins: [Functions],
+  data() {
+    return {
+      modal: false,
+      viewing: null,
+      viewing_edit: null,
+      local: false,
+      create_flag: false,
+      upload_image: null,
+      type: 'directions',
+      per_page: 5,
+      image_base: this.$store.state.image_base + 'fields/',
+      btn_image: '/static/images/default/add.png',
+      default_image: '/static/images/default/image.jpg',
 
-                items: [
-                    {desc: "方向相关描述", name: "基于机器学习的识别方法", image: "/static/images/direction/direction_1.jpg"},
-                    {desc: "方向相关描述", name: "语音特征选择方法", image: "/static/images/direction/direction_2.jpg"},
-                    {desc: "方向相关描述", name: "说话人识别", image: "/static/images/direction/direction_3.jpg"},
-                    {desc: "方向相关描述", name: "语音中的副语言信息识别", image: "/static/images/direction/direction_4.gif"},
-                    {desc: "方向相关描述", name: "关键词检出", image: "/static/images/direction/direction_1.jpg"},
-                    {desc: "方向相关描述", name: "VOIP电话语音分析", image: "/static/images/direction/direction_2.jpg"},
-                    {desc: "方向相关描述", name: "机器的听觉智能", image: "/static/images/direction/direction_3.jpg"},
-                    {desc: "方向相关描述", name: "声学事件检测", image: "/static/images/direction/direction_4.gif"},
-                ],
-                new_item: [
-                    {desc: "方向相关描述", name: "方向名称", image: "/static/images/default/header.png"},
-                ],
-
-            }
-
-        },
-
-        computed: {
-            per_page() {
-                return this.$store.state.admin ? 5 : 6;
-            },
-            admin() {
-                return this.$store.state.admin;
-            }
-        },
-
-        methods: {
-            change_image(e) {
-                let file = e.target.files[0];
-                this.upload_image = file;
-                this.local = true;
-                this.viewing_edit.image = window.URL.createObjectURL(file);
-            },
-            create() {
-                this.view(JSON.parse(JSON.stringify(this.new_item)), true);
-            },
-            view(item, flag) {
-                this.viewing = item;
-                this.create_flag = flag;
-                if (this.admin) {
-                    this.viewing_edit = JSON.parse(JSON.stringify(item));
-                    this.modal = true;
-                } else {
-                    this.$toast.error('没有权限');
-                }
-            },
-            edit() {
-                let data = new FormData();
-                data.append('type', this.type);
-                data.append('filetype', 'item');
-                data.append('id', this.viewing_edit.id);
-                data.append('name', this.viewing_edit.name);
-                data.append('desc', this.viewing_edit.desc);
-                data.append('image', this.viewing_edit.image);
-                data.append('image_file', this.upload_image);
-                this.post('/list/', data, data => {
-                    switch (data['message']) {
-                        case 'success': {
-                            this.reload_list();
-                            break;
-                        }
-                        case 'error': {
-                            this.$toast.error('修改失败');
-                            break;
-                        }
-                        default: {
-                            this.$toast.info(data['message']);
-                        }
-                    }
-                })
-                this.modal = false;
-            },
-            remove(item) {
-                this.delete('/list/', {type: this.type, filetype: 'item', filename: item.id}, data => {
-                    switch (data['message']) {
-                        case 'success': {
-                            this.reload_list();
-                            break;
-                        }
-                        case 'error': {
-                            this.$toast.error('删除失败');
-                            break;
-                        }
-                        default: {
-                            this.$toast.info(data['message']);
-                        }
-                    }
-                });
-                this.modal = false;
-            },
-            load_list(page) {
-                this.get('/list/', {type: this.type, filetype: 'lists', page: page, per_page: this.per_page}, data => {
-                    switch (data['message']) {
-                        case 'success': {
-                            this.items = data['content'];
-                            break;
-                        }
-                        case 'error': {
-                            break;
-                        }
-                        default: {
-                            this.$toast.info(data['message']);
-                        }
-                    }
-                })
-            },
-            reload_list() {
-                this.create_flag = false;
-                this.local = false;
-                this.$refs.page.change_page(-2);
-            },
-        }
+      items: [],
+      new_item: {id: 'new', desc: "方向相关描述", name: "方向名称", image: ""},
     }
+  },
+  mounted() {
+    this.load_list(1);
+  },
+  computed: {
+    admin() {
+      return this.$store.state.admin;
+    }
+  },
+
+  methods: {
+    change_image(e) {
+      let file = e.target.files[0];
+      this.upload_image = file;
+      this.local = true;
+      this.viewing_edit.image = window.URL.createObjectURL(file);
+    },
+    create() {
+      this.view(JSON.parse(JSON.stringify(this.new_item)), true);
+    },
+    view(item, flag) {
+      this.viewing = item;
+      this.create_flag = flag;
+      if (this.admin) {
+        this.viewing_edit = JSON.parse(JSON.stringify(item));
+        this.modal = true;
+      } else {
+        this.$toast.error('没有权限');
+      }
+    },
+    edit() {
+      let data = new FormData();
+      data.append('type', this.type);
+      data.append('filetype', 'item');
+      data.append('id', this.viewing_edit.id);
+      data.append('name', this.viewing_edit.name);
+      data.append('desc', this.viewing_edit.desc);
+      data.append('image', this.viewing_edit.image);
+      data.append('image_file', this.upload_image);
+      this.post('/list/', data, data => {
+        switch (data['message']) {
+          case 'success': {
+            this.reload_list();
+            break;
+          }
+          case 'error': {
+            this.$toast.error('修改失败');
+            break;
+          }
+          default: {
+            this.$toast.info(data['message']);
+          }
+        }
+      })
+      this.modal = false;
+    },
+    remove(item) {
+      this.delete('/list/', {type: this.type, filetype: 'item', filename: item.id}, data => {
+        switch (data['message']) {
+          case 'success': {
+            this.reload_list();
+            break;
+          }
+          case 'error': {
+            this.$toast.error('删除失败');
+            break;
+          }
+          default: {
+            this.$toast.info(data['message']);
+          }
+        }
+      });
+      this.modal = false;
+    },
+    load_list(page) {
+      this.get('/list/', {type: this.type, filetype: 'lists', page: page, per_page: this.per_page}, data => {
+        switch (data['message']) {
+          case 'success': {
+            this.items = data['content'];
+            break;
+          }
+          case 'error': {
+            break;
+          }
+          default: {
+            this.$toast.info(data['message']);
+          }
+        }
+      })
+    },
+    reload_list() {
+      this.create_flag = false;
+      this.local = false;
+      this.$refs.page.reload();
+    },
+  }
+}
 </script>
 
 <style scoped>
-  .modal {
-    display: block;
-    z-index: 2001;
-  }
+.modal {
+  display: block;
+  z-index: 2001;
+}
 </style>

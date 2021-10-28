@@ -61,7 +61,7 @@ export default {
   },
   methods: {
     get_pages() {
-      this.get('/list/', {type: this.type, filetype: 'pages', admin: this.admin, per_page: this.per_page},
+      return this.get('/list/', {type: this.type, filetype: 'pages', admin: this.admin, per_page: this.per_page},
         data => {
           switch (data['message']) {
             case 'success': {
@@ -81,12 +81,17 @@ export default {
           }
         });
     },
+    reload() {
+      this.get_pages().then(() => {
+        if (this.active > this.pages[this.pages.length - 1]) {
+          this.active = this.pages[this.pages.length - 1];
+        }
+        this.$emit('change_page', this.active);
+      });
+    },
     change_page(page) {
       if (page !== this.active) {
         switch (page) {
-          case -2: {
-            break;
-          }
           case -1: {
             this.active = this.active - 1;
             break;
