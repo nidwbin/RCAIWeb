@@ -286,19 +286,8 @@ class NewsOP(ImageOP, HeaderOP):
         return super(NewsOP, self).delete_images(filename) if super(NewsOP, self).delete_header(filename) else False
 
 
-class PapersOP(ImageOP, HeaderOP):
-    def __init__(self):
-        super(PapersOP, self).__init__(obj=Papers)
-
-    def create(self):
-        return super(PapersOP, self).create_header()
-
-    def change_file(self, filename: str, content: str):
-        return super(PapersOP, self).delete_not_in_str(filename, content) \
-            if super(PapersOP, self).change_file(filename, content) else False
-
-    def delete(self, filename: str):
-        return super(PapersOP, self).delete_images(filename) if super(PapersOP, self).delete_header(filename) else False
+class PapersOP:
+    pass
 
 
 class PeopleOP:
