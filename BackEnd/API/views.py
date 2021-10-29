@@ -10,12 +10,15 @@ from django.views.generic import View
 from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt
 from django.http import JsonResponse
 from django.conf import settings
-from API.function import Authority, AdminOP, NewsOP, PapersOP, StudentsOP
+from API.function import Authority, AdminOP, NewsOP, PapersOP, StudentsOP, FieldsOP, ProjectsOP, AchievementsOP
 
 authority = Authority()
 newsOP = NewsOP()
 papersOP = PapersOP()
 studentsOP = StudentsOP()
+fieldsOP = FieldsOP()
+projectsOP = ProjectsOP()
+achievementsOP = AchievementsOP()
 
 
 # Create your views here.
@@ -86,19 +89,32 @@ class List(View):
                 ans = newsOP.get_hots(tops=int(request.GET.get('len')))
             elif filetype == 'item':
                 ans = newsOP.get_item(filename=request.GET.get('filename'))
+
         elif view_type == 'papers':
             if filetype == 'pages':
-                ans = papersOP.count(admin=request.GET.get('admin') == 'true', pages=int(request.GET.get('per_page')))
-            elif filetype == 'papers':
-                ans = papersOP.get_items(admin=request.GET.get('admin') == 'true', page=int(request.GET.get('page')))
+                ans = papersOP.count(pages=int(request.GET.get('per_page')))
+            elif filetype == 'lists':
+                ans = papersOP.get_lists(page=int(request.GET.get('page')), pages=int(request.GET.get('per_page')))
             elif filetype == 'books':
-                pass
+                ans = achievementsOP.get_lists()
+
         elif view_type == 'master' or view_type == 'doctor':
             if filetype == 'pages':
                 ans = studentsOP.count(degree_type=view_type, pages=int(request.GET.get('per_page')))
             elif filetype == 'lists':
                 ans = studentsOP.get_lists(degree_type=view_type, page=int(request.GET.get('page')),
                                            pages=int(request.GET.get('per_page')))
+        elif view_type == 'directions':
+            if filetype == 'pages':
+                ans = fieldsOP.count(pages=int(request.GET.get('per_page')))
+            elif filetype == 'lists':
+                ans = fieldsOP.get_lists(page=int(request.GET.get('page')), pages=int(request.GET.get('per_page')))
+
+        elif view_type == 'projects':
+            if filetype == 'pages':
+                ans = projectsOP.count(pages=int(request.GET.get('per_page')))
+            elif filetype == 'lists':
+                ans = projectsOP.get_lists(page=int(request.GET.get('page')), pages=int(request.GET.get('per_page')))
         if ans is not False:
             return authority.get_response(request, JsonResponse({'message': 'success', 'content': ans}))
         else:
@@ -119,8 +135,27 @@ class List(View):
                         ans = newsOP.set_header(filename, request.POST.get('date'), request.POST.get('title'),
                                                 request.POST.get('overview'), request.POST.get('show') == 'true',
                                                 request.FILES.get('image'))
+
             elif view_type == 'papers':
-                pass
+                id_ = request.POST.get('id')
+                if id_ == 'new':
+                    if filetype == 'item':
+                        ans = papersOP.create(name=request.POST.get('name'), link=request.POST.get('link'))
+                    elif filetype == 'book':
+                        ans = achievementsOP.create(name=request.POST.get('name'), author=request.POST.get('authors'),
+                                                    pub_date=request.POST.get('pub_time'),
+                                                    publisher=request.POST.get('press'),
+                                                    overview=request.POST.get('desc'))
+                else:
+                    if filetype == 'item':
+                        ans = papersOP.change(id_=id_, name=request.POST.get('name'), link=request.POST.get('link'))
+                    elif filetype == 'book':
+                        ans = achievementsOP.change(id_=id_, name=request.POST.get('name'),
+                                                    author=request.POST.get('authors'),
+                                                    pub_date=request.POST.get('pub_time'),
+                                                    publisher=request.POST.get('press'),
+                                                    overview=request.POST.get('desc'))
+
             elif view_type == 'master' or view_type == 'doctor':
                 id_ = request.POST.get('id')
                 if id_ == 'new':
@@ -133,6 +168,31 @@ class List(View):
                                             email=request.POST.get('email'), degree_type=view_type,
                                             degree=request.POST.get('class'), overview=request.POST.get('abstract'),
                                             image=request.FILES.get('image_file'))
+
+            elif view_type == 'directions':
+                id_ = request.POST.get('id')
+                if id_ == 'new':
+                    ans = fieldsOP.create(name=request.POST.get('name'), description=request.POST.get('desc'),
+                                          image=request.FILES.get('image_file'))
+                else:
+                    ans = fieldsOP.change(id_=id_, name=request.POST.get('name'), description=request.POST.get('desc'),
+                                          image=request.FILES.get('image_file'))
+
+            elif view_type == 'projects':
+                id_ = request.POST.get('id')
+                if id_ == 'new':
+                    ans = projectsOP.create(name=request.POST.get('name'), genre=request.POST.get('class'),
+                                            source=request.POST.get('source'), start_date=request.POST.get('bg_time'),
+                                            finish_date=request.POST.get('ed_time'), budget=request.POST.get('value'),
+                                            role=request.POST.get('principal'), status=request.POST.get('state'),
+                                            description=request.POST.get('desc'), image=request.FILES.get('image_file'))
+                else:
+                    ans = projectsOP.change(id_=id_, name=request.POST.get('name'), genre=request.POST.get('class'),
+                                            source=request.POST.get('source'), start_date=request.POST.get('bg_time'),
+                                            finish_date=request.POST.get('ed_time'), budget=request.POST.get('value'),
+                                            role=request.POST.get('principal'), status=request.POST.get('state'),
+                                            description=request.POST.get('desc'), image=request.FILES.get('image_file'))
+
             if ans is not False:
                 return authority.get_response(request, JsonResponse({'message': 'success', 'content': ans}))
         return authority.get_response(request, JsonResponse({'message': 'error'}))
@@ -146,8 +206,20 @@ class List(View):
             if view_type == 'news':
                 if filetype == 'item':
                     ans = newsOP.delete(filename)
+            elif view_type == 'papers':
+                if filetype == 'item':
+                    ans = papersOP.delete(filename)
+                elif filetype == 'book':
+                    ans = achievementsOP.delete(filename)
             elif view_type == 'master' or view_type == 'doctor':
-                ans = studentsOP.delete(filename)
+                if filetype == 'item':
+                    ans = studentsOP.delete(filename)
+            elif view_type == 'directions':
+                if filetype == 'item':
+                    ans = fieldsOP.delete(filename)
+            elif view_type == 'projects':
+                if filetype == 'item':
+                    ans = projectsOP.delete(filename)
             if ans is not False:
                 return authority.get_response(request, JsonResponse({'message': 'success'}))
         return authority.get_response(request, JsonResponse({'message': 'error'}))

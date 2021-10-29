@@ -12,7 +12,7 @@
         <div class="col-lg-8">
           <div class="news_new_area">
             <div class="new_add mb-4 border-bottom" v-if="admin">
-              <img :src="add_btn_image" class="img_filter" @click="new_item" width="100%">
+              <img :src="btn_image" class="img_filter" @click="new_item" width="100%">
               <div class="footer">
                 发布新闻
               </div>
@@ -24,7 +24,7 @@
           <div v-for="item in lists" v-if="item.show || admin">
             <div class="comment-one__single">
               <div class="comment-one__image">
-                <img :src="image_base+item.image" alt="">
+                <img :src="item.image===''?default_image:image_base+item.image" alt="">
               </div><!-- /.comment-one__image -->
               <nuxt-link :to="{name:'view', query:{type:type, filename:item.filename}}">
                 <div class="comment-one__content">
@@ -41,15 +41,15 @@
               <!-- /.thm-btn comment-one__btn -->
             </div><!-- /.comment-one__single -->
             <div class="pb-5 pt-1" v-if="admin">
-              <button type="button" class="btn btn-danger float-right" v-if="admin" @click="remove(item)">
+              <button type="button" class="btn btn-danger float-right" @click="remove(item)">
                 <span class="fa fa-trash-o"></span>&nbsp;&nbsp;删除
               </button>
               <span class="float-right">&nbsp;</span>
-              <button type="button" class="btn btn-warning float-right" v-if="admin" @click="view(item)">
+              <button type="button" class="btn btn-warning float-right" @click="view(item)">
                 <span class="fa fa-edit"></span>&nbsp;&nbsp;编辑
               </button>
               <span class="float-right">&nbsp;</span>
-              <button type="button" class="btn btn-primary float-right display-1" v-if="admin" @click="more(item)">
+              <button type="button" class="btn btn-primary float-right display-1" @click="more(item)">
                 <span class="fa fa-eye"></span>&nbsp;&nbsp;查看
               </button>
             </div>
@@ -61,7 +61,7 @@
         <div class="col-lg-4">
           <div class="sidebar">
             <div class="new_add mb-4 text-center border-bottom" v-if="admin">
-              <img :src="add_btn_image" @click="new_item" class="img_filter" width="100%">
+              <img :src="btn_image" @click="new_item" class="img_filter" width="100%">
               <div class="footer">
                 发布新闻
               </div>
@@ -141,7 +141,8 @@ export default {
       hots: [],
       per_page: 10,
       image_base: this.$store.state.image_base + 'header/',
-      add_btn_image: '/static/images/default/header.png',
+      btn_image: '/static/images/default/add.png',
+      default_image: '/static/images/default/image.jpg',
     }
   },
   mounted() {
@@ -157,7 +158,7 @@ export default {
   methods: {
     listen_events() {
       bus.$on('reload_list', () => {
-        this.$refs.page.change_page(-2);
+        this.$refs.page.reload();
       });
       bus.$on('reload_hots', () => {
         this.load_hots(5);

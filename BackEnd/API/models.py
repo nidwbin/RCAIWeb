@@ -14,7 +14,7 @@ class Header(models.Model):
     overview = models.CharField(max_length=100, verbose_name="简述", default="点击开始新建条目")
     filename = models.CharField(max_length=50, null=True, blank=True, verbose_name="文件名")
     image = models.ImageField(upload_to='images/header', default='')  # 封面图片
-    image_name = models.CharField(max_length=50, verbose_name="图片名", default="header.png")
+    image_name = models.CharField(max_length=50, verbose_name="图片名", default='')
     date = models.CharField(max_length=50, verbose_name="日期", default='XXXX-XX-XX')  # 日期
     show = models.BooleanField(blank=True, default=False)
 
@@ -26,8 +26,9 @@ class News(Header):
     text_file = models.FileField(upload_to='markdown/news')  # 文件
 
 
-class Papers(Header):
-    text_file = models.FileField(upload_to='markdown/papers')  # 文件
+class Papers(models.Model):
+    name = models.CharField(max_length=100, verbose_name="内容")
+    link = models.CharField(max_length=50, verbose_name="链接")
 
 
 class Image(models.Model):
@@ -36,12 +37,18 @@ class Image(models.Model):
     image = models.ImageField(upload_to='images/body')  # 图片
 
 
+class Fields(models.Model):  # 研究方向
+    name = models.CharField(max_length=50, verbose_name="名称")
+    description = models.CharField(max_length=50, verbose_name="描述")
+    image_name = models.CharField(max_length=50, verbose_name="图片名")
+    image = models.ImageField(upload_to='images/fields')  # 图片
+
+
 class Achievements(models.Model):
     name = models.CharField(max_length=50, verbose_name="名称")
     genre = models.CharField(max_length=30, verbose_name="类别")
     author = models.CharField(max_length=30, verbose_name="作者")
     pub_date = models.CharField(max_length=50, null=True, blank=True, verbose_name="出版时间")
-    finish_date = models.CharField(max_length=50, null=True, blank=True, verbose_name="完成时间")
     publisher = models.CharField(max_length=30, verbose_name="出版社")
     overview = models.TextField(verbose_name="简介")
 
@@ -52,9 +59,12 @@ class Project(models.Model):
     source = models.CharField(max_length=50, verbose_name="来源")
     start_date = models.CharField(max_length=50, null=True, blank=True, verbose_name="开始时间")
     finish_date = models.CharField(max_length=50, null=True, blank=True, verbose_name="完成时间")
-    budget = models.FloatField(verbose_name="项目经费")
+    budget = models.CharField(max_length=50, verbose_name="项目经费")
     role = models.CharField(max_length=30, verbose_name="担任角色")
     status = models.CharField(max_length=50, verbose_name="项目状态")
+    description = models.CharField(max_length=50, verbose_name="描述",default='')
+    image = models.ImageField(upload_to='images/projects')
+    image_name = models.CharField(max_length=50, verbose_name="图片名")
 
 
 class People(models.Model):

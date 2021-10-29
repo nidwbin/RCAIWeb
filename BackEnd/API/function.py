@@ -13,7 +13,7 @@ import math
 
 from django.core.files.base import ContentFile
 from django.contrib.auth.hashers import make_password, check_password
-from API.models import Admin, Image, News, Papers, People, Student
+from API.models import Admin, Image, News, Papers, Student, Project, Fields, Achievements
 from django.conf import settings
 
 
@@ -286,19 +286,70 @@ class NewsOP(ImageOP, HeaderOP):
         return super(NewsOP, self).delete_images(filename) if super(NewsOP, self).delete_header(filename) else False
 
 
-class PapersOP(ImageOP, HeaderOP):
-    def __init__(self):
-        super(PapersOP, self).__init__(obj=Papers)
+class PapersOP:
+    @staticmethod
+    def __get_dict__(paper):
+        return {'id': paper.id,
+                'name': paper.name,
+                'link': paper.link}.copy()
 
-    def create(self):
-        return super(PapersOP, self).create_header()
+    @staticmethod
+    def __get_list__(papers):
+        ret_list = []
+        for i in papers:
+            ret_list.append(PapersOP.__get_dict__(i))
+        return ret_list.copy()
 
-    def change_file(self, filename: str, content: str):
-        return super(PapersOP, self).delete_not_in_str(filename, content) \
-            if super(PapersOP, self).change_file(filename, content) else False
+    @staticmethod
+    def count(pages: int):
+        try:
+            papers = Papers.objects.filter()
+            length = math.ceil(len(papers) / pages)
+            return length
+        except Exception as e:
+            print(e)
+        return False
 
-    def delete(self, filename: str):
-        return super(PapersOP, self).delete_images(filename) if super(PapersOP, self).delete_header(filename) else False
+    @staticmethod
+    def get_lists(page: int = 1, pages: int = 6):
+        try:
+            papers = Papers.objects.filter()
+            return PapersOP.__get_list__(papers[(page - 1) * pages:page * pages])
+        except Exception as e:
+            print(e)
+        return False
+
+    @staticmethod
+    def create(name: str, link: str):
+        try:
+            papers = Papers(name=name, link=link)
+            papers.save()
+            return True
+        except Exception as e:
+            print(e)
+        return False
+
+    @staticmethod
+    def change(id_: int, name: str, link: str):
+        try:
+            paper = Papers.objects.get(id=id_)
+            paper.name = name
+            paper.link = link
+            paper.save()
+            return True
+        except Exception as e:
+            print(e)
+        return False
+
+    @staticmethod
+    def delete(id_: int):
+        try:
+            paper = Papers.objects.get(id=id_)
+            paper.delete()
+            return True
+        except Exception as e:
+            print(e)
+        return False
 
 
 class PeopleOP:
@@ -405,3 +456,245 @@ class StudentsOP(PeopleOP):
 
     def delete(self, id_: int):
         return self.delete_info(id_)
+
+
+class ProjectsOP:
+    @staticmethod
+    def __get_dict__(project):
+        return {'id': project.id,
+                'name': project.name,
+                'class': project.genre,
+                'source': project.source,
+                'bg_time': project.start_date,
+                'ed_time': project.finish_date,
+                'value': project.budget,
+                'principal': project.role,
+                'status': project.status,
+                'desc': project.description,
+                'image': project.image_name}.copy()
+
+    @staticmethod
+    def __get_list__(projects):
+        ret_list = []
+        for i in projects:
+            ret_list.append(ProjectsOP.__get_dict__(i))
+        return ret_list.copy()
+
+    @staticmethod
+    def count(pages: int):
+        try:
+            projects = Project.objects.filter()
+            length = math.ceil(len(projects) / pages)
+            return length
+        except Exception as e:
+            print(e)
+        return False
+
+    @staticmethod
+    def get_lists(page: int = 1, pages: int = 6):
+        try:
+            projects = Project.objects.filter()
+            return ProjectsOP.__get_list__(projects[(page - 1) * pages:page * pages])
+        except Exception as e:
+            print(e)
+        return False
+
+    @staticmethod
+    def create(name: str, genre: str, source: str, start_date: str, finish_date: str, budget: str, role: str,
+               status: str, description: str, image):
+        try:
+            if image:
+                image_name = str(uuid.uuid4()) + os.path.splitext(image.name)[1]
+            else:
+                image_name = ''
+            project = Project(name=name, genre=genre, source=source, start_date=start_date, finish_date=finish_date,
+                              budget=budget, role=role, status=status, description=description, image_name=image_name)
+            if image:
+                project.image = image
+                project.image.name = image_name
+            project.save()
+            return True
+        except Exception as e:
+            print(e)
+        return False
+
+    @staticmethod
+    def change(id_: int, name: str, genre: str, source: str, start_date: str, finish_date: str, budget: str, role: str,
+               status: str, description: str, image):
+        try:
+            project = Project.objects.get(id=id_)
+            project.name = name
+            project.genre = genre
+            project.source = source
+            project.start_date = start_date
+            project.finish_date = finish_date
+            project.budget = budget
+            project.role = role
+            project.status = status
+            project.description = description
+            if image:
+                image_name = str(uuid.uuid4()) + os.path.splitext(image.name)[1]
+                project.image.delete()
+                project.image_name = image_name
+                project.image = image
+                project.image.name = image_name
+            project.save()
+            return True
+        except Exception as e:
+            print(e)
+        return False
+
+    @staticmethod
+    def delete(id_: int):
+        try:
+            project = Project.objects.get(id=id_)
+            project.image.delete()
+            project.delete()
+            return True
+        except Exception as e:
+            print(e)
+        return False
+
+
+class FieldsOP:
+    @staticmethod
+    def __get_dict__(field):
+        return {'id': field.id,
+                'name': field.name,
+                'desc': field.description,
+                'image': field.image_name}.copy()
+
+    @staticmethod
+    def __get_list__(fields):
+        ret_list = []
+        for i in fields:
+            ret_list.append(FieldsOP.__get_dict__(i))
+        return ret_list.copy()
+
+    @staticmethod
+    def count(pages: int):
+        try:
+            fields = Fields.objects.filter()
+            length = math.ceil(len(fields) / pages)
+            return length
+        except Exception as e:
+            print(e)
+        return False
+
+    @staticmethod
+    def get_lists(page: int = 1, pages: int = 6):
+        try:
+            fields = Fields.objects.filter()
+            return FieldsOP.__get_list__(fields[(page - 1) * pages:page * pages])
+        except Exception as e:
+            print(e)
+        return False
+
+    @staticmethod
+    def create(name: str, description: str, image):
+        try:
+            if image:
+                image_name = str(uuid.uuid4()) + os.path.splitext(image.name)[1]
+            else:
+                image_name = ''
+            fields = Fields(name=name, description=description, image_name=image_name)
+            if image:
+                fields.image = image
+                fields.image.name = image_name
+            fields.save()
+            return True
+        except Exception as e:
+            print(e)
+        return False
+
+    @staticmethod
+    def change(id_: int, name: str, description: str, image):
+        try:
+            fields = Fields.objects.get(id=id_)
+            fields.name = name
+            fields.description = description
+            if image:
+                image_name = str(uuid.uuid4()) + os.path.splitext(image.name)[1]
+                fields.image.delete()
+                fields.image_name = image_name
+                fields.image = image
+                fields.image.name = image_name
+            fields.save()
+            return True
+        except Exception as e:
+            print(e)
+        return False
+
+    @staticmethod
+    def delete(id_: int):
+        try:
+            fields = Fields.objects.get(id=id_)
+            fields.image.delete()
+            fields.delete()
+            return True
+        except Exception as e:
+            print(e)
+        return False
+
+
+class AchievementsOP:
+    @staticmethod
+    def __get_dict__(achievement):
+        return {'id': achievement.id,
+                'name': achievement.name,
+                'authors': achievement.author,
+                'pub_time': achievement.pub_date,
+                'press': achievement.publisher,
+                'desc': achievement.overview}.copy()
+
+    @staticmethod
+    def __get_list__(achievements):
+        ret_list = []
+        for i in achievements:
+            ret_list.append(AchievementsOP.__get_dict__(i))
+        return ret_list.copy()
+
+    @staticmethod
+    def get_lists():
+        try:
+            achievements = Achievements.objects.all()
+            return AchievementsOP.__get_list__(achievements)
+        except Exception as e:
+            print(e)
+        return False
+
+    @staticmethod
+    def create(name: str, author: str, pub_date: str, publisher: str, overview: str):
+        try:
+            achievement = Achievements(name=name, author=author, pub_date=pub_date, publisher=publisher,
+                                       overview=overview)
+            achievement.save()
+            return True
+        except Exception as e:
+            print(e)
+        return False
+
+    @staticmethod
+    def change(id_: int, name: str, author: str, pub_date: str, publisher: str, overview: str):
+        try:
+            achievement = Achievements.objects.get(id=id_)
+            achievement.name = name
+            achievement.author = author
+            achievement.pub_date = pub_date
+            achievement.publisher = publisher
+            achievement.overview = overview
+            achievement.save()
+            return True
+        except Exception as e:
+            print(e)
+        return False
+
+    @staticmethod
+    def delete(id_: int):
+        try:
+            achievements = Achievements.objects.get(id=id_)
+            achievements.delete()
+            return True
+        except Exception as e:
+            print(e)
+        return False
