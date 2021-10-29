@@ -13,7 +13,7 @@ import math
 
 from django.core.files.base import ContentFile
 from django.contrib.auth.hashers import make_password, check_password
-from API.models import Admin, Image, News, Papers, Student, Project, Fields
+from API.models import Admin, Image, News, Papers, Student, Project, Fields, Achievements
 from django.conf import settings
 
 
@@ -287,7 +287,68 @@ class NewsOP(ImageOP, HeaderOP):
 
 
 class PapersOP:
-    pass
+    @staticmethod
+    def __get_dict__(paper):
+        return {'id': paper.id,
+                'name': paper.name,
+                'link': paper.link}.copy()
+
+    @staticmethod
+    def __get_list__(papers):
+        ret_list = []
+        for i in papers:
+            ret_list.append(PapersOP.__get_dict__(i))
+        return ret_list.copy()
+
+    @staticmethod
+    def count(pages: int):
+        try:
+            papers = Papers.objects.filter()
+            length = math.ceil(len(papers) / pages)
+            return length
+        except Exception as e:
+            print(e)
+        return False
+
+    @staticmethod
+    def get_lists(page: int = 1, pages: int = 6):
+        try:
+            papers = Papers.objects.filter()
+            return PapersOP.__get_list__(papers[(page - 1) * pages:page * pages])
+        except Exception as e:
+            print(e)
+        return False
+
+    @staticmethod
+    def create(name: str, link: str):
+        try:
+            papers = Papers(name=name, link=link)
+            papers.save()
+            return True
+        except Exception as e:
+            print(e)
+        return False
+
+    @staticmethod
+    def change(id_: int, name: str, link: str):
+        try:
+            paper = Papers.objects.get(id=id_, name=name)
+            paper.link = link
+            paper.save()
+            return True
+        except Exception as e:
+            print(e)
+        return False
+
+    @staticmethod
+    def delete(id_: int):
+        try:
+            paper = Papers.objects.get(id=id_)
+            paper.delete()
+            return True
+        except Exception as e:
+            print(e)
+        return False
 
 
 class PeopleOP:
@@ -573,3 +634,42 @@ class FieldsOP:
         except Exception as e:
             print(e)
         return False
+
+
+class AchievementsOP:
+    @staticmethod
+    def create(name: str, author: str, pub_date: str, publisher: str, overview: str):
+        try:
+            achievement = Achievements(name=name, author=author, pub_date=pub_date, publisher=publisher, overview=overview)
+            achievement.save()
+            return True
+        except Exception as e:
+            print(e)
+        return False
+
+    @staticmethod
+    def change(id_: int, name: str, author: str, pub_date: str, publisher: str, overview: str):
+        try:
+            achievement = Achievements.objects.get(id=id_)
+            achievement.name = name
+            achievement.author = author
+            achievement.pub_date = pub_date
+            achievement.publisher = publisher
+            achievement.overview = overview
+            achievement.save()
+            return True
+        except Exception as e:
+            print(e)
+        return False
+
+    @staticmethod
+    def delete(id_: int):
+        try:
+            achievements = Achievements.objects.get(id=id_)
+            achievements.delete()
+            return True
+        except Exception as e:
+            print(e)
+        return False
+
+

@@ -26,8 +26,9 @@ class News(Header):
     text_file = models.FileField(upload_to='markdown/news')  # 文件
 
 
-class Papers(Header):
-    text_file = models.FileField(upload_to='markdown/papers')  # 文件
+class Papers(models.Model):
+    name = models.CharField(max_length=100, verbose_name="内容")
+    link = models.CharField(max_length=50, verbose_name="链接")
 
 
 class Image(models.Model):
@@ -48,7 +49,6 @@ class Achievements(models.Model):
     genre = models.CharField(max_length=30, verbose_name="类别")
     author = models.CharField(max_length=30, verbose_name="作者")
     pub_date = models.CharField(max_length=50, null=True, blank=True, verbose_name="出版时间")
-    finish_date = models.CharField(max_length=50, null=True, blank=True, verbose_name="完成时间")
     publisher = models.CharField(max_length=30, verbose_name="出版社")
     overview = models.TextField(verbose_name="简介")
 
