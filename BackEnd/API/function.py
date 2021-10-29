@@ -332,7 +332,8 @@ class PapersOP:
     @staticmethod
     def change(id_: int, name: str, link: str):
         try:
-            paper = Papers.objects.get(id=id_, name=name)
+            paper = Papers.objects.get(id=id_)
+            paper.name = name
             paper.link = link
             paper.save()
             return True
@@ -641,10 +642,10 @@ class AchievementsOP:
     def __get_dict__(achievement):
         return {'id': achievement.id,
                 'name': achievement.name,
-                'author': achievement.author,
-                'pub_date': achievement.pub_date,
-                'publisher': achievement.publisher,
-                'overview': achievement.overview}.copy()
+                'authors': achievement.author,
+                'pub_time': achievement.pub_date,
+                'press': achievement.publisher,
+                'desc': achievement.overview}.copy()
 
     @staticmethod
     def __get_list__(achievements):
@@ -654,10 +655,10 @@ class AchievementsOP:
         return ret_list.copy()
 
     @staticmethod
-    def get_lists(page: int = 1, pages: int = 6):
+    def get_lists():
         try:
-            achievements = Achievements.objects.filter()
-            return AchievementsOP.__get_list__(achievements[(page - 1) * pages:page * pages])
+            achievements = Achievements.objects.all()
+            return AchievementsOP.__get_list__(achievements)
         except Exception as e:
             print(e)
         return False
@@ -665,7 +666,8 @@ class AchievementsOP:
     @staticmethod
     def create(name: str, author: str, pub_date: str, publisher: str, overview: str):
         try:
-            achievement = Achievements(name=name, author=author, pub_date=pub_date, publisher=publisher, overview=overview)
+            achievement = Achievements(name=name, author=author, pub_date=pub_date, publisher=publisher,
+                                       overview=overview)
             achievement.save()
             return True
         except Exception as e:
@@ -696,5 +698,3 @@ class AchievementsOP:
         except Exception as e:
             print(e)
         return False
-
-

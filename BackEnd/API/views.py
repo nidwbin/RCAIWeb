@@ -10,7 +10,7 @@ from django.views.generic import View
 from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt
 from django.http import JsonResponse
 from django.conf import settings
-from API.function import Authority, AdminOP, NewsOP, PapersOP, StudentsOP, FieldsOP, ProjectsOP
+from API.function import Authority, AdminOP, NewsOP, PapersOP, StudentsOP, FieldsOP, ProjectsOP, AchievementsOP
 
 authority = Authority()
 newsOP = NewsOP()
@@ -18,6 +18,7 @@ papersOP = PapersOP()
 studentsOP = StudentsOP()
 fieldsOP = FieldsOP()
 projectsOP = ProjectsOP()
+achievementsOP = AchievementsOP()
 
 
 # Create your views here.
@@ -91,11 +92,11 @@ class List(View):
 
         elif view_type == 'papers':
             if filetype == 'pages':
-                ans = papersOP.count(admin=request.GET.get('admin') == 'true', pages=int(request.GET.get('per_page')))
-            elif filetype == 'papers':
-                ans = papersOP.get_items(admin=request.GET.get('admin') == 'true', page=int(request.GET.get('page')))
+                ans = papersOP.count(pages=int(request.GET.get('per_page')))
+            elif filetype == 'lists':
+                ans = papersOP.get_lists(page=int(request.GET.get('page')), pages=int(request.GET.get('per_page')))
             elif filetype == 'books':
-                pass
+                ans = achievementsOP.get_lists()
 
         elif view_type == 'master' or view_type == 'doctor':
             if filetype == 'pages':
@@ -136,7 +137,24 @@ class List(View):
                                                 request.FILES.get('image'))
 
             elif view_type == 'papers':
-                pass
+                id_ = request.POST.get('id')
+                if id_ == 'new':
+                    if filetype == 'item':
+                        ans = papersOP.create(name=request.POST.get('name'), link=request.POST.get('link'))
+                    elif filetype == 'book':
+                        ans = achievementsOP.create(name=request.POST.get('name'), author=request.POST.get('authors'),
+                                                    pub_date=request.POST.get('pub_time'),
+                                                    publisher=request.POST.get('press'),
+                                                    overview=request.POST.get('desc'))
+                else:
+                    if filetype == 'item':
+                        ans = papersOP.change(id_=id_, name=request.POST.get('name'), link=request.POST.get('link'))
+                    elif filetype == 'book':
+                        ans = achievementsOP.change(id_=id_, name=request.POST.get('name'),
+                                                    author=request.POST.get('authors'),
+                                                    pub_date=request.POST.get('pub_time'),
+                                                    publisher=request.POST.get('press'),
+                                                    overview=request.POST.get('desc'))
 
             elif view_type == 'master' or view_type == 'doctor':
                 id_ = request.POST.get('id')
@@ -159,6 +177,7 @@ class List(View):
                 else:
                     ans = fieldsOP.change(id_=id_, name=request.POST.get('name'), description=request.POST.get('desc'),
                                           image=request.FILES.get('image_file'))
+
             elif view_type == 'projects':
                 id_ = request.POST.get('id')
                 if id_ == 'new':
@@ -173,6 +192,7 @@ class List(View):
                                             finish_date=request.POST.get('ed_time'), budget=request.POST.get('value'),
                                             role=request.POST.get('principal'), status=request.POST.get('state'),
                                             description=request.POST.get('desc'), image=request.FILES.get('image_file'))
+
             if ans is not False:
                 return authority.get_response(request, JsonResponse({'message': 'success', 'content': ans}))
         return authority.get_response(request, JsonResponse({'message': 'error'}))
@@ -186,6 +206,11 @@ class List(View):
             if view_type == 'news':
                 if filetype == 'item':
                     ans = newsOP.delete(filename)
+            elif view_type == 'papers':
+                if filetype == 'item':
+                    ans = papersOP.delete(filename)
+                elif filetype == 'book':
+                    ans = achievementsOP.delete(filename)
             elif view_type == 'master' or view_type == 'doctor':
                 if filetype == 'item':
                     ans = studentsOP.delete(filename)
