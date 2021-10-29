@@ -638,6 +638,31 @@ class FieldsOP:
 
 class AchievementsOP:
     @staticmethod
+    def __get_dict__(achievement):
+        return {'id': achievement.id,
+                'name': achievement.name,
+                'author': achievement.author,
+                'pub_date': achievement.pub_date,
+                'publisher': achievement.publisher,
+                'overview': achievement.overview}.copy()
+
+    @staticmethod
+    def __get_list__(achievements):
+        ret_list = []
+        for i in achievements:
+            ret_list.append(AchievementsOP.__get_dict__(i))
+        return ret_list.copy()
+
+    @staticmethod
+    def get_lists(page: int = 1, pages: int = 6):
+        try:
+            achievements = Achievements.objects.filter()
+            return AchievementsOP.__get_list__(achievements[(page - 1) * pages:page * pages])
+        except Exception as e:
+            print(e)
+        return False
+
+    @staticmethod
     def create(name: str, author: str, pub_date: str, publisher: str, overview: str):
         try:
             achievement = Achievements(name=name, author=author, pub_date=pub_date, publisher=publisher, overview=overview)
