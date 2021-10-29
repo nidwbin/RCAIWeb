@@ -46,7 +46,6 @@
             </div><!-- /.comment-one -->
           </div><!-- /.col-lg-8 -->
           <div class="col-lg-4">
-
             <div class="card-header" style="background-color: white;">
               <div class="h2"><span class="fa fa-book" style="color: #ff5316"></span>&nbsp;&nbsp;出版物</div>
             </div>
