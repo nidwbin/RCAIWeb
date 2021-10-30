@@ -40,12 +40,12 @@
             </div>
             <div class="mt-5" v-if="admin" style="text-align: center">
               <button type="button" class="btn btn-primary btn-lg" @click="create">
-                <span class="fa fa-edit"></span>&nbsp;&nbsp;&nbsp;&nbsp;新&nbsp;增
+                <span class="fa fa-edit" ></span>&nbsp;&nbsp;&nbsp;&nbsp;新&nbsp;增
               </button>
             </div>
           </div>
           <div class="card-header mb-1">
-            <div class="h2">科研项目</div>
+            <div class="h2"><span class="fa fa-list-alt" style="color: #ff5316;"></span>&nbsp;&nbsp;科研项目</div>
           </div>
           <div class="single-project" v-for="item in items">
             <div class="single-project-thumb">

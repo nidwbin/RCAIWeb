@@ -18,6 +18,27 @@
         </div>
         <div class="row client-active">
           <swiper :options="swiperOptions">
+<!--            <swiper-slide v-for="item in hots" :key="item.filename">-->
+<!--              <div class="client-item mt-30">-->
+<!--                <div class="shape">-->
+<!--                  <img src="/static/images/shape/shape-4.png" alt="shape">-->
+<!--                </div>-->
+<!--                <div class="float-left" style="max-width: 20%;">-->
+<!--                  <img :src="item.image===''?default_image:image_base+item.image" alt="new" style="max-height: 110px;">-->
+<!--                </div>-->
+<!--                <div class="float-left ml-4" style="max-height: 20%;">-->
+<!--                  <h4 class="title">-->
+<!--                    <nuxt-link :to="{name:'view', query:{type:type, filename:item.filename}}">-->
+<!--                      {{ item.title }}-->
+<!--                    </nuxt-link>-->
+<!--                  </h4>-->
+<!--                  <span style="color: #ff5316; font-size: 14px;">{{ item.date }}</span>-->
+<!--                  <div class="text">-->
+<!--                    <p>{{ item.overview }}sadadasdadadadasdadsadasdasdasdsadasdasdsadsa</p>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </swiper-slide>-->
             <swiper-slide v-for="item in hots" :key="item.filename">
               <div class="client-item mt-30">
                 <div class="shape">
@@ -34,10 +55,11 @@
                     </nuxt-link>
                   </h5>
                   <span>{{ item.date }}</span>
+                  <div class="text">
+                    <p>{{ item.overview }}dadasdadadadasdadsadasdasdasdsadasdasdsads</p>
+                  </div>
                 </div>
-                <div class="text">
-                  <p>{{ item.overview }}</p>
-                </div>
+
               </div>
             </swiper-slide>
           </swiper>

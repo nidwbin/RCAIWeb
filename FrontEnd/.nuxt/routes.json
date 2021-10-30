@@ -2,157 +2,85 @@
   {
     "name": "contact-students",
     "path": "/contact-students",
-<<<<<<< HEAD
     "component": "C:\\\\Users\\\\liuyoude\\\\OneDrive\\\\HIT\\\\SPLab\\\\RCAIWeb\\\\FrontEnd\\\\pages\\\\contact-students.vue",
     "chunkName": "pages/contact-students",
     "_name": "_395e99d0"
-=======
-    "component": "/home/benjamin/codes/python/RACIWeb/FrontEnd/pages/contact-students.vue",
-    "chunkName": "pages/contact-students",
-    "_name": "_4112f673"
->>>>>>> origin/dev
   },
   {
     "name": "contact-teachers",
     "path": "/contact-teachers",
-<<<<<<< HEAD
     "component": "C:\\\\Users\\\\liuyoude\\\\OneDrive\\\\HIT\\\\SPLab\\\\RCAIWeb\\\\FrontEnd\\\\pages\\\\contact-teachers.vue",
     "chunkName": "pages/contact-teachers",
     "_name": "_40874c5e"
-=======
-    "component": "/home/benjamin/codes/python/RACIWeb/FrontEnd/pages/contact-teachers.vue",
-    "chunkName": "pages/contact-teachers",
-    "_name": "_3d7e9d2c"
->>>>>>> origin/dev
   },
   {
     "name": "direction",
     "path": "/direction",
-<<<<<<< HEAD
     "component": "C:\\\\Users\\\\liuyoude\\\\OneDrive\\\\HIT\\\\SPLab\\\\RCAIWeb\\\\FrontEnd\\\\pages\\\\direction.vue",
     "chunkName": "pages/direction",
     "_name": "_5b42f09c"
-=======
-    "component": "/home/benjamin/codes/python/RACIWeb/FrontEnd/pages/direction.vue",
-    "chunkName": "pages/direction",
-    "_name": "_6abfeda1"
->>>>>>> origin/dev
   },
   {
     "name": "doctor",
     "path": "/doctor",
-<<<<<<< HEAD
     "component": "C:\\\\Users\\\\liuyoude\\\\OneDrive\\\\HIT\\\\SPLab\\\\RCAIWeb\\\\FrontEnd\\\\pages\\\\doctor.vue",
     "chunkName": "pages/doctor",
     "_name": "_447c575c"
-=======
-    "component": "/home/benjamin/codes/python/RACIWeb/FrontEnd/pages/doctor.vue",
-    "chunkName": "pages/doctor",
-    "_name": "_4fe47d6d"
->>>>>>> origin/dev
   },
   {
     "name": "login",
     "path": "/login",
-<<<<<<< HEAD
     "component": "C:\\\\Users\\\\liuyoude\\\\OneDrive\\\\HIT\\\\SPLab\\\\RCAIWeb\\\\FrontEnd\\\\pages\\\\login.vue",
     "chunkName": "pages/login",
     "_name": "_fa8ec3f4"
-=======
-    "component": "/home/benjamin/codes/python/RACIWeb/FrontEnd/pages/login.vue",
-    "chunkName": "pages/login",
-    "_name": "_655ee58b"
->>>>>>> origin/dev
   },
   {
     "name": "master",
     "path": "/master",
-<<<<<<< HEAD
     "component": "C:\\\\Users\\\\liuyoude\\\\OneDrive\\\\HIT\\\\SPLab\\\\RCAIWeb\\\\FrontEnd\\\\pages\\\\master.vue",
     "chunkName": "pages/master",
     "_name": "_74c9d7d6"
-=======
-    "component": "/home/benjamin/codes/python/RACIWeb/FrontEnd/pages/master.vue",
-    "chunkName": "pages/master",
-    "_name": "_37bdbd30"
->>>>>>> origin/dev
   },
   {
     "name": "news",
     "path": "/news",
-<<<<<<< HEAD
     "component": "C:\\\\Users\\\\liuyoude\\\\OneDrive\\\\HIT\\\\SPLab\\\\RCAIWeb\\\\FrontEnd\\\\pages\\\\news.vue",
     "chunkName": "pages/news",
     "_name": "_735f1ec6"
-=======
-    "component": "/home/benjamin/codes/python/RACIWeb/FrontEnd/pages/news.vue",
-    "chunkName": "pages/news",
-    "_name": "_86815abe"
->>>>>>> origin/dev
   },
   {
     "name": "papers",
     "path": "/papers",
-<<<<<<< HEAD
     "component": "C:\\\\Users\\\\liuyoude\\\\OneDrive\\\\HIT\\\\SPLab\\\\RCAIWeb\\\\FrontEnd\\\\pages\\\\papers.vue",
     "chunkName": "pages/papers",
     "_name": "_67937f9a"
-=======
-    "component": "/home/benjamin/codes/python/RACIWeb/FrontEnd/pages/papers.vue",
-    "chunkName": "pages/papers",
-    "_name": "_4c93ae96"
->>>>>>> origin/dev
   },
   {
     "name": "projects",
     "path": "/projects",
-<<<<<<< HEAD
     "component": "C:\\\\Users\\\\liuyoude\\\\OneDrive\\\\HIT\\\\SPLab\\\\RCAIWeb\\\\FrontEnd\\\\pages\\\\projects.vue",
     "chunkName": "pages/projects",
     "_name": "_f176c926"
-=======
-    "component": "/home/benjamin/codes/python/RACIWeb/FrontEnd/pages/projects.vue",
-    "chunkName": "pages/projects",
-    "_name": "_093d2c70"
->>>>>>> origin/dev
   },
   {
     "name": "teacher",
     "path": "/teacher",
-<<<<<<< HEAD
     "component": "C:\\\\Users\\\\liuyoude\\\\OneDrive\\\\HIT\\\\SPLab\\\\RCAIWeb\\\\FrontEnd\\\\pages\\\\teacher.vue",
     "chunkName": "pages/teacher",
     "_name": "_0a8b88bf"
-=======
-    "component": "/home/benjamin/codes/python/RACIWeb/FrontEnd/pages/teacher.vue",
-    "chunkName": "pages/teacher",
-    "_name": "_4683f9f8"
->>>>>>> origin/dev
   },
   {
     "name": "view",
     "path": "/view",
-<<<<<<< HEAD
     "component": "C:\\\\Users\\\\liuyoude\\\\OneDrive\\\\HIT\\\\SPLab\\\\RCAIWeb\\\\FrontEnd\\\\pages\\\\view.vue",
     "chunkName": "pages/view",
     "_name": "_67829598"
-=======
-    "component": "/home/benjamin/codes/python/RACIWeb/FrontEnd/pages/view.vue",
-    "chunkName": "pages/view",
-    "_name": "_9e3a6d1a"
->>>>>>> origin/dev
   },
   {
     "name": "index",
     "path": "/",
-<<<<<<< HEAD
     "component": "C:\\\\Users\\\\liuyoude\\\\OneDrive\\\\HIT\\\\SPLab\\\\RCAIWeb\\\\FrontEnd\\\\pages\\\\index.vue",
     "chunkName": "pages/index",
     "_name": "_8dde0a22"
-=======
-    "component": "/home/benjamin/codes/python/RACIWeb/FrontEnd/pages/index.vue",
-    "chunkName": "pages/index",
-    "_name": "_c8917b18"
->>>>>>> origin/dev
   }
 ]

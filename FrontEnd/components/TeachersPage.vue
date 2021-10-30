@@ -10,7 +10,7 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
-          <div class="teacher-item mt-30" style="min-height: 360px !important;" v-for="item in new_item">
+          <div class="teacher-item mt-30" style="min-height: 360px !important;" v-for="item in new_item" v-if="admin">
             <div class="shape">
               <img src="/static/images/shape/shape-4.png" alt="shape">
             </div>
@@ -38,7 +38,7 @@
               </button>
             </div>
           </div>
-          <div class="card-header mb-3">
+          <div class="card-header">
             <div class="h2"><span class="fa fa-user-secret" style="color: #ff5316;">&nbsp;&nbsp;</span>中心教师</div>
           </div>
           <div class="teacher-item mt-30" v-for="item in items">
