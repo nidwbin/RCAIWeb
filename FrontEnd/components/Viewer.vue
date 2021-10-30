@@ -133,6 +133,7 @@ export default {
       bus.$off(['save']);
     },
     send_all() {
+      this.save(this.$refs.md.d_value, this.$refs.md.d_render);
       bus.$emit('finish');
     },
     delete_all() {
