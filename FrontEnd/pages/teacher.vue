@@ -18,7 +18,6 @@
   import Nav from "../components/Nav";
   import PageHeader from "../components/PageHeader";
   import TeachersPage from "../components/TeachersPage";
-  import GMap from "../components/GMap";
   import Footer from "../components/Footer";
 
   export default {
@@ -26,7 +25,6 @@
       Nav,
       PageHeader,
       TeachersPage,
-      GMap,
       Footer,
     },
   mounted() {

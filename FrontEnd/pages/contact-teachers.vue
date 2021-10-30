@@ -10,7 +10,7 @@
     <Nav/>
     <PageHeader title_zh="招聘" title_en="Join Us"/>
     <ContactTeachersPage />
-    <GMap />
+    <Map />
     <Footer/>
   </div>
 </template>
@@ -19,7 +19,7 @@
   import Nav from "../components/Nav";
   import PageHeader from "../components/PageHeader";
   import ContactTeachersPage from "../components/ContactTeachersPage";
-  import GMap from "../components/GMap";
+  import Map from "../components/Map";
   import Footer from "../components/Footer";
 
   export default {
@@ -27,7 +27,7 @@
       Nav,
       PageHeader,
       ContactTeachersPage,
-      GMap,
+      Map,
       Footer,
     },
   mounted() {

@@ -10,8 +10,8 @@ class Admin(models.Model):
 
 
 class Header(models.Model):
-    title = models.CharField(max_length=50, verbose_name="标题", default="新建条目")
-    overview = models.CharField(max_length=100, verbose_name="简述", default="点击开始新建条目")
+    title = models.CharField(max_length=50, verbose_name="标题", default="")
+    overview = models.CharField(max_length=100, verbose_name="简述", default="")
     filename = models.CharField(max_length=50, null=True, blank=True, verbose_name="文件名")
     image = models.ImageField(upload_to='images/header', default='')  # 封面图片
     image_name = models.CharField(max_length=50, verbose_name="图片名", default='')

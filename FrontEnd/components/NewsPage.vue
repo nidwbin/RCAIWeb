@@ -77,7 +77,8 @@
               <div class="sidebar__post-wrap">
                 <div class="sidebar__post__single" v-for="item in hots">
                   <div class="sidebar__post-image">
-                    <div class="inner-block"><img :src="image_base+item.image" alt=""></div>
+                    <div class="inner-block"><img :src="item.image===''?default_image:image_base+item.image" alt="">
+                    </div>
                     <!-- /.inner-block -->
                   </div><!-- /.sidebar__post-image -->
                   <nuxt-link :to="{name:'view', query:{type:type, filename:item.filename}}">
