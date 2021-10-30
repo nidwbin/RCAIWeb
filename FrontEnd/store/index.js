@@ -1,6 +1,6 @@
 export const state = () => ({
-  admin: false,
-  debug: false,
+  admin: true,
+  debug: true,
   image_base: 'http://localhost:8000/media/images/',
 });
 
