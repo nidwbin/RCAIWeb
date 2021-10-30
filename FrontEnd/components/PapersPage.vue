@@ -387,21 +387,12 @@ export default {
         {
           name: "Zhihao Du, Ming Lei, Jiqing Han, Shiliang Zhang. PAN: Phoneme-Aware Network for Monaural Speech Enhancement, ICASSP2020, Barcelona, Spain",
           link: '#'
-<<<<<<< HEAD
         },
         {
           name: "Chen Chen, Jiqing Han. TDMF: Task-Driven Multi-Level Framework for End-to-End Speaker Verification, ICASSP2020, Barcelona, Spain",
           link: '#'
         },
         {
-=======
-        },
-        {
-          name: "Chen Chen, Jiqing Han. TDMF: Task-Driven Multi-Level Framework for End-to-End Speaker Verification, ICASSP2020, Barcelona, Spain",
-          link: '#'
-        },
-        {
->>>>>>> origin/dev
           name: "Jiabin Xue, Tieran Zheng, Jiqing Han, Convolutional Grid Long Short-Term Memory Recurrent Neural Network for Automatic Speech Recognition. ICONIP2019, Sydney Autstralia",
           link: '#'
         },

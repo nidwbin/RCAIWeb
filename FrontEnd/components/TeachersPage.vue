@@ -10,27 +10,27 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
-          <div class="teacher-item mt-30" style="min-height: 360px !important;" v-for="item in new_item">
+          <div class="teacher-item mt-30" style="min-height: 360px !important;" v-if="admin">
             <div class="shape">
               <img src="/static/images/shape/shape-4.png" alt="shape">
             </div>
             <div class="user">
               <div class="user-thumb">
-                <img :src="item.image" alt="client">
+                <img :src="default_image" alt="client">
                 <i class="fa fa-quote-left"></i>
               </div>
-              <h5 class="title">{{ item.name }}</h5>
-              <span>{{ item.prof }}</span>
+              <h5 class="title">{{ new_item.name }}</h5>
+              <span>{{ new_item.prof }}</span>
               <div class="contact">
-                <p>电话：<span>{{ item.tel }}</span></p>
-                <p>邮箱：<span>{{ item.email }}</span></p>
-                <p>地址：<span>{{ item.adress }}</span></p>
-                <p>主页：<span>{{ item.link }}</span></p>
+                <p>电话：<span>{{ new_item.tel }}</span></p>
+                <p>邮箱：<span>{{ new_item.email }}</span></p>
+                <p>地址：<span>{{ new_item.adress }}</span></p>
+                <p>主页：<span>{{ new_item.link }}</span></p>
               </div>
 
             </div>
             <div class="text">
-              <p>{{ item.desc }}</p>
+              <p>{{ new_item.desc }}</p>
             </div>
             <div class="mt-4" style="text-align: center">
               <button type="button" class="btn btn-primary" @click="create">
@@ -47,7 +47,7 @@
             </div>
             <div class="user">
               <div class="user-thumb">
-                <img :src="item.image" alt="client">
+                <img :src="item.image===''?default_image:image_base+item.image" alt="client">
                 <i class="fa fa-quote-left"></i>
               </div>
               <h5 class="title">{{ item.name }}</h5>
@@ -56,7 +56,8 @@
                 <p>电话：<span><a :href="'tel:'+item.tel">{{ item.tel }}</a></span></p>
                 <p>邮箱：<span><a :href="'mailto:'+ item.email">{{ item.email }}</a></span></p>
                 <p>地址：<span>{{ item.adress }}</span></p>
-                <p>主页：<span style="color: #007bff !important; cursor: pointer;"><a @click="goto_link(item.link)">{{ item.link }}</a></span></p>
+                <p>主页：<span style="color: #007bff !important; cursor: pointer;"><a
+                  @click="goto_link(item.link)">{{ item.link }}</a></span></p>
               </div>
 
             </div>
@@ -176,17 +177,10 @@ export default {
   name: "TeacherPage",
   components: {PagesList},
   mixins: [Functions],
-  props: {
-    type: {
-      type: String,
-      default: '',
-    }
-  },
-  mounted() {
-    this.load_list(1);
-  },
+
   data() {
     return {
+      type: 'teachers',
       modal: false,
       viewing: null,
       viewing_edit: null,
@@ -238,19 +232,21 @@ export default {
           link: "http://homepage.hit.edu.cn/hanjiqing"
         },
       ],
-      new_item: [
-        {
-          name: "姓名",
-          prof: "职称",
-          desc: "简介",
-          image: "/static/images/default/add.png",
-          tel: "xxxx-xxxxxxxx",
-          email: "xxx@hit.edu.cn",
-          adress: "哈尔滨工业大学xxx信箱",
-          link: "http://homepage.hit.edu.cn/xxx"
-        },
-      ]
+      new_item: {
+        id: 'new',
+        name: "姓名",
+        prof: "职称",
+        desc: "简介",
+        image: "",
+        tel: "xxxx-xxxxxxxx",
+        email: "xxx@hit.edu.cn",
+        adress: "哈尔滨工业大学xxx信箱",
+        link: "http://homepage.hit.edu.cn/xxx"
+      },
     }
+  },
+  mounted() {
+    this.load_list();
   },
   computed: {
     per_page() {
@@ -291,8 +287,7 @@ export default {
       data.append('tel', this.viewing_edit.tel);
       data.append('email', this.viewing_edit.email);
       data.append('adress', this.viewing_edit.adress);
-       data.append('desc', this.viewing_edit.desc);
-
+      data.append('desc', this.viewing_edit.desc);
       data.append('image', this.viewing_edit.image);
       data.append('image_file', this.upload_image);
       this.post('/list/', data, data => {
@@ -332,10 +327,9 @@ export default {
     },
     goto_link(link) {
       window.location.href = link;
-      // window.open(link, "_blank");
     },
-    load_list(page) {
-      this.get('/list/', {type: this.type, filetype: 'lists', page: page, per_page: this.per_page}, data => {
+    load_list() {
+      this.get('/list/', {type: this.type, filetype: 'lists'}, data => {
         switch (data['message']) {
           case 'success': {
             this.items = data['content'];
@@ -353,15 +347,45 @@ export default {
     reload_list() {
       this.create_flag = false;
       this.local = false;
-      this.$refs.page.reload();
+      this.load_list();
     },
   }
 }
 </script>
 
 <style scoped>
-  .modal {
-    display: block;
-    z-index: 2001;
-  }
+.modal {
+  z-index: 2001;
+  display: block;
+}
+
+.modal-dialog {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.modal-content {
+  /*overflow-y: scroll; */
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.modal-body {
+  overflow-y: scroll;
+  position: absolute;
+  top: 68px;
+  bottom: 70px;
+  width: 100%;
+}
+
+.modal-footer {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+}
 </style>

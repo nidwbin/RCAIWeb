@@ -62,7 +62,7 @@ class Project(models.Model):
     budget = models.CharField(max_length=50, verbose_name="项目经费")
     role = models.CharField(max_length=30, verbose_name="担任角色")
     status = models.CharField(max_length=50, verbose_name="项目状态")
-    description = models.CharField(max_length=50, verbose_name="描述",default='')
+    description = models.CharField(max_length=50, verbose_name="描述", default='')
     image = models.ImageField(upload_to='images/projects')
     image_name = models.CharField(max_length=50, verbose_name="图片名")
 
@@ -80,6 +80,7 @@ class People(models.Model):
 
 class Teacher(People):
     professional_title = models.CharField(max_length=30, verbose_name="职称")
+    address = models.CharField(max_length=30, verbose_name="地址")
     introduction = models.TextField(null=True, blank=True, verbose_name="基本信息")
     mobile = models.CharField(null=True, blank=True, max_length=11, verbose_name="电话")
 
@@ -88,12 +89,12 @@ class Student(People):
     degree_type = models.CharField(max_length=30, verbose_name="学位类型")
     degree = models.CharField(max_length=30, verbose_name="学位")
     overview = models.TextField(verbose_name="简介")
-
-
-class BasicInformation(models.Model):
-    name = models.CharField(max_length=50, verbose_name="实验室名称")
-    email = models.EmailField(max_length=100, null=True, blank=True, verbose_name="邮箱")
-    mobile = models.CharField(null=True, blank=True, max_length=11, verbose_name="电话")
-    address = models.CharField(max_length=50, verbose_name="地址")
-    overview = models.TextField(verbose_name="简介")
-    history = models.TextField(verbose_name="发展历史")
+#
+#
+# class BasicInformation(models.Model):
+#     name = models.CharField(max_length=50, verbose_name="实验室名称")
+#     email = models.EmailField(max_length=100, null=True, blank=True, verbose_name="邮箱")
+#     mobile = models.CharField(null=True, blank=True, max_length=11, verbose_name="电话")
+#     address = models.CharField(max_length=50, verbose_name="地址")
+#     overview = models.TextField(verbose_name="简介")
+#     history = models.TextField(verbose_name="发展历史")

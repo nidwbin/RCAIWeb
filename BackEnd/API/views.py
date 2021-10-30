@@ -10,15 +10,18 @@ from django.views.generic import View
 from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt
 from django.http import JsonResponse
 from django.conf import settings
-from API.function import Authority, AdminOP, NewsOP, PapersOP, StudentsOP, FieldsOP, ProjectsOP, AchievementsOP
+from API.function import Authority, AdminOP, NewsOP, PapersOP, StudentsOP, FieldsOP, ProjectsOP, AchievementsOP, \
+    TeachersOP
 
 authority = Authority()
+adminOP = AdminOP()
 newsOP = NewsOP()
 papersOP = PapersOP()
 studentsOP = StudentsOP()
 fieldsOP = FieldsOP()
 projectsOP = ProjectsOP()
 achievementsOP = AchievementsOP()
+teacherOP = TeachersOP()
 
 
 # Create your views here.
@@ -28,24 +31,14 @@ def get_csrf(request):
     return authority.get_response(request, JsonResponse({}))
 
 
-@csrf_exempt
-def set_admin(request):
-    if settings.DEBUG and request.method == 'PUT':
-        username = request.GET.get('username')
-        password = request.GET.get('password')
-        if AdminOP.set_admin(username, password):
-            return JsonResponse({'message': 'success'})
-    return JsonResponse({'message': 'error'})
-
-
 class Admin(View):
     def post(self, request):
         username = request.POST.get('username')
         password = request.POST.get('password')
-        if AdminOP.check_admin(username, password) or settings.DEBUG:
+        if adminOP.check_admin(username, password) or settings.DEBUG:
             username_ = request.POST.get('username_')
             password_ = request.POST.get('password_')
-            if AdminOP.set_admin(username_, password_):
+            if adminOP.set_admin(username_, password_):
                 return authority.get_response(request, JsonResponse({'message': 'success'}), put=True)
         return authority.get_response(request, JsonResponse({'message': 'error'}), keep=False)
 
@@ -54,9 +47,8 @@ class Admin(View):
         password = request.GET.get('password')
         username_ = request.GET.get('username_')
         password_ = request.GET.get('password_')
-        if username_ != 'RCAIROOT' and AdminOP.check_admin(username, password) \
-                and AdminOP.check_admin(username_, password_):
-            if AdminOP.delete_admin(username_):
+        if adminOP.check_admin(username, password) and adminOP.check_admin(username_, password_):
+            if adminOP.delete_admin(username_):
                 return authority.get_response(request, JsonResponse({'message': 'success'}), put=True)
         return authority.get_response(request, JsonResponse({'message': 'error'}), keep=False)
 
@@ -97,6 +89,10 @@ class List(View):
                 ans = papersOP.get_lists(page=int(request.GET.get('page')), pages=int(request.GET.get('per_page')))
             elif filetype == 'books':
                 ans = achievementsOP.get_lists()
+
+        elif view_type == 'teachers':
+            if filetype == 'lists':
+                ans = teacherOP.get_lists()
 
         elif view_type == 'master' or view_type == 'doctor':
             if filetype == 'pages':
@@ -156,6 +152,19 @@ class List(View):
                                                     publisher=request.POST.get('press'),
                                                     overview=request.POST.get('desc'))
 
+            elif view_type == 'teachers':
+                id_ = request.POST.get('id')
+                if id_ == 'new':
+                    ans = teacherOP.create(name=request.POST.get('name'), homepage=request.POST.get('link'),
+                                           email=request.POST.get('email'), professional_title=request.POST.get('prof'),
+                                           introduction=request.POST.get('desc'), mobile=request.POST.get('tel'),
+                                           address=request.POST.get('adress'), image=request.FILES.get('image_file'))
+                else:
+                    ans = teacherOP.change(id_=id_, name=request.POST.get('name'), homepage=request.POST.get('link'),
+                                           email=request.POST.get('email'), professional_title=request.POST.get('prof'),
+                                           introduction=request.POST.get('desc'), mobile=request.POST.get('tel'),
+                                           address=request.POST.get('adress'), image=request.FILES.get('image_file'))
+
             elif view_type == 'master' or view_type == 'doctor':
                 id_ = request.POST.get('id')
                 if id_ == 'new':
@@ -214,6 +223,9 @@ class List(View):
             elif view_type == 'master' or view_type == 'doctor':
                 if filetype == 'item':
                     ans = studentsOP.delete(filename)
+            elif view_type == 'teachers':
+                if filetype == 'item':
+                    ans = teacherOP.delete(filename)
             elif view_type == 'directions':
                 if filetype == 'item':
                     ans = fieldsOP.delete(filename)
