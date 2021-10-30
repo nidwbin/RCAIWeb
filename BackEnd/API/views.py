@@ -14,6 +14,7 @@ from API.function import Authority, AdminOP, NewsOP, PapersOP, StudentsOP, Field
     TeachersOP
 
 authority = Authority()
+adminOP = AdminOP()
 newsOP = NewsOP()
 papersOP = PapersOP()
 studentsOP = StudentsOP()
@@ -30,24 +31,14 @@ def get_csrf(request):
     return authority.get_response(request, JsonResponse({}))
 
 
-@csrf_exempt
-def set_admin(request):
-    if settings.DEBUG and request.method == 'PUT':
-        username = request.GET.get('username')
-        password = request.GET.get('password')
-        if AdminOP.set_admin(username, password):
-            return JsonResponse({'message': 'success'})
-    return JsonResponse({'message': 'error'})
-
-
 class Admin(View):
     def post(self, request):
         username = request.POST.get('username')
         password = request.POST.get('password')
-        if AdminOP.check_admin(username, password) or settings.DEBUG:
+        if adminOP.check_admin(username, password) or settings.DEBUG:
             username_ = request.POST.get('username_')
             password_ = request.POST.get('password_')
-            if AdminOP.set_admin(username_, password_):
+            if adminOP.set_admin(username_, password_):
                 return authority.get_response(request, JsonResponse({'message': 'success'}), put=True)
         return authority.get_response(request, JsonResponse({'message': 'error'}), keep=False)
 
@@ -56,9 +47,8 @@ class Admin(View):
         password = request.GET.get('password')
         username_ = request.GET.get('username_')
         password_ = request.GET.get('password_')
-        if username_ != 'RCAIROOT' and AdminOP.check_admin(username, password) \
-                and AdminOP.check_admin(username_, password_):
-            if AdminOP.delete_admin(username_):
+        if adminOP.check_admin(username, password) and adminOP.check_admin(username_, password_):
+            if adminOP.delete_admin(username_):
                 return authority.get_response(request, JsonResponse({'message': 'success'}), put=True)
         return authority.get_response(request, JsonResponse({'message': 'error'}), keep=False)
 

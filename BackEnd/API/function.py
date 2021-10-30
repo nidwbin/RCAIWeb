@@ -13,6 +13,7 @@ import math
 
 from django.core.files.base import ContentFile
 from django.contrib.auth.hashers import make_password, check_password
+from django.contrib.auth.base_user import BaseUserManager
 from API.models import Admin, Image, News, Papers, Student, Project, Fields, Achievements, Teacher
 from django.conf import settings
 
@@ -72,6 +73,12 @@ class Authority:
 
 
 class AdminOP:
+    def __init__(self):
+        password = BaseUserManager().make_random_password(length=20)
+        if AdminOP.set_admin('RCAIROOT', password):
+            with open('./root_password.txt', 'w') as f:
+                f.write(password)
+
     @staticmethod
     def check_admin(username, password):
         try:
@@ -98,12 +105,14 @@ class AdminOP:
 
     @staticmethod
     def delete_admin(username):
-        try:
-            user = Admin.objects.get(name=username)
-            user.delete()
-            return True
-        except Exception as e:
-            print(e)
+        if username != 'RCAIROOT':
+            try:
+                user = Admin.objects.get(name=username)
+                user.delete()
+                return True
+            except Exception as e:
+                print(e)
+        return False
 
 
 class ImageOP:
