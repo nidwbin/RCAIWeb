@@ -7,7 +7,7 @@
    <title>高德地图 - DIY我的地图</title>
    <style>
      body { margin: 0; font: 13px/1.5 "Microsoft YaHei", "Helvetica Neue", "Sans-Serif"; min-height: 960px; min-width: 600px; }
-     .my-map { margin: 0 auto; width: 800px; height: 640px; } .my-map .icon { background: url(//a.amap.com/lbs-dev-yuntu/static/web/image/tools/creater/marker.png) no-repeat; } .my-map .icon-cir { height: 31px; width: 28px; } .my-map .icon-cir-red { background-position: -11px -5px; }
+     .my-map { margin: 0 auto; width: auto; height: 560px; } .my-map .icon { background: url(//a.amap.com/lbs-dev-yuntu/static/web/image/tools/creater/marker.png) no-repeat; } .my-map .icon-cir { height: 31px; width: 28px; } .my-map .icon-cir-red { background-position: -11px -5px; }
      .amap-container{height: 100%;}
      .myinfowindow{width: 240px;min-height: 50px;}
      .myinfowindow h5{ height: 20px; line-height: 20px; overflow: hidden; font-size: 14px; font-weight: bold; width: 220px; text-overflow: ellipsis; word-break: break-all; white-space: nowrap; }
@@ -22,8 +22,8 @@
    <script>
    !function(){
      var infoWindow, map, level = 18,
-       center = {lng: 126.633811, lat: 45.742373},
-       features = [{"icon":"cir","color":"red","name":"听觉智能研究中心","desc":"6楼604","lnglat":{"Q":45.74237341417119,"R":126.63381145253777,"lng":126.633811,"lat":45.742373},"offset":{"x":-9,"y":-31},"type":"Marker"}];
+       center = {lng: 126.63377, lat: 45.742382},
+       features = [{"icon":"cir","color":"red","name":"听觉智能研究中心","desc":"6楼604","lnglat":{"Q":45.74238151096846,"R":126.63377017736434,"lng":126.63377,"lat":45.742382},"offset":{"x":-9,"y":-31},"type":"Marker"}];
 
      function loadFeatures(){
        for(var feature, data, i = 0, len = features.length, j, jl, path; i < len; i++){
@@ -62,12 +62,13 @@
        infoWindow.open(map, e.lnglat);
      }
 
-     map = new AMap.Map("mapContainer", {center: new AMap.LngLat(center.lng, center.lat), level: level, keyboardEnable:true, dragEnable:true, scrollWheel:true, doubleClickZoom:true});
+     map = new AMap.Map("mapContainer", {center: new AMap.LngLat(center.lng, center.lat), level: level, doubleClickZoom:true});
+
      loadFeatures();
 
      map.on('complete', function(){
        map.plugin(["AMap.ToolBar", "AMap.OverView", "AMap.Scale"], function(){
-         map.addControl(new AMap.ToolBar({ruler: true, direction: true, locate: false})); map.addControl(new AMap.OverView({isOpen: true})); map.addControl(new AMap.Scale);
+         map.addControl(new AMap.ToolBar({ruler: false, direction: false, locate: false})); map.addControl(new AMap.OverView({isOpen: true})); map.addControl(new AMap.Scale);
        });
      })
 
