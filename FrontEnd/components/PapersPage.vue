@@ -46,7 +46,6 @@
             </div><!-- /.comment-one -->
           </div><!-- /.col-lg-8 -->
           <div class="col-lg-4">
-
             <div class="card-header" style="background-color: white;">
               <div class="h2"><span class="fa fa-book" style="color: #ff5316"></span>&nbsp;&nbsp;出版物</div>
             </div>
@@ -388,12 +387,21 @@ export default {
         {
           name: "Zhihao Du, Ming Lei, Jiqing Han, Shiliang Zhang. PAN: Phoneme-Aware Network for Monaural Speech Enhancement, ICASSP2020, Barcelona, Spain",
           link: '#'
+<<<<<<< HEAD
         },
         {
           name: "Chen Chen, Jiqing Han. TDMF: Task-Driven Multi-Level Framework for End-to-End Speaker Verification, ICASSP2020, Barcelona, Spain",
           link: '#'
         },
         {
+=======
+        },
+        {
+          name: "Chen Chen, Jiqing Han. TDMF: Task-Driven Multi-Level Framework for End-to-End Speaker Verification, ICASSP2020, Barcelona, Spain",
+          link: '#'
+        },
+        {
+>>>>>>> origin/dev
           name: "Jiabin Xue, Tieran Zheng, Jiqing Han, Convolutional Grid Long Short-Term Memory Recurrent Neural Network for Automatic Speech Recognition. ICONIP2019, Sydney Autstralia",
           link: '#'
         },

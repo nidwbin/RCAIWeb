@@ -25,7 +25,7 @@
                 </div>
                 <div class="user">
                   <div class="user-thumb">
-                    <img :src="image_base+item.image" alt="new">
+                    <img :src="item.image===''?default_image:image_base+item.image" alt="new">
                     <i class="fa fa-quote-left"></i>
                   </div>
                   <h5 class="title">
@@ -99,6 +99,7 @@ export default {
       },
       type: 'news',
       hots: [],
+      default_image: '/static/images/default/image.jpg',
       image_base: this.$store.state.image_base + 'header/',
     }
   },
@@ -125,5 +126,8 @@ export default {
 </script>
 
 <style scoped>
-
+a, a:link, a:visited, a:hover, a:active {
+  text-decoration: none;
+  color: inherit;
+}
 </style>

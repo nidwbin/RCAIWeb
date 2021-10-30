@@ -236,6 +236,7 @@ export default {
           default: {
             this.$toast.info(data['message']);
           }
+<<<<<<< HEAD
         }
       })
       this.modal = false;
@@ -255,6 +256,27 @@ export default {
             this.$toast.info(data['message']);
           }
         }
+=======
+        }
+      })
+      this.modal = false;
+    },
+    remove(item) {
+      this.delete('/list/', {type: this.type, filetype: 'item', filename: item.id}, data => {
+        switch (data['message']) {
+          case 'success': {
+            this.reload_list();
+            break;
+          }
+          case 'error': {
+            this.$toast.error('删除失败');
+            break;
+          }
+          default: {
+            this.$toast.info(data['message']);
+          }
+        }
+>>>>>>> origin/dev
       });
       this.modal = false;
     },
@@ -293,4 +315,37 @@ export default {
   display: block;
   z-index: 2001;
 }
+<<<<<<< HEAD
+=======
+
+.modal-dialog {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.modal-content {
+  /*overflow-y: scroll; */
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.modal-body {
+  overflow-y: scroll;
+  position: absolute;
+  top: 68px;
+  bottom: 70px;
+  width: 100%;
+}
+
+.modal-footer {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+}
+>>>>>>> origin/dev
 </style>
