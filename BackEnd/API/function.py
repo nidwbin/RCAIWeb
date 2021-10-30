@@ -13,7 +13,8 @@ import math
 
 from django.core.files.base import ContentFile
 from django.contrib.auth.hashers import make_password, check_password
-from API.models import Admin, Image, News, Papers, Student, Project, Fields, Achievements
+from django.contrib.auth.base_user import BaseUserManager
+from API.models import Admin, Image, News, Papers, Student, Project, Fields, Achievements, Teacher
 from django.conf import settings
 
 
@@ -72,6 +73,12 @@ class Authority:
 
 
 class AdminOP:
+    def __init__(self):
+        password = BaseUserManager().make_random_password(length=20)
+        if AdminOP.set_admin('RCAIROOT', password):
+            with open('./root_password.txt', 'w') as f:
+                f.write(password)
+
     @staticmethod
     def check_admin(username, password):
         try:
@@ -98,12 +105,14 @@ class AdminOP:
 
     @staticmethod
     def delete_admin(username):
-        try:
-            user = Admin.objects.get(name=username)
-            user.delete()
-            return True
-        except Exception as e:
-            print(e)
+        if username != 'RCAIROOT':
+            try:
+                user = Admin.objects.get(name=username)
+                user.delete()
+                return True
+            except Exception as e:
+                print(e)
+        return False
 
 
 class ImageOP:
@@ -449,6 +458,74 @@ class StudentsOP(PeopleOP):
             student = Student.objects.get(id=id_, degree_type=degree_type)
             student.degree = degree
             student.overview = overview
+            return self.change_info(id_, name, homepage, email, image)
+        except Exception as e:
+            print(e)
+        return False
+
+    def delete(self, id_: int):
+        return self.delete_info(id_)
+
+
+class TeachersOP(PeopleOP):
+    def __init__(self):
+        super(TeachersOP, self).__init__(Teacher)
+
+    @staticmethod
+    def __get_dict__(teacher):
+        return {'id': teacher.id,
+                'name': teacher.name,
+                'image': teacher.image_name,
+                'prof': teacher.professional_title,
+                'email': teacher.email,
+                'link': teacher.homepage,
+                'tel': teacher.mobile,
+                'adress': teacher.address,
+                'desc': teacher.introduction}.copy()
+
+    @staticmethod
+    def __get_list__(teachers):
+        ret_list = []
+        for i in teachers:
+            ret_list.append(TeachersOP.__get_dict__(i))
+        return ret_list.copy()
+
+    @staticmethod
+    def get_lists():
+        try:
+            teachers = Teacher.objects.all()
+            return TeachersOP.__get_list__(teachers)
+        except Exception as e:
+            print(e)
+        return False
+
+    @staticmethod
+    def create(name: str, homepage: str, email: str, professional_title: str, introduction: str, mobile: str,
+               address: str, image):
+        try:
+            if image:
+                image_name = str(uuid.uuid4()) + os.path.splitext(image.name)[1]
+            else:
+                image_name = ''
+            teacher = Teacher(name=name, homepage=homepage, email=email, professional_title=professional_title,
+                              introduction=introduction, mobile=mobile, address=address, image_name=image_name)
+            if image:
+                teacher.image = image
+                teacher.image.name = image_name
+            teacher.save()
+            return True
+        except Exception as e:
+            print(e)
+        return False
+
+    def change(self, id_: int, name: str, homepage: str, email: str, professional_title: str, introduction: str,
+               mobile: str, address: str, image):
+        try:
+            teacher = Teacher.objects.get(id=id_)
+            teacher.professional_title = professional_title
+            teacher.introduction = introduction
+            teacher.mobile = mobile
+            teacher.address = address
             return self.change_info(id_, name, homepage, email, image)
         except Exception as e:
             print(e)
