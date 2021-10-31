@@ -56,7 +56,7 @@
                   </h5>
                   <span>{{ item.date }}</span>
                   <div class="text">
-                    <p>{{ item.overview }}dadasdadadadasdadsadasdasdasdsadasdasdsads</p>
+                    <p>{{ item.overview }}</p>
                   </div>
                 </div>
 

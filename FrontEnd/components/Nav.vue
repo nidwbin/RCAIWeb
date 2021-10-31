@@ -6,7 +6,6 @@
  * @LastEditTime: 2021-10-02
  -->
 <template>
-  <client-only>
     <header class="header-area">
       <div class="header-top">
         <div class="container">
@@ -199,7 +198,6 @@
         </div>
       </div>
     </header>
-  </client-only>
 </template>
 
 <script>

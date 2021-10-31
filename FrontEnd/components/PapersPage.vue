@@ -49,8 +49,8 @@
             <div class="card-header" style="background-color: white;">
               <div class="h2"><span class="fa fa-book" style="color: #ff5316"></span>&nbsp;&nbsp;出版物</div>
             </div>
-            <div class="book-area" v-if="admin">
-              <div class="book-single">
+            <div class="book-area" >
+              <div class="book-single" v-if="admin">
                 <div class="name">
                   <h4>名称：</h4>
                   <p>{{ new_book.name }}</p>
@@ -352,7 +352,7 @@ import Functions from "./Functions";
 import PagesList from "@/components/PagesList";
 
 export default {
-  name: "NewsList",
+  name: "PapersPage",
   components: {PagesList},
   mixins: [Functions],
   data() {
