@@ -2,9 +2,7 @@
 
 
 function install_docker(){
-        cp /etc/apt/sources.list /etc/apt/sources.list.bak
-        sed -i s/archive.ubuntu.com/mirrors.tuna.tsinghua.edu.cn/g /etc/apt/sources.list
-        apt update && apt install -y apt-transport-https ca-certificates curl gnupg-agent software-properties-common
+        apt install -y ca-certificates curl gnupg-agent software-properties-common
         
         curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
         curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
@@ -29,8 +27,10 @@ function install_others() {
 
 function check() {
     echo "Change apt sources..."
-    cp /etc/apt/sources.list /etc/apt/sources.list.bak
-    sed -i s/archive.ubuntu.com/mirrors.tuna.tsinghua.edu.cn/g /etc/apt/sources.list
+    apt update && apt install -y python wget apt-transport-https
+    wget https://tuna.moe/oh-my-tuna/oh-my-tuna.py
+    python oh-my-tuna.py --global
+    apt update
     echo "Ok!"
 
     echo "Checking docker..."
