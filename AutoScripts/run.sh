@@ -1,11 +1,14 @@
 # !/bin/bash
 workdir=/RCAIWeb
 mkdir -p $workdir
+
 if [ -d $workdir/git ];then
     cd $workdir/git
     git pull origin
 else
-    git clone git@github.com:nidwbin/RCAIWeb.git $workdir/git
+    git config --global http.proxy 'socks5://192.168.11.211:10808'
+    git config --global https.proxy 'socks5://192.168.11.211:10808'
+    git clone https://github.com/nidwbin/RCAIWeb.git $workdir/git
 fi
 
 echo "Make dirs..."

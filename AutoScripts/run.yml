@@ -29,7 +29,8 @@ services:
 
   django:
     build:
-      dockerfile: ./docker/django.dockerfile
+      context: ./docker/
+      dockerfile: django.dockerfile
     volumes:
       - /RCAIWeb/django:/django
       - /RCAIWeb/media:/django/media
@@ -45,7 +46,8 @@ services:
 
   nuxt:
     build:
-      dockerfile: ./docker/nuxt.dockerfile
+      context: ./docker/
+      dockerfile: nuxt.dockerfile
     volumes:
       - /RCAIWeb/nuxt:/nuxt
       - /RCAIWeb/static:/nuxt/static
@@ -61,7 +63,8 @@ services:
 
   nginx:
     build:
-      dockerfile: ./docker/nginx.dockerfile
+      context: ./docker/
+      dockerfile: nginx.dockerfile
     volumes:
       - /RCAIWeb/nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf
       - /RCAIWeb/nginx/ssl:/usr/share/nginx/ssl
