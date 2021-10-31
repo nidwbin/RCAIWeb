@@ -6,7 +6,7 @@ ENV HOST=0.0.0.0
 RUN mkdir -p /nuxt
 WORKDIR /nuxt
 
-RUN npm config set registry https://registry.npm.taobao.org
+RUN npm config set registry https://mirrors.huaweicloud.com/repository/npm/
 
 EXPOSE 9000
 
