@@ -1,3 +1,3 @@
 # !/bin/bash
-tar -zxvf env.tar.gz
+npm install
 npm run build && npm run start
