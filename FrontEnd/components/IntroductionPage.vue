@@ -11,10 +11,8 @@
       <div class="row">
         <div class="col-lg-7">
           <div class="single-project">
-            <div class="single-project-thumb">
-            </div>
-            <div class="single-project-content-1">
-              <h4 class="title"><span class="fa fa-home"></span>&nbsp;&nbsp;中心概况</h4>
+            <div class="single-project-content-1" style="padding-top: 0 !important;">
+              <h4 class="title" style="margin-top: 0 !important;"><span class="fa fa-home"></span>&nbsp;&nbsp;中心概况</h4>
               <p>哈工大听觉智能研究中心(Research Center of Auditory Intelligence, 简称：RCAI)致力于语音、音乐及声音的识别的识别、分析、增强等处理技术的研究最早成立于 20 世纪 80年代初，是国内较早开展此研究的单位之一。</p>
               <p>中心现有教授1名、副教授4名，博士生导师3人，科研秘书1名，拥有包括企业级服务器在内的一批现代化的仪器设备。研究室室注重交流与合作，与相关领域的知名学者保持密切的联系，与国家计算机信息内容安全组成重点实验室、IBM联合实验室、语言语音教育部 - 微软重点实验室的重要组成部分，并先后派出多名硕士、博士到微软亚洲研究院和IBM中国研究中心学习。</p>
               <p>研究室近年来已发表国内外学术期刊论文及国际学术会议论文100余篇其中被SCI、EI权威索引论文40多篇次，著书5部，获得国家发明专利多项，申报国家发明专利40多项；多次获得省、部级科技奖项。</p>

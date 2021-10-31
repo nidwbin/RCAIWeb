@@ -8,6 +8,9 @@
 <template>
   <section class="leadership-area about-leadership team-leadership">
     <div class="container">
+      <div class="card-header">
+        <div class="h2"><span class="fa fa-group" style="color: #ff5316;">&nbsp;&nbsp;</span>中心学生</div>
+      </div>
       <div class="row justify-content-center">
         <div class="col-lg-4 col-md-6 col-sm-9" v-if="admin">
           <div class="leadership-item mt-30">

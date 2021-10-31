@@ -14,8 +14,8 @@
             <div class="paper-aera">
               <div class="card-text border-bottom mt-2 mb-4 pb-2" v-if="admin">
                 <div class="ml-4 float-left"
-                     style="font-size: 22px; font-family: 'Times New Roman';letter-spacing: .6px;line-height: 46px;">
-                  0.&nbsp;&nbsp;{{ new_item.name }}
+                     style="font-size: 18px; font-family: 'Times New Roman';letter-spacing: .6px;line-height: 46px;">
+                  0.&nbsp;&nbsp;{{ new_item.name }}<a :href="new_item.link">&nbsp;&nbsp;<span class="	fa fa-chain" style="color: gray"></span></a>
                 </div>
                 <div class="pt-1 pb-5">
                   <button type="button" class="btn btn-primary btn-sm float-right" @click="create('paper')">
@@ -30,8 +30,8 @@
             <div class="comment-one">
               <div class="card-text border-bottom mt-2 mb-2 pb-2" v-for="(item,index) in items">
                 <div class="ml-4"
-                     style="font-size: 22px; font-family: 'Times New Roman';letter-spacing: .6px;line-height: 46px;">
-                  <a :href="item.link">{{ index + 1 }}.&nbsp;&nbsp;{{ item.name }}</a>
+                     style="font-size: 18px; font-family: 'Times New Roman';letter-spacing: .6px;line-height: 46px;">
+                  {{ index + 1 }}.&nbsp;&nbsp;{{ item.name }}&nbsp;&nbsp;<a :href="item.link"><span class="	fa fa-chain" style="color: #007bff"></span></a>
                 </div>
                 <div class="pt-0 pb-5" v-if="admin">
                   <button type="button" class="btn btn-danger btn-sm float-right" @click="remove(item,'paper')">
@@ -131,6 +131,12 @@
               </div>
               <div class="modal-body">
                 <div class="input-group mb-3">
+                  <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon0_0">论文链接</span>
+                  </div>
+                  <input type="text" class="form-control" v-model="viewing_edit.link" aria-describedby="basic-addon0_0">
+                </div>
                   <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon0_1">论文名称</span>
                   </div>

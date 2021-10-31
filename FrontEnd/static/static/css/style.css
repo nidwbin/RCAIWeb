@@ -2983,7 +2983,9 @@ p {
 
 .client-area .client-item {
   min-height: 60px;
-  padding: 20px;
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
   height: 150px;
   border: 1px solid #eaeaea;
   box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.04);
@@ -2993,23 +2995,31 @@ p {
   background: #fff;
 }
 
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-  .client-area .client-item {
-    padding: 30px;
-  }
-}
+/*@media only screen and (min-width: 768px) and (max-width: 991px) {*/
+/*  .client-area .client-item {*/
+/*    padding-top: 30px;*/
+/*    padding-left: 30px;*/
+/*    padding-right: 30px;*/
+/*  }*/
+/*}*/
 
-@media (max-width: 767px) {
-  .client-area .client-item {
-    padding: 30px;
-  }
-}
+/*@media (max-width: 767px) {*/
+/*  .client-area .client-item {*/
+/*    padding-top: 30px;*/
+/*    padding-left: 30px;*/
+/*    padding-right: 30px;*/
+/*  }*/
+/*}*/
 
-@media only screen and (min-width: 576px) and (max-width: 767px) {
-  .client-area .client-item {
-    padding: 60px;
-  }
-}
+/*@media only screen and (min-width: 576px) and (max-width: 767px) {*/
+/*  .client-area .client-item {*/
+/*    padding-top: 30px;*/
+/*    padding-left: 30px;*/
+/*    padding-right: 30px;*/
+/*  }*/
+
+
+/*}*/
 
 .client-area .client-item .shape {
   position: absolute;
@@ -3018,15 +3028,15 @@ p {
 }
 
 .client-area .client-item .user {
-  padding-left: 103px;
+  padding-left: 153px;
   position: relative;
 }
 
-@media (max-width: 767px) {
-  .client-area .client-item .user {
-    padding-left: 90px;
-  }
-}
+/*@media (max-width: 767px) {*/
+/*  .client-area .client-item .user {*/
+/*    padding-left: 90px;*/
+/*  }*/
+/*}*/
 
 .client-area .client-item .user .title {
   font-size: 20px;
@@ -3052,8 +3062,10 @@ p {
   position: absolute;
   /*float: left;*/
   left: 0;
-  top: 50%;
+  /*top: 50%;*/
+  top: 55px;
   transform: translateY(-50%);
+
 }
 
 .client-area .client-item .user .user-thumb i {
@@ -3072,15 +3084,33 @@ p {
 }
 
 .client-area .client-item .user .user-thumb img {
-  width: 120px;
+  max-width: 200px;
+  max-height: 115px;
+  min-width: 150px;
+  min-height: 100px;
 }
 
+/*@media (max-width: 576px) {*/
+/*  !*.client-area .client-item .user .user-thumb img {*!*/
+/*  !*  max-width: 150px;*!*/
+/*  !*  max-height: 115px;*!*/
+/*  !*}*!*/
+
+/*  .client-area .client-item .user {*/
+/*    padding-left: 153px;*/
+/*    position: relative;*/
+/*  }*/
+/*}*/
+
 .client-area .client-item .text p {
-  padding-top: 10px;
+  padding-top: 4px;
   font-size: 16px;
   font-weight: 300;
   color: #7e8591;
-  line-height: 34px;
+  line-height: 24px;
+  margin-left: 50px;
+  min-height: 60px;
+  line-break: anywhere;
 }
 
 .client-area .client-active .slick-dots {
@@ -4316,6 +4346,7 @@ p {
   width: 40% !important;
   margin-bottom: -40px !important;
 }
+
 @media (max-width: 993px) {
   .single-project-area .single-project .single-project-thumb .add {
     width: 100% !important;
@@ -6224,6 +6255,7 @@ p {
     filter: brightness(80%);
   }
 }
+
 @media only screen and (max-width: 576px) {
   .news_new_area .new_add {
     display: block;
@@ -6245,6 +6277,7 @@ p {
   display: block;
   color: grey;
 }
+
 .sidebar .new_add .footer {
   font-size: 24px;
   font-weight: 600;
@@ -6346,6 +6379,7 @@ p {
 .comment-one__image > img {
   border-radius: 0%;
   width: 100%;
+  max-height: 150px;
 }
 
 .comment-one__content {
@@ -6512,6 +6546,7 @@ p {
   filter: brightness(80%);
   cursor: pointer;
 }
+
 @media (max-width: 993px) {
   .sidebar .new_add {
     display: none;
@@ -6580,9 +6615,9 @@ p {
 }
 
 .sidebar__post-image .inner-block > img {
-  width: 60%;
   border-radius: 0;
   margin-left: 30px;
+  max-height: 100px;
 }
 
 .sidebar__post-content {
@@ -8664,18 +8699,29 @@ p {
 }
 
 .direction-area .direction-item .item .thumb {
-  /*min-width: 165px;*/
-  width: 35%;
+  min-width: 165px;
+  /*width: 35%;*/
   position: relative;
 }
+
 .direction-area .direction-item .item .thumb:hover {
   filter: brightness(80%);
 }
 
 .direction-area .direction-item .item .thumb img {
   /*width: 100%;*/
-  /*max-width: 480px;*/
+  max-width: 330px;
+  max-height: 240px;
   /*height: 100%;*/
+}
+
+@media (max-width: 575px) {
+  .direction-area .direction-item .item .thumb img {
+    /*width: 100%;*/
+    max-width: 100%;
+    max-height: 100%;
+    /*height: 100%;*/
+  }
 }
 
 .direction-area .direction-item .item .thumb span {
