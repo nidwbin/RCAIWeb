@@ -15,8 +15,6 @@ services:
       - /RCAIWeb/mysql/logs:/logs:rw
       - /RCAIWeb/mysql/data:/var/lib/mysql/:rw
       - /RCAIWeb/mysql/init:/docker-entrypoint-initdb.d/
-    ports:
-      - "7000:3306"
     environment:
       - MYSQL_ROOT_PASSWORD=0!!OH@MY@RCAI@DB!!0
       - MYSQL_DATABASE=RCAIDB
@@ -34,8 +32,6 @@ services:
     volumes:
       - /RCAIWeb/django:/django
       - /RCAIWeb/media:/django/media
-    ports:
-      - "8000:8000"
     depends_on:
       - mysql
     networks:
@@ -51,8 +47,6 @@ services:
     volumes:
       - /RCAIWeb/nuxt:/nuxt
       - /RCAIWeb/static:/nuxt/static
-    ports:
-      - "9000:9000"
     depends_on:
       - django
     networks:
