@@ -29,8 +29,8 @@
                     <span class="fa fa-edit"></span>&nbsp;&nbsp;新增
                   </button>
                 </div>
+                <div class="item_footer"></div>
               </div>
-              <div class="item_footer"></div>
               <div class="card-header mt-5 mb-5">
                 <div class="h2"><span class="	fa fa-codepen" style="color: #ff5316"></span>&nbsp;&nbsp;研究方向</div>
               </div>
