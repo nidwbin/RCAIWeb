@@ -40,5 +40,5 @@ echo "Ok!"
 
 echo "Start run..."
 cd $workdir/git/AutoScripts
-docker-compose -f $workdir/git/AutoScripts/run.yml up
+docker-compose -f $workdir/git/AutoScripts/run.yml up -d
 echo "Ok!"
