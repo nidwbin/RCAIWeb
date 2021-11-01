@@ -106,7 +106,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon4">年级</span>
                 </div>
-                <select class="form-control" id="sel1" v-bind="viewing_edit.class">
+                <select class="form-control" id="sel1" v-model="viewing_edit.class">
                   <option :value="viewing_edit.class">{{ viewing_edit.class }}</option>
                   <option v-for="class_item in classes" v-show="class_item !== viewing_edit.class" :value="class_item">
                     {{ class_item }}
@@ -311,5 +311,35 @@ export default {
 .modal {
   display: block;
   z-index: 2001;
+}
+
+.modal-dialog {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.modal-content {
+  /*overflow-y: scroll; */
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.modal-body {
+  overflow-y: scroll;
+  position: absolute;
+  top: 68px;
+  bottom: 70px;
+  width: 100%;
+}
+
+.modal-footer {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
 }
 </style>
