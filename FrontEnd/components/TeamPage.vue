@@ -106,9 +106,9 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon4">年级</span>
                 </div>
-                <select class="form-control" id="sel1" v-model="viewing_edit.class">
-                  <option>{{ viewing_edit.class }}</option>
-                  <option v-for="class_item in classes" v-show="class_item !== viewing_edit.class">
+                <select class="form-control" id="sel1" v-bind="viewing_edit.class">
+                  <option :value="viewing_edit.class">{{ viewing_edit.class }}</option>
+                  <option v-for="class_item in classes" v-show="class_item !== viewing_edit.class" :value="class_item">
                     {{ class_item }}
                   </option>
                 </select>
