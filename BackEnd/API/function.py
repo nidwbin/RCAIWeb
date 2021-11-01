@@ -455,12 +455,11 @@ class StudentsOP(PeopleOP):
     def change(self, id_: int, name: str, homepage: str, email: str, degree_type: str, degree: str, overview: str,
                image):
         try:
-            if self.change_info(id_, name, homepage, email, image):
-                student = Student.objects.get(id=id_, degree_type=degree_type)
-                student.degree = degree
-                student.overview = overview
-                student.save()
-                return True
+            student = Student.objects.get(id=id_, degree_type=degree_type)
+            student.degree = degree
+            student.overview = overview
+            student.save()
+            return self.change_info(id_, name, homepage, email, image)
         except Exception as e:
             print(e)
         return False
@@ -523,14 +522,13 @@ class TeachersOP(PeopleOP):
     def change(self, id_: int, name: str, homepage: str, email: str, professional_title: str, introduction: str,
                mobile: str, address: str, image):
         try:
-            if self.change_info(id_, name, homepage, email, image):
-                teacher = Teacher.objects.get(id=id_)
-                teacher.professional_title = professional_title
-                teacher.introduction = introduction
-                teacher.mobile = mobile
-                teacher.address = address
-                teacher.save()
-                return True
+            teacher = Teacher.objects.get(id=id_)
+            teacher.professional_title = professional_title
+            teacher.introduction = introduction
+            teacher.mobile = mobile
+            teacher.address = address
+            teacher.save()
+            return self.change_info(id_, name, homepage, email, image)
         except Exception as e:
             print(e)
         return False
