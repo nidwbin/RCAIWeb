@@ -115,7 +115,7 @@
               </div>
             </div>
 
-            <div :class="`offcanvas_menu_wrapper ${mobileToggle ? 'active' : ''}`">
+            <div :class="`offcanvas_menu_wrapper ${mobileToggle ? 'active' : ''}`" v-show="mobileToggle">
               <div class="canvas_close">
                 <a @click="mobileToggle = !mobileToggle" href="javascript:void(0)"><i class="fa fa-times"></i></a>
               </div>
