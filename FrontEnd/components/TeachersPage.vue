@@ -182,8 +182,28 @@ export default {
     return {
       type: 'teachers',
       modal: false,
-      viewing: null,
-      viewing_edit: null,
+      viewing: {
+        id: 'new',
+        name: "姓名",
+        prof: "职称",
+        desc: "简介",
+        image: "",
+        tel: "xxxx-xxxxxxxx",
+        email: "xxx@hit.edu.cn",
+        adress: "哈尔滨工业大学xxx信箱",
+        link: "http://homepage.hit.edu.cn/xxx"
+      },
+      viewing_edit: {
+        id: 'new',
+        name: "姓名",
+        prof: "职称",
+        desc: "简介",
+        image: "",
+        tel: "xxxx-xxxxxxxx",
+        email: "xxx@hit.edu.cn",
+        adress: "哈尔滨工业大学xxx信箱",
+        link: "http://homepage.hit.edu.cn/xxx"
+      },
       local: false,
       create_flag: false,
       upload_image: null,

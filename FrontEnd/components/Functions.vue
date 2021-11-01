@@ -6,11 +6,14 @@
 export default {
   name: "Functions",
   methods: {
-    ready() {
+    sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    },
+    async ready() {
       let cnt = 10;
       while (!this.$cookies.get('ajax-ready') && cnt) {
-        this.$axios.get('/csrf');
-        cnt--;
+         await this.$axios.get('/csrf');
+         cnt--;
       }
       return this.$cookies.get('ajax-ready');
     },

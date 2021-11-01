@@ -200,8 +200,8 @@ export default {
   data() {
     return {
       modal: false,
-      viewing: null,
-      viewing_edit: null,
+      viewing: {id: 'new', desc: "方向相关描述", name: "方向名称", image: ""},
+      viewing_edit: {id: 'new', desc: "方向相关描述", name: "方向名称", image: ""},
       local: false,
       create_flag: false,
       upload_image: null,

@@ -15,7 +15,8 @@
               <div class="card-text border-bottom mt-2 mb-4 pb-2" v-show="admin">
                 <div class="ml-4 float-left"
                      style="font-size: 18px; font-family: 'Times New Roman';letter-spacing: .6px;line-height: 46px;">
-                  0.&nbsp;&nbsp;{{ new_item.name }}<a :href="new_item.link">&nbsp;&nbsp;<span class="	fa fa-chain" style="color: gray"></span></a>
+                  0.&nbsp;&nbsp;{{ new_item.name }}<a :href="new_item.link">&nbsp;&nbsp;<span class="	fa fa-chain"
+                                                                                              style="color: gray"></span></a>
                 </div>
                 <div class="pt-1 pb-5">
                   <button type="button" class="btn btn-primary btn-sm float-right" @click="create('paper')">
@@ -31,7 +32,8 @@
               <div class="card-text border-bottom mt-2 mb-2 pb-2" v-for="(item,index) in items">
                 <div class="ml-4"
                      style="font-size: 18px; font-family: 'Times New Roman';letter-spacing: .6px;line-height: 46px;">
-                  {{ index + 1 }}.&nbsp;&nbsp;{{ item.name }}&nbsp;&nbsp;<a :href="item.link"><span class="	fa fa-chain" style="color: #007bff"></span></a>
+                  {{ index + 1 }}.&nbsp;&nbsp;{{ item.name }}&nbsp;&nbsp;<a :href="item.link"><span
+                  class="	fa fa-chain" style="color: #007bff"></span></a>
                 </div>
                 <div class="pt-0 pb-5" v-show="admin">
                   <button type="button" class="btn btn-danger btn-sm float-right" @click="remove(item,'paper')">
@@ -49,7 +51,7 @@
             <div class="card-header" style="background-color: white;">
               <div class="h2"><span class="fa fa-book" style="color: #ff5316"></span>&nbsp;&nbsp;出版物</div>
             </div>
-            <div class="book-area" >
+            <div class="book-area">
               <div class="book-single" v-show="admin">
                 <div class="name">
                   <h4>名称：</h4>
@@ -132,11 +134,12 @@
               <div class="modal-body">
                 <div class="input-group mb-3">
                   <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon0_0">论文链接</span>
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon0_0">论文链接</span>
+                    </div>
+                    <input type="text" class="form-control" v-model="viewing_edit.link"
+                           aria-describedby="basic-addon0_0">
                   </div>
-                  <input type="text" class="form-control" v-model="viewing_edit.link" aria-describedby="basic-addon0_0">
-                </div>
                   <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon0_1">论文名称</span>
                   </div>
@@ -360,8 +363,8 @@ export default {
       type: 'papers',
       per_page: 10,
       modal: false,
-      viewing: null,
-      viewing_edit: null,
+      viewing: {id: 'new', name: "请输入论文引用", link: '#'},
+      viewing_edit: {id: 'new', name: "请输入论文引用", link: '#'},
       create_flag: false,
       item_type: 'paper', // paper or book
       items: [

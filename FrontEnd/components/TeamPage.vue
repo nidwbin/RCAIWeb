@@ -164,8 +164,24 @@ export default {
   data() {
     return {
       modal: false,
-      viewing: null,
-      viewing_edit: null,
+      viewing: {
+        id: 'new',
+        name: "姓名",
+        image: '',
+        class: this.type === "doctor" ? "博一" : "研一",
+        email: "example@exa.com",
+        link: "#",
+        abstract: "描述",
+      },
+      viewing_edit: {
+        id: 'new',
+        name: "姓名",
+        image: '',
+        class: this.type === "doctor" ? "博一" : "研一",
+        email: "example@exa.com",
+        link: "#",
+        abstract: "描述",
+      },
       local: false,
       create_flag: false,
       upload_image: null,

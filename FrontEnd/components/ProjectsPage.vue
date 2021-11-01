@@ -40,7 +40,7 @@
             </div>
             <div class="mt-5" v-show="admin" style="text-align: center">
               <button type="button" class="btn btn-primary btn-lg" @click="create">
-                <span class="fa fa-edit" ></span>&nbsp;&nbsp;&nbsp;&nbsp;新&nbsp;增
+                <span class="fa fa-edit"></span>&nbsp;&nbsp;&nbsp;&nbsp;新&nbsp;增
               </button>
             </div>
           </div>
@@ -204,8 +204,32 @@ export default {
     return {
       type: 'projects',
       modal: false,
-      viewing: null,
-      viewing_edit: null,
+      viewing: {
+        id: 'new',
+        image: "",
+        name: "项目名称",
+        source: "xxxxxxxx",
+        bg_time: "XXXX-XX-XX",
+        ed_time: "XXXX-XX-XX",
+        value: "xxx",
+        principal: "xx",
+        class: "xxxx",
+        state: "xx",
+        desc: "项目具体内容的描述......"
+      },
+      viewing_edit: {
+        id: 'new',
+        image: "",
+        name: "项目名称",
+        source: "xxxxxxxx",
+        bg_time: "XXXX-XX-XX",
+        ed_time: "XXXX-XX-XX",
+        value: "xxx",
+        principal: "xx",
+        class: "xxxx",
+        state: "xx",
+        desc: "项目具体内容的描述......"
+      },
       local: false,
       upload_image: null,
       image_base: this.$store.state.image_base + 'projects/',
