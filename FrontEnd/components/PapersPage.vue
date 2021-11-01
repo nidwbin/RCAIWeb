@@ -12,7 +12,7 @@
         <div class="row">
           <div class="col-lg-8">
             <div class="paper-aera">
-              <div class="card-text border-bottom mt-2 mb-4 pb-2" v-if="admin">
+              <div class="card-text border-bottom mt-2 mb-4 pb-2" v-show="admin">
                 <div class="ml-4 float-left"
                      style="font-size: 18px; font-family: 'Times New Roman';letter-spacing: .6px;line-height: 46px;">
                   0.&nbsp;&nbsp;{{ new_item.name }}<a :href="new_item.link">&nbsp;&nbsp;<span class="	fa fa-chain" style="color: gray"></span></a>
@@ -33,7 +33,7 @@
                      style="font-size: 18px; font-family: 'Times New Roman';letter-spacing: .6px;line-height: 46px;">
                   {{ index + 1 }}.&nbsp;&nbsp;{{ item.name }}&nbsp;&nbsp;<a :href="item.link"><span class="	fa fa-chain" style="color: #007bff"></span></a>
                 </div>
-                <div class="pt-0 pb-5" v-if="admin">
+                <div class="pt-0 pb-5" v-show="admin">
                   <button type="button" class="btn btn-danger btn-sm float-right" @click="remove(item,'paper')">
                     <span class="fa fa-trash-o"></span>&nbsp;&nbsp;删除
                   </button>
@@ -50,7 +50,7 @@
               <div class="h2"><span class="fa fa-book" style="color: #ff5316"></span>&nbsp;&nbsp;出版物</div>
             </div>
             <div class="book-area" >
-              <div class="book-single" v-if="admin">
+              <div class="book-single" v-show="admin">
                 <div class="name">
                   <h4>名称：</h4>
                   <p>{{ new_book.name }}</p>
@@ -102,7 +102,7 @@
                   <h6>简介：</h6>
                   <p>{{ book.desc }}</p>
                 </div>
-                <div class="mt-4 mb-4" v-if="admin" style="text-align: center">
+                <div class="mt-4 mb-4" v-show="admin" style="text-align: center">
                   <button type="button" class="btn btn-warning" @click="view(book,false,'book')">
                     <span class="fa fa-edit"></span>&nbsp;&nbsp;编辑
                   </button>
@@ -120,7 +120,7 @@
       <PagesList/>
     </section>
 
-    <div v-if="modal">
+    <div v-show="modal">
       <div class="modal" v-on:click.self="modal=false">
         <div class="modal-dialog modal-dialog-centered">
           <div v-if="item_type === 'paper'">

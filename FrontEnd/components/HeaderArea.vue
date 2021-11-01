@@ -1,5 +1,5 @@
 <template>
-  <div v-if="modal">
+  <div v-show="modal">
     <div class="modal" v-on:click.self="modal=false">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -47,7 +47,7 @@
               <input type="checkbox" class="custom-control-input" id="switch" v-model="viewing_edit.show">
               <label class="custom-control-label" for="switch">展示</label>
             </div>
-            <button type="button" class="btn btn-primary" @click="more" v-if="btn_more">
+            <button type="button" class="btn btn-primary" @click="more" v-show="btn_more">
               <span class="fa fa-eye"></span>&nbsp;&nbsp;查看
             </button>
             <button type="button" class="btn btn-warning" @click="edit"><span class="fa fa-edit"></span>&nbsp;&nbsp;修改

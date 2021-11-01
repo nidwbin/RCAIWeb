@@ -1,5 +1,5 @@
 <template>
-<div class="container mt-2" v-if="admin">
+<div class="container mt-2" v-show="admin">
   <div class="card">
     <h3 class="card-header text-muted">
       <div class="btn btn-light btn-lg btn-block" @click="">

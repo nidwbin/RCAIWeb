@@ -12,7 +12,7 @@
         <div class="h2"><span class="fa fa-group" style="color: #ff5316;">&nbsp;&nbsp;</span>中心学生</div>
       </div>
       <div class="row justify-content-center">
-        <div class="col-lg-4 col-md-6 col-sm-9" v-if="admin">
+        <div class="col-lg-4 col-md-6 col-sm-9" v-show="admin">
           <div class="leadership-item mt-30">
             <div class="leadership-thumb" style="filter: brightness(98%); cursor: pointer">
               <img :src=" btn_image " alt="doctors" @click="create">
@@ -47,7 +47,7 @@
               <span>{{ item.class }}</span>
               <p style="min-height: 102px;">{{ item.abstract }}</p>
             </div>
-            <div class="mt-2" v-if="admin" style="text-align: center">
+            <div class="mt-2" v-show="admin" style="text-align: center">
               <button type="button" class="btn btn-warning" @click="view(item,false)">
                 <span class="fa fa-edit"></span>&nbsp;&nbsp;编辑
               </button>
@@ -60,7 +60,7 @@
         </div>
       </div>
     </div>
-    <div v-if="modal">
+    <div v-show="modal">
       <div class="modal" v-on:click.self="modal=false">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
@@ -108,7 +108,7 @@
                 </div>
                 <select class="form-control" id="sel1" v-model="viewing_edit.class">
                   <option>{{ viewing_edit.class }}</option>
-                  <option v-for="class_item in classes" v-if="class_item !== viewing_edit.class">
+                  <option v-for="class_item in classes" v-show="class_item !== viewing_edit.class">
                     {{ class_item }}
                   </option>
                 </select>

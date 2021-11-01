@@ -6,7 +6,7 @@
  * @LastEditTime: 2021-09-28
  -->
 <template>
-  <div class="container mt-4 mb-4" v-if="!hidden">
+  <div class="container mt-4 mb-4" v-show="!hidden">
     <div class="row">
       <div class="col"></div>
       <ul class="pagination">

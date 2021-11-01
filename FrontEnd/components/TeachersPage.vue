@@ -10,7 +10,7 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
-          <div class="teacher-item mt-30" style="min-height: 360px !important;" v-if="admin">
+          <div class="teacher-item mt-30" style="min-height: 360px !important;" v-show="admin">
             <div class="shape">
               <img src="/static/images/shape/shape-4.png" alt="shape">
             </div>
@@ -64,7 +64,7 @@
             <div class="text" style="min-height: 300px;">
               <p>{{ item.desc }}</p>
             </div>
-            <div class="mt-2" v-if="admin" style="text-align: center">
+            <div class="mt-2" v-show="admin" style="text-align: center">
               <button type="button" class="btn btn-warning" @click="view(item,false)">
                 <span class="fa fa-edit"></span>&nbsp;&nbsp;编辑
               </button>
@@ -78,7 +78,7 @@
       </div>
     </div>
 
-    <div v-if="modal">
+    <div v-show="modal">
       <div class="modal" v-on:click.self="modal=false">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">

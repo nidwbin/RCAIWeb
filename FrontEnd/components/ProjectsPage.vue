@@ -10,7 +10,7 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
-          <div class="single-project" v-if="admin">
+          <div class="single-project" v-show="admin">
             <div class="single-project-thumb">
               <img class="add" :src=" btn_image" alt="project" @click="create">
               <div class="single-project-thumb-content d-flex">
@@ -38,7 +38,7 @@
               <h3 class="title"><span class="	fa fa-clipboard"></span>{{ new_item.name }}</h3>
               <p>{{ new_item.desc }}</p>
             </div>
-            <div class="mt-5" v-if="admin" style="text-align: center">
+            <div class="mt-5" v-show="admin" style="text-align: center">
               <button type="button" class="btn btn-primary btn-lg" @click="create">
                 <span class="fa fa-edit" ></span>&nbsp;&nbsp;&nbsp;&nbsp;新&nbsp;增
               </button>
@@ -75,7 +75,7 @@
               <h3 class="title"><span class="	fa fa-clipboard"></span>{{ item.name }}</h3>
               <p>{{ item.desc }}</p>
             </div>
-            <div class="mt-5" v-if="admin" style="text-align: center">
+            <div class="mt-5" v-show="admin" style="text-align: center">
               <button type="button" class="btn btn-warning btn-lg" @click="view(item)">
                 <span class="fa fa-edit"></span>&nbsp;&nbsp;&nbsp;&nbsp;编&nbsp;辑
               </button>
@@ -91,7 +91,7 @@
         </div>
       </div>
     </div>
-    <div v-if="modal">
+    <div v-show="modal">
       <div class="modal" v-on:click.self="modal=false">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">

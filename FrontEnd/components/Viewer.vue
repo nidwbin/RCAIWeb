@@ -17,7 +17,7 @@
           />
         </div>
       </div>
-      <div class="row mt-2 mb-2" v-if="admin">
+      <div class="row mt-2 mb-2" v-show="admin">
         <div class="col-8">
           <button class="btn btn-primary btn-lg btn-block" @click="send_all"><i class="fa fa-send"></i>发布</button>
         </div>

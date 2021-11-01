@@ -12,7 +12,7 @@
         <div class="row">
           <div class="col-lg-12">
             <div class="direction-item">
-              <div v-if="admin">
+              <div v-show="admin">
                 <div class="item d-block d-sm-flex align-items-center">
                   <div class="thumb">
                     <img :src="btn_image" style="filter: brightness(98%); cursor: pointer" alt="direction"
@@ -45,7 +45,7 @@
                     <p>{{ item.desc }}</p>
                   </div>
                 </div>
-                <div class=" pt-2 pb-2" v-if="admin">
+                <div class=" pt-2 pb-2" v-show="admin">
                   <button type="button" class="btn btn-danger btn-lg float-right" @click="remove(item)">
                     <span class="fa fa-trash-o"></span>&nbsp;&nbsp;删除
                   </button>
@@ -62,7 +62,7 @@
       </div>
     </div>
 
-    <div v-if="modal">
+    <div v-show="modal">
       <div class="modal" v-on:click.self="modal=false">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">

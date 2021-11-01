@@ -35,31 +35,33 @@
                 </div>
                 <div class="col-1"></div>
               </div>
-              <div class="form-group" v-if="change_mode">
-                <label for="username_">被修改者</label>
-                <input type="text" class="form-control" id="username_" v-model="username_" placeholder="输入用户名">
-              </div>
-              <div class="form-group" v-if="change_mode">
-                <label for="password_">被修改者密码</label>
-                <input type="password" class="form-control" id="password_" v-model="password_" placeholder="输入密码">
-              </div>
-              <div class="form-group" v-if="change_mode">
-                <label for="password__">确认密码</label>
-                <input type="password" class="form-control" id="password__" v-model="password__" placeholder="输入密码"
-                       @keydown.enter="change">
-              </div>
-              <div class="row">
-                <div class="col-1"></div>
-                <div class="col text-center" @click="change($event)" v-if="change_mode">
-                  <a ref="change" href="#" :class="'btn '+btn_change">
-                    <i class="fa fa-pencil"></i>修改
-                  </a>
+              <div v-show="change_mode">
+                <div class="form-group">
+                  <label for="username_">被修改者</label>
+                  <input type="text" class="form-control" id="username_" v-model="username_" placeholder="输入用户名">
                 </div>
-                <div class="col text-center" @click="remove" v-if="change_mode">
-                  <a href="#" class="btn btn-danger"><i class="fa fa-send"></i>删除
-                  </a>
+                <div class="form-group">
+                  <label for="password_">被修改者密码</label>
+                  <input type="password" class="form-control" id="password_" v-model="password_" placeholder="输入密码">
                 </div>
-                <div class="col-1"></div>
+                <div class="form-group">
+                  <label for="password__">确认密码</label>
+                  <input type="password" class="form-control" id="password__" v-model="password__" placeholder="输入密码"
+                         @keydown.enter="change">
+                </div>
+                <div class="row">
+                  <div class="col-1"></div>
+                  <div class="col text-center" @click="change($event)">
+                    <a ref="change" href="#" :class="'btn '+btn_change">
+                      <i class="fa fa-pencil"></i>修改
+                    </a>
+                  </div>
+                  <div class="col text-center" @click="remove">
+                    <a href="#" class="btn btn-danger"><i class="fa fa-send"></i>删除
+                    </a>
+                  </div>
+                  <div class="col-1"></div>
+                </div>
               </div>
             </form>
           </div>
