@@ -455,8 +455,8 @@ class StudentsOP(PeopleOP):
     def change(self, id_: int, name: str, homepage: str, email: str, degree_type: str, degree: str, overview: str,
                image):
         try:
-            student = Student.objects.get(id=id_, degree_type=degree_type)
             if self.change_info(id_, name, homepage, email, image):
+                student = Student.objects.get(id=id_, degree_type=degree_type)
                 student.degree = degree
                 student.overview = overview
                 student.save()
@@ -523,9 +523,8 @@ class TeachersOP(PeopleOP):
     def change(self, id_: int, name: str, homepage: str, email: str, professional_title: str, introduction: str,
                mobile: str, address: str, image):
         try:
-            teacher = Teacher.objects.get(id=id_)
-
             if self.change_info(id_, name, homepage, email, image):
+                teacher = Teacher.objects.get(id=id_)
                 teacher.professional_title = professional_title
                 teacher.introduction = introduction
                 teacher.mobile = mobile
