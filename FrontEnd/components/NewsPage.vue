@@ -11,8 +11,8 @@
       <div class="row">
         <div class="col-lg-8">
           <div class="news_new_area">
-            <div class="new_add mb-4 border-bottom" v-if="admin">
-              <img :src="btn_image" class="img_filter" @click="new_item" width="100%">
+            <div class="new_add mb-4 border-bottom" v-show="admin">
+              <img :src="btn_image" alt="" class="img_filter" @click="new_item" width="100%">
               <div class="footer">
                 发布新闻
               </div>
@@ -21,7 +21,7 @@
           <div class="card-header mb-3">
             <div class="h2"><span class="	fa fa-newspaper-o" style="color: #ff5316;">&nbsp;&nbsp;</span>新闻</div>
           </div>
-          <div v-for="item in lists" v-if="item.show || admin">
+          <div v-for="item in lists" v-show="item.show || admin">
             <div class="comment-one__single">
               <div class="comment-one__image">
                 <img :src="item.image===''?default_image:image_base+item.image" alt="">
@@ -40,7 +40,7 @@
               <!--              </div>-->
               <!-- /.thm-btn comment-one__btn -->
             </div><!-- /.comment-one__single -->
-            <div class="pb-5 pt-1" v-if="admin">
+            <div class="pb-5 pt-1" v-show="admin">
               <button type="button" class="btn btn-danger float-right" @click="remove(item)">
                 <span class="fa fa-trash-o"></span>&nbsp;&nbsp;删除
               </button>
@@ -60,8 +60,8 @@
         </div><!-- /.comment-one -->
         <div class="col-lg-4">
           <div class="sidebar">
-            <div class="new_add mb-4 text-center border-bottom" v-if="admin">
-              <img :src="btn_image" @click="new_item" class="img_filter" width="100%">
+            <div class="new_add mb-4 text-center border-bottom" v-show="admin">
+              <img :src="btn_image" alt="" @click="new_item" class="img_filter" width="100%">
               <div class="footer">
                 发布新闻
               </div>
