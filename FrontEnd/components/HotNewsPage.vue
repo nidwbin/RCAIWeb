@@ -128,7 +128,8 @@ export default {
         data => {
           switch (data['message']) {
             case 'success': {
-              this.hots = data['content'];
+              let hots = data['content'];
+              this.hots = hots.length === 1 ? [JSON.parse(JSON.stringify(hots[0])), JSON.parse(JSON.stringify(hots[0]))] : hots;
               break;
             }
             case 'error': {
