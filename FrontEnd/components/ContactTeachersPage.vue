@@ -23,16 +23,11 @@
               </div>
             </div>
             <div class="about">
-              <h3>相关信息</h3>
-              <div class="list">
-                <ul>
-                  <li>1.***************</li>
-                  <li>2.**********************</li>
-                  <li>3.***************</li>
-                  <li>4.**********************</li>
-                  <li>联系我们：***********</li>
-                  <li>详情见主页：***********</li>
-                </ul>
+              <h3 class="mb-5">相关信息</h3>
+              <div class="list-group">
+                <div class="list-group-item text-center" v-for="item in info_items">
+                  {{ item.desc }}
+                </div>
               </div>
             </div>
           </div>
@@ -51,6 +46,13 @@
                     {treatment:"年薪30万，10万科研启动经费",name:"师资博士后/项目博士后", require:"30周岁以下", image:"/static/images/contact/teacher-2.png"},
                     {treatment:"年薪28万，20万科研启动经费，20万安家费",name:"青年拔尖/准聘副教授", require:"32周岁以下", image:"/static/images/contact/teacher-1.png"},
                     {treatment:"年薪35万，100万科研启动经费，60万安家费",name:"青年拔尖/准聘教授", require:"35周岁以下", image:"/static/images/contact/teacher-3.png"},
+                ],
+
+                info_items: [
+                  {desc: "1.**********"},
+                  {desc: "2.**********"},
+                  {desc: "3.**********"},
+                  {desc: "联系我们：马心慧 xxxxxxxxx"},
                 ]
             }
         }

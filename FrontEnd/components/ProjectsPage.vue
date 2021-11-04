@@ -247,17 +247,7 @@ export default {
           principal: "负责",
           class: "纵向项目",
           state: "进行中",
-          desc: "Lorem ipsum is simply free text used by copytyping refreshing. Neque porro est qui dolorem ipsum quia\n" +
-            "                quaed inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Aelltes port lacus quis\n" +
-            "                enim var sed efficitur turpis gilla sed sit amet finibus eros. Lorem Ipsum is simply dummy text of the\n" +
-            "                printing and typesetting industry. Lorem Ipsum has been the ndustry standard dummy text ever since the\n" +
-            "                1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It\n" +
-            "                has survived not only five centuries. Lorem Ipsum is simply dummy text of the new design printng and\n" +
-            "                type setting Ipsum Take a look at our round up of the best shows coming soon to your telly box has been\n" +
-            "                the is industrys. When an unknown printer took a galley of type and scrambled it to make a type specimen\n" +
-            "                book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining\n" +
-            "                essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets\n" +
-            "                containing."
+          desc: "项目描述"
         },
         {
           image: "/static/images/project/project_2.jpg",
@@ -269,17 +259,7 @@ export default {
           principal: "负责",
           class: "纵向项目",
           state: "进行中",
-          desc: "Lorem ipsum is simply free text used by copytyping refreshing. Neque porro est qui dolorem ipsum quia\n" +
-            "                quaed inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Aelltes port lacus quis\n" +
-            "                enim var sed efficitur turpis gilla sed sit amet finibus eros. Lorem Ipsum is simply dummy text of the\n" +
-            "                printing and typesetting industry. Lorem Ipsum has been the ndustry standard dummy text ever since the\n" +
-            "                1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It\n" +
-            "                has survived not only five centuries. Lorem Ipsum is simply dummy text of the new design printng and\n" +
-            "                type setting Ipsum Take a look at our round up of the best shows coming soon to your telly box has been\n" +
-            "                the is industrys. When an unknown printer took a galley of type and scrambled it to make a type specimen\n" +
-            "                book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining\n" +
-            "                essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets\n" +
-            "                containing."
+          desc: "项目描述"
         },
         {
           image: "/static/images/project/project_3.jpg",
@@ -291,17 +271,7 @@ export default {
           principal: "负责",
           class: "纵向项目",
           state: "进行中",
-          desc: "Lorem ipsum is simply free text used by copytyping refreshing. Neque porro est qui dolorem ipsum quia\n" +
-            "                quaed inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Aelltes port lacus quis\n" +
-            "                enim var sed efficitur turpis gilla sed sit amet finibus eros. Lorem Ipsum is simply dummy text of the\n" +
-            "                printing and typesetting industry. Lorem Ipsum has been the ndustry standard dummy text ever since the\n" +
-            "                1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It\n" +
-            "                has survived not only five centuries. Lorem Ipsum is simply dummy text of the new design printng and\n" +
-            "                type setting Ipsum Take a look at our round up of the best shows coming soon to your telly box has been\n" +
-            "                the is industrys. When an unknown printer took a galley of type and scrambled it to make a type specimen\n" +
-            "                book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining\n" +
-            "                essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets\n" +
-            "                containing."
+          desc: "项目描述"
         },
       ],
       new_item: {

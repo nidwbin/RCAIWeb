@@ -33,8 +33,8 @@
                     <span>{{ item.year }}</span>
                   </div>
                   <div class="content">
-                    <nuxt-link to="/single-project">Company was Founded</nuxt-link>
-                    <p>there are many variations of passages of lorem Ipsum available but the majority have suffered alteration in some form injected which don't look of available but the majority have suffered even slightly believable.</p>
+                    <nuxt-link to="/single-project">{{ item.name }}</nuxt-link>
+                    <p>{{ item.desc }}</p>
                   </div>
                 </div>
               </div>
@@ -51,10 +51,10 @@
         data () {
             return{
                 items: [
-                    {year:1996},
-                    {year:2001},
-                    {year:2007},
-                    {year:2020},
+                    // {year:1996},
+                    // {year:2001},
+                    {year:"XXXX", name:"SPLAB", desc:"Speech Processing Lab"},
+                    {year:2021, name:"RCAI", desc:"Research Center of Auditory Intelligence"},
                 ]
 
             }

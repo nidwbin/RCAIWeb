@@ -11,7 +11,7 @@
     <Slider/>
     <HotNewsPage/>
     <IntroductionPage/>
-    <FunfactsThreeArea/>
+    <StaticDataArea/>
     <Footer/>
   </div>
 
@@ -22,7 +22,7 @@ import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import Slider from "../components/Slider";
 import IntroductionPage from "../components/IntroductionPage";
-import FunfactsThreeArea from "../components/FunfactsArea";
+import StaticDataArea from "../components/StaticDataArea"
 import HotNewsPage from "../components/HotNewsPage";
 
 export default {
@@ -30,7 +30,7 @@ export default {
     Nav,
     Footer,
     IntroductionPage,
-    FunfactsThreeArea,
+    StaticDataArea,
     Slider,
     HotNewsPage,
   },

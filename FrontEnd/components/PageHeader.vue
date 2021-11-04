@@ -6,7 +6,7 @@
  * @LastEditTime: 2021-09-28
  -->
 <template>
-  <div class="page-title-area bg_cover pt-120" style="background-image: url(/static/images/banner-bg-1.jpg);">
+  <div class="page-title-area bg_cover pt-200">
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
@@ -43,5 +43,19 @@
 </script>
 
 <style scoped>
+.page-title-area {
+  /* TODO change header background */
+  /*background-image: url(/static/images/background/header-bg1.jpg);*/
+  /*background-position-y: -220px;*/
 
+  background-image: url(/static/images/background/header-bg2.jpg);
+  background-position-y: -300px;
+
+  /*background-image: url(/static/images/background/header-bg3.jpg);*/
+  /*background-position-y: -400px;*/
+
+  /*background-image: url(/static/images/background/header-bg4.jpg);*/
+  /*background-position-y: -100px;*/
+
+}
 </style>

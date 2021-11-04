@@ -120,11 +120,12 @@
                 <a @click="mobileToggle = !mobileToggle" href="javascript:void(0)"><i class="fa fa-times"></i></a>
               </div>
               <div class="header-social">
-                <ul class="text-center">
-                  <li><a href="#"><i class="fa fa-facebook-f"></i></a></li>
-                  <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                  <li><a href="#"><i class="fa fa-skype"></i></a></li>
-                  <li><a href="#"><i class="fa fa-pinterest-p"></i></a></li>
+                <ul class="text-center" style="color: #ff5316">
+                  <span class="fa fa-home"></span>&nbsp;&nbsp;听觉智能研究中心
+<!--                  <li><a href="#"><i class="fa fa-facebook-f"></i></a></li>-->
+<!--                  <li><a href="#"><i class="fa fa-twitter"></i></a></li>-->
+<!--                  <li><a href="#"><i class="fa fa-skype"></i></a></li>-->
+<!--                  <li><a href="#"><i class="fa fa-pinterest-p"></i></a></li>-->
                 </ul>
               </div>
               <div id="menu" class="text-left ">

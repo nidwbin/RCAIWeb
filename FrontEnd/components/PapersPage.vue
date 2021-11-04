@@ -48,29 +48,29 @@
             </div><!-- /.comment-one -->
           </div><!-- /.col-lg-8 -->
           <div class="col-lg-4">
-            <div class="card-header" style="background-color: white;">
+            <div class="card-header" style="box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.04);">
               <div class="h2"><span class="fa fa-book" style="color: #ff5316"></span>&nbsp;&nbsp;出版物</div>
             </div>
             <div class="book-area">
               <div class="book-single" v-show="admin">
                 <div class="name">
-                  <h4>名称：</h4>
+                  <h4>&nbsp;名称：</h4>
                   <p>{{ new_book.name }}</p>
                 </div>
                 <div class="info">
-                  <h6>作者：</h6>
+                  <h6>&nbsp;&nbsp;作者：</h6>
                   <p>{{ new_book.authors }}</p>
                 </div>
                 <div class="info">
-                  <h6>出版时间：</h6>
+                  <h6>&nbsp;&nbsp;出版时间：</h6>
                   <p>{{ new_book.pub_time }}</p>
                 </div>
                 <div class="info">
-                  <h6>出版社：</h6>
+                  <h6>&nbsp;&nbsp;出版社：</h6>
                   <p>{{ new_book.press }}</p>
                 </div>
                 <div class="desc">
-                  <h6>简介：</h6>
+                  <h6>&nbsp;&nbsp;简介：</h6>
                   <p>{{ new_book.desc }}</p>
                 </div>
                 <div class="mt-4 mb-4" style="text-align: center">
@@ -78,30 +78,30 @@
                     <span class="fa fa-edit"></span>&nbsp;&nbsp;新增
                   </button>
                 </div>
-                <div class="border-bottom"></div>
+<!--                <div class="border-bottom"></div>-->
               </div>
               <!--              <div class="title">-->
               <!--                <h3><span class="fa fa-book"></span>出版物</h3>-->
               <!--              </div>-->
               <div class="book-single" v-for="book in books">
                 <div class="name">
-                  <h4>名称：</h4>
+                  <h4>&nbsp;名称：</h4>
                   <p>{{ book.name }}</p>
                 </div>
                 <div class="info">
-                  <h6>作者：</h6>
+                  <h6>&nbsp;&nbsp;作者：</h6>
                   <p>{{ book.authors }}</p>
                 </div>
                 <div class="info">
-                  <h6>出版时间：</h6>
+                  <h6>&nbsp;&nbsp;出版时间：</h6>
                   <p>{{ book.pub_time }}</p>
                 </div>
                 <div class="info">
-                  <h6>出版社：</h6>
+                  <h6>&nbsp;&nbsp;出版社：</h6>
                   <p>{{ book.press }}</p>
                 </div>
                 <div class="desc">
-                  <h6>简介：</h6>
+                  <h6>&nbsp;&nbsp;简介：</h6>
                   <p>{{ book.desc }}</p>
                 </div>
                 <div class="mt-4 mb-4" v-show="admin" style="text-align: center">
@@ -113,12 +113,12 @@
                     <span class="fa fa-trash-o"></span>&nbsp;&nbsp;删除
                   </button>
                 </div>
-                <div class="border-bottom"></div>
+<!--                <div class="border-bottom"></div>-->
               </div>
             </div>
-          </div><!-- /.col-lg-4 -->
-        </div><!-- /.row -->
-      </div><!-- /.container -->
+          </div>
+        </div>
+      </div>
       <PagesList/>
     </section>
 
@@ -235,118 +235,6 @@
       <div class="modal-backdrop show" style=" z-index: 2000"></div>
     </div>
     <PagesList ref="page" :type="this.type" :per_page="this.per_page" @change_page="load_list"/>
-    <div>
-      <!--    <div v-else>-->
-      <!--      <section class="paper-details">-->
-      <!--        <div class="container">-->
-      <!--          <div class="row">-->
-      <!--            <div class="col-lg-8">-->
-      <!--              <div class="paper-aera">-->
-      <!--                <h3><span class="fa fa-graduation-cap"></span>论文专著</h3>-->
-      <!--              </div>-->
-      <!--              <div class="comment-one">-->
-      <!--                <div class="comment-one__single" v-for="item in items_default">-->
-      <!--                  <form>-->
-      <!--                    <div class="comment-one__content">-->
-      <!--                      <nuxt-link to="#">-->
-      <!--                        <p>{{ item.index }}.<textarea name="paper_name" type="text"-->
-      <!--                                                      :placeholder="item.paper"></textarea></p>-->
-      <!--                      </nuxt-link>-->
-      <!--                      <div class="but">-->
-      <!--                        <span class="fa fa-send-o" id="add_1" @click="onSubmit(item)">&nbsp;新&nbsp;增</span>-->
-      <!--                      </div>-->
-      <!--                    </div>&lt;!&ndash; /.comment-one__content &ndash;&gt;-->
-      <!--                  </form>-->
-      <!--                </div>-->
-      <!--                <div class="comment-one__single" v-for="item in items">-->
-      <!--                  <form>-->
-      <!--                    <div class="comment-one__content">-->
-      <!--                      <nuxt-link to="#">-->
-      <!--                        <p>{{ item.index }}.<textarea name="paper_name" type="text" :placeholder="item.paper"-->
-      <!--                                                      v-model="item.paper"></textarea></p>-->
-      <!--                      </nuxt-link>-->
-      <!--                      <div class="but">-->
-      <!--                        <span class="fa fa-send-o" id="add_2" @click="onSubmit(item)">&nbsp;提&nbsp;交</span>-->
-      <!--                        <span class="fa fa-trash-o" id="del" @click="onSubmit(item)">&nbsp;删&nbsp;除</span>-->
-      <!--                      </div>-->
-      <!--                    </div>&lt;!&ndash; /.comment-one__content &ndash;&gt;-->
-      <!--                  </form>-->
-      <!--                </div>-->
-      <!--              </div>&lt;!&ndash; /.comment-one &ndash;&gt;-->
-      <!--            </div>&lt;!&ndash; /.col-lg-8 &ndash;&gt;-->
-      <!--            <div class="col-lg-4">-->
-      <!--              <div class="book-area">-->
-      <!--                <div class="title">-->
-      <!--                  <h3><span class="fa fa-book"></span>出版物</h3>-->
-      <!--                </div>-->
-      <!--                <div class="book-single" v-for="book in books_default">-->
-      <!--                  <form>-->
-      <!--                    <div class="name">-->
-      <!--                      <h4>名称：</h4>-->
-      <!--                      <p><input name="book_name" type="text" :placeholder="book.name"-->
-      <!--                                style="font-size: 17px;font-weight: 600;"></p>-->
-      <!--                    </div>-->
-      <!--                    <div class="info">-->
-      <!--                      <h6>作者：</h6>-->
-      <!--                      <p><input name="book_authors" type="text" :placeholder="book.authors"></p>-->
-      <!--                    </div>-->
-      <!--                    <div class="info">-->
-      <!--                      <h6>出版时间：</h6>-->
-      <!--                      <p><input name="book_pub_time" type="text" :placeholder="book.pub_time"></p>-->
-      <!--                    </div>-->
-      <!--                    <div class="info">-->
-      <!--                      <h6>出版社：</h6>-->
-      <!--                      <p><input name="book_press" type="text" :placeholder="book.press"></p>-->
-      <!--                    </div>-->
-      <!--                    <div class="desc">-->
-      <!--                      <h6>简介：</h6>-->
-      <!--                      <p><textarea name="book_desc" type="text" :placeholder="book.desc"></textarea></p>-->
-      <!--                    </div>-->
-      <!--                    <div class="but">-->
-      <!--                      <span class="fa fa-send-o" id="add_b_1" @click="onSubmit(item)">&nbsp;提&nbsp;交</span>-->
-      <!--                    </div>-->
-      <!--                  </form>-->
-      <!--                </div>-->
-      <!--                <div class="book-single" v-for="book in books">-->
-      <!--                  <form>-->
-      <!--                    <div class="name">-->
-      <!--                      <h4>名称：</h4>-->
-      <!--                      <p><input name="book_name" type="text" :placeholder="book.name" v-model="book.name"-->
-      <!--                                style="font-size: 17px;font-weight: 600;"></p>-->
-      <!--                    </div>-->
-      <!--                    <div class="info">-->
-      <!--                      <h6>作者：</h6>-->
-      <!--                      <p><input name="book_authors" type="text" :placeholder="book.authors" v-model="book.authors"></p>-->
-      <!--                    </div>-->
-      <!--                    <div class="info">-->
-      <!--                      <h6>出版时间：</h6>-->
-      <!--                      <p><input name="book_pub_time" type="text" :placeholder="book.pub_time" v-model="book.pub_time">-->
-      <!--                      </p>-->
-      <!--                    </div>-->
-      <!--                    <div class="info">-->
-      <!--                      <h6>出版社：</h6>-->
-      <!--                      <p><input name="book_press" type="text" :placeholder="book.press" v-model="book.press"></p>-->
-      <!--                    </div>-->
-      <!--                    <div class="desc">-->
-      <!--                      <h6>简介：</h6>-->
-      <!--                      <p><textarea name="book_desc" type="text" :placeholder="book.desc" v-model="book.desc"></textarea>-->
-      <!--                      </p>-->
-      <!--                    </div>-->
-      <!--                  </form>-->
-      <!--                  <div class="but">-->
-      <!--                    <span class="fa fa-send-o" id="add_b_2" @click="onSubmit(item)">&nbsp;提&nbsp;交</span>-->
-      <!--                    &lt;!&ndash;                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&ndash;&gt;-->
-      <!--                    <span class="fa fa-trash-o" id="del_b" @click="onSubmit(item)">&nbsp;删&nbsp;除</span>-->
-      <!--                  </div>-->
-      <!--                </div>-->
-      <!--              </div>-->
-      <!--            </div>&lt;!&ndash; /.col-lg-4 &ndash;&gt;-->
-      <!--          </div>&lt;!&ndash; /.row &ndash;&gt;-->
-      <!--        </div>&lt;!&ndash; /.container &ndash;&gt;-->
-      <!--        <PagesList/>-->
-      <!--      </section>-->
-      <!--    </div>-->
-    </div>
   </div>
 </template>
 

@@ -57,7 +57,7 @@
 
             </div>
           </div>
-        </div><!-- /.comment-one -->
+        </div>
         <div class="col-lg-4">
           <div class="sidebar">
             <div class="new_add mb-4 text-center border-bottom" v-show="admin">
@@ -71,7 +71,7 @@
                 <input type="text" name="search" placeholder="开始搜索...">
                 <button type="submit"><i class="fa fa-search"></i></button>
               </form>
-            </div><!-- /.sidebar__single -->
+            </div>
             <div class="sidebar__single sidebar__post">
               <h3 class="sidebar__title">近期新闻</h3><!-- /.sidebar__title -->
               <div class="sidebar__post-wrap">
@@ -90,36 +90,36 @@
                   </nuxt-link>
                 </div><!-- /.sidebar__post__single -->
               </div><!-- /.sidebar__post-wrap -->
-            </div><!-- /.sidebar__single -->
-            <div class="sidebar__single sidebar__category">
-              <h3 class="sidebar__title">Categories</h3><!-- /.sidebar__title -->
-              <ul class="sidebar__category-list">
-                <li class="sidebar__category-list-item"><a href="#">Business</a></li>
-                <li class="sidebar__category-list-item"><a href="#">Introductions</a></li>
-                <li class="sidebar__category-list-item"><a href="#">One Page Template</a></li>
-                <li class="sidebar__category-list-item"><a href="#">Parallax Effects</a></li>
-                <li class="sidebar__category-list-item"><a href="#">New Technologies</a></li>
-                <li class="sidebar__category-list-item"><a href="#">Video Backgrounds</a></li>
-              </ul><!-- /.sidebar__category-list -->
-            </div><!-- /.sidebar__single -->
-            <div class="sidebar__single sidebar__tags">
-              <h3 class="sidebar__title">Tags</h3><!-- /.sidebar__title -->
-              <ul class="sidebar__tags-list">
-                <li class="sidebar__tags-list-item"><a href="#">Construction,</a></li>
-                <li class="sidebar__tags-list-item"><a href="#">Build,</a></li>
-                <li class="sidebar__tags-list-item"><a href="#">Factory.</a></li>
-                <li class="sidebar__tags-list-item"><a href="#">Engineering.</a></li>
-                <li class="sidebar__tags-list-item"><a href="#">Repairing,</a></li>
-                <li class="sidebar__tags-list-item"><a href="#">Industry,</a></li>
-                <li class="sidebar__tags-list-item"><a href="#">Materials,</a></li>
-                <li class="sidebar__tags-list-item"><a href="#">Mechanical,</a></li>
-                <li class="sidebar__tags-list-item"><a href="#">Buildings,</a></li>
-              </ul><!-- /.sidebar__category-list -->
-            </div><!-- /.sidebar__single -->
-          </div><!-- /.sidebar -->
-        </div><!-- /.col-lg-4 -->
-      </div><!-- /.row -->
-    </div><!-- /.container -->
+            </div>
+<!--            <div class="sidebar__single sidebar__category">-->
+<!--              <h3 class="sidebar__title">Categories</h3>&lt;!&ndash; /.sidebar__title &ndash;&gt;-->
+<!--              <ul class="sidebar__category-list">-->
+<!--                <li class="sidebar__category-list-item"><a href="#">Business</a></li>-->
+<!--                <li class="sidebar__category-list-item"><a href="#">Introductions</a></li>-->
+<!--                <li class="sidebar__category-list-item"><a href="#">One Page Template</a></li>-->
+<!--                <li class="sidebar__category-list-item"><a href="#">Parallax Effects</a></li>-->
+<!--                <li class="sidebar__category-list-item"><a href="#">New Technologies</a></li>-->
+<!--                <li class="sidebar__category-list-item"><a href="#">Video Backgrounds</a></li>-->
+<!--              </ul>&lt;!&ndash; /.sidebar__category-list &ndash;&gt;-->
+<!--            </div>-->
+<!--            <div class="sidebar__single sidebar__tags">-->
+<!--              <h3 class="sidebar__title">Tags</h3>&lt;!&ndash; /.sidebar__title &ndash;&gt;-->
+<!--              <ul class="sidebar__tags-list">-->
+<!--                <li class="sidebar__tags-list-item"><a href="#">Construction,</a></li>-->
+<!--                <li class="sidebar__tags-list-item"><a href="#">Build,</a></li>-->
+<!--                <li class="sidebar__tags-list-item"><a href="#">Factory.</a></li>-->
+<!--                <li class="sidebar__tags-list-item"><a href="#">Engineering.</a></li>-->
+<!--                <li class="sidebar__tags-list-item"><a href="#">Repairing,</a></li>-->
+<!--                <li class="sidebar__tags-list-item"><a href="#">Industry,</a></li>-->
+<!--                <li class="sidebar__tags-list-item"><a href="#">Materials,</a></li>-->
+<!--                <li class="sidebar__tags-list-item"><a href="#">Mechanical,</a></li>-->
+<!--                <li class="sidebar__tags-list-item"><a href="#">Buildings,</a></li>-->
+<!--              </ul>&lt;!&ndash; /.sidebar__category-list &ndash;&gt;-->
+<!--            </div>-->
+          </div>
+        </div>
+      </div>
+    </div>
     <HeaderArea ref="header" :type="type" :btn_more="true"/>
     <PagesList ref="page" :type="type" :per_page="per_page" @change_page="load_list"/>
   </section>

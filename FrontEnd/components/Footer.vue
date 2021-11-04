@@ -24,14 +24,14 @@
                   <div class="call">
                     <a :href="'tel:'+phone">{{ phone }}</a>
                   </div>
-                  <div class="social">
-                    <ul>
-                      <li><a href="#"><i class="fa fa-facebook-f"></i></a></li>
-                      <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                      <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                      <li><a href="#"><i class="fa fa-pinterest-p"></i></a></li>
-                    </ul>
-                  </div>
+<!--                  <div class="social">-->
+<!--                    <ul>-->
+<!--                      <li><a href="#"><i class="fa fa-facebook-f"></i></a></li>-->
+<!--                      <li><a href="#"><i class="fa fa-twitter"></i></a></li>-->
+<!--                      <li><a href="#"><i class="fa fa-instagram"></i></a></li>-->
+<!--                      <li><a href="#"><i class="fa fa-pinterest-p"></i></a></li>-->
+<!--                    </ul>-->
+<!--                  </div>-->
                 </div>
               </div>
             </div>
@@ -115,7 +115,7 @@
           </div>
         </div>
         <div class="footer-copyright text-center">
-          <p>© Copyright 2021</p>
+          <p>© Copyright 2021 哈尔滨工业大学 · 听觉智能研究中心</p>
         </div>
       </div>
       <div class="footer-shape-1">

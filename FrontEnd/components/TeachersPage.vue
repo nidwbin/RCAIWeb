@@ -221,36 +221,36 @@ export default {
           adress: "哈尔滨工业大学321信箱",
           link: "http://homepage.hit.edu.cn/hanjiqing"
         },
-        {
-          name: "韩纪庆",
-          prof: "教授，博士生导师",
-          desc: "简介",
-          image: "/static/images/teacher/JQH.png",
-          tel: "0451-86417981",
-          email: "jqhan@hit.edu.cn",
-          adress: "哈尔滨工业大学321信箱",
-          link: "http://homepage.hit.edu.cn/hanjiqing"
-        },
-        {
-          name: "韩纪庆",
-          prof: "教授，博士生导师",
-          desc: "简介",
-          image: "/static/images/teacher/JQH.png",
-          tel: "0451-86417981",
-          email: "jqhan@hit.edu.cn",
-          adress: "哈尔滨工业大学321信箱",
-          link: "http://homepage.hit.edu.cn/hanjiqing"
-        },
-        {
-          name: "韩纪庆",
-          prof: "教授，博士生导师",
-          desc: "简介",
-          image: "/static/images/teacher/JQH.png",
-          tel: "0451-86417981",
-          email: "jqhan@hit.edu.cn",
-          adress: "哈尔滨工业大学321信箱",
-          link: "http://homepage.hit.edu.cn/hanjiqing"
-        },
+        // {
+        //   name: "韩纪庆",
+        //   prof: "教授，博士生导师",
+        //   desc: "简介",
+        //   image: "/static/images/teacher/JQH.png",
+        //   tel: "0451-86417981",
+        //   email: "jqhan@hit.edu.cn",
+        //   adress: "哈尔滨工业大学321信箱",
+        //   link: "http://homepage.hit.edu.cn/hanjiqing"
+        // },
+        // {
+        //   name: "韩纪庆",
+        //   prof: "教授，博士生导师",
+        //   desc: "简介",
+        //   image: "/static/images/teacher/JQH.png",
+        //   tel: "0451-86417981",
+        //   email: "jqhan@hit.edu.cn",
+        //   adress: "哈尔滨工业大学321信箱",
+        //   link: "http://homepage.hit.edu.cn/hanjiqing"
+        // },
+        // {
+        //   name: "韩纪庆",
+        //   prof: "教授，博士生导师",
+        //   desc: "简介",
+        //   image: "/static/images/teacher/JQH.png",
+        //   tel: "0451-86417981",
+        //   email: "jqhan@hit.edu.cn",
+        //   adress: "哈尔滨工业大学321信箱",
+        //   link: "http://homepage.hit.edu.cn/hanjiqing"
+        // },
       ],
       new_item: {
         id: 'new',
