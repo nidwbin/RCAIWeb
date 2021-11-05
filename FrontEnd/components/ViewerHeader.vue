@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="page-title-area bg_cover pt-120" style="background-image: url(/static/images/banner-bg-1.jpg);">
+    <div class="page-title-area bg_cover pt-120" style="background-image: url(/static/images/background/header-bg2.jpg);">
       <div class="container">
         <div class="row">
           <div class="col-lg-12">
