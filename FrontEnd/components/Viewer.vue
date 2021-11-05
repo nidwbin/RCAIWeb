@@ -133,8 +133,9 @@ export default {
       bus.$off(['save']);
     },
     send_all() {
-      this.save(this.$refs.md.d_value, this.$refs.md.d_render);
-      bus.$emit('finish');
+      this.save(this.$refs.md.d_value, this.$refs.md.d_render).then(() => {
+        bus.$emit('finish');
+      });
     },
     delete_all() {
       bus.$emit('delete');
@@ -245,7 +246,7 @@ export default {
         console.log('images map', this.images_saved);
       }
 
-      this.process_image_saved(val).then(() => {
+      return this.process_image_saved(val).then(() => {
         this.process_image_upload(val).then((value) => {
           this.process_markdown(value);
         })
