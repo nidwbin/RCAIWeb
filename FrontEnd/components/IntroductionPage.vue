@@ -6,7 +6,7 @@
  * @LastEditTime: 2021-10-01
  -->
 <template>
-  <section class="single-project-area pt-120">
+  <section class="single-project-area pt-30">
     <div class="container">
       <div class="row">
         <div class="col-lg-7">

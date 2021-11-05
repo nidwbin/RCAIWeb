@@ -6,7 +6,7 @@
  * @LastEditTime: 2021-10-03
  -->
 <template>
-  <section class="teacher-area pt-90 testimonials-client">
+  <section class="teacher-area pt-30 testimonials-client">
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
