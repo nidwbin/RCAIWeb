@@ -48,31 +48,32 @@ class Authority:
     def __check_key__(self, request, response, keep=True, put=False):
         now_time = datetime.datetime.now()
         if put or (keep and self.__check_pass__(now_time, request)):
-            if keep:
-                key = self.__get_key__(request)
-                if key in self.chain:
-                    key = self.chain[key]
-                    deadline = self.deadline[key]
-                else:
-                    deadline, key = self.__gen_key__(now_time)
-                self.__set_key__(deadline, key, response, request)
+            key = self.__get_key__(request)
+            if key in self.chain:
+                key = self.chain[key]
+                deadline = self.deadline[key]
             else:
-                if self.deadline:
-                    self.deadline.clear()
-                if self.chain:
-                    self.chain.clear()
-                self.__set_key__(now_time, 'Visitor', response, request)
+                deadline, key = self.__gen_key__(now_time)
+            self.__set_key__(deadline, key, response, request)
+        elif not keep and self.__check_pass__(now_time, request):
+            if self.deadline:
+                self.deadline.clear()
+            if self.chain:
+                self.chain.clear()
+            self.__set_key__(now_time, 'Visitor', response, request)
         else:
             self.__set_key__(now_time, 'Visitor', response, request)
 
-    def check_pass(self, request):
-        now_time = datetime.datetime.now()
-        return self.__check_pass__(now_time, request)
 
-    def get_response(self, request, response, keep=True, put=False):
-        self.__check_key__(request, response, keep, put)
-        response['Access-Control-Expose-Headers'] = "key,set-cookie"
-        return response
+def check_pass(self, request):
+    now_time = datetime.datetime.now()
+    return self.__check_pass__(now_time, request)
+
+
+def get_response(self, request, response, keep=True, put=False):
+    self.__check_key__(request, response, keep, put)
+    response['Access-Control-Expose-Headers'] = "key,set-cookie"
+    return response
 
 
 class AdminOP:
