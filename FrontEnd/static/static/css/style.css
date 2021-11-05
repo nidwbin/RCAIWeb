@@ -3395,6 +3395,17 @@ p {
   color: #444a47 !important;
   text-transform: uppercase;
   left: 1px;
+  line-break: anywhere !important;
+}
+
+@media (max-width: 767px) {
+  .teacher-area .teacher-item .contact {
+    margin-left: 115px;
+  }
+  .teacher-area .teacher-item .contact span {
+    display: block;
+    margin-top: -2px;
+  }
 }
 
 .teacher-area .teacher-item .user h5 {

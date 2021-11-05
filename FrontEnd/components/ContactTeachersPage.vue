@@ -10,6 +10,9 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
+          <div class="card-header mb-5">
+            <div class="h2"><span class="fa fa-address-book" style="color: #ff5316;"></span>&nbsp;&nbsp;加入我们</div>
+          </div>
           <div class="contact-item">
             <div class="item d-block d-sm-flex align-items-top" v-for="item in items">
               <div class="thumb">

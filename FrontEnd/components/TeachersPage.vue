@@ -55,7 +55,7 @@
               <div class="contact">
                 <p>电话：<span><a :href="'tel:'+item.tel">{{ item.tel }}</a></span></p>
                 <p>邮箱：<span><a :href="'mailto:'+ item.email">{{ item.email }}</a></span></p>
-                <p>地址：<span>{{ item.adress }}</span></p>
+                <p>地址：<span style="line-break: anywhere!important;">{{ item.adress }}</span></p>
                 <p>主页：<span style="color: #007bff !important; cursor: pointer;"><a
                   @click="goto_link(item.link)">{{ item.link }}</a></span></p>
               </div>

@@ -49,7 +49,7 @@
   /*background-position-y: -220px;*/
 
   background-image: url(/static/images/background/header-bg2.jpg);
-  background-position-y: -300px;
+  background-position-y: center;
 
   /*background-image: url(/static/images/background/header-bg3.jpg);*/
   /*background-position-y: -400px;*/
