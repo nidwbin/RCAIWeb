@@ -47,7 +47,7 @@ class Authority:
 
     def __check_key__(self, request, response, keep=True, put=False):
         now_time = datetime.datetime.now()
-        if put or self.__check_pass__(now_time, request):
+        if put or (keep and self.__check_pass__(now_time, request)):
             if keep:
                 key = self.__get_key__(request)
                 if key in self.chain:
