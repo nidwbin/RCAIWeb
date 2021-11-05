@@ -133,7 +133,7 @@ export default {
       bus.$off(['save']);
     },
     send_all() {
-      this.save(this.$refs.md.d_value, 0);
+      this.save(this.$refs.md.d_value, this.$refs.md.d_render, true);
     },
     delete_all() {
       bus.$emit('delete');
@@ -237,7 +237,7 @@ export default {
       }
       return this.$refs.md.d_value;
     },
-    save(val, render) {
+    save(val, render, back = false) {
       if (this.debug) {
         console.log('markdown val', val);
         console.log('images', this.images);
@@ -246,7 +246,7 @@ export default {
       this.process_image_saved(val).then(() => {
         this.process_image_upload(val).then((value) => {
           this.process_markdown(value).then(() => {
-            if (render === 0) {
+            if (back) {
               bus.$emit('finish');
             }
           });

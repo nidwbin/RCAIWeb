@@ -84,8 +84,8 @@ export default {
     return {
       modal: false,
       local: false,
-      viewing: {},
-      viewing_edit: {},
+      viewing: {image: ''},
+      viewing_edit: {image: ''},
       upload_image: null,
       image_base: this.$store.state.image_base + 'header/',
       default_image: '/static/images/default/image.jpg',
