@@ -3303,7 +3303,7 @@ p {
 
 .teacher-area {
   padding-bottom: 20px;
-  padding-top: 20px !important;
+  padding-top: 30px !important;
   position: relative;
   z-index: 10;
 }
@@ -4319,9 +4319,9 @@ p {
 }
 
 .single-project-area {
-  margin-top: 80px;
+  /*margin-top: 30px;*/
   padding-bottom: 10px;
-  padding-top: 10px;
+  padding-top: 30px;
 
 }
 
@@ -5403,7 +5403,7 @@ p {
 # Academic Details
 --------------------------------------------------------------*/
 .paper-details {
-  padding-top: 120px;
+  padding-top: 30px;
   padding-bottom: 120px;
 }
 
@@ -5951,7 +5951,7 @@ p {
 # News Details
 --------------------------------------------------------------*/
 .blog-details {
-  padding-top: 120px;
+  padding-top: 30px;
   padding-bottom: 120px;
 }
 
@@ -7901,7 +7901,7 @@ p {
 }
 
 .leadership-area.team-leadership {
-  padding-top: 40px;
+  padding-top: 30px;
 }
 
 /*===========================
@@ -9044,8 +9044,8 @@ p {
 .contact-area {
   padding-bottom: 20px;
   padding-top: 40px;
-  padding-left: 40px;
-  padding-right: 20px;
+  /*padding-left: 40px;*/
+  /*padding-right: 20px;*/
   /*background: rgba(231, 233, 232, 0.8);*/
 }
 

@@ -7,7 +7,7 @@
  -->
 <template>
   <section class="client-area client-2-area client-about">
-    <div class="client-full">
+    <div class="col">
       <div class="container-fluid">
         <div class="row">
           <div class="col-lg-7">
@@ -45,19 +45,19 @@
                   <img src="/static/images/shape/shape-4.png" alt="shape">
                 </div>
                 <div class="user">
-                  <div class="user-thumb">
-                    <img :src="item.image===''?default_image:image_base+item.image" alt="new">
-                    <i class="fa fa-quote-left"></i>
-                  </div>
-                  <h5 class="title">
-                    <nuxt-link :to="{name:'view', query:{type:type, filename:item.filename}}">
+                  <nuxt-link :to="{name:'view', query:{type:type, filename:item.filename}}">
+                    <div class="user-thumb">
+                      <img :src="item.image===''?default_image:image_base+item.image" alt="new">
+                      <i class="fa fa-quote-left"></i>
+                    </div>
+                    <h5 class="title">
                       {{ item.title }}
-                    </nuxt-link>
-                  </h5>
-                  <span>{{ item.date }}</span>
-                  <div class="text">
-                    <p>{{ item.overview }}</p>
-                  </div>
+                    </h5>
+                    <span>{{ item.date }}</span>
+                    <div class="text">
+                      <p>{{ item.overview }}</p>
+                    </div>
+                  </nuxt-link>
                 </div>
               </div>
             </swiper-slide>

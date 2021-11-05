@@ -6,7 +6,7 @@
  * @LastEditTime: 2021-10-03
  -->
 <template>
-  <div class="contact-area pt-115">
+  <div class="contact-area pt-30">
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
