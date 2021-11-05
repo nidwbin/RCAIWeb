@@ -64,16 +64,14 @@ class Authority:
         else:
             self.__set_key__(now_time, 'Visitor', response, request)
 
+    def check_pass(self, request):
+        now_time = datetime.datetime.now()
+        return self.__check_pass__(now_time, request)
 
-def check_pass(self, request):
-    now_time = datetime.datetime.now()
-    return self.__check_pass__(now_time, request)
-
-
-def get_response(self, request, response, keep=True, put=False):
-    self.__check_key__(request, response, keep, put)
-    response['Access-Control-Expose-Headers'] = "key,set-cookie"
-    return response
+    def get_response(self, request, response, keep=True, put=False):
+        self.__check_key__(request, response, keep, put)
+        response['Access-Control-Expose-Headers'] = "key,set-cookie"
+        return response
 
 
 class AdminOP:
