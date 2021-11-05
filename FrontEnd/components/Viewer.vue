@@ -239,14 +239,13 @@ export default {
       }
       return this.$refs.md.d_value;
     },
-    save(val, render) {
+    async save(val, render) {
       if (this.debug) {
         console.log('markdown val', val);
         console.log('images', this.images);
         console.log('images map', this.images_saved);
       }
-
-      return this.process_image_saved(val).then(() => {
+      await this.process_image_saved(val).then(() => {
         this.process_image_upload(val).then((value) => {
           this.process_markdown(value);
         })
