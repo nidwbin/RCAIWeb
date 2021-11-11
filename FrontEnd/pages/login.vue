@@ -8,7 +8,7 @@
 <template>
   <div>
     <Nav/>
-    <PageHeader title="登录"/>
+    <PageHeader title_zh="登录" title_en="login"/>
     <LoginArea/>
     <Footer/>
   </div>
