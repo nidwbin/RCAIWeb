@@ -34,7 +34,7 @@
             <div class="leadership-thumb">
               <img :src=" item.image===''?default_image:image_base+item.image" alt="doctors">
               <div class="social">
-                <a href="#"><i class="fa fa-plus"></i></a>
+                <a><i class="fa fa-plus"></i></a>
                 <ul>
                   <li><a :href="'mailto:'+item.email"><i class="fa fa-at"></i></a></li>
                   <li><a href="#"><i @click="goto_link(item.link)" class="fa fa-vcard-o"></i></a></li>
@@ -198,7 +198,17 @@ export default {
         link: "#",
         abstract: "描述",
       },
+      edit_new_item: {
+        id: 'new',
+        name: "",
+        image: '',
+        class: "",
+        email: "",
+        link: "",
+        abstract: "",
+      },
       classes: this.type === "doctor" ? ['博一', '博二', '博三', '博四', '博五'] : ['研一', '研二', '研三'],
+
     }
   },
   computed: {
@@ -218,7 +228,7 @@ export default {
       this.viewing_edit.image = file ? window.URL.createObjectURL(file) : this.viewing_edit.image;
     },
     create() {
-      this.view(JSON.parse(JSON.stringify(this.new_item)), true);
+      this.view(JSON.parse(JSON.stringify(this.edit_new_item)), true);
     },
     view(item, flag) {
       this.viewing = item;
@@ -324,8 +334,8 @@ export default {
 .modal-content {
   /*overflow-y: scroll; */
   position: absolute;
-  top: 0;
-  bottom: 0;
+  top: 10%;
+  bottom: 10%;
   width: 100%;
 }
 

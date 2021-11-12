@@ -106,7 +106,7 @@
                 <div class="footer-about-list d-flex">
                   <ul class="mr-70">
                     <li v-for="item in links">
-                      <a :href="item.link"><i class="fa fa-angle-right"></i> {{ item.mse }}</a>
+                      <a :href="item.link" style="font-size: 13px;"><i class="fa fa-angle-right"></i> {{ item.mse }}</a>
                     </li>
                   </ul>
                 </div>

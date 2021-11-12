@@ -4,18 +4,18 @@ import { normalizeURL, decode } from 'ufo'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
-const _4112f673 = () => interopDefault(import('../pages/contact-students.vue' /* webpackChunkName: "pages/contact-students" */))
-const _3d7e9d2c = () => interopDefault(import('../pages/contact-teachers.vue' /* webpackChunkName: "pages/contact-teachers" */))
-const _6abfeda1 = () => interopDefault(import('../pages/direction.vue' /* webpackChunkName: "pages/direction" */))
-const _4fe47d6d = () => interopDefault(import('../pages/doctor.vue' /* webpackChunkName: "pages/doctor" */))
-const _655ee58b = () => interopDefault(import('../pages/login.vue' /* webpackChunkName: "pages/login" */))
-const _37bdbd30 = () => interopDefault(import('../pages/master.vue' /* webpackChunkName: "pages/master" */))
-const _86815abe = () => interopDefault(import('../pages/news.vue' /* webpackChunkName: "pages/news" */))
-const _4c93ae96 = () => interopDefault(import('../pages/papers.vue' /* webpackChunkName: "pages/papers" */))
-const _093d2c70 = () => interopDefault(import('../pages/projects.vue' /* webpackChunkName: "pages/projects" */))
-const _4683f9f8 = () => interopDefault(import('../pages/teacher.vue' /* webpackChunkName: "pages/teacher" */))
-const _9e3a6d1a = () => interopDefault(import('../pages/view.vue' /* webpackChunkName: "pages/view" */))
-const _c8917b18 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
+const _126ad14e = () => interopDefault(import('..\\pages\\contact-students.vue' /* webpackChunkName: "pages/contact-students" */))
+const _199383dc = () => interopDefault(import('..\\pages\\contact-teachers.vue' /* webpackChunkName: "pages/contact-teachers" */))
+const _057ae37b = () => interopDefault(import('..\\pages\\direction.vue' /* webpackChunkName: "pages/direction" */))
+const _1a5ee5d3 = () => interopDefault(import('..\\pages\\doctor.vue' /* webpackChunkName: "pages/doctor" */))
+const _5b62d865 = () => interopDefault(import('..\\pages\\login.vue' /* webpackChunkName: "pages/login" */))
+const _02382596 = () => interopDefault(import('..\\pages\\master.vue' /* webpackChunkName: "pages/master" */))
+const _c936c6f2 = () => interopDefault(import('..\\pages\\news.vue' /* webpackChunkName: "pages/news" */))
+const _b79eddca = () => interopDefault(import('..\\pages\\papers.vue' /* webpackChunkName: "pages/papers" */))
+const _10e350ae = () => interopDefault(import('..\\pages\\projects.vue' /* webpackChunkName: "pages/projects" */))
+const _6190a75e = () => interopDefault(import('..\\pages\\teacher.vue' /* webpackChunkName: "pages/teacher" */))
+const _e0efd94e = () => interopDefault(import('..\\pages\\view.vue' /* webpackChunkName: "pages/view" */))
+const _dc899564 = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
 
 const emptyFn = () => {}
 
@@ -30,51 +30,51 @@ export const routerOptions = {
 
   routes: [{
     path: "/contact-students",
-    component: _4112f673,
+    component: _126ad14e,
     name: "contact-students"
   }, {
     path: "/contact-teachers",
-    component: _3d7e9d2c,
+    component: _199383dc,
     name: "contact-teachers"
   }, {
     path: "/direction",
-    component: _6abfeda1,
+    component: _057ae37b,
     name: "direction"
   }, {
     path: "/doctor",
-    component: _4fe47d6d,
+    component: _1a5ee5d3,
     name: "doctor"
   }, {
     path: "/login",
-    component: _655ee58b,
+    component: _5b62d865,
     name: "login"
   }, {
     path: "/master",
-    component: _37bdbd30,
+    component: _02382596,
     name: "master"
   }, {
     path: "/news",
-    component: _86815abe,
+    component: _c936c6f2,
     name: "news"
   }, {
     path: "/papers",
-    component: _4c93ae96,
+    component: _b79eddca,
     name: "papers"
   }, {
     path: "/projects",
-    component: _093d2c70,
+    component: _10e350ae,
     name: "projects"
   }, {
     path: "/teacher",
-    component: _4683f9f8,
+    component: _6190a75e,
     name: "teacher"
   }, {
     path: "/view",
-    component: _9e3a6d1a,
+    component: _e0efd94e,
     name: "view"
   }, {
     path: "/",
-    component: _c8917b18,
+    component: _dc899564,
     name: "index"
   }],
 
