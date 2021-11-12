@@ -133,8 +133,7 @@ export default {
       bus.$off(['save']);
     },
     send_all() {
-      this.save(this.$refs.md.d_value, this.$refs.md.d_render);
-      bus.$emit('finish');
+      this.save(this.$refs.md.d_value, this.$refs.md.d_render, true);
     },
     delete_all() {
       bus.$emit('delete');
@@ -181,8 +180,8 @@ export default {
       }
     },
 
-    process_markdown(val) {
-      this.post("/file/", {
+    async process_markdown(val) {
+      await this.post("/file/", {
         type: this.type, filetype: 'markdown', filename: this.filename, content: val,
       }, data => {
         switch (data['message']) {
@@ -238,16 +237,19 @@ export default {
       }
       return this.$refs.md.d_value;
     },
-    save(val, render) {
+    save(val, render, back = false) {
       if (this.debug) {
         console.log('markdown val', val);
         console.log('images', this.images);
         console.log('images map', this.images_saved);
       }
-
       this.process_image_saved(val).then(() => {
         this.process_image_upload(val).then((value) => {
-          this.process_markdown(value);
+          this.process_markdown(value).then(() => {
+            if (back) {
+              bus.$emit('finish');
+            }
+          });
         })
       });
     }
