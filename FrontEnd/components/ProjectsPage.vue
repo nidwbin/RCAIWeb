@@ -237,42 +237,42 @@ export default {
       default_image: "/static/images/default/image.jpg",
       per_page: 5,
       items: [
-        {
-          image: "/static/images/project/project_1.jpg",
-          name: "复杂声学环境下声学事件检测与音频场景识别方法研究",
-          source: "国家重点研发项目子课题",
-          bg_time: "2017-10",
-          ed_time: "2021-09",
-          value: "153.5万",
-          principal: "负责",
-          class: "纵向项目",
-          state: "进行中",
-          desc: "项目描述"
-        },
-        {
-          image: "/static/images/project/project_2.jpg",
-          name: "面向自然口语交互的情境化语义理解和多轮对话交互管理技术",
-          source: "国家自然科学基金重点项目",
-          bg_time: "2015-01-01",
-          ed_time: "2018-12-01",
-          value: "86万",
-          principal: "负责",
-          class: "纵向项目",
-          state: "进行中",
-          desc: "项目描述"
-        },
-        {
-          image: "/static/images/project/project_3.jpg",
-          name: "复杂声学环境下声学事件检测与音频场景识别方法研究",
-          source: "国家自然科学基金重点项目",
-          bg_time: "2018-01",
-          ed_time: "2021-12",
-          value: "256万（直接）",
-          principal: "负责",
-          class: "纵向项目",
-          state: "进行中",
-          desc: "项目描述"
-        },
+        // {
+        //   image: "/static/images/project/project_1.jpg",
+        //   name: "复杂声学环境下声学事件检测与音频场景识别方法研究",
+        //   source: "国家重点研发项目子课题",
+        //   bg_time: "2017-10",
+        //   ed_time: "2021-09",
+        //   value: "153.5万",
+        //   principal: "负责",
+        //   class: "纵向项目",
+        //   state: "进行中",
+        //   desc: "项目描述"
+        // },
+        // {
+        //   image: "/static/images/project/project_2.jpg",
+        //   name: "面向自然口语交互的情境化语义理解和多轮对话交互管理技术",
+        //   source: "国家自然科学基金重点项目",
+        //   bg_time: "2015-01-01",
+        //   ed_time: "2018-12-01",
+        //   value: "86万",
+        //   principal: "负责",
+        //   class: "纵向项目",
+        //   state: "进行中",
+        //   desc: "项目描述"
+        // },
+        // {
+        //   image: "/static/images/project/project_3.jpg",
+        //   name: "复杂声学环境下声学事件检测与音频场景识别方法研究",
+        //   source: "国家自然科学基金重点项目",
+        //   bg_time: "2018-01",
+        //   ed_time: "2021-12",
+        //   value: "256万（直接）",
+        //   principal: "负责",
+        //   class: "纵向项目",
+        //   state: "进行中",
+        //   desc: "项目描述"
+        // },
       ],
       new_item: {
         id: 'new',
@@ -286,6 +286,19 @@ export default {
         class: "xxxx",
         state: "xx",
         desc: "项目具体内容的描述......"
+      },
+      edit_new_item: {
+        id: 'new',
+        image: "",
+        name: "",
+        source: "",
+        bg_time: "",
+        ed_time: "",
+        value: "",
+        principal: "",
+        class: "",
+        state: "",
+        desc: ""
       },
     }
   },
@@ -306,7 +319,7 @@ export default {
       this.viewing_edit.image = window.URL.createObjectURL(file);
     },
     create() {
-      this.view(JSON.parse(JSON.stringify(this.new_item)), true);
+      this.view(JSON.parse(JSON.stringify(this.edit_new_item)), true);
     },
     view(item) {
       this.viewing = item;
@@ -410,8 +423,8 @@ export default {
 .modal-content {
   /*overflow-y: scroll; */
   position: absolute;
-  top: 0;
-  bottom: 0;
+  top: 10%;
+  bottom: 10%;
   width: 100%;
 }
 

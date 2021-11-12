@@ -7,64 +7,64 @@
  -->
 <template>
   <section class="client-area client-2-area client-about">
-    <div class="col">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-lg-7">
-            <div class="client-title">
-              <h6 class="title">近期新闻</h6>
+      <div class="col client-full">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-7">
+              <div class="client-title">
+                <h6 class="title">近期新闻</h6>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="row client-active">
-          <swiper :options="swiperOptions">
-            <!--            <swiper-slide v-for="item in hots" :key="item.filename">-->
-            <!--              <div class="client-item mt-30">-->
-            <!--                <div class="shape">-->
-            <!--                  <img src="/static/images/shape/shape-4.png" alt="shape">-->
-            <!--                </div>-->
-            <!--                <div class="float-left" style="max-width: 20%;">-->
-            <!--                  <img :src="item.image===''?default_image:image_base+item.image" alt="new" style="max-height: 110px;">-->
-            <!--                </div>-->
-            <!--                <div class="float-left ml-4" style="max-height: 20%;">-->
-            <!--                  <h4 class="title">-->
-            <!--                    <nuxt-link :to="{name:'view', query:{type:type, filename:item.filename}}">-->
-            <!--                      {{ item.title }}-->
-            <!--                    </nuxt-link>-->
-            <!--                  </h4>-->
-            <!--                  <span style="color: #ff5316; font-size: 14px;">{{ item.date }}</span>-->
-            <!--                  <div class="text">-->
-            <!--                    <p>{{ item.overview }}sadadasdadadadasdadsadasdasdasdsadasdasdsadsa</p>-->
-            <!--                  </div>-->
-            <!--                </div>-->
-            <!--              </div>-->
-            <!--            </swiper-slide>-->
-            <swiper-slide v-for="item in hots" :key="item.filename">
-              <div class="client-item mt-30">
-                <div class="shape">
-                  <img src="/static/images/shape/shape-4.png" alt="shape">
+          <div class="row client-active">
+            <swiper :options="swiperOptions">
+              <!--            <swiper-slide v-for="item in hots" :key="item.filename">-->
+              <!--              <div class="client-item mt-30">-->
+              <!--                <div class="shape">-->
+              <!--                  <img src="/static/images/shape/shape-4.png" alt="shape">-->
+              <!--                </div>-->
+              <!--                <div class="float-left" style="max-width: 20%;">-->
+              <!--                  <img :src="item.image===''?default_image:image_base+item.image" alt="new" style="max-height: 110px;">-->
+              <!--                </div>-->
+              <!--                <div class="float-left ml-4" style="max-height: 20%;">-->
+              <!--                  <h4 class="title">-->
+              <!--                    <nuxt-link :to="{name:'view', query:{type:type, filename:item.filename}}">-->
+              <!--                      {{ item.title }}-->
+              <!--                    </nuxt-link>-->
+              <!--                  </h4>-->
+              <!--                  <span style="color: #ff5316; font-size: 14px;">{{ item.date }}</span>-->
+              <!--                  <div class="text">-->
+              <!--                    <p>{{ item.overview }}sadadasdadadadasdadsadasdasdasdsadasdasdsadsa</p>-->
+              <!--                  </div>-->
+              <!--                </div>-->
+              <!--              </div>-->
+              <!--            </swiper-slide>-->
+              <swiper-slide v-for="item in hots" :key="item.filename">
+                <div class="client-item mt-30">
+                  <div class="shape">
+                    <img src="/static/images/shape/shape-4.png" alt="shape">
+                  </div>
+                  <div class="user">
+                    <nuxt-link :to="{name:'view', query:{type:type, filename:item.filename}}">
+                      <div class="user-thumb">
+                        <img :src="item.image===''?default_image:image_base+item.image" alt="new">
+                        <i class="fa fa-quote-left"></i>
+                      </div>
+                      <h5 class="title">
+                        {{ item.title }}
+                      </h5>
+                      <span>{{ item.date }}</span>
+                      <div class="text">
+                        <p>{{ item.overview }}</p>
+                      </div>
+                    </nuxt-link>
+                  </div>
                 </div>
-                <div class="user">
-                  <nuxt-link :to="{name:'view', query:{type:type, filename:item.filename}}">
-                    <div class="user-thumb">
-                      <img :src="item.image===''?default_image:image_base+item.image" alt="new">
-                      <i class="fa fa-quote-left"></i>
-                    </div>
-                    <h5 class="title">
-                      {{ item.title }}
-                    </h5>
-                    <span>{{ item.date }}</span>
-                    <div class="text">
-                      <p>{{ item.overview }}</p>
-                    </div>
-                  </nuxt-link>
-                </div>
-              </div>
-            </swiper-slide>
-          </swiper>
+              </swiper-slide>
+            </swiper>
+          </div>
         </div>
       </div>
-    </div>
     <!--    <div class="client-shape animated wow fadeInLeft" data-wow-duration="1500ms" data-wow-delay="0ms">-->
     <!--      <img src="/static/images/shape/shape-7.png" alt="">-->
     <!--    </div>-->

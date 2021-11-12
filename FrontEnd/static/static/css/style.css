@@ -137,7 +137,6 @@ p {
 }
 
 
-
 /*===== All Button Style =====*/
 .main-btn {
   display: inline-block;
@@ -3082,18 +3081,6 @@ p {
   min-height: 100px;
 }
 
-/*@media (max-width: 576px) {*/
-/*  !*.client-area .client-item .user .user-thumb img {*!*/
-/*  !*  max-width: 150px;*!*/
-/*  !*  max-height: 115px;*!*/
-/*  !*}*!*/
-
-/*  .client-area .client-item .user {*/
-/*    padding-left: 153px;*/
-/*    position: relative;*/
-/*  }*/
-/*}*/
-
 .client-area .client-item .text p {
   padding-top: 4px;
   font-size: 16px;
@@ -3103,6 +3090,25 @@ p {
   margin-left: 50px;
   min-height: 60px;
   line-break: anywhere;
+}
+
+@media (max-width: 1205px) {
+  .client-area .client-item .text p {
+    font-size: 12px;
+    line-height: 16px;
+  }
+}
+@media only screen and (max-width: 1025px) {
+  .client-area .client-item .text p {
+    font-size: 18px;
+    line-height: 22px;
+  }
+}
+@media only screen and (max-width: 656px) {
+  .client-area .client-item .text p {
+    font-size: 12px;
+    line-height: 16px;
+  }
 }
 
 .client-area .client-active .slick-dots {
@@ -3402,6 +3408,7 @@ p {
   .teacher-area .teacher-item .contact {
     margin-left: 115px;
   }
+
   .teacher-area .teacher-item .contact span {
     display: block;
     margin-top: -2px;
@@ -6378,7 +6385,7 @@ p {
 
   @media only screen and (max-width: 576px) {
     .comment-one__image {
-      max-width: 100%;
+      width: 100%;
     }
   }
 }
@@ -7778,8 +7785,8 @@ p {
 }
 
 .leadership-area .leadership-item .leadership-thumb img {
-  /*max-height: 300px;*/
-  /*min-height: 240px;*/
+  max-height: 320px;
+  min-height: 200px;
   position: absolute;
   bottom: 0;
   width: 100%;

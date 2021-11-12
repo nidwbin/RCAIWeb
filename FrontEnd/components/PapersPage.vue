@@ -126,7 +126,7 @@
       <div class="modal" v-on:click.self="modal=false">
         <div class="modal-dialog modal-dialog-centered">
           <div v-if="item_type === 'paper'">
-            <div class="modal-content">
+            <div class="modal-content" style="top: 25% !important;bottom: 28% !important;">
               <div class="modal-header">
                 <h4 class="modal-title">编辑论文信息</h4>
                 <button type="button" class="close" @click="modal=false">×</button>
@@ -145,7 +145,7 @@
                   </div>
                   <textarea class="form-control" v-model="viewing_edit.name"
                             aria-describedby="basic-addon0_1"
-                            style="min-height: 200px !important; min-width: 500px !important; font-size: 22px; font-family: 'Times New Roman';"></textarea>
+                            style="min-height: 200px !important; min-width: 400px !important; font-size: 22px; font-family: 'Times New Roman';"></textarea>
                 </div>
               </div>
               <div class="modal-footer">
@@ -256,65 +256,67 @@ export default {
       create_flag: false,
       item_type: 'paper', // paper or book
       items: [
-        {
-          name: "Wenjie Song, Jiqing Han, Hongwei Song. Contrastive Embedding Learning Method for Respiratory Sound Classification, ICASSP2021, Toronto, Canada",
-          link: '#'
-        },
-        {
-          index: "2",
-          name: "Hongwei Song, Jiqing Han, Shiwen Deng, Zhihao Du. Capturing Temporal Dependencies through Future Prediction for CNN-Based Audio Classifiers, ICASSP2021, Toronto, Canada",
-          link: '#'
-        },
-        {
-          name: "Zhihao Du, Ming Lei, Jiqing Han, Shiliang Zhang. Self-supervised Adversarial Multi-task Learning for Vocoder-based Monaural Speech Enhancement, Interspeech2020, Shanghai, China",
-          link: '#'
-        },
-        {
-          name: "Zhihao Du, Jiqing Han, Xueliang Zhang. Double Adversarial Nework based Monaural Speech Enhancement for Robust Speech Recognition, Interspeech2020, Shanghai, China",
-          link: '#'
-        },
-        {
-          name: "Liwen Zhang, Jiqing Han, Ziqing Shi. ATReSN-Net: Capturing Attentive Temporal Relations in Semantic Neighborhood for Acoustic Scene Classification, Interspeech2020, Shanghai, China",
-          link: '#'
-        },
-        {
-          name: "Jiabin Xue, Tieran Zheng, Jiqing Han. Structured Sparse Attention for End-to-End Automatic Speech recognition, ICASSP2020, Barcelona, Spain",
-          link: '#'
-        },
-        {
-          name: "Zhihao Du, Ming Lei, Jiqing Han, Shiliang Zhang. PAN: Phoneme-Aware Network for Monaural Speech Enhancement, ICASSP2020, Barcelona, Spain",
-          link: '#'
-        },
-        {
-          name: "Chen Chen, Jiqing Han. TDMF: Task-Driven Multi-Level Framework for End-to-End Speaker Verification, ICASSP2020, Barcelona, Spain",
-          link: '#'
-        },
-        {
-          name: "Jiabin Xue, Tieran Zheng, Jiqing Han, Convolutional Grid Long Short-Term Memory Recurrent Neural Network for Automatic Speech Recognition. ICONIP2019, Sydney Autstralia",
-          link: '#'
-        },
+        // {
+        //   name: "Wenjie Song, Jiqing Han, Hongwei Song. Contrastive Embedding Learning Method for Respiratory Sound Classification, ICASSP2021, Toronto, Canada",
+        //   link: '#'
+        // },
+        // {
+        //   index: "2",
+        //   name: "Hongwei Song, Jiqing Han, Shiwen Deng, Zhihao Du. Capturing Temporal Dependencies through Future Prediction for CNN-Based Audio Classifiers, ICASSP2021, Toronto, Canada",
+        //   link: '#'
+        // },
+        // {
+        //   name: "Zhihao Du, Ming Lei, Jiqing Han, Shiliang Zhang. Self-supervised Adversarial Multi-task Learning for Vocoder-based Monaural Speech Enhancement, Interspeech2020, Shanghai, China",
+        //   link: '#'
+        // },
+        // {
+        //   name: "Zhihao Du, Jiqing Han, Xueliang Zhang. Double Adversarial Nework based Monaural Speech Enhancement for Robust Speech Recognition, Interspeech2020, Shanghai, China",
+        //   link: '#'
+        // },
+        // {
+        //   name: "Liwen Zhang, Jiqing Han, Ziqing Shi. ATReSN-Net: Capturing Attentive Temporal Relations in Semantic Neighborhood for Acoustic Scene Classification, Interspeech2020, Shanghai, China",
+        //   link: '#'
+        // },
+        // {
+        //   name: "Jiabin Xue, Tieran Zheng, Jiqing Han. Structured Sparse Attention for End-to-End Automatic Speech recognition, ICASSP2020, Barcelona, Spain",
+        //   link: '#'
+        // },
+        // {
+        //   name: "Zhihao Du, Ming Lei, Jiqing Han, Shiliang Zhang. PAN: Phoneme-Aware Network for Monaural Speech Enhancement, ICASSP2020, Barcelona, Spain",
+        //   link: '#'
+        // },
+        // {
+        //   name: "Chen Chen, Jiqing Han. TDMF: Task-Driven Multi-Level Framework for End-to-End Speaker Verification, ICASSP2020, Barcelona, Spain",
+        //   link: '#'
+        // },
+        // {
+        //   name: "Jiabin Xue, Tieran Zheng, Jiqing Han, Convolutional Grid Long Short-Term Memory Recurrent Neural Network for Automatic Speech Recognition. ICONIP2019, Sydney Autstralia",
+        //   link: '#'
+        // },
       ],
       new_item: {id: 'new', name: "请输入论文引用", link: '#'},
+      edit_new_item: {id: 'new', name: "", link: ''},
 
       books: [
-        {name: "语音信号处理", authors: "韩纪庆，张磊，郑铁然 编著", pub_time: "2004-09-01", press: "清华大学出版社", desc: ""},
-        {
-          name: "音频信息处理技术",
-          authors: "韩纪庆，冯涛，郑贵滨，马翼平 编著",
-          pub_time: "2007-01-01",
-          press: "清华大学出版社",
-          desc: "该书为普通高等教育“十一五”国家级规划教材"
-        },
-        {name: "语音信号处理（第2版）", authors: "韩纪庆，张磊，郑铁然 编著", pub_time: "2013-04-01", press: "清华大学出版社", desc: ""},
-        {
-          name: "声学事件检测理论与方法",
-          authors: "韩纪庆，石自强 著",
-          pub_time: "2016-08-15",
-          press: "科学出版社",
-          desc: "本书可作为高等院校计算机应用、信号与信息处理、通信与电子系统等专业及学科的研究生教材，也可供该领域的科研及工程技术人员参考。"
-        },
+        // {name: "语音信号处理", authors: "韩纪庆，张磊，郑铁然 编著", pub_time: "2004-09-01", press: "清华大学出版社", desc: ""},
+        // {
+        //   name: "音频信息处理技术",
+        //   authors: "韩纪庆，冯涛，郑贵滨，马翼平 编著",
+        //   pub_time: "2007-01-01",
+        //   press: "清华大学出版社",
+        //   desc: "该书为普通高等教育“十一五”国家级规划教材"
+        // },
+        // {name: "语音信号处理（第2版）", authors: "韩纪庆，张磊，郑铁然 编著", pub_time: "2013-04-01", press: "清华大学出版社", desc: ""},
+        // {
+        //   name: "声学事件检测理论与方法",
+        //   authors: "韩纪庆，石自强 著",
+        //   pub_time: "2016-08-15",
+        //   press: "科学出版社",
+        //   desc: "本书可作为高等院校计算机应用、信号与信息处理、通信与电子系统等专业及学科的研究生教材，也可供该领域的科研及工程技术人员参考。"
+        // },
       ],
       new_book: {id: 'new', name: "书籍名称", authors: "作者信息", pub_time: "XXXX-XX-XX", press: "出版社信息", desc: "书籍描述"},
+      edit_new_book: {id: 'new', name: "", authors: "", pub_time: "", press: "", desc: ""},
 
     }
   },
@@ -330,7 +332,7 @@ export default {
 
   methods: {
     create(item_type) {
-      this.view(JSON.parse(JSON.stringify(item_type === 'paper' ? this.new_item : this.new_book)), true, item_type);
+      this.view(JSON.parse(JSON.stringify(item_type === 'paper' ? this.edit_new_item : this.edit_new_book)), true, item_type);
     },
     view(item, flag, item_type) {
       this.viewing = item;
@@ -458,6 +460,35 @@ export default {
 .modal {
   display: block;
   z-index: 2001;
+}
+.modal-dialog {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.modal-content {
+  /*overflow-y: scroll;*/
+  position: absolute;
+  top: 20%;
+  bottom: 17%;
+  width: 100%;
+}
+
+.modal-body {
+  overflow-y: scroll;
+  position: absolute;
+  top: 68px;
+  bottom: 70px;
+  width: 100%;
+}
+
+.modal-footer {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
 }
 
 a, a:link, a:visited, a:hover, a:active {

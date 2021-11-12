@@ -17,7 +17,7 @@
                 发布新闻
               </div>
             </div>
-          </div><!-- /.comment-one -->
+          </div>
           <div class="card-header mb-3">
             <div class="h2"><span class="	fa fa-newspaper-o" style="color: #ff5316;">&nbsp;&nbsp;</span>新闻</div>
           </div>
@@ -25,21 +25,17 @@
             <div class="comment-one__single">
               <div class="comment-one__image">
                 <img :src="item.image===''?default_image:image_base+item.image" alt="">
-              </div><!-- /.comment-one__image -->
+              </div>
               <nuxt-link :to="{name:'view', query:{type:type, filename:item.filename}}">
                 <div class="comment-one__content">
                   <h3>
                     {{ item.title }}
                     <span :class="item.show?'comment-one__date':'comment-one__date text-muted'">{{ item.date }}</span>
                   </h3>
-                  <p>{{ item.overview }}</p>
-                </div><!-- /.comment-one__content -->
+                  <p style="line-height: 22px;">{{ item.overview }}</p>
+                </div>
               </nuxt-link>
-              <!--              <div class="blog-btn">-->
-              <!--                <a href="#" class="main-btn text-center">Reply</a>-->
-              <!--              </div>-->
-              <!-- /.thm-btn comment-one__btn -->
-            </div><!-- /.comment-one__single -->
+            </div>
             <div class="pb-5 pt-1" v-show="admin">
               <button type="button" class="btn btn-danger float-right" @click="remove(item)">
                 <span class="fa fa-trash-o"></span>&nbsp;&nbsp;删除
@@ -73,23 +69,21 @@
               </form>
             </div>
             <div class="sidebar__single sidebar__post">
-              <h3 class="sidebar__title">近期新闻</h3><!-- /.sidebar__title -->
+              <h3 class="sidebar__title">近期新闻</h3>
               <div class="sidebar__post-wrap">
                 <div class="sidebar__post__single" v-for="item in hots">
                   <div class="sidebar__post-image">
                     <div class="inner-block"><img :src="item.image===''?default_image:image_base+item.image" alt="">
                     </div>
-                    <!-- /.inner-block -->
-                  </div><!-- /.sidebar__post-image -->
+                  </div>
                   <nuxt-link :to="{name:'view', query:{type:type, filename:item.filename}}">
                     <div class="sidebar__post-content">
                       <span>{{ item.date }}</span>
                       <h4 class="sidebar__post-title"><a href="/single-post">{{ item.title }}</a></h4>
-                      <!-- /.sidebar__post-title -->
-                    </div><!-- /.sidebar__post-content -->
+                    </div>
                   </nuxt-link>
-                </div><!-- /.sidebar__post__single -->
-              </div><!-- /.sidebar__post-wrap -->
+                </div>
+              </div>
             </div>
 <!--            <div class="sidebar__single sidebar__category">-->
 <!--              <h3 class="sidebar__title">Categories</h3>&lt;!&ndash; /.sidebar__title &ndash;&gt;-->

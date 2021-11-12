@@ -211,16 +211,16 @@ export default {
       btn_image: '/static/images/default/add.png',
       default_image: '/static/images/default/image.jpg',
       items: [
-        {
-          name: "韩纪庆",
-          prof: "教授，博士生导师",
-          desc: "简介",
-          image: "/static/images/teacher/JQH.png",
-          tel: "0451-86417981",
-          email: "jqhan@hit.edu.cn",
-          adress: "哈尔滨工业大学321信箱",
-          link: "http://homepage.hit.edu.cn/hanjiqing"
-        },
+        // {
+        //   name: "韩纪庆",
+        //   prof: "教授，博士生导师",
+        //   desc: "简介",
+        //   image: "/static/images/teacher/JQH.png",
+        //   tel: "0451-86417981",
+        //   email: "jqhan@hit.edu.cn",
+        //   adress: "哈尔滨工业大学321信箱",
+        //   link: "http://homepage.hit.edu.cn/hanjiqing"
+        // },
         // {
         //   name: "韩纪庆",
         //   prof: "教授，博士生导师",
@@ -263,6 +263,17 @@ export default {
         adress: "哈尔滨工业大学xxx信箱",
         link: "http://homepage.hit.edu.cn/xxx"
       },
+      edit_new_item: {
+        id: 'new',
+        name: "",
+        prof: "",
+        desc: "",
+        image: "",
+        tel: "",
+        email: "",
+        adress: "",
+        link: ""
+      },
     }
   },
   mounted() {
@@ -284,7 +295,7 @@ export default {
       this.viewing_edit.image = file ? window.URL.createObjectURL(file) : this.viewing_edit.image;
     },
     create() {
-      this.view(JSON.parse(JSON.stringify(this.new_item)), true);
+      this.view(JSON.parse(JSON.stringify(this.edit_new_item)), true);
     },
     view(item, flag) {
       this.viewing = item;
@@ -390,8 +401,8 @@ export default {
 .modal-content {
   /*overflow-y: scroll; */
   position: absolute;
-  top: 0;
-  bottom: 0;
+  top: 10%;
+  bottom: 10%;
   width: 100%;
 }
 

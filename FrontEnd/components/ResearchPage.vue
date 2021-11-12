@@ -213,6 +213,7 @@ export default {
 
       items: [],
       new_item: {id: 'new', desc: "方向相关描述", name: "方向名称", image: ""},
+      edit_new_item: {id: 'new', desc: "", name: "", image: ""},
     }
   },
   mounted() {
@@ -232,7 +233,7 @@ export default {
       this.viewing_edit.image = window.URL.createObjectURL(file);
     },
     create() {
-      this.view(JSON.parse(JSON.stringify(this.new_item)), true);
+      this.view(JSON.parse(JSON.stringify(this.edit_new_item)), true);
     },
     view(item, flag) {
       this.viewing = item;
@@ -317,5 +318,34 @@ export default {
 .modal {
   display: block;
   z-index: 2001;
+}
+.modal-dialog {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.modal-content {
+  /*overflow-y: scroll;*/
+  position: absolute;
+  top: 20%;
+  bottom: 14%;
+  width: 100%;
+}
+
+.modal-body {
+  overflow-y: scroll;
+  position: absolute;
+  top: 68px;
+  bottom: 70px;
+  width: 100%;
+}
+
+.modal-footer {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
 }
 </style>
