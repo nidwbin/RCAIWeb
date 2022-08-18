@@ -1,4 +1,4 @@
-FROM node:16.11.1-buster
+FROM node:16.17.0-buster
 
 ENV NODE_ENV=production
 ENV HOST=0.0.0.0
