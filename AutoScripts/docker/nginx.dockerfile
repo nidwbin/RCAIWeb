@@ -1,4 +1,4 @@
-FROM nginx:latest
+FROM nginx:1.23.1
 
 RUN mkdir -p /media && \
     mkdir -p /static && \
