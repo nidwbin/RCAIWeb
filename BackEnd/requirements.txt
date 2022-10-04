@@ -1,5 +1,5 @@
 asgiref==3.4.1
-Django==3.2.8
+Django==3.2.16
 django-cors-headers==3.10.0
 django-uwsgi==0.2.2
 mysqlclient==2.0.3
@@ -8,7 +8,7 @@ pytz==2021.3
 sqlparse==0.4.2
 uWSGI==2.0.20
 asgiref==3.4.1
-Django==3.2.8
+Django==3.2.16
 django-cors-headers==3.10.0
 django-uwsgi==0.2.2
 mysqlclient==2.0.3
